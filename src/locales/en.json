@@ -1,0 +1,13 @@
+{
+  "common": {
+    "appName": "Vizo Studio",
+    "loading": "Loading..."
+  },
+  "theme": {
+    "toggleLight": "Switch to light mode",
+    "toggleDark": "Switch to dark mode"
+  },
+  "language": {
+    "switchTo": "Change language"
+  }
+}

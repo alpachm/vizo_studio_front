@@ -1,0 +1,78 @@
+# ==========================================
+# Environment Variables & Secrets (CRITICAL)
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# Dependencies & Package Managers
+# ==========================================
+node_modules/
+.pnpm-store/
+.yarn/
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+
+# ==========================================
+# Build & Output Directories
+# ==========================================
+dist/
+dist-ssr/
+build/
+out/
+*.tsbuildinfo
+
+# ==========================================
+# Logs & Debugging
+# ==========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.swp
+*.swo
+
+# ==========================================
+# Operating System Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# IDEs & Code Editors
+# ==========================================
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# JetBrains / WebStorm / IntelliJ
+.idea/
+
+# Visual Studio / Misc
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ==========================================
+# Tooling & Framework Caches
+# ==========================================
+.cache/
+.vite/
+.eslintcache
+.stylelintcache
+.turbo/

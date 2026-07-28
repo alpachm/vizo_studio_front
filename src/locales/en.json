@@ -9,5 +9,9 @@
   },
   "language": {
     "switchTo": "Change language"
+  },
+  "homeScreen": {
+    "title": "Welcome to Vizo Studio",
+    "subtitle": "Your creative platform for visual design and exploration."
   }
 }

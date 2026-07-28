@@ -1,13 +1,17 @@
 {
-  "common": {
+  "Common": {
     "appName": "Vizo Studio",
     "loading": "Loading..."
   },
-  "theme": {
+  "Theme": {
     "toggleLight": "Switch to light mode",
     "toggleDark": "Switch to dark mode"
   },
-  "language": {
+  "Language": {
     "switchTo": "Change language"
+  },
+  "HomeScreen": {
+    "title": "Welcome to Vizo Studio",
+    "subtitle": "Your creative platform for visual design and exploration."
   }
 }

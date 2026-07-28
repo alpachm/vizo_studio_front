@@ -29,21 +29,47 @@ Actúas como un **Desarrollador Web Front-End Senior** especializado en arquitec
     - _Ejemplo:_ Si una interfaz es utilizada en la pantalla `src/screens/HomeScreen.tsx`, su interfaz debe almacenarse obligatoriamente en `src/interfaces/HomeScreenInterface.ts`.
 - **Verificación de duplicados:** Antes de crear cualquier interfaz nueva, debes verificar obligatoriamente el directorio `src/interfaces/` para comprobar si ya existe una interfaz equivalente y evitar código duplicado.
 
-### 🚨 Regla 2: Prohibido Texto Plano (i18n Mandatorio)
+### 🚨 Regla 2: Prohibido Texto Plano e Internacionalización (i18n Mandatorio)
 
 - **Queda TOTALMENTE PROHIBIDO escribir texto plano** directo en la interfaz (JSX/TSX).
 - **Todo** contenido textual (títulos, párrafos, placeholders, botones, mensajes de error, tooltips, aria-labels) debe ser consumido exclusivamente a través del hook de traducción (`useTranslation`).
-- Estructura requerida para los diccionarios de traducción:
+- **Estructura Requerida de Archivos:**
     - `src/locales/es.json` (Español)
     - `src/locales/en.json` (Inglés)
-- Al crear o modificar UI, debes actualizar obligatoriamente ambos archivos `.json` manteniendo una estructura de llaves consistente y organizada por módulos/pantallas.
+- **Nomenclatura Estricta de Llaves en JSON:**
+    - **Llaves Principales (Root/Namespaces):** Deben escribirse **OBLIGATORIAMENTE en PascalCase** (primera letra en mayúscula), representando módulos, componentes o pantallas.
+        - _Ejemplos:_ `"Common"`, `"Theme"`, `"Language"`, `"HomeScreen"`, `"Header"`, `"ServicesSection"`.
+    - **Llaves Internas (Propiedades/Textos):** Deben mantenerse en **camelCase** (primera letra en minúscula).
+        - _Ejemplos:_ `"appName"`, `"toggleLight"`, `"title"`, `"subtitle"`.
+
+#### Ejemplo de Referencia Estructural:
+
+```json
+{
+    "Common": {
+        "appName": "Vizo Studio",
+        "loading": "Loading..."
+    },
+    "Theme": {
+        "toggleLight": "Switch to light mode",
+        "toggleDark": "Switch to dark mode"
+    },
+    "Language": {
+        "switchTo": "Change language"
+    },
+    "HomeScreen": {
+        "title": "Welcome to Vizo Studio",
+        "subtitle": "Your creative platform for visual design and exploration."
+    }
+}
+```
 
 ### 🚨 Regla 3: Manejo Estricto de Estilos (Tailwind CSS), Responsividad y Temas
 
 - **Queda TOTALMENTE PROHIBIDO crear o importar archivos `.css` o `.module.css` adicionales.**
 - **Desarrollo 100% Responsive:** Todos los componentes y maquetados deben construirse pensando en una experiencia _Mobile-First_ o totalmente adaptable, garantizando que la UI se vea perfecta tanto en dispositivos móviles como en pantallas de escritorio.
 - **Soporte Obligatorio para Temas (Dark Mode & Light Mode):** Todo el desarrollo debe implementarse respetando la estructura de variables CSS y clases de Tailwind adaptadas para soportar de forma limpia y fluida la alternancia entre el modo oscuro por defecto y el modo claro.
-- All styles must be built exclusively using Tailwind CSS utility classes.
+- Todos los estilos deben crearse utilizando exclusivamente las clases de utilidad de Tailwind CSS..
 
 ### 🚨 Regla 4: Uso Exclusivo de Tipografías
 

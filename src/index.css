@@ -4,15 +4,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Unbounded:wght@200..900&display=swap");
 
 /* ============================================================
-   Tailwind CSS v4
+   Tailwind CSS v3 Directives
    ============================================================ */
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ============================================================
    CSS Variables & Themes (Light / Dark)
    ============================================================ */
-
-/* Dark Mode (Default) */
 :root,
 [data-theme="dark"] {
     --color-bg: #000000;
@@ -24,7 +24,6 @@
     --font-body-val: "Inter", sans-serif;
 }
 
-/* Light Mode */
 [data-theme="light"] {
     --color-bg: #fafafa;
     --color-primary: #e63946;
@@ -33,20 +32,6 @@
     --color-text-muted: #4b5563;
     --font-title-val: "Unbounded", sans-serif;
     --font-body-val: "Inter", sans-serif;
-}
-
-/* ============================================================
-   Tailwind v4 Theme Extension
-   ============================================================ */
-@theme {
-    --color-bg: var(--color-bg);
-    --color-primary: var(--color-primary);
-    --color-secondary: var(--color-secondary);
-    --color-text: var(--color-text);
-    --color-text-muted: var(--color-text-muted);
-
-    --font-title: var(--font-title-val);
-    --font-body: var(--font-body-val);
 }
 
 /* ============================================================
@@ -60,12 +45,14 @@
     padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+html,
+body,
+#root {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 body {
@@ -76,20 +63,8 @@ body {
         background-color 0.3s ease,
         color 0.3s ease;
     line-height: 1.6;
-    min-height: 100vh;
-    width: 100%;
-    overflow-x: hidden;
 }
 
-/* Requisito indispensable para React + Vite: Que el contenedor raíz abarque todo el ancho */
-#root {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Headings use the title font exclusively */
 h1,
 h2,
 h3,

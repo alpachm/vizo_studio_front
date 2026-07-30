@@ -80,26 +80,32 @@ function Header() {
                         }
                     >
                         {mobileOpen ? (
-                            <FiX className="w-6 h-6" aria-hidden="true" />
+                            <FiX className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
                         ) : (
-                            <FiMenu className="w-6 h-6" aria-hidden="true" />
+                            <FiMenu className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
                         )}
                     </button>
                 </div>
             </div>
 
-            {/* ---- Mobile Dropdown ---- */}
-            {mobileOpen && (
-                <nav
-                    className="md:hidden border-t border-text-muted/10 bg-bg/95 backdrop-blur-md"
-                    aria-label={t("Header.nav.mobileAriaLabel")}
-                >
-                    <div className="flex flex-col px-4 py-4 gap-3 max-w-7xl mx-auto">
+            {/* ---- Mobile Dropdown (CSS Grid Accordion) ---- */}
+            <div
+                className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out grid ${
+                    mobileOpen
+                        ? "grid-rows-[1fr] opacity-100 border-b border-text-muted/10"
+                        : "grid-rows-[0fr] opacity-0"
+                }`}
+            >
+                <div className="min-h-0 bg-bg/95 backdrop-blur-md">
+                    <nav
+                        className="flex flex-col px-4 py-4 gap-3 max-w-7xl mx-auto"
+                        aria-label={t("Header.nav.mobileAriaLabel")}
+                    >
                         {navItems.map((item) => (
                             <a
                                 key={item.to}
                                 href={item.to}
-                                className="font-body text-base text-text-muted hover:text-primary transition-colors duration-150"
+                                className="font-body text-lg text-text-muted hover:text-primary transition-colors duration-150 py-1"
                                 onClick={closeMobile}
                             >
                                 {t(item.labelKey)}
@@ -108,14 +114,14 @@ function Header() {
 
                         <a
                             href="/contact"
-                            className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-primary text-primary font-body font-medium text-lg hover:bg-primary hover:text-white transition-all duration-200"
+                            className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-primary text-primary font-body font-medium text-lg hover:bg-primary hover:text-white transition-all duration-200 mt-2"
                             onClick={closeMobile}
                         >
                             {t("Header.buttons.contact")}
                         </a>
-                    </div>
-                </nav>
-            )}
+                    </nav>
+                </div>
+            </div>
         </header>
     );
 }

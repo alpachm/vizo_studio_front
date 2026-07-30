@@ -4,15 +4,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Unbounded:wght@200..900&display=swap");
 
 /* ============================================================
-   Tailwind CSS v4
+   Tailwind CSS v3 Directives
    ============================================================ */
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* ============================================================
-   CSS Variables & Themes
+   CSS Variables & Themes (Light / Dark)
    ============================================================ */
-
-/* Dark Mode (Default) */
 :root,
 [data-theme="dark"] {
     --color-bg: #000000;
@@ -20,36 +20,22 @@
     --color-secondary: #f4a261;
     --color-text: #f3f4f6;
     --color-text-muted: #8e8e93;
-    --font-title: "Unbounded", sans-serif;
-    --font-body: "Inter", sans-serif;
+    --font-title-val: "Unbounded", sans-serif;
+    --font-body-val: "Inter", sans-serif;
 }
 
-/* Light Mode */
 [data-theme="light"] {
     --color-bg: #fafafa;
     --color-primary: #e63946;
     --color-secondary: #d97706;
     --color-text: #111827;
     --color-text-muted: #4b5563;
-    --font-title: "Unbounded", sans-serif;
-    --font-body: "Inter", sans-serif;
+    --font-title-val: "Unbounded", sans-serif;
+    --font-body-val: "Inter", sans-serif;
 }
 
 /* ============================================================
-   Tailwind v4 Custom Theme — Mapped to CSS Variables
-   ============================================================ */
-@theme {
-    --color-bg: var(--color-bg);
-    --color-primary: var(--color-primary);
-    --color-secondary: var(--color-secondary);
-    --color-text: var(--color-text);
-    --color-text-muted: var(--color-text-muted);
-    --font-title: var(--font-title);
-    --font-body: var(--font-body);
-}
-
-/* ============================================================
-   Base Styles & Global Selectors
+   Base Styles & Global Layout Resets
    ============================================================ */
 *,
 *::before,
@@ -59,34 +45,31 @@
     padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 body {
-    font-family: var(--font-body);
+    font-family: var(--font-body-val);
     background-color: var(--color-bg);
     color: var(--color-text);
     transition:
         background-color 0.3s ease,
         color 0.3s ease;
     line-height: 1.6;
-    min-height: 100vh;
 }
 
-/* Headings use the title font exclusively */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-title);
-}
-
-/* Utility class for title font */
-.font-title {
-    font-family: var(--font-title);
+    font-family: var(--font-title-val);
 }

@@ -69,7 +69,7 @@ Actúas como un **Desarrollador Web Front-End Senior** especializado en arquitec
 - **Queda TOTALMENTE PROHIBIDO crear o importar archivos `.css` o `.module.css` adicionales.**
 - **Desarrollo 100% Responsive:** Todos los componentes y maquetados deben construirse pensando en una experiencia _Mobile-First_ o totalmente adaptable, garantizando que la UI se vea perfecta tanto en dispositivos móviles como en pantallas de escritorio.
 - **Soporte Obligatorio para Temas (Dark Mode & Light Mode):** Todo el desarrollo debe implementarse respetando la estructura de variables CSS y clases de Tailwind adaptadas para soportar de forma limpia y fluida la alternancia entre el modo oscuro por defecto y el modo claro.
-- Todos los estilos deben crearse utilizando exclusivamente las clases de utilidad de Tailwind CSS..
+- **Uso Obligatorio de Clases Canónicas de Tailwind:** Queda estrictamente prohibido utilizar valores arbitrarios con variables CSS manuales como `bg-[var(--color-bg)]` o `text-[var(--color-primary)]`. Debes utilizar exclusivamente las clases de utilidad canónicas y semánticas configuradas en el proyecto (ej. `bg-bg/80`, `text-primary`, `border-text-muted/10`).
 
 ### 🚨 Regla 4: Uso Exclusivo de Tipografías
 

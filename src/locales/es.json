@@ -10,6 +10,20 @@
   "Language": {
     "switchTo": "Cambiar idioma"
   },
+  "Header": {
+    "nav": {
+      "blog": "Blog",
+      "services": "Servicios",
+      "aboutUs": "Sobre nosotros",
+      "openMenu": "Abrir menú de navegación",
+      "closeMenu": "Cerrar menú de navegación",
+      "desktopAriaLabel": "Navegación principal",
+      "mobileAriaLabel": "Navegación móvil"
+    },
+    "buttons": {
+      "contact": "Hablemos"
+    }
+  },
   "HomeScreen": {
     "title": "Bienvenido a Vizo Studio",
     "subtitle": "Tu plataforma creativa para el diseño y la exploración visual."

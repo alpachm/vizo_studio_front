@@ -4,7 +4,7 @@
 import { useState, useCallback } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { FiMenu, FiX, FiCodesandbox } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------

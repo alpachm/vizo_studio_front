@@ -62,6 +62,15 @@
       "step1": {
         "title": "¿Tienes alguna idea?",
         "button": "Cuéntanos"
+      },
+      "step2": {
+        "title": "¡Hola! Cuéntanos todo acerca de tu idea",
+        "subtitle": "Estoy interesado en...",
+        "options": {
+          "website": "Sitio web para mi empresa/negocio",
+          "mobileApp": "Aplicación móvil",
+          "customSoftware": "Software a medida"
+        }
       }
     },
     "Services": {

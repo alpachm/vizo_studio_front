@@ -1,16 +1,35 @@
 // ---------------------------------------------------------------------------
 // Contact — Multi-step contact section (step manager)
 // ---------------------------------------------------------------------------
-import type { IContactProps } from "../../interfaces/HomeScreenInterface";
+import { useState } from "react";
+import type { IContactProps, TContactStep } from "../../interfaces/HomeScreenInterface";
+import { ContactStep } from "../../interfaces/HomeScreenInterface";
 import Step1 from "./Contact/Step1";
+import Step2 from "./Contact/Step2";
 
 function Contact(_props: IContactProps) {
+    const [currentStep, setCurrentStep] = useState<TContactStep>(ContactStep.Step1);
+
+    const goToStep2 = () => {
+        setCurrentStep(ContactStep.Step2);
+    };
+
+    const goToStep1 = () => {
+        setCurrentStep(ContactStep.Step1);
+    };
+
     const renderStep = () => {
-        return <Step1 />;
+        switch (currentStep) {
+            case ContactStep.Step2:
+                return <Step2 onBack={goToStep1} />;
+            case ContactStep.Step1:
+            default:
+                return <Step1 onNextStep={goToStep2} />;
+        }
     };
 
     return (
-        <section className="w-full h-dvh flex flex-col relative bg-bg overflow-hidden">
+        <section className="w-full h-dvh flex flex-col relative bg-bg overflow-y-auto">
             <div className="w-full flex-1 flex flex-col relative">{renderStep()}</div>
         </section>
     );

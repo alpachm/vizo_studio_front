@@ -62,6 +62,15 @@
       "step1": {
         "title": "Do you have an idea?",
         "button": "Tell us"
+      },
+      "step2": {
+        "title": "Hello! Tell us all about your idea",
+        "subtitle": "I'm interested in...",
+        "options": {
+          "website": "Website for my company/business",
+          "mobileApp": "Mobile application",
+          "customSoftware": "Custom software"
+        }
       }
     },
     "Services": {

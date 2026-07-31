@@ -33,12 +33,12 @@
     "Services": {
       "title": "What we do?",
       "apps": {
-        "title": "Mobile app development",
+        "title": "Creation of <highlight>mobile apps</highlight>",
         "imageAlt": "Mobile app development service",
         "description": "We turn your ideas into fast, user-friendly mobile applications ready to scale. We build custom software with modern design and guaranteed performance on any device, both iPhone and Android"
       },
       "web": {
-        "title": "Web development",
+        "title": "Creation of <highlight>websites</highlight>",
         "imageAlt": "Web development service",
         "description": "We create fast, secure websites tailored to your business. We develop modern platforms that look perfect on any device and are ready to grow your brand"
       }

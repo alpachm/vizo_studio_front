@@ -3,7 +3,7 @@
 // Two-block alternating layout: Mobile Apps (40/60) & Web Development (60/40)
 // ---------------------------------------------------------------------------
 import { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import type { IServicesProps } from "../../interfaces/HomeScreenInterface";
 import service1Img from "../../assets/HomeScreen/images/service_1.png";
 import service2Img from "../../assets/HomeScreen/images/service_2.png";
@@ -81,7 +81,12 @@ function Services(_props: IServicesProps) {
                         {/* Right Column — Content (60%) */}
                         <div className="flex w-full flex-col items-end justify-center text-right lg:w-3/5">
                             <h3 className="font-title text-2xl font-extrabold text-text sm:text-3xl lg:text-4xl">
-                                {t("HomeScreen.Services.apps.title")}
+                                <Trans
+                                    i18nKey="HomeScreen.Services.apps.title"
+                                    components={{
+                                        highlight: <span className="text-secondary" />,
+                                    }}
+                                />
                             </h3>
                             <p className="mt-4 max-w-xl font-light text-lg leading-relaxed text-text-muted sm:text-xl lg:mt-6">
                                 {t("HomeScreen.Services.apps.description")}
@@ -99,7 +104,12 @@ function Services(_props: IServicesProps) {
                         {/* Left Column — Content (60%) */}
                         <div className="flex w-full flex-col items-start justify-center text-left lg:w-3/5">
                             <h3 className="font-title text-2xl font-extrabold text-text sm:text-3xl lg:text-4xl">
-                                {t("HomeScreen.Services.web.title")}
+                                <Trans
+                                    i18nKey="HomeScreen.Services.web.title"
+                                    components={{
+                                        highlight: <span className="text-secondary" />,
+                                    }}
+                                />
                             </h3>
                             <p className="mt-4 max-w-xl font-light text-lg leading-relaxed text-text-muted sm:text-xl lg:mt-6">
                                 {t("HomeScreen.Services.web.description")}

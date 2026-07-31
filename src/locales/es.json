@@ -33,12 +33,12 @@
     "Services": {
       "title": "¿Qué hacemos?",
       "apps": {
-        "title": "Creación de apps móviles",
+        "title": "Creación de <highlight>apps móviles</highlight>",
         "imageAlt": "Servicio de creación de apps móviles",
         "description": "Convertimos tus ideas en aplicaciones móviles rápidas, fáciles de usar y listas para crecer. Creamos software a la medida con diseño moderno y rendimiento garantizado en cualquier dispositivo tanto iPhone como Android"
       },
       "web": {
-        "title": "Creación de páginas web",
+        "title": "Creación de <highlight>páginas web</highlight>",
         "imageAlt": "Servicio de creación de páginas web",
         "description": "Creamos sitios web rápidos, seguros y diseñados a la medida de tu negocio. Desarrollamos plataformas modernas que se ven perfectas en cualquier dispositivo y están listas para hacer crecer tu marca"
       }

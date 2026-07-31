@@ -55,6 +55,10 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
         );
     };
 
+    const handleSelectBudget = (label: string) => {
+        setSelectedBudget((prev) => (prev === label ? "" : label));
+    };
+
     const onSubmit = handleSubmit((formValues) => {
         const payload: ContactFormData = {
             ...formValues,
@@ -115,34 +119,8 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                 })}
             </div>
 
-            {/* Budget Range — Single Selection */}
-            <h3 className="font-title text-xl sm:text-2xl font-bold text-text mb-6">
-                {t("HomeScreen.Contact.step2.budget.subtitle")}
-            </h3>
-
-            <div className="flex flex-wrap gap-3 sm:gap-4 w-full mb-10">
-                {BUDGET_OPTIONS.map((option) => {
-                    const isActive = selectedBudget === option.id;
-
-                    return (
-                        <button
-                            key={option.id}
-                            type="button"
-                            onClick={() => setSelectedBudget(isActive ? "" : option.id)}
-                            className={`font-body text-base sm:text-lg font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-none transition-all duration-200 cursor-pointer ${
-                                isActive
-                                    ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-lg scale-[1.02]"
-                                    : "bg-transparent border border-text/20 text-text hover:border-[var(--color-primary)]"
-                            }`}
-                        >
-                            {t(option.label)}
-                        </button>
-                    );
-                })}
-            </div>
-
             {/* Project Details Form */}
-            <form onSubmit={onSubmit} className="w-full max-w-2xl flex flex-col gap-6">
+            <form onSubmit={onSubmit} className="w-full max-w-2xl flex flex-col gap-8">
                 {/* Full Name */}
                 <div className="flex flex-col">
                     <input
@@ -223,6 +201,34 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                     {errors.projectDetails && (
                         <span className={errorTextClasses}>{errors.projectDetails.message}</span>
                     )}
+                </div>
+
+                {/* Budget Range — Single Selection (inside form, before submit) */}
+                <div className="w-full mt-4">
+                    <h3 className="font-title text-xl sm:text-2xl font-bold text-text mb-6">
+                        {t("HomeScreen.Contact.step2.budget.subtitle")}
+                    </h3>
+
+                    <div className="flex flex-wrap gap-3 sm:gap-4 w-full">
+                        {BUDGET_OPTIONS.map((option) => {
+                            const isActive = selectedBudget === option.label;
+
+                            return (
+                                <button
+                                    key={option.id}
+                                    type="button"
+                                    onClick={() => handleSelectBudget(option.label)}
+                                    className={`font-body text-base sm:text-lg font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-none transition-all duration-200 cursor-pointer ${
+                                        isActive
+                                            ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-lg scale-[1.02]"
+                                            : "bg-transparent border border-text/20 text-text hover:border-[var(--color-primary)]"
+                                    }`}
+                                >
+                                    {t(option.label)}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
 
                 {/* Submit Button */}

@@ -30,6 +30,12 @@
       "description": "At Vizo Studio, we create modern, fast, and scalable websites and web applications. We work closely with you every step of the way to bring your digital project to life without any complications",
       "cta": "Let's talk about your idea"
     },
+    "AboutUs": {
+      "title": "Who we are?",
+      "paragraph1": "At Vizostudio we have a passionate team with over 3 years of experience developing custom software. We have supported brands and entrepreneurs in <country>Venezuela</country>, <country>Colombia</country> and <country>Argentina</country>, transforming complex challenges into agile, secure and efficient digital platforms.",
+      "paragraph2": "Working with us means rigorous planning, transparent communication and constant feedback at every stage. We focus on delivering stable and scalable products, becoming the technical partner your project needs to grow.",
+      "imageAlt": "Vizostudio development team view"
+    },
     "Services": {
       "title": "What we do?",
       "apps": {

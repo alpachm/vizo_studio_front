@@ -46,5 +46,6 @@ export type TContactStep = (typeof ContactStep)[keyof typeof ContactStep];
 export interface IContactProps {}
 
 /** Props for the Contact Step 1 component */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface IContactStep1Props {}
+export interface IContactStep1Props {
+  onNextStep?: () => void;
+}

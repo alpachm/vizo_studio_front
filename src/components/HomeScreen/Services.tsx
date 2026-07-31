@@ -24,17 +24,17 @@ function Services(_props: IServicesProps) {
                     <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
                         {/* Left Column — Image Placeholder (40%) */}
                         <div className="w-full lg:w-2/5">
-                            <div className="flex aspect-square w-full items-center justify-center bg-white shadow-md">
+                            <div className="flex aspect-square w-full items-center justify-center rounded-none bg-white shadow-md">
                                 <FiSmartphone className="text-6xl text-text-muted/40 lg:text-7xl" />
                             </div>
                         </div>
 
                         {/* Right Column — Content (60%) */}
-                        <div className="flex w-full flex-col justify-center lg:w-3/5">
-                            <h3 className="font-title text-2xl font-bold text-text sm:text-3xl lg:text-4xl">
+                        <div className="flex w-full flex-col items-end justify-center text-right lg:w-3/5">
+                            <h3 className="font-title text-2xl font-extrabold text-text sm:text-3xl lg:text-4xl">
                                 {t("HomeScreen.Services.apps.title")}
                             </h3>
-                            <p className="mt-4 max-w-xl font-body text-base leading-relaxed text-text-muted sm:text-lg lg:mt-6">
+                            <p className="mt-4 max-w-xl font-light text-lg leading-relaxed text-text-muted sm:text-xl lg:mt-6">
                                 {t("HomeScreen.Services.apps.description")}
                             </p>
                         </div>
@@ -45,18 +45,18 @@ function Services(_props: IServicesProps) {
                     {/* -------------------------------------------------- */}
                     <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
                         {/* Left Column — Content (60%) */}
-                        <div className="flex w-full flex-col justify-center lg:w-3/5">
-                            <h3 className="font-title text-2xl font-bold text-text sm:text-3xl lg:text-4xl">
+                        <div className="flex w-full flex-col items-start justify-center text-left lg:w-3/5">
+                            <h3 className="font-title text-2xl font-extrabold text-text sm:text-3xl lg:text-4xl">
                                 {t("HomeScreen.Services.web.title")}
                             </h3>
-                            <p className="mt-4 max-w-xl font-body text-base leading-relaxed text-text-muted sm:text-lg lg:mt-6">
+                            <p className="mt-4 max-w-xl font-light text-lg leading-relaxed text-text-muted sm:text-xl lg:mt-6">
                                 {t("HomeScreen.Services.web.description")}
                             </p>
                         </div>
 
                         {/* Right Column — Image Placeholder (40%) */}
                         <div className="w-full lg:w-2/5">
-                            <div className="flex aspect-square w-full items-center justify-center bg-white shadow-md">
+                            <div className="flex aspect-square w-full items-center justify-center rounded-none bg-white shadow-md">
                                 <FiGlobe className="text-6xl text-text-muted/40 lg:text-7xl" />
                             </div>
                         </div>

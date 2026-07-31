@@ -36,6 +36,28 @@
       "paragraph2": "Trabajar con nosotros significa planificación rigurosa, comunicación transparente y feedback constante en cada etapa. Nos enfocamos en entregar productos estables y escalables, convirtiéndonos en el aliado técnico que tu proyecto necesita para crecer.",
       "imageAlt": "Vista del equipo de desarrollo de Vizostudio"
     },
+    "WhyUs": {
+      "title": "¿Por qué elegirnos?",
+      "subtitle": "Hacemos que tu proyecto marque la diferencia",
+      "cards": {
+        "proactive": {
+          "title": "Trabajo Proactivo",
+          "description": "No nos limitamos a seguir instrucciones. Analizamos tu proyecto, proponemos soluciones avanzadas y nos anticipamos a los retos técnicos antes de que afecten tu desarrollo."
+        },
+        "organized": {
+          "title": "Gestión Organizada",
+          "description": "Planificamos cada fase del proyecto con metodologías claras, garantizando entregas puntuales, hitos bien definidos y total visibilidad del progreso."
+        },
+        "quality": {
+          "title": "Altos Estándares de Calidad",
+          "description": "Construimos con código limpio, arquitectura escalable, alta velocidad de carga y seguridad integrada, aplicando las mejores prácticas modernas del entorno web."
+        },
+        "communication": {
+          "title": "Comunicación y Feedback",
+          "description": "Mantenemos un flujo constante y transparente en todo momento. Escuchamos tus requerimientos, iteramos con tus ideas y te mantenemos al tanto sin tecnicismos complejos."
+        }
+      }
+    },
     "Services": {
       "title": "¿Qué hacemos?",
       "apps": {

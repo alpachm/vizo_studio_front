@@ -36,6 +36,28 @@
       "paragraph2": "Working with us means rigorous planning, transparent communication and constant feedback at every stage. We focus on delivering stable and scalable products, becoming the technical partner your project needs to grow.",
       "imageAlt": "Vizostudio development team view"
     },
+    "WhyUs": {
+      "title": "Why choose us?",
+      "subtitle": "We make your project stand out",
+      "cards": {
+        "proactive": {
+          "title": "Proactive Work",
+          "description": "We don't just follow instructions. We analyze your project, propose advanced solutions, and anticipate technical challenges before they affect your development."
+        },
+        "organized": {
+          "title": "Organized Management",
+          "description": "We plan each project phase with clear methodologies, ensuring timely deliveries, well-defined milestones, and full visibility of progress."
+        },
+        "quality": {
+          "title": "High Quality Standards",
+          "description": "We build with clean code, scalable architecture, high loading speed, and integrated security, applying the best modern web environment practices."
+        },
+        "communication": {
+          "title": "Communication & Feedback",
+          "description": "We maintain a constant and transparent flow at all times. We listen to your requirements, iterate with your ideas, and keep you informed without complex technical jargon."
+        }
+      }
+    },
     "Services": {
       "title": "What we do?",
       "apps": {

@@ -25,7 +25,10 @@
     }
   },
   "HomeScreen": {
-    "title": "Bienvenido a Vizo Studio",
-    "subtitle": "Tu plataforma creativa para el diseño y la exploración visual."
+    "Hero": {
+      "title": "Transformamos tu idea en una plataforma digital de alto impacto",
+      "description": "En Vizo Studio creamos páginas y aplicaciones web modernas, rápidas y listas para crecer. Trabajamos mano a mano contigo en cada paso para hacer realidad tu proyecto digital sin complicaciones",
+      "cta": "Hablemos de tu idea"
+    }
   }
 }

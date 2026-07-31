@@ -58,6 +58,12 @@
         }
       }
     },
+    "Contact": {
+      "step1": {
+        "title": "Do you have an idea?",
+        "button": "Tell us"
+      }
+    },
     "Services": {
       "title": "What we do?",
       "apps": {

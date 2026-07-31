@@ -6,6 +6,7 @@ import AboutUs from "../components/HomeScreen/AboutUs";
 import WhyUs from "../components/HomeScreen/WhyUs";
 import Services from "../components/HomeScreen/Services";
 import type { IHomeScreenProps } from "../interfaces/HomeScreenInterface";
+import Contact from "../components/HomeScreen/Contact";
 
 function HomeScreen(_props: IHomeScreenProps) {
     return (
@@ -14,6 +15,7 @@ function HomeScreen(_props: IHomeScreenProps) {
             <Services />
             <AboutUs />
             <WhyUs />
+            <Contact />
         </>
     );
 }

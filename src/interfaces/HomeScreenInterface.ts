@@ -33,3 +33,18 @@ export interface IWhyUsCardItem {
 /** Props for the Services section component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IServicesProps {}
+
+/** Union of available contact form steps */
+export const ContactStep = {
+  Step1: 1,
+} as const;
+
+export type TContactStep = (typeof ContactStep)[keyof typeof ContactStep];
+
+/** Props for the Contact section root component (step manager) */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IContactProps {}
+
+/** Props for the Contact Step 1 component */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IContactStep1Props {}

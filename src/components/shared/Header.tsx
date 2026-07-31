@@ -63,7 +63,7 @@ function Header() {
 
                         <a
                             href="/contact"
-                            className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-primary text-primary font-body font-medium text-sm hover:bg-primary hover:text-white transition-all duration-200"
+                            className="inline-flex items-center justify-center px-4 py-2 text-color-text font-body font-medium bg-primary text-lg hover:bg-white hover:text-primary transition-all duration-500"
                         >
                             {t("Header.buttons.contact")}
                         </a>
@@ -72,7 +72,7 @@ function Header() {
                     {/* ---- Mobile Menu Toggle ---- */}
                     <button
                         type="button"
-                        className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-text-muted hover:text-primary hover:bg-bg transition-colors"
+                        className="md:hidden inline-flex items-center justify-center p-2 text-text-muted hover:text-primary hover:bg-bg transition-colors"
                         onClick={() => setMobileOpen((prev) => !prev)}
                         aria-expanded={mobileOpen}
                         aria-label={
@@ -105,7 +105,7 @@ function Header() {
                             <a
                                 key={item.to}
                                 href={item.to}
-                                className="font-body text-lg text-text-muted hover:text-primary transition-colors duration-150 py-1"
+                                className="font-body text-lg text-color-text hover:text-primary transition-colors duration-150 py-1"
                                 onClick={closeMobile}
                             >
                                 {t(item.labelKey)}
@@ -114,7 +114,7 @@ function Header() {
 
                         <a
                             href="/contact"
-                            className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-primary text-primary font-body font-medium text-lg hover:bg-primary hover:text-white transition-all duration-200 mt-2"
+                            className="inline-flex items-center justify-center px-4 py-2 text-white bg-primary font-body font-medium text-lg hover:bg-primary hover:text-white transition-all duration-200 mt-2"
                             onClick={closeMobile}
                         >
                             {t("Header.buttons.contact")}

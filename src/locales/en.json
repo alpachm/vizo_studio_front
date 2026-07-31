@@ -25,7 +25,10 @@
     }
   },
   "HomeScreen": {
-    "title": "Welcome to Vizo Studio",
-    "subtitle": "Your creative platform for visual design and exploration."
+    "Hero": {
+      "title": "We turn your idea into a high-impact digital platform",
+      "description": "At Vizo Studio, we create modern, fast, and scalable websites and web applications. We work closely with you every step of the way to bring your digital project to life without any complications",
+      "cta": "Let's talk about your idea"
+    }
   }
 }

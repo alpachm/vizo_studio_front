@@ -2,6 +2,7 @@
 // Services — Services section for the Home screen
 // Two-block alternating layout: Mobile Apps (40/60) & Web Development (60/40)
 // ---------------------------------------------------------------------------
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { IServicesProps } from "../../interfaces/HomeScreenInterface";
 import service1Img from "../../assets/HomeScreen/images/service_1.png";
@@ -9,6 +10,37 @@ import service2Img from "../../assets/HomeScreen/images/service_2.png";
 
 function Services(_props: IServicesProps) {
     const { t } = useTranslation();
+
+    // ---- Refs & Intersection Observer state ----
+    const block1Ref = useRef<HTMLDivElement | null>(null);
+    const block2Ref = useRef<HTMLDivElement | null>(null);
+
+    const [isBlock1Visible, setIsBlock1Visible] = useState(false);
+    const [isBlock2Visible, setIsBlock2Visible] = useState(false);
+
+    useEffect(() => {
+        const observerOptions: IntersectionObserverInit = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.25,
+        };
+
+        const block1Observer = new IntersectionObserver(([entry]) => {
+            setIsBlock1Visible(entry.isIntersecting);
+        }, observerOptions);
+
+        const block2Observer = new IntersectionObserver(([entry]) => {
+            setIsBlock2Visible(entry.isIntersecting);
+        }, observerOptions);
+
+        if (block1Ref.current) block1Observer.observe(block1Ref.current);
+        if (block2Ref.current) block2Observer.observe(block2Ref.current);
+
+        return () => {
+            block1Observer.disconnect();
+            block2Observer.disconnect();
+        };
+    }, []);
 
     return (
         <section className="w-full bg-bg py-16 sm:py-20 lg:py-24">
@@ -22,14 +54,21 @@ function Services(_props: IServicesProps) {
                     {/* -------------------------------------------------- */}
                     {/* Block 1 — Mobile App Development (40/60)            */}
                     {/* -------------------------------------------------- */}
-                    <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
+                    <div
+                        ref={block1Ref}
+                        className="flex flex-col gap-8 lg:flex-row lg:items-center"
+                    >
                         {/* Left Column — Service Image 1 (40%) */}
                         <div className="w-full lg:w-2/5">
                             <div className="aspect-square w-full overflow-hidden rounded-none bg-white shadow-md">
                                 <img
                                     src={service1Img}
                                     alt={t("HomeScreen.Services.apps.imageAlt")}
-                                    className="h-full w-full object-contain"
+                                    className={`h-full w-full object-contain transition-all duration-700 ease-out ${
+                                        isBlock1Visible
+                                            ? "translate-y-0 opacity-100"
+                                            : "translate-y-full opacity-0"
+                                    }`}
                                     loading="lazy"
                                 />
                             </div>
@@ -49,7 +88,10 @@ function Services(_props: IServicesProps) {
                     {/* -------------------------------------------------- */}
                     {/* Block 2 — Web Development (60/40, inverted)         */}
                     {/* -------------------------------------------------- */}
-                    <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
+                    <div
+                        ref={block2Ref}
+                        className="flex flex-col gap-8 lg:flex-row lg:items-center"
+                    >
                         {/* Left Column — Content (60%) */}
                         <div className="flex w-full flex-col items-start justify-center text-left lg:w-3/5">
                             <h3 className="font-title text-2xl font-extrabold text-text sm:text-3xl lg:text-4xl">
@@ -66,7 +108,11 @@ function Services(_props: IServicesProps) {
                                 <img
                                     src={service2Img}
                                     alt={t("HomeScreen.Services.web.imageAlt")}
-                                    className="h-full w-full object-contain"
+                                    className={`h-full w-full object-contain transition-all duration-700 ease-out ${
+                                        isBlock2Visible
+                                            ? "translate-y-0 opacity-100"
+                                            : "translate-y-full opacity-0"
+                                    }`}
                                     loading="lazy"
                                 />
                             </div>

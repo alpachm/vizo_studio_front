@@ -43,7 +43,7 @@ function Services(_props: IServicesProps) {
     }, []);
 
     return (
-        <section className="w-full bg-bg py-16 sm:py-20 lg:py-24">
+        <section className="w-full bg-bg py-16 sm:py-20 lg:py-24 overflow-x-clip relative">
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Section Title */}
                 <h2 className="font-title text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl">
@@ -59,12 +59,16 @@ function Services(_props: IServicesProps) {
                         className="flex flex-col gap-8 lg:flex-row lg:items-center"
                     >
                         {/* Left Column — Service Image 1 (40%) */}
-                        <div className="w-full lg:w-2/5">
-                            <div className="aspect-square w-full overflow-hidden rounded-none bg-white shadow-md">
+                        <div className="w-full lg:w-2/5 flex items-center justify-center p-4">
+                            {/* Outer Stage Container (Square Aspect, Clips Bottom Overflow) */}
+                            <div className="aspect-square w-full relative flex items-center justify-center overflow-hidden">
+                                {/* White Circle Stage Base */}
+                                <div className="w-[85%] h-[85%] rounded-full bg-white shadow-xl absolute inset-0 m-auto z-0" />
+                                {/* Pop-Out Animated Image */}
                                 <img
                                     src={service1Img}
                                     alt={t("HomeScreen.Services.apps.imageAlt")}
-                                    className={`h-full w-full object-contain transition-all duration-700 ease-out ${
+                                    className={`relative z-10 h-full w-full object-contain filter drop-shadow-2xl transition-all duration-700 ease-out ${
                                         isBlock1Visible
                                             ? "translate-y-0 opacity-100"
                                             : "translate-y-full opacity-0"
@@ -103,12 +107,16 @@ function Services(_props: IServicesProps) {
                         </div>
 
                         {/* Right Column — Service Image 2 (40%) */}
-                        <div className="w-full lg:w-2/5">
-                            <div className="aspect-square w-full overflow-hidden rounded-none bg-white shadow-md">
+                        <div className="w-full lg:w-2/5 flex items-center justify-center p-4">
+                            {/* Outer Stage Container (Square Aspect, Clips Bottom Overflow) */}
+                            <div className="aspect-square w-full relative flex items-center justify-center overflow-hidden">
+                                {/* White Circle Stage Base */}
+                                <div className="w-[85%] h-[85%] rounded-full bg-white shadow-xl absolute inset-0 m-auto z-0" />
+                                {/* Pop-Out Animated Image */}
                                 <img
                                     src={service2Img}
                                     alt={t("HomeScreen.Services.web.imageAlt")}
-                                    className={`h-full w-full object-contain transition-all duration-700 ease-out ${
+                                    className={`relative z-10 h-full w-full object-contain filter drop-shadow-2xl transition-all duration-700 ease-out ${
                                         isBlock2Visible
                                             ? "translate-y-0 opacity-100"
                                             : "translate-y-full opacity-0"

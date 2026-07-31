@@ -70,6 +70,21 @@
           "website": "Sitio web para mi empresa/negocio",
           "mobileApp": "Aplicación móvil",
           "customSoftware": "Software a medida"
+        },
+        "form": {
+          "fullName": "Nombre completo",
+          "email": "Correo electrónico",
+          "phone": "Teléfono",
+          "company": "Empresa / Negocio (opcional)",
+          "projectDetails": "Cuéntanos los detalles de tu proyecto",
+          "submit": "Enviar mensaje",
+          "back": "Volver",
+          "errors": {
+            "fullName": "El nombre completo es requerido",
+            "email": "Ingresa un correo electrónico válido",
+            "phone": "El teléfono es requerido",
+            "projectDetails": "Los detalles del proyecto son requeridos"
+          }
         }
       }
     },

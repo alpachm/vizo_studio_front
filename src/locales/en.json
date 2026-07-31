@@ -70,6 +70,21 @@
           "website": "Website for my company/business",
           "mobileApp": "Mobile application",
           "customSoftware": "Custom software"
+        },
+        "form": {
+          "fullName": "Full name",
+          "email": "Email address",
+          "phone": "Phone number",
+          "company": "Company / Business (optional)",
+          "projectDetails": "Tell us the details of your project",
+          "submit": "Send message",
+          "back": "Go back",
+          "errors": {
+            "fullName": "Full name is required",
+            "email": "Please enter a valid email address",
+            "phone": "Phone number is required",
+            "projectDetails": "Project details are required"
+          }
         }
       }
     },

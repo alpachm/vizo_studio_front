@@ -60,4 +60,15 @@ export interface IContactStep1Props {
 /** Props for the Contact Step 2 component */
 export interface IContactStep2Props {
   onBack?: () => void;
+  onSubmitForm?: (data: ContactFormData) => void;
+}
+
+/** Form data shape for Step 2 contact form */
+export interface ContactFormData {
+  selectedInterests: string[];
+  fullName: string;
+  email: string;
+  phone: string;
+  company?: string;
+  projectDetails: string;
 }

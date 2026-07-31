@@ -30,6 +30,12 @@
       "description": "En Vizo Studio creamos páginas y aplicaciones web modernas, rápidas y listas para crecer. Trabajamos mano a mano contigo en cada paso para hacer realidad tu proyecto digital sin complicaciones",
       "cta": "Hablemos de tu idea"
     },
+    "AboutUs": {
+      "title": "¿Quiénes somos?",
+      "paragraph1": "En Vizostudio contamos con un equipo apasionado que suma más de 3 años desarrollando software a la medida. Hemos acompañado a marcas y emprendedores en <country>Venezuela</country>, <country>Colombia</country> y <country>Argentina</country>, transformando desafíos complejos en plataformas digitales ágiles, seguras y eficientes.",
+      "paragraph2": "Trabajar con nosotros significa planificación rigurosa, comunicación transparente y feedback constante en cada etapa. Nos enfocamos en entregar productos estables y escalables, convirtiéndonos en el aliado técnico que tu proyecto necesita para crecer.",
+      "imageAlt": "Vista del equipo de desarrollo de Vizostudio"
+    },
     "Services": {
       "title": "¿Qué hacemos?",
       "apps": {

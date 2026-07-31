@@ -29,6 +29,17 @@
       "title": "We turn your idea into a high-impact digital platform",
       "description": "At Vizo Studio, we create modern, fast, and scalable websites and web applications. We work closely with you every step of the way to bring your digital project to life without any complications",
       "cta": "Let's talk about your idea"
+    },
+    "Services": {
+      "title": "What we do?",
+      "apps": {
+        "title": "Mobile app development",
+        "description": "We turn your ideas into fast, user-friendly mobile applications ready to scale. We build custom software with modern design and guaranteed performance on any device, both iPhone and Android"
+      },
+      "web": {
+        "title": "Web development",
+        "description": "We create fast, secure websites tailored to your business. We develop modern platforms that look perfect on any device and are ready to grow your brand"
+      }
     }
   }
 }

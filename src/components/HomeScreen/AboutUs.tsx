@@ -30,7 +30,7 @@ export const AboutUs: React.FC<IAboutUsProps> = ({ className = "" }) => {
                 while padding permits top 3D pop-out visibility */}
                         <div className="aspect-square w-full max-w-md relative flex items-center justify-center my-4">
                             {/* White Circle Stage Base */}
-                            <div className="w-[85%] h-[85%] rounded-full bg-white shadow-xl absolute inset-0 m-auto z-0" />
+                            <div className="w-[80%] aspect-square rounded-full bg-white shadow-xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" />
                             {/* Pop-Out Image */}
                             <img
                                 src={aboutUsImg}

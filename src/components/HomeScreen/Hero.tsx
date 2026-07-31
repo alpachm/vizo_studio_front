@@ -39,8 +39,8 @@ function Hero(_props: IHeroProps) {
                 className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
             />
 
-            {/* Dark Overlay for Text Readability */}
-            <div className="absolute inset-0 z-0 bg-bg/75 backdrop-blur-sm" />
+            {/* 40% Black Overlay for Text Contrast */}
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-black/40" />
 
             {/* Hero Content Layer */}
             <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">

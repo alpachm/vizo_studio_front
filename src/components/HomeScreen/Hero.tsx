@@ -1,15 +1,49 @@
 // ---------------------------------------------------------------------------
 // Hero — Main hero section for the Home screen
 // ---------------------------------------------------------------------------
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import type { IHeroProps } from "../../interfaces/HomeScreenInterface";
+import heroVideo from "../../assets/HomeScreen/videos/hero-bg.mp4";
 
 function Hero(_props: IHeroProps) {
     const { t } = useTranslation();
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+
+    const handleLoadedData = () => {
+        if (videoRef.current) {
+            videoRef.current.currentTime = 2;
+            videoRef.current.play().catch(() => {
+                // Autoplay blocked by browser — silently ignore
+            });
+        }
+    };
+
+    const handleTimeUpdate = () => {
+        if (videoRef.current && videoRef.current.currentTime >= 12) {
+            videoRef.current.currentTime = 2;
+        }
+    };
 
     return (
-        <section className="flex min-h-screen w-full flex-col items-center justify-center relative text-center pt-20 sm:pt-24 pb-12">
-            <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden text-center pt-20 sm:pt-24 pb-12">
+            {/* Background Video */}
+            <video
+                ref={videoRef}
+                src={heroVideo}
+                autoPlay
+                muted
+                playsInline
+                onLoadedData={handleLoadedData}
+                onTimeUpdate={handleTimeUpdate}
+                className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+            />
+
+            {/* Dark Overlay for Text Readability */}
+            <div className="absolute inset-0 z-0 bg-bg/75 backdrop-blur-sm" />
+
+            {/* Hero Content Layer */}
+            <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 <h1 className="font-title text-4xl font-bold tracking-tight text-text sm:text-6xl lg:text-7xl">
                     {t("HomeScreen.Hero.title")}
                 </h1>

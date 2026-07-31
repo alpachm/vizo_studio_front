@@ -4,7 +4,8 @@
 // ---------------------------------------------------------------------------
 import { useTranslation } from "react-i18next";
 import type { IServicesProps } from "../../interfaces/HomeScreenInterface";
-import { FiSmartphone, FiGlobe } from "react-icons/fi";
+import service1Img from "../../assets/HomeScreen/images/service_1.png";
+import service2Img from "../../assets/HomeScreen/images/service_2.png";
 
 function Services(_props: IServicesProps) {
     const { t } = useTranslation();
@@ -22,10 +23,15 @@ function Services(_props: IServicesProps) {
                     {/* Block 1 — Mobile App Development (40/60)            */}
                     {/* -------------------------------------------------- */}
                     <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
-                        {/* Left Column — Image Placeholder (40%) */}
+                        {/* Left Column — Service Image 1 (40%) */}
                         <div className="w-full lg:w-2/5">
-                            <div className="flex aspect-square w-full items-center justify-center rounded-none bg-white shadow-md">
-                                <FiSmartphone className="text-6xl text-text-muted/40 lg:text-7xl" />
+                            <div className="aspect-square w-full overflow-hidden rounded-none bg-white shadow-md">
+                                <img
+                                    src={service1Img}
+                                    alt={t("HomeScreen.Services.apps.imageAlt")}
+                                    className="h-full w-full object-contain"
+                                    loading="lazy"
+                                />
                             </div>
                         </div>
 
@@ -54,10 +60,15 @@ function Services(_props: IServicesProps) {
                             </p>
                         </div>
 
-                        {/* Right Column — Image Placeholder (40%) */}
+                        {/* Right Column — Service Image 2 (40%) */}
                         <div className="w-full lg:w-2/5">
-                            <div className="flex aspect-square w-full items-center justify-center rounded-none bg-white shadow-md">
-                                <FiGlobe className="text-6xl text-text-muted/40 lg:text-7xl" />
+                            <div className="aspect-square w-full overflow-hidden rounded-none bg-white shadow-md">
+                                <img
+                                    src={service2Img}
+                                    alt={t("HomeScreen.Services.web.imageAlt")}
+                                    className="h-full w-full object-contain"
+                                    loading="lazy"
+                                />
                             </div>
                         </div>
                     </div>

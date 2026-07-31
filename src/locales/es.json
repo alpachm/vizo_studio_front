@@ -66,6 +66,16 @@
       "step2": {
         "title": "¡Hola! Cuéntanos todo acerca de tu idea",
         "subtitle": "Estoy interesado en...",
+        "budget": {
+          "subtitle": "Presupuesto para el proyecto (USD)",
+          "options": {
+            "range1": "$200 - $400",
+            "range2": "$400 - $600",
+            "range3": "$600 - $800",
+            "range4": "$800 - $1000",
+            "range5": "+$1000"
+          }
+        },
         "options": {
           "website": "Sitio web para mi empresa/negocio",
           "mobileApp": "Aplicación móvil",

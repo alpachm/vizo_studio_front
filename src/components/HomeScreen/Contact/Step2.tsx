@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { FiArrowLeft } from "react-icons/fi";
 import type {
+    BudgetOption,
     ContactFormData,
     IContactInterestOption,
     IContactStep2Props,
@@ -18,9 +19,19 @@ const INTEREST_OPTIONS: IContactInterestOption[] = [
     { id: "customSoftware", translationKey: "HomeScreen.Contact.step2.options.customSoftware" },
 ];
 
+/** Budget range options sourced from translation keys */
+const BUDGET_OPTIONS: BudgetOption[] = [
+    { id: "range1", label: "HomeScreen.Contact.step2.budget.options.range1" },
+    { id: "range2", label: "HomeScreen.Contact.step2.budget.options.range2" },
+    { id: "range3", label: "HomeScreen.Contact.step2.budget.options.range3" },
+    { id: "range4", label: "HomeScreen.Contact.step2.budget.options.range4" },
+    { id: "range5", label: "HomeScreen.Contact.step2.budget.options.range5" },
+];
+
 function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
     const { t } = useTranslation();
     const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+    const [selectedBudget, setSelectedBudget] = useState<string>("");
 
     const {
         register,
@@ -29,6 +40,7 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
     } = useForm<ContactFormData>({
         defaultValues: {
             selectedInterests: [],
+            budget: "",
             fullName: "",
             email: "",
             phone: "",
@@ -47,6 +59,7 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
         const payload: ContactFormData = {
             ...formValues,
             selectedInterests,
+            budget: selectedBudget,
         };
         onSubmitForm?.(payload);
     });
@@ -97,6 +110,32 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                             }`}
                         >
                             {t(option.translationKey)}
+                        </button>
+                    );
+                })}
+            </div>
+
+            {/* Budget Range — Single Selection */}
+            <h3 className="font-title text-xl sm:text-2xl font-bold text-text mb-6">
+                {t("HomeScreen.Contact.step2.budget.subtitle")}
+            </h3>
+
+            <div className="flex flex-wrap gap-3 sm:gap-4 w-full mb-10">
+                {BUDGET_OPTIONS.map((option) => {
+                    const isActive = selectedBudget === option.id;
+
+                    return (
+                        <button
+                            key={option.id}
+                            type="button"
+                            onClick={() => setSelectedBudget(isActive ? "" : option.id)}
+                            className={`font-body text-base sm:text-lg font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-none transition-all duration-200 cursor-pointer ${
+                                isActive
+                                    ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-lg scale-[1.02]"
+                                    : "bg-transparent border border-text/20 text-text hover:border-[var(--color-primary)]"
+                            }`}
+                        >
+                            {t(option.label)}
                         </button>
                     );
                 })}

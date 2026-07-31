@@ -66,6 +66,16 @@
       "step2": {
         "title": "Hello! Tell us all about your idea",
         "subtitle": "I'm interested in...",
+        "budget": {
+          "subtitle": "Budget for the project (USD)",
+          "options": {
+            "range1": "$200 - $400",
+            "range2": "$400 - $600",
+            "range3": "$600 - $800",
+            "range4": "$800 - $1000",
+            "range5": "+$1000"
+          }
+        },
         "options": {
           "website": "Website for my company/business",
           "mobileApp": "Mobile application",

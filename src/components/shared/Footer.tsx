@@ -31,15 +31,6 @@ const DEFAULT_EMAIL = "vizostudio.dev@gmail.com";
 const DEFAULT_WHATSAPP = "+58 4146536468";
 
 // ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
-/** Strips non-digit characters from a phone string for URL usage. */
-function digitsOnly(value: string): string {
-    return value.replace(/\D/g, "");
-}
-
-// ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
 

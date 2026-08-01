@@ -3,7 +3,8 @@
 // ---------------------------------------------------------------------------
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { FiMail, FiPhone, FiArrowUp } from "react-icons/fi";
+import { FiMail, FiArrowUp } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 import type { FooterNavItem } from "../../interfaces/FooterInterface";
 
 // ---------------------------------------------------------------------------
@@ -52,7 +53,7 @@ function Footer() {
                         {/* Email */}
                         <a
                             href={`mailto:${DEFAULT_EMAIL}`}
-                            className="inline-flex items-center gap-2 font-body text-lg text-text-muted hover:text-secondary transition-colors duration-200"
+                            className="inline-flex items-center gap-2 font-body text-lg text-text-muted hover:text-primary transition-colors duration-200"
                         >
                             <FiMail className="w-5 h-5" aria-hidden="true" />
                             {DEFAULT_EMAIL}
@@ -63,11 +64,16 @@ function Footer() {
                             href={`https://wa.me/${digitsOnly(DEFAULT_WHATSAPP)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 font-body text-lg text-text-muted hover:text-secondary transition-colors duration-200"
+                            className="inline-flex items-center gap-2 font-body text-lg text-text-muted hover:text-primary transition-colors duration-200"
                         >
-                            <FiPhone className="w-5 h-5" aria-hidden="true" />
+                            <FaWhatsapp className="w-5 h-5" aria-hidden="true" />
                             {DEFAULT_WHATSAPP}
                         </a>
+
+                        {/* Location / Year */}
+                        <p className="mt-4 text-xs sm:text-sm text-text/50 font-medium font-body">
+                            {t("Footer.location")}
+                        </p>
                     </div>
                 </div>
 
@@ -91,7 +97,7 @@ function Footer() {
                     <button
                         type="button"
                         onClick={scrollToTop}
-                        className="inline-flex items-center gap-2 font-body text-lg text-text-muted hover:text-secondary transition-colors duration-200 cursor-pointer"
+                        className="inline-flex items-center gap-2 font-body text-lg text-text-muted hover:text-primary transition-colors duration-200 cursor-pointer"
                     >
                         <FiArrowUp className="w-5 h-5" aria-hidden="true" />
                         {t("Footer.backToTop")}

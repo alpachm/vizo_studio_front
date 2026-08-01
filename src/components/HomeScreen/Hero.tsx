@@ -52,9 +52,9 @@ function Hero(_props: IHeroProps) {
         setTimeout(() => {
             const finalTop = contactSection.getBoundingClientRect().top + window.scrollY;
             if (Math.abs(window.scrollY - finalTop) > 2) {
-                window.scrollTo({ top: finalTop, behavior: "auto" });
+                window.scrollTo({ top: finalTop, behavior: "smooth" });
             }
-        }, 600);
+        }, 700);
     };
 
     return (

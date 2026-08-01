@@ -80,7 +80,7 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
     const errorTextClasses = "text-red-400 text-sm mt-1 font-body";
 
     return (
-        <div className="w-full min-h-dvh flex flex-col bg-bg px-4 py-12 sm:px-8 md:px-16 lg:px-24">
+        <div className="w-full h-auto min-h-dvh flex flex-col bg-bg px-4 py-12 sm:px-8 md:px-16 lg:px-24">
             {/* Back Button */}
             {onBack && (
                 <button

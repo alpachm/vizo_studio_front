@@ -1,13 +1,150 @@
 {
-  "common": {
+  "Common": {
     "appName": "Vizo Studio",
+    "logoVizo": "Vizo",
+    "logoStudio": "Studio",
     "loading": "Cargando..."
   },
-  "theme": {
+  "Theme": {
     "toggleLight": "Cambiar a modo claro",
     "toggleDark": "Cambiar a modo oscuro"
   },
-  "language": {
+  "Language": {
     "switchTo": "Cambiar idioma"
+  },
+  "Header": {
+    "nav": {
+      "blog": "Blog",
+      "services": "Servicios",
+      "aboutUs": "Sobre nosotros",
+      "openMenu": "Abrir menú de navegación",
+      "closeMenu": "Cerrar menú de navegación",
+      "desktopAriaLabel": "Navegación principal",
+      "mobileAriaLabel": "Navegación móvil"
+    },
+    "buttons": {
+      "contact": "Hablemos"
+    }
+  },
+  "Footer": {
+    "status": "Disponibles para nuevos proyectos",
+    "tagline": "Diseño y desarrollo de software a medida para hacer crecer tu marca.",
+    "navTitle": "Navegación",
+    "nav": {
+      "blog": "Blog",
+      "services": "Servicios",
+      "aboutUs": "Sobre nosotros",
+      "contact": "Contacto"
+    },
+    "backToTop": "Volver arriba",
+    "copyright": "© 2026 Vizo Studio. Todos los derechos reservados.",
+    "location": "Venezuela",
+    "legal": {
+      "privacy": "Privacidad",
+      "terms": "Términos de servicio"
+    }
+  },
+  "Portfolio": {
+    "title": "Un poco de nuestro trabajo"
+  },
+  "HomeScreen": {
+    "Hero": {
+      "title": "Transformamos tu idea en una plataforma digital de alto impacto",
+      "description": "En Vizo Studio creamos páginas y aplicaciones web modernas, rápidas y listas para crecer. Trabajamos mano a mano contigo en cada paso para hacer realidad tu proyecto digital sin complicaciones",
+      "cta": "Hablemos de tu idea"
+    },
+    "AboutUs": {
+      "title": "¿Quiénes somos?",
+      "paragraph1": "En Vizostudio contamos con un equipo apasionado que suma más de 3 años desarrollando software a la medida. Hemos acompañado a marcas y emprendedores en <country>Venezuela</country>, <country>Colombia</country> y <country>Argentina</country>, transformando desafíos complejos en plataformas digitales ágiles, seguras y eficientes.",
+      "paragraph2": "Trabajar con nosotros significa planificación rigurosa, comunicación transparente y feedback constante en cada etapa. Nos enfocamos en entregar productos estables y escalables, convirtiéndonos en el aliado técnico que tu proyecto necesita para crecer.",
+      "imageAlt": "Vista del equipo de desarrollo de Vizostudio"
+    },
+    "WhyUs": {
+      "title": "¿Por qué elegirnos?",
+      "subtitle": "Hacemos que tu proyecto marque la diferencia",
+      "cards": {
+        "proactive": {
+          "title": "Trabajo Proactivo",
+          "description": "No nos limitamos a seguir instrucciones. Analizamos tu proyecto, proponemos soluciones avanzadas y nos anticipamos a los retos técnicos antes de que afecten tu desarrollo."
+        },
+        "organized": {
+          "title": "Gestión Organizada",
+          "description": "Planificamos cada fase del proyecto con metodologías claras, garantizando entregas puntuales, hitos bien definidos y total visibilidad del progreso."
+        },
+        "quality": {
+          "title": "Altos Estándares de Calidad",
+          "description": "Construimos con código limpio, arquitectura escalable, alta velocidad de carga y seguridad integrada, aplicando las mejores prácticas modernas del entorno web."
+        },
+        "communication": {
+          "title": "Comunicación y Feedback",
+          "description": "Mantenemos un flujo constante y transparente en todo momento. Escuchamos tus requerimientos, iteramos con tus ideas y te mantenemos al tanto sin tecnicismos complejos."
+        }
+      }
+    },
+    "Contact": {
+      "step1": {
+        "title": "¿Tienes alguna idea?",
+        "button": "Cuéntanos"
+      },
+      "step2": {
+        "title": "¡Hola! Cuéntanos todo acerca de tu idea",
+        "subtitle": "Estoy interesado en...",
+        "budget": {
+          "subtitle": "Presupuesto para el proyecto (USD)",
+          "options": {
+            "range1": "$200 - $400",
+            "range2": "$400 - $600",
+            "range3": "$600 - $800",
+            "range4": "$800 - $1000",
+            "range5": "+$1000"
+          }
+        },
+        "options": {
+          "website": "Sitio web para mi empresa/negocio",
+          "mobileApp": "Aplicación móvil",
+          "customSoftware": "Software a medida"
+        },
+        "form": {
+          "fullName": "Nombre completo",
+          "email": "Correo electrónico",
+          "phone": "Teléfono",
+          "company": "Empresa / Negocio (opcional)",
+          "projectDetails": "Cuéntanos los detalles de tu proyecto",
+          "submit": "Enviar mensaje",
+          "back": "Volver",
+          "errors": {
+            "fullName": "El nombre completo es requerido",
+            "email": "Ingresa un correo electrónico válido",
+            "phone": "El teléfono es requerido",
+            "projectDetails": "Los detalles del proyecto son requeridos",
+            "projectDetailsMinWords": "Por favor, describe tu proyecto en al menos 5 palabras",
+            "selectedInterests": "Por favor, selecciona al menos una opción de interés",
+            "budget": "Por favor, selecciona un rango de presupuesto",
+            "submitError": "Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo."
+          }
+        }
+      },
+      "step3": {
+        "title": "¡Gracias por contactarnos!",
+        "message": "Hemos recibido tu mensaje correctamente. Nuestro equipo revisará los detalles de tu proyecto y te contactará lo antes posible.",
+        "buttons": {
+          "writeAgain": "Volver a escribir",
+          "exit": "Salir"
+        }
+      }
+    },
+    "Services": {
+      "title": "¿Qué hacemos?",
+      "apps": {
+        "title": "Creación de <highlight>apps móviles</highlight>",
+        "imageAlt": "Servicio de creación de apps móviles",
+        "description": "Convertimos tus ideas en aplicaciones móviles rápidas, fáciles de usar y listas para crecer. Creamos software a la medida con diseño moderno y rendimiento garantizado en cualquier dispositivo tanto iPhone como Android"
+      },
+      "web": {
+        "title": "Creación de <highlight>páginas web</highlight>",
+        "imageAlt": "Servicio de creación de páginas web",
+        "description": "Creamos sitios web rápidos, seguros y diseñados a la medida de tu negocio. Desarrollamos plataformas modernas que se ven perfectas en cualquier dispositivo y están listas para hacer crecer tu marca"
+      }
+    }
   }
 }

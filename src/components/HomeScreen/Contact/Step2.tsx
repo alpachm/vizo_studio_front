@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // Step 2 — Multi-select interest options + project details form
 // ---------------------------------------------------------------------------
-import { useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { FiArrowLeft } from "react-icons/fi";
@@ -30,12 +30,12 @@ const BUDGET_OPTIONS: BudgetOption[] = [
 
 function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
     const { t } = useTranslation();
-    const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-    const [selectedBudget, setSelectedBudget] = useState<string>("");
 
     const {
         register,
         handleSubmit,
+        setValue,
+        watch,
         formState: { errors, isSubmitting },
     } = useForm<ContactFormData>({
         defaultValues: {
@@ -49,27 +49,33 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
         },
     });
 
-    const toggleOption = (id: string) => {
-        setSelectedInterests((prev) =>
-            prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
-        );
+    const selectedInterests = watch("selectedInterests") || [];
+    const selectedBudget = watch("budget") || "";
+
+    // Register fields that are managed programmatically (not via register() in JSX)
+    useEffect(() => {
+        register("selectedInterests");
+        register("budget");
+    }, [register]);
+
+    const toggleInterest = (id: string) => {
+        const updated = selectedInterests.includes(id)
+            ? selectedInterests.filter((item) => item !== id)
+            : [...selectedInterests, id];
+        setValue("selectedInterests", updated, { shouldValidate: true });
     };
 
     const handleSelectBudget = (label: string) => {
-        setSelectedBudget((prev) => (prev === label ? "" : label));
+        const nextBudget = selectedBudget === label ? "" : label;
+        setValue("budget", nextBudget, { shouldValidate: true });
     };
 
-    const onSubmit = handleSubmit((formValues) => {
-        const payload: ContactFormData = {
-            ...formValues,
-            selectedInterests,
-            budget: selectedBudget,
-        };
-        onSubmitForm?.(payload);
-    });
+    const onFormSubmit = (data: ContactFormData) => {
+        onSubmitForm?.(data);
+    };
 
     const inputBaseClasses =
-        "bg-transparent border-b border-text/30 focus:border-[var(--color-primary)] focus:outline-none rounded-none py-3 px-1 transition-colors w-full text-text placeholder:text-text/40 font-body text-base";
+        "bg-transparent border-b border-text/30 focus:border-primary focus:outline-none rounded-none py-3 px-1 transition-colors w-full text-text placeholder:text-text/40 font-body text-base";
 
     const errorTextClasses = "text-red-400 text-sm mt-1 font-body";
 
@@ -92,110 +98,128 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                 {t("HomeScreen.Contact.step2.title")}
             </h2>
 
-            {/* Subtitle */}
-            <p className="text-xl sm:text-2xl font-thin text-text mb-4">
-                {t("HomeScreen.Contact.step2.subtitle")}
-            </p>
+            {/* Main Form Containing All Sections */}
+            <form
+                onSubmit={handleSubmit(onFormSubmit)}
+                className="w-full max-w-2xl flex flex-col gap-8"
+            >
+                {/* 1. Multi-Select Interests Section */}
+                <div className="w-full">
+                    <p className="text-xl sm:text-2xl font-thin text-text mb-4">
+                        {t("HomeScreen.Contact.step2.subtitle")}
+                    </p>
 
-            {/* Multi-Select Interest Buttons */}
-            <div className="flex flex-wrap gap-4 mt-4 mb-10">
-                {INTEREST_OPTIONS.map((option) => {
-                    const isActive = selectedInterests.includes(option.id);
+                    <div className="flex flex-wrap gap-4 mt-2">
+                        {INTEREST_OPTIONS.map((option) => {
+                            const isActive = selectedInterests.includes(option.id);
 
-                    return (
-                        <button
-                            key={option.id}
-                            type="button"
-                            onClick={() => toggleOption(option.id)}
-                            className={`font-body text-base sm:text-lg font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-none transition-all duration-200 cursor-pointer ${
-                                isActive
-                                    ? "bg-primary text-white border-primary"
-                                    : "bg-transparent border border-text/20 text-text hover:border-text/50"
+                            return (
+                                <button
+                                    key={option.id}
+                                    type="button"
+                                    onClick={() => toggleInterest(option.id)}
+                                    className={`font-body text-base sm:text-lg font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-none transition-all duration-200 cursor-pointer border ${
+                                        isActive
+                                            ? "bg-primary border-primary text-white shadow-lg scale-[1.02]"
+                                            : "bg-transparent border-text/20 text-text hover:border-text/50"
+                                    }`}
+                                >
+                                    {t(option.translationKey)}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* 2. Text Inputs — Full Name & Email */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Full Name */}
+                    <div className="flex flex-col">
+                        <input
+                            {...register("fullName", {
+                                required: t(
+                                    "HomeScreen.Contact.step2.form.errors.fullName",
+                                ) as string,
+                            })}
+                            type="text"
+                            placeholder={t("HomeScreen.Contact.step2.form.fullName")}
+                            className={`${inputBaseClasses} ${
+                                errors.fullName ? "border-red-400 focus:border-red-400" : ""
                             }`}
-                        >
-                            {t(option.translationKey)}
-                        </button>
-                    );
-                })}
-            </div>
+                        />
+                        {errors.fullName && (
+                            <span className={errorTextClasses}>{errors.fullName.message}</span>
+                        )}
+                    </div>
 
-            {/* Project Details Form */}
-            <form onSubmit={onSubmit} className="w-full max-w-2xl flex flex-col gap-8">
-                {/* Full Name */}
-                <div className="flex flex-col">
-                    <input
-                        {...register("fullName", {
-                            required: t("HomeScreen.Contact.step2.form.errors.fullName"),
-                        })}
-                        type="text"
-                        placeholder={t("HomeScreen.Contact.step2.form.fullName")}
-                        className={`${inputBaseClasses} ${
-                            errors.fullName ? "border-red-400 focus:border-red-400" : ""
-                        }`}
-                    />
-                    {errors.fullName && (
-                        <span className={errorTextClasses}>{errors.fullName.message}</span>
-                    )}
+                    {/* Email */}
+                    <div className="flex flex-col">
+                        <input
+                            {...register("email", {
+                                required: t("HomeScreen.Contact.step2.form.errors.email") as string,
+                                pattern: {
+                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                    message: t(
+                                        "HomeScreen.Contact.step2.form.errors.email",
+                                    ) as string,
+                                },
+                            })}
+                            type="email"
+                            placeholder={t("HomeScreen.Contact.step2.form.email")}
+                            className={`${inputBaseClasses} ${
+                                errors.email ? "border-red-400 focus:border-red-400" : ""
+                            }`}
+                        />
+                        {errors.email && (
+                            <span className={errorTextClasses}>{errors.email.message}</span>
+                        )}
+                    </div>
                 </div>
 
-                {/* Email */}
-                <div className="flex flex-col">
-                    <input
-                        {...register("email", {
-                            required: t("HomeScreen.Contact.step2.form.errors.email"),
-                            pattern: {
-                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: t("HomeScreen.Contact.step2.form.errors.email"),
-                            },
-                        })}
-                        type="email"
-                        placeholder={t("HomeScreen.Contact.step2.form.email")}
-                        className={`${inputBaseClasses} ${
-                            errors.email ? "border-red-400 focus:border-red-400" : ""
-                        }`}
-                    />
-                    {errors.email && (
-                        <span className={errorTextClasses}>{errors.email.message}</span>
-                    )}
+                {/* 3. Text Inputs — Phone & Company */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Phone */}
+                    <div className="flex flex-col">
+                        <input
+                            {...register("phone", {
+                                required: t("HomeScreen.Contact.step2.form.errors.phone") as string,
+                            })}
+                            type="tel"
+                            placeholder={t("HomeScreen.Contact.step2.form.phone")}
+                            className={`${inputBaseClasses} ${
+                                errors.phone ? "border-red-400 focus:border-red-400" : ""
+                            }`}
+                        />
+                        {errors.phone && (
+                            <span className={errorTextClasses}>{errors.phone.message}</span>
+                        )}
+                    </div>
+
+                    {/* Company (Optional) */}
+                    <div className="flex flex-col">
+                        <input
+                            {...register("company")}
+                            type="text"
+                            placeholder={t("HomeScreen.Contact.step2.form.company")}
+                            className={inputBaseClasses}
+                        />
+                    </div>
                 </div>
 
-                {/* Phone */}
-                <div className="flex flex-col">
-                    <input
-                        {...register("phone", {
-                            required: t("HomeScreen.Contact.step2.form.errors.phone"),
-                        })}
-                        type="tel"
-                        placeholder={t("HomeScreen.Contact.step2.form.phone")}
-                        className={`${inputBaseClasses} ${
-                            errors.phone ? "border-red-400 focus:border-red-400" : ""
-                        }`}
-                    />
-                    {errors.phone && (
-                        <span className={errorTextClasses}>{errors.phone.message}</span>
-                    )}
-                </div>
-
-                {/* Company (Optional) */}
-                <div className="flex flex-col">
-                    <input
-                        {...register("company")}
-                        type="text"
-                        placeholder={t("HomeScreen.Contact.step2.form.company")}
-                        className={inputBaseClasses}
-                    />
-                </div>
-
-                {/* Project Details (Textarea) */}
+                {/* 4. Project Details (Auto-expanding Textarea) */}
                 <div className="flex flex-col">
                     <textarea
                         {...register("projectDetails", {
-                            required: t("HomeScreen.Contact.step2.form.errors.projectDetails"),
+                            required: t(
+                                "HomeScreen.Contact.step2.form.errors.projectDetails",
+                            ) as string,
                             validate: (value) => {
                                 const wordCount = value.trim().split(/\s+/).filter(Boolean).length;
                                 return (
                                     wordCount >= 5 ||
-                                    t("HomeScreen.Contact.step2.form.errors.projectDetailsMinWords")
+                                    (t(
+                                        "HomeScreen.Contact.step2.form.errors.projectDetailsMinWords",
+                                    ) as string)
                                 );
                             },
                         })}
@@ -205,7 +229,7 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                             e.currentTarget.style.height = "auto";
                             e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
                         }}
-                        className={`bg-transparent border-b border-text/30 focus:border-[var(--color-primary)] focus:outline-none rounded-none py-3 px-1 transition-colors w-full text-text placeholder:text-text/50 text-base resize-none overflow-hidden ${
+                        className={`bg-transparent border-b border-text/30 focus:border-primary focus:outline-none rounded-none py-3 px-1 transition-colors w-full text-text placeholder:text-text/50 text-base resize-none overflow-hidden ${
                             errors.projectDetails ? "border-red-400 focus:border-red-400" : ""
                         }`}
                     />
@@ -214,7 +238,7 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                     )}
                 </div>
 
-                {/* Budget Range — Single Selection (inside form, before submit) */}
+                {/* 5. Single-Select Budget Range */}
                 <div className="w-full mt-4">
                     <h3 className="font-title text-xl sm:text-2xl font-bold text-text mb-6">
                         {t("HomeScreen.Contact.step2.budget.subtitle")}
@@ -231,8 +255,8 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                                     onClick={() => handleSelectBudget(option.label)}
                                     className={`font-body text-base sm:text-lg font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-none transition-all duration-200 cursor-pointer ${
                                         isActive
-                                            ? "bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-lg scale-[1.02]"
-                                            : "bg-transparent border border-text/20 text-text hover:border-[var(--color-primary)]"
+                                            ? "bg-primary border-primary text-white shadow-lg scale-[1.02]"
+                                            : "bg-transparent border border-text/20 text-text hover:border-primary"
                                     }`}
                                 >
                                     {t(option.label)}
@@ -242,7 +266,7 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                     </div>
                 </div>
 
-                {/* Submit Button */}
+                {/* 6. Submit Button */}
                 <button
                     type="submit"
                     disabled={isSubmitting}

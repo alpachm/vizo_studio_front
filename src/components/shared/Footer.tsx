@@ -6,6 +6,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { FiMail, FiArrowUp } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import { useScrollToSection } from "../../hooks/useScrollToSection";
 import type { FooterProps, FooterNavItem } from "../../interfaces/FooterInterface";
 
 // ---------------------------------------------------------------------------
@@ -15,9 +16,16 @@ import type { FooterProps, FooterNavItem } from "../../interfaces/FooterInterfac
 const DEFAULT_NAV_ITEMS: FooterNavItem[] = [
     { labelKey: "Footer.nav.services", to: "/services" },
     { labelKey: "Footer.nav.aboutUs", to: "/about" },
-    { labelKey: "Footer.nav.blog", to: "/blog" },
+    // { labelKey: "Footer.nav.blog", to: "/blog" },
     { labelKey: "Footer.nav.contact", to: "/contact" },
 ];
+
+/** Maps route paths to their corresponding home‑page section IDs. */
+const ROUTE_TO_SECTION_ID: Record<string, string> = {
+    "/services": "services",
+    "/about": "about-us",
+    "/contact": "contacto",
+};
 
 const DEFAULT_EMAIL = "correo@email.com";
 const DEFAULT_WHATSAPP = "+58 4140004343";
@@ -41,6 +49,8 @@ function Footer({
     whatsapp = DEFAULT_WHATSAPP,
 }: FooterProps) {
     const { t } = useTranslation();
+
+    const { scrollToSection } = useScrollToSection();
 
     const scrollToTop = useCallback(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -115,13 +125,19 @@ function Footer({
                             aria-label={t("Footer.navTitle")}
                         >
                             {navItems.map((item) => (
-                                <a
+                                <button
                                     key={item.to}
-                                    href={item.to}
-                                    className="font-body text-base sm:text-lg text-text-muted hover:text-primary transition-colors duration-200 w-fit"
+                                    type="button"
+                                    onClick={() => {
+                                        const sectionId = ROUTE_TO_SECTION_ID[item.to];
+                                        if (sectionId) {
+                                            scrollToSection(sectionId);
+                                        }
+                                    }}
+                                    className="font-body text-base sm:text-lg text-text-muted hover:text-primary transition-colors duration-200 w-fit bg-transparent border-none cursor-pointer"
                                 >
                                     {t(item.labelKey)}
-                                </a>
+                                </button>
                             ))}
                         </nav>
 

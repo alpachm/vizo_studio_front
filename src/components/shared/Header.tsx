@@ -5,6 +5,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiMenu, FiX } from "react-icons/fi";
+import { useScrollToSection } from "../../hooks/useScrollToSection";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------
@@ -17,12 +18,6 @@ const ROUTE_TO_SECTION_ID: Record<string, string> = {
     "/about": "about-us",
     "/contact": "contacto",
 };
-
-/** Fixed compact header height for scroll offset calculations (px). */
-const COMPACT_HEADER_HEIGHT = 70;
-
-/** Section IDs where the header should scroll WITHOUT offset (header autohides). */
-const NO_OFFSET_SECTIONS = new Set(["contacto"]);
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
     // { labelKey: "Header.nav.blog", to: "/blog" },
@@ -74,38 +69,7 @@ function Header() {
     }, []);
 
     const closeMobile = useCallback(() => setMobileOpen(false), []);
-
-    // -----------------------------------------------------------------------
-    // Scroll-to-section helper
-    // -----------------------------------------------------------------------
-
-    /** Smooth‑scrolls to a section by its DOM id.
-     *  @param sectionId The `id` attribute of the target section element.
-     *  @param applyHeaderOffset When `true` (default), deducts the current
-     *         header height so the sticky header does not overlap the section. */
-    const scrollToSection = useCallback(
-        (sectionId: string, applyHeaderOffset = true) => {
-            const target = document.getElementById(sectionId);
-            if (!target) return;
-
-            if (applyHeaderOffset) {
-                const targetPosition =
-                    target.getBoundingClientRect().top + window.scrollY - COMPACT_HEADER_HEIGHT;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: "smooth",
-                });
-            } else {
-                // Direct scrollIntoView — header autohides, no offset needed.
-                target.scrollIntoView({ behavior: "smooth" });
-            }
-
-            // Close mobile drawer after triggering scroll
-            closeMobile();
-        },
-        [closeMobile],
-    );
+    const { scrollToSection } = useScrollToSection();
 
     // -----------------------------------------------------------------------
     // Click handler for navigation items (desktop & mobile)
@@ -117,10 +81,9 @@ function Header() {
             if (!sectionId) return; // fallback to default link behavior
 
             e.preventDefault();
-            const needsOffset = !NO_OFFSET_SECTIONS.has(sectionId);
-            scrollToSection(sectionId, needsOffset);
+            scrollToSection(sectionId, closeMobile);
         },
-        [scrollToSection],
+        [scrollToSection, closeMobile],
     );
 
     // Header background is active when scrolled OR mobile menu is open

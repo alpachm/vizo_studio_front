@@ -93,7 +93,8 @@
             "fullName": "El nombre completo es requerido",
             "email": "Ingresa un correo electrónico válido",
             "phone": "El teléfono es requerido",
-            "projectDetails": "Los detalles del proyecto son requeridos"
+            "projectDetails": "Los detalles del proyecto son requeridos",
+            "projectDetailsMinWords": "Por favor, describe tu proyecto en al menos 5 palabras"
           }
         }
       }

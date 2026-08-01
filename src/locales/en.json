@@ -93,7 +93,8 @@
             "fullName": "Full name is required",
             "email": "Please enter a valid email address",
             "phone": "Phone number is required",
-            "projectDetails": "Project details are required"
+            "projectDetails": "Project details are required",
+            "projectDetailsMinWords": "Please describe your project in at least 5 words"
           }
         }
       }

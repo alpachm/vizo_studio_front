@@ -191,10 +191,21 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                     <textarea
                         {...register("projectDetails", {
                             required: t("HomeScreen.Contact.step2.form.errors.projectDetails"),
+                            validate: (value) => {
+                                const wordCount = value.trim().split(/\s+/).filter(Boolean).length;
+                                return (
+                                    wordCount >= 5 ||
+                                    t("HomeScreen.Contact.step2.form.errors.projectDetailsMinWords")
+                                );
+                            },
                         })}
-                        rows={5}
+                        rows={1}
                         placeholder={t("HomeScreen.Contact.step2.form.projectDetails")}
-                        className={`${inputBaseClasses} resize-none ${
+                        onInput={(e) => {
+                            e.currentTarget.style.height = "auto";
+                            e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+                        }}
+                        className={`bg-transparent border-b border-text/30 focus:border-[var(--color-primary)] focus:outline-none rounded-none py-3 px-1 transition-colors w-full text-text placeholder:text-text/50 text-base resize-none overflow-hidden ${
                             errors.projectDetails ? "border-red-400 focus:border-red-400" : ""
                         }`}
                     />

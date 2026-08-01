@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // Header — Global fixed header with navigation and CTA
 // ---------------------------------------------------------------------------
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -24,17 +24,30 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
 function Header() {
     const { t } = useTranslation();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const closeMobile = useCallback(() => setMobileOpen(false), []);
 
     const navItems = DEFAULT_NAV_ITEMS;
 
     return (
-        <header className="w-full fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md border-b border-text-muted/10 transition-colors duration-300">
+        <header
+            className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+                isScrolled ? "bg-bg shadow-sm py-3" : "bg-transparent py-5"
+            }`}
+        >
             {/* Container 1: Centering and Max-Width */}
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Container 2: Flex distribution */}
-                <div className="h-16 sm:h-20 flex items-center justify-between">
+                <div className="flex items-center justify-between">
                     {/* ---- Logo / Brand ---- */}
                     <Link
                         to="/"
@@ -63,7 +76,11 @@ function Header() {
 
                         <a
                             href="/contact"
-                            className="inline-flex items-center justify-center px-4 py-2 text-color-text font-body font-medium bg-primary text-lg hover:bg-white hover:text-primary transition-all duration-500"
+                            className={`inline-flex items-center justify-center px-4 py-2 font-body font-medium text-lg transition-all duration-300 border ${
+                                isScrolled
+                                    ? "bg-primary border-primary text-white hover:opacity-90"
+                                    : "bg-transparent border-text-muted text-text-muted hover:border-text hover:text-text"
+                            }`}
                         >
                             {t("Header.buttons.contact")}
                         </a>
@@ -114,7 +131,11 @@ function Header() {
 
                         <a
                             href="/contact"
-                            className="inline-flex items-center justify-center px-4 py-2 text-white bg-primary font-body font-medium text-lg hover:bg-primary hover:text-white transition-all duration-200 mt-2"
+                            className={`inline-flex items-center justify-center px-4 py-2 font-body font-medium text-lg transition-all duration-300 border mt-2 ${
+                                isScrolled
+                                    ? "bg-primary border-primary text-white hover:opacity-90"
+                                    : "bg-transparent border-text-muted text-text-muted hover:border-text hover:text-text"
+                            }`}
                             onClick={closeMobile}
                         >
                             {t("Header.buttons.contact")}

@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
+import { useScrollToTop } from "../../hooks/useScrollToTop";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------
@@ -70,6 +71,7 @@ function Header() {
 
     const closeMobile = useCallback(() => setMobileOpen(false), []);
     const { scrollToSection } = useScrollToSection();
+    const { scrollToTop } = useScrollToTop();
 
     // -----------------------------------------------------------------------
     // Click handler for navigation items (desktop & mobile)
@@ -106,8 +108,9 @@ function Header() {
                     {/* ---- Logo / Brand ---- */}
                     <Link
                         to="/"
-                        className="flex items-center shrink-0 gap-2 group"
+                        className="flex items-center shrink-0 gap-2 group cursor-pointer"
                         aria-label={t("Common.appName")}
+                        onClick={() => scrollToTop(closeMobile)}
                     >
                         <span
                             className={`font-title text-2xl sm:text-3xl font-black tracking-tight transition-colors duration-300 ${

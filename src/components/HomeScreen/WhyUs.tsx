@@ -71,7 +71,7 @@ export const WhyUs: React.FC<IWhyUsProps> = ({ className = "" }) => {
                     <h2 className="font-title text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-[#000] mb-2">
                         {t("HomeScreen.WhyUs.title")}
                     </h2>
-                    <p className="text-[var(--color-secondary)] text-base sm:text-lg">
+                    <p className="text-[var(--color-primary)] text-base sm:text-lg">
                         {t("HomeScreen.WhyUs.subtitle")}
                     </p>
                 </div>
@@ -95,7 +95,7 @@ export const WhyUs: React.FC<IWhyUsProps> = ({ className = "" }) => {
                                 key={card.id}
                                 className={`p-8 sm:p-10 rounded-none border border-[#000]/10 shadow-sm shadow-md flex flex-col items-center text-center transition-all duration-700 ease-out will-change-transform ${transformClass}`}
                             >
-                                <div className="text-4xl sm:text-5xl text-[var(--color-secondary)] mb-5">
+                                <div className="text-4xl sm:text-5xl text-[var(--color-primary)] mb-5">
                                     <IconComponent />
                                 </div>
                                 <h3 className="font-title text-lg sm:text-xl font-bold text-[#000] mb-3">

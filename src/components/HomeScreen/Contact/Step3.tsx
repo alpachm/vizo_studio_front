@@ -11,7 +11,7 @@ function Step3({ onWriteAgain, onExit }: IContactStep3Props) {
     return (
         <div className="w-full h-dvh min-h-dvh flex flex-col justify-center items-center bg-bg px-4 sm:px-8 text-center">
             {/* Success Icon */}
-            <FiCheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-secondary mb-6" />
+            <FiCheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-primary mb-6" />
 
             {/* Confirmation Title */}
             <h2 className="font-title text-2xl sm:text-4xl lg:text-5xl font-bold text-text mb-4">

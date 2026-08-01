@@ -121,7 +121,7 @@ function Header() {
                         </span>
                         <span
                             className={`font-title text-2xl sm:text-3xl font-black tracking-tight transition-colors duration-300 ${
-                                isScrolled ? "text-secondary" : "text-text-muted"
+                                isScrolled ? "text-primary" : "text-text-muted"
                             }`}
                         >
                             {t("Common.logoStudio")}

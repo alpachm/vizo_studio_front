@@ -79,7 +79,7 @@ export const AboutUs: React.FC<IAboutUsProps> = ({ className = "" }) => {
                             <Trans
                                 i18nKey="HomeScreen.AboutUs.paragraph1"
                                 components={{
-                                    country: <span className="font-bold text-secondary" />,
+                                    country: <span className="font-bold text-primary" />,
                                 }}
                             />
                         </p>

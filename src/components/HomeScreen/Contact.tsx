@@ -81,6 +81,7 @@ function Contact(_props: IContactProps) {
 
     return (
         <section
+            id="contacto"
             className={`w-full ${
                 currentStep === ContactStep.Step1 ? "h-dvh overflow-hidden" : "h-auto min-h-dvh"
             } relative bg-bg`}

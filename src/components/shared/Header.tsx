@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // Header — Global fixed header with navigation and CTA
 // ---------------------------------------------------------------------------
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -25,13 +25,39 @@ function Header() {
     const { t } = useTranslation();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isOverlapping, setIsOverlapping] = useState(false);
+    const headerRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
+        let rafId: number | null = null;
+
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
+            // Throttle: skip if a frame is already queued
+            if (rafId !== null) return;
+
+            rafId = requestAnimationFrame(() => {
+                setIsScrolled(window.scrollY > 20);
+
+                // Pixel-perfect overlap detection with #contacto via getBoundingClientRect
+                const contactSection = document.getElementById("contacto");
+                if (contactSection) {
+                    const headerHeight = headerRef.current?.offsetHeight ?? 80;
+                    const contactRect = contactSection.getBoundingClientRect();
+                    // Header overlaps Contact ONLY when Contact's top edge is
+                    // at or above the Header's bottom edge AND Contact's bottom
+                    // edge is still below the viewport's top.
+                    setIsOverlapping(contactRect.top <= headerHeight && contactRect.bottom >= 0);
+                }
+
+                rafId = null;
+            });
         };
+
         window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            if (rafId !== null) cancelAnimationFrame(rafId);
+        };
     }, []);
 
     const closeMobile = useCallback(() => setMobileOpen(false), []);
@@ -42,9 +68,12 @@ function Header() {
 
     return (
         <header
-            className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                isHeaderActive ? "bg-bg shadow-sm py-3" : "bg-transparent py-5"
-            }`}
+            ref={headerRef}
+            className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+                isOverlapping
+                    ? "-translate-y-full opacity-0 pointer-events-none"
+                    : "translate-y-0 opacity-100"
+            } ${isHeaderActive ? "bg-bg shadow-sm py-3" : "bg-transparent py-5"}`}
         >
             {/* Container 1: Centering and Max-Width */}
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

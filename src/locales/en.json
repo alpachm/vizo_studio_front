@@ -24,6 +24,24 @@
       "contact": "Let's talk"
     }
   },
+  "Footer": {
+    "status": "Available for new projects",
+    "tagline": "Custom software design and development to grow your brand.",
+    "navTitle": "Navigation",
+    "nav": {
+      "blog": "Blog",
+      "services": "Services",
+      "aboutUs": "About us",
+      "contact": "Contact"
+    },
+    "backToTop": "Back to top",
+    "copyright": "© 2026 Vizo Studio. All rights reserved.",
+    "location": "Venezuela",
+    "legal": {
+      "privacy": "Privacy",
+      "terms": "Terms of Service"
+    }
+  },
   "HomeScreen": {
     "Hero": {
       "title": "We turn your idea into a high-impact digital platform",

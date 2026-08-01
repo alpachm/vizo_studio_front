@@ -38,6 +38,7 @@ export interface IServicesProps {}
 export const ContactStep = {
   Step1: 1,
   Step2: 2,
+  Step3: 3,
 } as const;
 
 export type TContactStep = (typeof ContactStep)[keyof typeof ContactStep];
@@ -60,7 +61,14 @@ export interface IContactStep1Props {
 /** Props for the Contact Step 2 component */
 export interface IContactStep2Props {
   onBack?: () => void;
-  onSubmitForm?: (data: ContactFormData) => void;
+  onSubmitForm?: (data: ContactFormData) => void | Promise<void>;
+  submitError?: string | null;
+}
+
+/** Props for the Contact Step 3 confirmation component */
+export interface IContactStep3Props {
+  onWriteAgain?: () => void;
+  onExit?: () => void;
 }
 
 /** Form data shape for Step 2 contact form */

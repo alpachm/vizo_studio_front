@@ -96,8 +96,17 @@
             "projectDetails": "Project details are required",
             "projectDetailsMinWords": "Please describe your project in at least 5 words",
             "selectedInterests": "Please select at least one interest option",
-            "budget": "Please select a budget range"
+            "budget": "Please select a budget range",
+            "submitError": "An error occurred while sending the message. Please try again."
           }
+        }
+      },
+      "step3": {
+        "title": "Thank you for contacting us!",
+        "message": "We have received your message successfully. Our team will review your project details and contact you as soon as possible.",
+        "buttons": {
+          "writeAgain": "Write again",
+          "exit": "Exit"
         }
       }
     },

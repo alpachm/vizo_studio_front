@@ -28,7 +28,7 @@ const BUDGET_OPTIONS: BudgetOption[] = [
     { id: "range5", label: "HomeScreen.Contact.step2.budget.options.range5" },
 ];
 
-function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
+function Step2({ onBack, onSubmitForm, submitError }: IContactStep2Props) {
     const { t } = useTranslation();
 
     const {
@@ -280,13 +280,20 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                     )}
                 </div>
 
-                {/* 6. Submit Button */}
+                {/* 6. Submit Error Alert */}
+                {submitError && (
+                    <div className="bg-red-400/10 border border-red-400/30 text-red-400 font-body text-sm px-4 py-3 rounded-none mt-4">
+                        {submitError}
+                    </div>
+                )}
+
+                {/* 7. Submit Button */}
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-primary text-white font-body text-lg sm:text-xl font-bold px-10 py-4 sm:px-12 sm:py-5 rounded-none shadow-lg hover:brightness-110 active:scale-95 transition-all duration-200 cursor-pointer mt-4 self-start disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-primary text-white font-body text-lg sm:text-xl font-bold px-10 py-4 sm:px-12 sm:py-5 rounded-none shadow-lg hover:brightness-110 active:scale-95 transition-all duration-200 cursor-pointer mt-2 self-start disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {t("HomeScreen.Contact.step2.form.submit")}
+                    {isSubmitting ? t("Common.loading") : t("HomeScreen.Contact.step2.form.submit")}
                 </button>
             </form>
         </div>

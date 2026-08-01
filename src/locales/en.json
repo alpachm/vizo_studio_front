@@ -58,6 +58,58 @@
         }
       }
     },
+    "Contact": {
+      "step1": {
+        "title": "Do you have an idea?",
+        "button": "Tell us"
+      },
+      "step2": {
+        "title": "Hello! Tell us all about your idea",
+        "subtitle": "I'm interested in...",
+        "budget": {
+          "subtitle": "Budget for the project (USD)",
+          "options": {
+            "range1": "$200 - $400",
+            "range2": "$400 - $600",
+            "range3": "$600 - $800",
+            "range4": "$800 - $1000",
+            "range5": "+$1000"
+          }
+        },
+        "options": {
+          "website": "Website for my company/business",
+          "mobileApp": "Mobile application",
+          "customSoftware": "Custom software"
+        },
+        "form": {
+          "fullName": "Full name",
+          "email": "Email address",
+          "phone": "Phone number",
+          "company": "Company / Business (optional)",
+          "projectDetails": "Tell us the details of your project",
+          "submit": "Send message",
+          "back": "Go back",
+          "errors": {
+            "fullName": "Full name is required",
+            "email": "Please enter a valid email address",
+            "phone": "Phone number is required",
+            "projectDetails": "Project details are required",
+            "projectDetailsMinWords": "Please describe your project in at least 5 words",
+            "selectedInterests": "Please select at least one interest option",
+            "budget": "Please select a budget range",
+            "submitError": "An error occurred while sending the message. Please try again."
+          }
+        }
+      },
+      "step3": {
+        "title": "Thank you for contacting us!",
+        "message": "We have received your message successfully. Our team will review your project details and contact you as soon as possible.",
+        "buttons": {
+          "writeAgain": "Write again",
+          "exit": "Exit"
+        }
+      }
+    },
     "Services": {
       "title": "What we do?",
       "apps": {

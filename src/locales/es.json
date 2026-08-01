@@ -58,6 +58,58 @@
         }
       }
     },
+    "Contact": {
+      "step1": {
+        "title": "¿Tienes alguna idea?",
+        "button": "Cuéntanos"
+      },
+      "step2": {
+        "title": "¡Hola! Cuéntanos todo acerca de tu idea",
+        "subtitle": "Estoy interesado en...",
+        "budget": {
+          "subtitle": "Presupuesto para el proyecto (USD)",
+          "options": {
+            "range1": "$200 - $400",
+            "range2": "$400 - $600",
+            "range3": "$600 - $800",
+            "range4": "$800 - $1000",
+            "range5": "+$1000"
+          }
+        },
+        "options": {
+          "website": "Sitio web para mi empresa/negocio",
+          "mobileApp": "Aplicación móvil",
+          "customSoftware": "Software a medida"
+        },
+        "form": {
+          "fullName": "Nombre completo",
+          "email": "Correo electrónico",
+          "phone": "Teléfono",
+          "company": "Empresa / Negocio (opcional)",
+          "projectDetails": "Cuéntanos los detalles de tu proyecto",
+          "submit": "Enviar mensaje",
+          "back": "Volver",
+          "errors": {
+            "fullName": "El nombre completo es requerido",
+            "email": "Ingresa un correo electrónico válido",
+            "phone": "El teléfono es requerido",
+            "projectDetails": "Los detalles del proyecto son requeridos",
+            "projectDetailsMinWords": "Por favor, describe tu proyecto en al menos 5 palabras",
+            "selectedInterests": "Por favor, selecciona al menos una opción de interés",
+            "budget": "Por favor, selecciona un rango de presupuesto",
+            "submitError": "Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo."
+          }
+        }
+      },
+      "step3": {
+        "title": "¡Gracias por contactarnos!",
+        "message": "Hemos recibido tu mensaje correctamente. Nuestro equipo revisará los detalles de tu proyecto y te contactará lo antes posible.",
+        "buttons": {
+          "writeAgain": "Volver a escribir",
+          "exit": "Salir"
+        }
+      }
+    },
     "Services": {
       "title": "¿Qué hacemos?",
       "apps": {

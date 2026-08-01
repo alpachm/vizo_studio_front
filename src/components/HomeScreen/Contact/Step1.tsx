@@ -9,7 +9,7 @@ function Step1({ onNextStep }: IContactStep1Props) {
     const { t } = useTranslation();
 
     return (
-        <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-dvh min-h-dvh flex flex-col items-center justify-center overflow-hidden">
             {/* Background Video */}
             <video
                 autoPlay

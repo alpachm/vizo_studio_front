@@ -62,6 +62,32 @@ function Contact(_props: IContactProps) {
     const goToStep2 = () => navigateTo(ContactStep.Step2);
     const goToStep3 = () => navigateTo(ContactStep.Step3);
 
+    /**
+     * Resolves a service-layer error to a localized user-facing message.
+     * Falls back to the generic submit error when the message is unrecognized.
+     */
+    const resolveErrorMessage = (err: unknown): string => {
+        if (!(err instanceof Error)) {
+            return t("HomeScreen.Contact.step2.form.errors.submitError") as string;
+        }
+        const msg = err.message;
+
+        // Map known service-layer messages to i18n keys (matching is loose on purpose
+        // so that minor wording changes in the service don't break the detection).
+        if (msg.includes("VITE_BASE_URL")) {
+            return t("HomeScreen.Contact.step2.form.errors.configError") as string;
+        }
+        if (msg.startsWith("Network error") || msg.includes("Unable to reach the server")) {
+            return t("HomeScreen.Contact.step2.form.errors.networkError") as string;
+        }
+        if (msg.includes("Server responded with status")) {
+            return t("HomeScreen.Contact.step2.form.errors.serverError") as string;
+        }
+
+        // Fallback to the generic submit error
+        return t("HomeScreen.Contact.step2.form.errors.submitError") as string;
+    };
+
     const handleFormSubmit = async (data: ContactFormData) => {
         setSubmitError(null);
 
@@ -70,11 +96,7 @@ function Contact(_props: IContactProps) {
             scrollToSection("contacto");
             goToStep3();
         } catch (err) {
-            const message =
-                err instanceof Error
-                    ? err.message
-                    : (t("HomeScreen.Contact.step2.form.errors.submitError") as string);
-            setSubmitError(message);
+            setSubmitError(resolveErrorMessage(err));
         }
     };
 

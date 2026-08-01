@@ -14,6 +14,15 @@ export default {
                 title: ["var(--font-title-val)", "sans-serif"],
                 body: ["var(--font-body-val)", "sans-serif"],
             },
+            animation: {
+                "marquee-scroll": "marquee 40s linear infinite",
+            },
+            keyframes: {
+                marquee: {
+                    "0%": { transform: "translateX(0)" },
+                    "100%": { transform: "translateX(-50%)" },
+                },
+            },
         },
     },
     plugins: [],

@@ -87,3 +87,7 @@ export interface BudgetOption {
   id: string;
   label: string;
 }
+
+/** Props for the Portfolio section component */
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IPortfolioProps {}

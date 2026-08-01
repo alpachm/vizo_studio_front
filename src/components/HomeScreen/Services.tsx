@@ -87,7 +87,7 @@ function Services(_props: IServicesProps) {
                                 <Trans
                                     i18nKey="HomeScreen.Services.apps.title"
                                     components={{
-                                        highlight: <span className="text-secondary" />,
+                                        highlight: <span className="text-primary" />,
                                     }}
                                 />
                             </h3>
@@ -110,7 +110,7 @@ function Services(_props: IServicesProps) {
                                 <Trans
                                     i18nKey="HomeScreen.Services.web.title"
                                     components={{
-                                        highlight: <span className="text-secondary" />,
+                                        highlight: <span className="text-primary" />,
                                     }}
                                 />
                             </h3>

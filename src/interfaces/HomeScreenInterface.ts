@@ -82,6 +82,17 @@ export interface ContactFormData {
   projectDetails: string;
 }
 
+/** API payload shape for submitting the contact form to the backend */
+export interface ContactPayload {
+  app_type: string;
+  fullname: string;
+  email: string;
+  phone: number;
+  company_name: string;
+  about_project: string;
+  project_budget: string;
+}
+
 /** Data shape for a single budget range option */
 export interface BudgetOption {
   id: string;

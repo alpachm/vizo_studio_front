@@ -121,7 +121,10 @@
             "projectDetailsMinWords": "Please describe your project in at least 5 words",
             "selectedInterests": "Please select at least one interest option",
             "budget": "Please select a budget range",
-            "submitError": "An error occurred while sending the message. Please try again."
+            "submitError": "An error occurred while sending the message. Please try again.",
+            "networkError": "Connection error. Unable to reach the server. Please check your internet connection and try again.",
+            "configError": "Server configuration error. Please contact technical support.",
+            "serverError": "The server responded with an error. Please try again later."
           }
         }
       },

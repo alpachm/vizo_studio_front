@@ -10,6 +10,8 @@ import type {
     TContactStep,
 } from "../../interfaces/HomeScreenInterface";
 import { ContactStep } from "../../interfaces/HomeScreenInterface";
+import { useScrollToSection } from "../../hooks/useScrollToSection";
+import { submitContact } from "../../services/contactService";
 import Step1 from "./Contact/Step1";
 import Step2 from "./Contact/Step2";
 import Step3 from "./Contact/Step3";
@@ -48,6 +50,7 @@ function Contact(_props: IContactProps) {
         0,
     ]);
     const [submitError, setSubmitError] = useState<string | null>(null);
+    const { scrollToSection } = useScrollToSection();
 
     const navigateTo = (nextStep: TContactStep) => {
         const newDirection = nextStep > currentStep ? 1 : -1;
@@ -59,23 +62,41 @@ function Contact(_props: IContactProps) {
     const goToStep2 = () => navigateTo(ContactStep.Step2);
     const goToStep3 = () => navigateTo(ContactStep.Step3);
 
+    /**
+     * Resolves a service-layer error to a localized user-facing message.
+     * Falls back to the generic submit error when the message is unrecognized.
+     */
+    const resolveErrorMessage = (err: unknown): string => {
+        if (!(err instanceof Error)) {
+            return t("HomeScreen.Contact.step2.form.errors.submitError") as string;
+        }
+        const msg = err.message;
+
+        // Map known service-layer messages to i18n keys (matching is loose on purpose
+        // so that minor wording changes in the service don't break the detection).
+        if (msg.includes("VITE_BASE_URL")) {
+            return t("HomeScreen.Contact.step2.form.errors.configError") as string;
+        }
+        if (msg.startsWith("Network error") || msg.includes("Unable to reach the server")) {
+            return t("HomeScreen.Contact.step2.form.errors.networkError") as string;
+        }
+        if (msg.includes("Server responded with status")) {
+            return t("HomeScreen.Contact.step2.form.errors.serverError") as string;
+        }
+
+        // Fallback to the generic submit error
+        return t("HomeScreen.Contact.step2.form.errors.submitError") as string;
+    };
+
     const handleFormSubmit = async (data: ContactFormData) => {
         setSubmitError(null);
 
         try {
-            // TODO: Integrate with backend API / email service
-            console.log("Contact form submitted:", data);
-
-            // Simulate API call — replace with real fetch/axios request
-            // await fetch("/api/contact", {
-            //   method: "POST",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify(data),
-            // });
-
+            await submitContact(data);
+            scrollToSection("contacto");
             goToStep3();
-        } catch {
-            setSubmitError(t("HomeScreen.Contact.step2.form.errors.submitError") as string);
+        } catch (err) {
+            setSubmitError(resolveErrorMessage(err));
         }
     };
 

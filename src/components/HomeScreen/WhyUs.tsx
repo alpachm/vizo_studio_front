@@ -93,7 +93,7 @@ export const WhyUs: React.FC<IWhyUsProps> = ({ className = "" }) => {
                         return (
                             <div
                                 key={card.id}
-                                className={`p-8 sm:p-10 rounded-none border border-[#000]/10 shadow-sm shadow-md flex flex-col items-center text-center transition-all duration-700 ease-out will-change-transform ${transformClass}`}
+                                className={`p-8 sm:p-10 rounded-none border border-[#000]/10  shadow-md flex flex-col items-center text-center transition-all duration-700 ease-out will-change-transform ${transformClass}`}
                             >
                                 <div className="text-4xl sm:text-5xl text-[var(--color-primary)] mb-5">
                                     <IconComponent />

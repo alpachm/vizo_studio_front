@@ -51,7 +51,8 @@
     "Hero": {
       "title": "We turn your idea into a high-impact digital platform",
       "description": "At Vizo Studio, we create modern, fast, and scalable websites and web applications. We work closely with you every step of the way to bring your digital project to life without any complications",
-      "cta": "Let's talk about your idea"
+      "cta": "Let's talk about your idea",
+      "secondaryCta": "View our services"
     },
     "AboutUs": {
       "title": "Who we are?",
@@ -120,7 +121,10 @@
             "projectDetailsMinWords": "Please describe your project in at least 5 words",
             "selectedInterests": "Please select at least one interest option",
             "budget": "Please select a budget range",
-            "submitError": "An error occurred while sending the message. Please try again."
+            "submitError": "An error occurred while sending the message. Please try again.",
+            "networkError": "Connection error. Unable to reach the server. Please check your internet connection and try again.",
+            "configError": "Server configuration error. Please contact technical support.",
+            "serverError": "The server responded with an error. Please try again later."
           }
         }
       },

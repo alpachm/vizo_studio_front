@@ -51,7 +51,8 @@
     "Hero": {
       "title": "Transformamos tu idea en una plataforma digital de alto impacto",
       "description": "En Vizo Studio creamos páginas y aplicaciones web modernas, rápidas y listas para crecer. Trabajamos mano a mano contigo en cada paso para hacer realidad tu proyecto digital sin complicaciones",
-      "cta": "Hablemos de tu idea"
+      "cta": "Hablemos de tu idea",
+      "secondaryCta": "Mira nuestros servicios"
     },
     "AboutUs": {
       "title": "¿Quiénes somos?",
@@ -120,7 +121,10 @@
             "projectDetailsMinWords": "Por favor, describe tu proyecto en al menos 5 palabras",
             "selectedInterests": "Por favor, selecciona al menos una opción de interés",
             "budget": "Por favor, selecciona un rango de presupuesto",
-            "submitError": "Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo."
+            "submitError": "Ocurrió un error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+            "networkError": "Error de conexión. No se pudo conectar con el servidor. Por favor, verifica tu conexión a internet e inténtalo de nuevo.",
+            "configError": "Error de configuración del servidor. Por favor, contacta al soporte técnico.",
+            "serverError": "El servidor respondió con un error. Por favor, inténtalo de nuevo más tarde."
           }
         }
       },

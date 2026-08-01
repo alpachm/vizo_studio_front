@@ -3,11 +3,13 @@
 // ---------------------------------------------------------------------------
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { useScrollToSection } from "../../hooks/useScrollToSection";
 import type { IHeroProps } from "../../interfaces/HomeScreenInterface";
 import heroVideo from "../../assets/HomeScreen/videos/hero-bg.mp4";
 
 function Hero(_props: IHeroProps) {
     const { t } = useTranslation();
+    const { scrollToSection } = useScrollToSection();
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
     const handleLoadedData = () => {
@@ -82,13 +84,22 @@ function Hero(_props: IHeroProps) {
                 <p className="mx-auto mt-6 max-w-3xl font-body text-lg font-normal text-text-muted sm:text-xl">
                     {t("HomeScreen.Hero.description")}
                 </p>
-                <button
-                    type="button"
-                    onClick={handleScrollToContact}
-                    className="mt-8 inline-flex cursor-pointer items-center justify-center bg-primary px-8 py-4 font-body text-base font-semibold text-white shadow-lg transition-all duration-200 hover:opacity-90 active:scale-95"
-                >
-                    {t("HomeScreen.Hero.cta")}
-                </button>
+                <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6">
+                    <button
+                        type="button"
+                        onClick={handleScrollToContact}
+                        className="inline-flex cursor-pointer items-center justify-center bg-primary px-8 py-4 font-body text-base font-semibold text-white shadow-lg transition-all duration-200 hover:opacity-90 active:scale-95"
+                    >
+                        {t("HomeScreen.Hero.cta")}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => scrollToSection("services")}
+                        className="inline-flex cursor-pointer items-center justify-center border border-text-muted bg-transparent px-8 py-4 font-body text-base font-semibold text-text transition-all duration-200 hover:border-text hover:text-white active:scale-95"
+                    >
+                        {t("HomeScreen.Hero.secondaryCta")}
+                    </button>
+                </div>
             </div>
         </section>
     );

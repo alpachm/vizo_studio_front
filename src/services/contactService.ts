@@ -16,7 +16,7 @@ export interface ContactServiceResponse {
  */
 function mapToPayload(data: ContactFormData): ContactPayload {
   return {
-    app_type: data.selectedInterests,
+    app_type: JSON.stringify(data.selectedInterests),
     fullname: data.fullName,
     email: data.email,
     phone: Number(data.phone),
@@ -63,6 +63,7 @@ export async function submitContact(
       { cause: networkError },
     );
   }
+  console.log({JSON: JSON.stringify(payload)})
 
   if (!response.ok) {
     let serverMessage: string;

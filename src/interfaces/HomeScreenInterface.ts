@@ -84,7 +84,7 @@ export interface ContactFormData {
 
 /** API payload shape for submitting the contact form to the backend */
 export interface ContactPayload {
-  app_type: string[];
+  app_type: string;
   fullname: string;
   email: string;
   phone: number;

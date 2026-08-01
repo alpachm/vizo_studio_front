@@ -10,6 +10,7 @@ import type {
     TContactStep,
 } from "../../interfaces/HomeScreenInterface";
 import { ContactStep } from "../../interfaces/HomeScreenInterface";
+import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { submitContact } from "../../services/contactService";
 import Step1 from "./Contact/Step1";
 import Step2 from "./Contact/Step2";
@@ -49,6 +50,7 @@ function Contact(_props: IContactProps) {
         0,
     ]);
     const [submitError, setSubmitError] = useState<string | null>(null);
+    const { scrollToSection } = useScrollToSection();
 
     const navigateTo = (nextStep: TContactStep) => {
         const newDirection = nextStep > currentStep ? 1 : -1;
@@ -65,6 +67,7 @@ function Contact(_props: IContactProps) {
 
         try {
             await submitContact(data);
+            scrollToSection("contacto");
             goToStep3();
         } catch (err) {
             const message =

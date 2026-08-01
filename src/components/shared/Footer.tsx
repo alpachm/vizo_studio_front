@@ -27,8 +27,8 @@ const ROUTE_TO_SECTION_ID: Record<string, string> = {
     "/contact": "contacto",
 };
 
-const DEFAULT_EMAIL = "correo@email.com";
-const DEFAULT_WHATSAPP = "+58 4140004343";
+const DEFAULT_EMAIL = "vizostudio.dev@gmail.com";
+const DEFAULT_WHATSAPP = "+58 4146536468";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -99,7 +99,7 @@ function Footer({
 
                             {/* WhatsApp */}
                             <a
-                                href={`https://wa.me/${digitsOnly(whatsapp)}`}
+                                href={`https://wa.link/1jvyz3`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2.5 font-body text-base sm:text-lg text-text-muted hover:text-primary transition-colors duration-200 w-fit"

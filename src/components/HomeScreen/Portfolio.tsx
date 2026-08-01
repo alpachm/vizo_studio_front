@@ -14,7 +14,7 @@ function Portfolio(_props: IPortfolioProps) {
         VIDEO_SOURCES.map((src, index) => (
             <div
                 key={index}
-                className="flex-shrink-0 h-64 sm:h-80 lg:h-96 rounded-xl overflow-hidden shadow-sm"
+                className="flex-shrink-0 h-64 sm:h-80 lg:h-96 overflow-hidden shadow-sm"
             >
                 <video
                     src={src}

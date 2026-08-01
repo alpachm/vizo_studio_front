@@ -25,6 +25,38 @@ function Hero(_props: IHeroProps) {
         }
     };
 
+    const handleScrollToContact = () => {
+        const contactSection = document.getElementById("contacto");
+        if (!contactSection) return;
+
+        // Calculate absolute document offset by walking up offsetParents.
+        // This is immune to viewport shifts (e.g. mobile address bar) that
+        // can skew getBoundingClientRect during long smooth scrolls.
+        let targetTop = 0;
+        let currentElement: HTMLElement | null = contactSection;
+
+        while (currentElement) {
+            targetTop += currentElement.offsetTop;
+            currentElement = currentElement.offsetParent as HTMLElement | null;
+        }
+
+        window.scrollTo({
+            top: targetTop,
+            behavior: "smooth",
+        });
+
+        // Fallback correction: on mobile, dynamic browser chrome (address bar)
+        // can shift the viewport mid-scroll and cause the animation to stop
+        // short. After the smooth scroll completes (~600 ms), snap to the
+        // exact position so the Header's IntersectionObserver fires reliably.
+        setTimeout(() => {
+            const finalTop = contactSection.getBoundingClientRect().top + window.scrollY;
+            if (Math.abs(window.scrollY - finalTop) > 2) {
+                window.scrollTo({ top: finalTop, behavior: "smooth" });
+            }
+        }, 700);
+    };
+
     return (
         <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden text-center pt-20 sm:pt-24 pb-12">
             {/* Background Video */}
@@ -52,6 +84,7 @@ function Hero(_props: IHeroProps) {
                 </p>
                 <button
                     type="button"
+                    onClick={handleScrollToContact}
                     className="mt-8 inline-flex cursor-pointer items-center justify-center bg-primary px-8 py-4 font-body text-base font-semibold text-white shadow-lg transition-all duration-200 hover:opacity-90 active:scale-95"
                 >
                     {t("HomeScreen.Hero.cta")}

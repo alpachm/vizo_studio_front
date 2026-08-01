@@ -36,6 +36,7 @@ export const AboutUs: React.FC<IAboutUsProps> = ({ className = "" }) => {
        isolate creates a new stacking context to contain the off-screen
        translate-y-full transform within the section boundary. */
         <section
+            id="about-us"
             ref={sectionRef}
             className={`w-full py-20 sm:py-24 bg-bg overflow-clip isolate relative ${className}`}
         >

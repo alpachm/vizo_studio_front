@@ -43,7 +43,10 @@ function Services(_props: IServicesProps) {
     }, []);
 
     return (
-        <section className="w-full bg-bg py-16 sm:py-20 lg:py-24 overflow-x-clip relative">
+        <section
+            id="services"
+            className="w-full bg-bg py-16 sm:py-20 lg:py-24 overflow-x-clip relative"
+        >
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Section Title */}
                 <h2 className="font-title text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl">

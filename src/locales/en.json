@@ -94,7 +94,9 @@
             "email": "Please enter a valid email address",
             "phone": "Phone number is required",
             "projectDetails": "Project details are required",
-            "projectDetailsMinWords": "Please describe your project in at least 5 words"
+            "projectDetailsMinWords": "Please describe your project in at least 5 words",
+            "selectedInterests": "Please select at least one interest option",
+            "budget": "Please select a budget range"
           }
         }
       }

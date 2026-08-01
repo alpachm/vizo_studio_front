@@ -54,8 +54,16 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
 
     // Register fields that are managed programmatically (not via register() in JSX)
     useEffect(() => {
-        register("selectedInterests");
-        register("budget");
+        register("selectedInterests", {
+            validate: (value) =>
+                (value && value.length > 0) ||
+                (t("HomeScreen.Contact.step2.form.errors.selectedInterests") as string),
+        });
+        register("budget", {
+            validate: (value) =>
+                (value && value !== "") ||
+                (t("HomeScreen.Contact.step2.form.errors.budget") as string),
+        });
     }, [register]);
 
     const toggleInterest = (id: string) => {
@@ -129,6 +137,9 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                             );
                         })}
                     </div>
+                    {errors.selectedInterests && (
+                        <span className={errorTextClasses}>{errors.selectedInterests.message}</span>
+                    )}
                 </div>
 
                 {/* 2. Text Inputs — Full Name & Email */}
@@ -264,6 +275,9 @@ function Step2({ onBack, onSubmitForm }: IContactStep2Props) {
                             );
                         })}
                     </div>
+                    {errors.budget && (
+                        <span className={errorTextClasses}>{errors.budget.message}</span>
+                    )}
                 </div>
 
                 {/* 6. Submit Button */}

@@ -94,7 +94,9 @@
             "email": "Ingresa un correo electrónico válido",
             "phone": "El teléfono es requerido",
             "projectDetails": "Los detalles del proyecto son requeridos",
-            "projectDetailsMinWords": "Por favor, describe tu proyecto en al menos 5 palabras"
+            "projectDetailsMinWords": "Por favor, describe tu proyecto en al menos 5 palabras",
+            "selectedInterests": "Por favor, selecciona al menos una opción de interés",
+            "budget": "Por favor, selecciona un rango de presupuesto"
           }
         }
       }

@@ -66,7 +66,7 @@ export interface IContactStep2Props {
 /** Form data shape for Step 2 contact form */
 export interface ContactFormData {
   selectedInterests: string[];
-  budget?: string;
+  budget: string;
   fullName: string;
   email: string;
   phone: string;

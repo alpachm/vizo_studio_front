@@ -36,12 +36,14 @@ function Header() {
 
     const closeMobile = useCallback(() => setMobileOpen(false), []);
 
+    // Header background is active when scrolled OR mobile menu is open
+    const isHeaderActive = isScrolled || mobileOpen;
     const navItems = DEFAULT_NAV_ITEMS;
 
     return (
         <header
             className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-                isScrolled ? "bg-bg shadow-sm py-3" : "bg-transparent py-5"
+                isHeaderActive ? "bg-bg shadow-sm py-3" : "bg-transparent py-5"
             }`}
         >
             {/* Container 1: Centering and Max-Width */}
@@ -87,33 +89,33 @@ function Header() {
                     </nav>
 
                     {/* ---- Mobile Menu Toggle ---- */}
-                    <button
-                        type="button"
-                        className="md:hidden inline-flex items-center justify-center p-2 text-text-muted hover:text-primary hover:bg-bg transition-colors"
-                        onClick={() => setMobileOpen((prev) => !prev)}
-                        aria-expanded={mobileOpen}
-                        aria-label={
-                            mobileOpen ? t("Header.nav.closeMenu") : t("Header.nav.openMenu")
-                        }
-                    >
-                        {mobileOpen ? (
-                            <FiX className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
-                        ) : (
-                            <FiMenu className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
-                        )}
-                    </button>
+                    <div className="flex md:hidden items-center">
+                        <button
+                            type="button"
+                            className="md:hidden inline-flex items-center justify-center p-2 text-text-muted hover:text-primary hover:bg-bg transition-colors"
+                            onClick={() => setMobileOpen((prev) => !prev)}
+                            aria-expanded={mobileOpen}
+                            aria-label={
+                                mobileOpen ? t("Header.nav.closeMenu") : t("Header.nav.openMenu")
+                            }
+                        >
+                            {mobileOpen ? (
+                                <FiX className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
+                            ) : (
+                                <FiMenu className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
 
             {/* ---- Mobile Dropdown (CSS Grid Accordion) ---- */}
             <div
                 className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out grid ${
-                    mobileOpen
-                        ? "grid-rows-[1fr] opacity-100 border-b border-text-muted/10"
-                        : "grid-rows-[0fr] opacity-0"
+                    mobileOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                 }`}
             >
-                <div className="min-h-0 bg-bg/95 backdrop-blur-md">
+                <div className="min-h-0 bg-bg">
                     <nav
                         className="flex flex-col px-4 py-4 gap-3 max-w-7xl mx-auto"
                         aria-label={t("Header.nav.mobileAriaLabel")}
@@ -129,13 +131,10 @@ function Header() {
                             </a>
                         ))}
 
+                        {/* Mobile Dropdown CTA — Always Primary Filled */}
                         <a
                             href="/contact"
-                            className={`inline-flex items-center justify-center px-4 py-2 font-body font-medium text-lg transition-all duration-300 border mt-2 ${
-                                isScrolled
-                                    ? "bg-primary border-primary text-white hover:opacity-90"
-                                    : "bg-transparent border-text-muted text-text-muted hover:border-text hover:text-text"
-                            }`}
+                            className="inline-flex items-center justify-center px-4 py-2 font-body font-medium text-lg transition-all duration-300 border mt-2 bg-primary border-primary text-white hover:opacity-90"
                             onClick={closeMobile}
                         >
                             {t("Header.buttons.contact")}

@@ -18,6 +18,9 @@ const ROUTE_TO_SECTION_ID: Record<string, string> = {
     "/contact": "contacto",
 };
 
+/** Fixed compact header height for scroll offset calculations (px). */
+const COMPACT_HEADER_HEIGHT = 70;
+
 /** Section IDs where the header should scroll WITHOUT offset (header autohides). */
 const NO_OFFSET_SECTIONS = new Set(["contacto"]);
 
@@ -85,12 +88,9 @@ function Header() {
             const target = document.getElementById(sectionId);
             if (!target) return;
 
-            const headerHeight = headerRef.current?.offsetHeight ?? 80;
-
             if (applyHeaderOffset) {
-                const rect = target.getBoundingClientRect();
-                const scrollTop = window.scrollY + rect.top;
-                const targetPosition = scrollTop - headerHeight;
+                const targetPosition =
+                    target.getBoundingClientRect().top + window.scrollY - COMPACT_HEADER_HEIGHT;
 
                 window.scrollTo({
                     top: targetPosition,

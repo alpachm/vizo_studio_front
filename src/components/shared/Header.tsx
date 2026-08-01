@@ -11,8 +11,18 @@ import type { NavItem } from "../../interfaces/HeaderInterface";
 // Constants
 // ---------------------------------------------------------------------------
 
+/** Maps route paths to their corresponding home‑page section IDs. */
+const ROUTE_TO_SECTION_ID: Record<string, string> = {
+    "/services": "services",
+    "/about": "about-us",
+    "/contact": "contacto",
+};
+
+/** Section IDs where the header should scroll WITHOUT offset (header autohides). */
+const NO_OFFSET_SECTIONS = new Set(["contacto"]);
+
 const DEFAULT_NAV_ITEMS: NavItem[] = [
-    { labelKey: "Header.nav.blog", to: "/blog" },
+    // { labelKey: "Header.nav.blog", to: "/blog" },
     { labelKey: "Header.nav.services", to: "/services" },
     { labelKey: "Header.nav.aboutUs", to: "/about" },
 ];
@@ -62,6 +72,57 @@ function Header() {
 
     const closeMobile = useCallback(() => setMobileOpen(false), []);
 
+    // -----------------------------------------------------------------------
+    // Scroll-to-section helper
+    // -----------------------------------------------------------------------
+
+    /** Smooth‑scrolls to a section by its DOM id.
+     *  @param sectionId The `id` attribute of the target section element.
+     *  @param applyHeaderOffset When `true` (default), deducts the current
+     *         header height so the sticky header does not overlap the section. */
+    const scrollToSection = useCallback(
+        (sectionId: string, applyHeaderOffset = true) => {
+            const target = document.getElementById(sectionId);
+            if (!target) return;
+
+            const headerHeight = headerRef.current?.offsetHeight ?? 80;
+
+            if (applyHeaderOffset) {
+                const rect = target.getBoundingClientRect();
+                const scrollTop = window.scrollY + rect.top;
+                const targetPosition = scrollTop - headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth",
+                });
+            } else {
+                // Direct scrollIntoView — header autohides, no offset needed.
+                target.scrollIntoView({ behavior: "smooth" });
+            }
+
+            // Close mobile drawer after triggering scroll
+            closeMobile();
+        },
+        [closeMobile],
+    );
+
+    // -----------------------------------------------------------------------
+    // Click handler for navigation items (desktop & mobile)
+    // -----------------------------------------------------------------------
+
+    const handleNavClick = useCallback(
+        (to: string, e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+            const sectionId = ROUTE_TO_SECTION_ID[to];
+            if (!sectionId) return; // fallback to default link behavior
+
+            e.preventDefault();
+            const needsOffset = !NO_OFFSET_SECTIONS.has(sectionId);
+            scrollToSection(sectionId, needsOffset);
+        },
+        [scrollToSection],
+    );
+
     // Header background is active when scrolled OR mobile menu is open
     const isHeaderActive = isScrolled || mobileOpen;
     const navItems = DEFAULT_NAV_ITEMS;
@@ -96,17 +157,19 @@ function Header() {
                         aria-label={t("Header.nav.desktopAriaLabel")}
                     >
                         {navItems.map((item) => (
-                            <a
+                            <button
                                 key={item.to}
-                                href={item.to}
-                                className="font-body text-lg text-text-muted hover:text-primary transition-colors duration-150"
+                                type="button"
+                                onClick={(e) => handleNavClick(item.to, e)}
+                                className="font-body text-lg text-text-muted hover:text-primary transition-colors duration-150 bg-transparent border-none cursor-pointer"
                             >
                                 {t(item.labelKey)}
-                            </a>
+                            </button>
                         ))}
 
-                        <a
-                            href="/contact"
+                        <button
+                            type="button"
+                            onClick={(e) => handleNavClick("/contact", e)}
                             className={`inline-flex items-center justify-center px-4 py-2 font-body font-medium text-lg transition-all duration-300 border ${
                                 isScrolled
                                     ? "bg-primary border-primary text-white hover:opacity-90"
@@ -114,7 +177,7 @@ function Header() {
                             }`}
                         >
                             {t("Header.buttons.contact")}
-                        </a>
+                        </button>
                     </nav>
 
                     {/* ---- Mobile Menu Toggle ---- */}
@@ -150,24 +213,24 @@ function Header() {
                         aria-label={t("Header.nav.mobileAriaLabel")}
                     >
                         {navItems.map((item) => (
-                            <a
+                            <button
                                 key={item.to}
-                                href={item.to}
-                                className="font-body text-lg text-color-text hover:text-primary transition-colors duration-150 py-1"
-                                onClick={closeMobile}
+                                type="button"
+                                onClick={(e) => handleNavClick(item.to, e)}
+                                className="font-body text-lg text-text-muted hover:text-primary transition-colors duration-150 py-1 bg-transparent border-none cursor-pointer text-left"
                             >
                                 {t(item.labelKey)}
-                            </a>
+                            </button>
                         ))}
 
                         {/* Mobile Dropdown CTA — Always Primary Filled */}
-                        <a
-                            href="/contact"
+                        <button
+                            type="button"
+                            onClick={(e) => handleNavClick("/contact", e)}
                             className="inline-flex items-center justify-center px-4 py-2 font-body font-medium text-lg transition-all duration-300 border mt-2 bg-primary border-primary text-white hover:opacity-90"
-                            onClick={closeMobile}
                         >
                             {t("Header.buttons.contact")}
-                        </a>
+                        </button>
                     </nav>
                 </div>
             </div>

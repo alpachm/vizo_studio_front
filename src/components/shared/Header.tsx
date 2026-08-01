@@ -109,8 +109,19 @@ function Header() {
                         className="flex items-center shrink-0 gap-2 group"
                         aria-label={t("Common.appName")}
                     >
-                        <span className="font-title text-2xl sm:text-3xl font-black tracking-tight text-text">
-                            {t("Common.appName")}
+                        <span
+                            className={`font-title text-2xl sm:text-3xl font-black tracking-tight transition-colors duration-300 ${
+                                isScrolled ? "text-white" : "text-text-muted"
+                            }`}
+                        >
+                            {t("Common.logoVizo")}
+                        </span>
+                        <span
+                            className={`font-title text-2xl sm:text-3xl font-black tracking-tight transition-colors duration-300 ${
+                                isScrolled ? "text-secondary" : "text-text-muted"
+                            }`}
+                        >
+                            {t("Common.logoStudio")}
                         </span>
                     </Link>
 

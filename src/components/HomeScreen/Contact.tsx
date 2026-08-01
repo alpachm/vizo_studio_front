@@ -10,6 +10,7 @@ import type {
     TContactStep,
 } from "../../interfaces/HomeScreenInterface";
 import { ContactStep } from "../../interfaces/HomeScreenInterface";
+import { submitContact } from "../../services/contactService";
 import Step1 from "./Contact/Step1";
 import Step2 from "./Contact/Step2";
 import Step3 from "./Contact/Step3";
@@ -63,19 +64,14 @@ function Contact(_props: IContactProps) {
         setSubmitError(null);
 
         try {
-            // TODO: Integrate with backend API / email service
-            console.log("Contact form submitted:", data);
-
-            // Simulate API call — replace with real fetch/axios request
-            // await fetch("/api/contact", {
-            //   method: "POST",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify(data),
-            // });
-
+            await submitContact(data);
             goToStep3();
-        } catch {
-            setSubmitError(t("HomeScreen.Contact.step2.form.errors.submitError") as string);
+        } catch (err) {
+            const message =
+                err instanceof Error
+                    ? err.message
+                    : (t("HomeScreen.Contact.step2.form.errors.submitError") as string);
+            setSubmitError(message);
         }
     };
 

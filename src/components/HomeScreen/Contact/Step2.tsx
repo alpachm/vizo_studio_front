@@ -78,8 +78,8 @@ function Step2({ onBack, onSubmitForm, submitError }: IContactStep2Props) {
         setValue("budget", nextBudget, { shouldValidate: true });
     };
 
-    const onFormSubmit = (data: ContactFormData) => {
-        onSubmitForm?.(data);
+    const onFormSubmit = async (data: ContactFormData) => {
+        await onSubmitForm?.(data);
     };
 
     const inputBaseClasses =

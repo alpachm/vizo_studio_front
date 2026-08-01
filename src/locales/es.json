@@ -24,6 +24,15 @@
       "contact": "Hablemos"
     }
   },
+  "Footer": {
+    "nav": {
+      "blog": "Blog",
+      "services": "Servicios",
+      "aboutUs": "Sobre nosotros"
+    },
+    "backToTop": "Volver arriba",
+    "navAriaLabel": "Navegación del pie de página"
+  },
   "HomeScreen": {
     "Hero": {
       "title": "Transformamos tu idea en una plataforma digital de alto impacto",

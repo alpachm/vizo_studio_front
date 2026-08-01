@@ -24,6 +24,15 @@
       "contact": "Let's talk"
     }
   },
+  "Footer": {
+    "nav": {
+      "blog": "Blog",
+      "services": "Services",
+      "aboutUs": "About us"
+    },
+    "backToTop": "Back to top",
+    "navAriaLabel": "Footer navigation"
+  },
   "HomeScreen": {
     "Hero": {
       "title": "We turn your idea into a high-impact digital platform",

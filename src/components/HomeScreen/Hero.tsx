@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import type { IHeroProps } from "../../interfaces/HomeScreenInterface";
-import heroVideo from "../../assets/HomeScreen/videos/hero-bg.mp4";
+import { BG_VIDEOS } from "../../utils";
 
 function Hero(_props: IHeroProps) {
     const { t } = useTranslation();
@@ -64,7 +64,7 @@ function Hero(_props: IHeroProps) {
             {/* Background Video */}
             <video
                 ref={videoRef}
-                src={heroVideo}
+                src={BG_VIDEOS.hero_bg}
                 autoPlay
                 muted
                 playsInline

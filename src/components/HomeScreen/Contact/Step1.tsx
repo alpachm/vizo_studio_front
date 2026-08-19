@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 import { useTranslation } from "react-i18next";
 import type { IContactStep1Props } from "../../../interfaces/HomeScreenInterface";
-import contactBgVideo from "../../../assets/HomeScreen/videos/contact-bg.mp4";
+import { BG_VIDEOS } from "../../../utils";
 
 function Step1({ onNextStep }: IContactStep1Props) {
     const { t } = useTranslation();
@@ -18,7 +18,7 @@ function Step1({ onNextStep }: IContactStep1Props) {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
             >
-                <source src={contactBgVideo} type="video/mp4" />
+                <source src={BG_VIDEOS.contact_bg} type="video/mp4" />
             </video>
 
             {/* Dark Overlay for Text Readability */}

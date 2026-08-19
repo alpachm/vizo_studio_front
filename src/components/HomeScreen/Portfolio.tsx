@@ -1,17 +1,12 @@
 import { useTranslation } from "react-i18next";
-import portfolio1 from "../../assets/HomeScreen/videos/portfolio-1.mp4";
-import portfolio2 from "../../assets/HomeScreen/videos/portfolio-2.mp4";
-import portfolio3 from "../../assets/HomeScreen/videos/portfolio-3.mp4";
-import portfolio4 from "../../assets/HomeScreen/videos/portfolio-4.mp4";
 import type { IPortfolioProps } from "../../interfaces/HomeScreenInterface";
-
-const VIDEO_SOURCES = [portfolio1, portfolio2, portfolio3, portfolio4];
+import { PORTFOLIO_VIDEOS } from "../../utils";
 
 function Portfolio(_props: IPortfolioProps) {
     const { t } = useTranslation();
 
     const renderVideoTrack = () =>
-        VIDEO_SOURCES.map((src, index) => (
+        PORTFOLIO_VIDEOS.map((src, index) => (
             <div
                 key={index}
                 className="flex-shrink-0 h-64 sm:h-80 lg:h-96 overflow-hidden shadow-sm"

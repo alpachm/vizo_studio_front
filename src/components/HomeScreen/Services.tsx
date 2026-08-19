@@ -5,8 +5,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import type { IServicesProps } from "../../interfaces/HomeScreenInterface";
-import service1Img from "../../assets/HomeScreen/images/service_1.png";
-import service2Img from "../../assets/HomeScreen/images/service_2.png";
+import service1Img from "../../assets/HomeScreen/images/service_1.webp";
+import service2Img from "../../assets/HomeScreen/images/service_2.webp";
 
 function Services(_props: IServicesProps) {
     const { t } = useTranslation();

@@ -5,7 +5,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import type { IAboutUsProps } from "../../interfaces/HomeScreenInterface";
-import aboutUsImg from "../../assets/HomeScreen/images/about_us.png";
+import aboutUsImg from "../../assets/HomeScreen/images/about_us.webp";
 
 export const AboutUs: React.FC<IAboutUsProps> = ({ className = "" }) => {
     const { t } = useTranslation();

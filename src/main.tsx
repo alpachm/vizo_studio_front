@@ -4,7 +4,7 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import "./config/i18n";
 import "./index.css";
 import AppProvider from "./context/AppProvider";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Import the auto-generated route tree (produced by TanStack Router Vite plugin)
 import { routeTree } from "./routeTree.gen";

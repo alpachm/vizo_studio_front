@@ -88,14 +88,14 @@ function Hero(_props: IHeroProps) {
                     <button
                         type="button"
                         onClick={handleScrollToContact}
-                        className="inline-flex cursor-pointer items-center justify-center bg-primary px-8 py-4 font-body text-base font-semibold text-white shadow-lg transition-all duration-200 hover:opacity-90 active:scale-95"
+                        className="inline-flex cursor-pointer items-center justify-center bg-primary px-8 py-4 font-body text-base font-semibold text-white shadow-lg transition-all duration-200 hover:opacity-90 active:scale-95 w-[250px] h-[60px]"
                     >
                         {t("HomeScreen.Hero.cta")}
                     </button>
                     <button
                         type="button"
                         onClick={() => scrollToSection("services")}
-                        className="inline-flex cursor-pointer items-center justify-center border border-text-muted bg-transparent px-8 py-4 font-body text-base font-semibold text-text transition-all duration-200 hover:border-text hover:text-white active:scale-95"
+                        className="inline-flex cursor-pointer items-center justify-center border border-text-muted bg-transparent px-8 py-4 font-body text-base font-semibold text-text transition-all duration-200 hover:border-text hover:text-white active:scale-95 w-[250px] h-[60px]"
                     >
                         {t("HomeScreen.Hero.secondaryCta")}
                     </button>

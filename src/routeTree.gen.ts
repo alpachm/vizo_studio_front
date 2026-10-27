@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FluyaVitalRouteImport } from './routes/fluya-vital'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FluyaVitalRoute = FluyaVitalRouteImport.update({
+  id: '/fluya-vital',
+  path: '/fluya-vital',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/fluya-vital': typeof FluyaVitalRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/fluya-vital': typeof FluyaVitalRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/fluya-vital': typeof FluyaVitalRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/fluya-vital'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/fluya-vital'
+  id: '__root__' | '/' | '/fluya-vital'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FluyaVitalRoute: typeof FluyaVitalRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fluya-vital': {
+      id: '/fluya-vital'
+      path: '/fluya-vital'
+      fullPath: '/fluya-vital'
+      preLoaderRoute: typeof FluyaVitalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FluyaVitalRoute: FluyaVitalRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

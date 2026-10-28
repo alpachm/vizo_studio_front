@@ -26,12 +26,12 @@ export default {
                 },
                 "wave-drift-left": {
                     "0%": { transform: "translateX(0%)" },
-                    "50%": { transform: "translateX(-5%)" },
+                    "50%": { transform: "translateX(55%)" },
                     "100%": { transform: "translateX(0%)" },
                 },
                 "wave-drift-right": {
                     "0%": { transform: "translateX(0%)" },
-                    "50%": { transform: "translateX(5%)" },
+                    "50%": { transform: "translate(55%)" },
                     "100%": { transform: "translateX(0%)" },
                 },
             },

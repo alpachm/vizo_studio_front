@@ -16,11 +16,23 @@ export default {
             },
             animation: {
                 "marquee-scroll": "marquee 40s linear infinite",
+                "wave-drift-left": "wave-drift-left 12s ease-in-out infinite",
+                "wave-drift-right": "wave-drift-right 10s ease-in-out infinite",
             },
             keyframes: {
                 marquee: {
                     "0%": { transform: "translateX(0)" },
                     "100%": { transform: "translateX(-50%)" },
+                },
+                "wave-drift-left": {
+                    "0%": { transform: "translateX(0%)" },
+                    "50%": { transform: "translateX(-5%)" },
+                    "100%": { transform: "translateX(0%)" },
+                },
+                "wave-drift-right": {
+                    "0%": { transform: "translateX(0%)" },
+                    "50%": { transform: "translateX(5%)" },
+                    "100%": { transform: "translateX(0%)" },
                 },
             },
         },

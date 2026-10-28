@@ -6,28 +6,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap");
 
 .fvContainer {
-    /* ---- Fluye Vital brand palette ---- */
-    --fv-bg-dark: #0f172a;
-    --fv-navy: #0b2545;
-    --fv-primary: #1e6091;
-    --fv-cyan: #00b4d8;
-    --fv-light: #90e0ef;
-
-    /* ---- Layout ---- */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    min-height: 100vh;
-    margin: 0;
-    padding: 2rem 1.5rem;
-    text-align: center;
-
-    /* ---- Brand typography & colors ---- */
-    background-color: var(--fv-bg-dark);
-    color: #ffffff;
-    font-family: "Montserrat", sans-serif;
+    /* ---- Fluye Vital brand palette (single source of truth) ----
+       Exposed as CSS custom properties so the Tailwind wave layers
+       can pull the exact brand tones via var(--fv-*). */
+    --fv-navy: #0b2545;    /* Navy  — deepest water */
+    --fv-primary: #1e6091; /* Ocean — mid water */
+    --fv-cyan: #00b4d8;    /* Cyan  — shallow water */
+    --fv-light: #90e0ef;   /* Aqua  — surf / foam */
 }
 
 .fvTitle {
@@ -37,7 +22,7 @@
     font-size: clamp(2rem, 7vw, 4.5rem);
     line-height: 1.1;
     letter-spacing: 1px;
-    color: #ffffff;
+    color: var(--fv-navy);
 }
 
 .fvSubtitle {
@@ -46,7 +31,7 @@
     font-weight: 300;
     font-size: clamp(1rem, 2.5vw, 1.4rem);
     letter-spacing: 3px;
-    color: var(--fv-light);
+    color: var(--fv-primary);
 }
 
 .fvAccent {

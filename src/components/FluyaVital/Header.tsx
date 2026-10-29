@@ -59,7 +59,7 @@ export const FluyaVitalHeader: React.FC<IFluyaVitalHeaderProps> = ({ className =
                         className={`${styles.fvBrand} flex items-baseline gap-1.5 leading-none sm:gap-2`}
                     >
                         <span className="text-lg font-black text-[#0b2545] sm:text-2xl lg:text-3xl">
-                            {t("FluyaVital.header.fluye")}
+                            {t("FluyaVital.header.fluya")}
                         </span>
                         <span className="text-lg font-light text-[#0b2545] sm:text-2xl lg:text-3xl">
                             {t("FluyaVital.header.vital")}

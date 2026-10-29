@@ -49,7 +49,13 @@
   },
   "FluyaVital": {
     "title": "Fluye Vital",
-    "subtitle": "Pantalla de ejemplo en construcción"
+    "subtitle": "Pantalla de ejemplo en construcción",
+    "header": {
+      "ariaLabel": "Colaboración entre Vizo Studio y Fluye Vital",
+      "logoAlt": "Logotipo de Fluye Vital",
+      "fluye": "Fluye",
+      "vital": "Vital"
+    }
   },
   "HomeScreen": {
     "Hero": {

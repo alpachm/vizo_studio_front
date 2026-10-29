@@ -6,14 +6,16 @@ import type { IFluyaVitalProps } from "../interfaces/FluyaVitalInterface";
 import Wave1 from "../assets/FluyaVital/SVG/wave-1";
 import Wave2 from "../assets/FluyaVital/SVG/wave-2";
 import styles from "./FluyaVital.module.css";
+import Header from "../components/FluyaVital/Header";
 
 export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
     const { t } = useTranslation();
 
     return (
         <div
-            className={`${styles.fvContainer} relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-sky-50 px-6 py-8 text-center text-sky-950`}
+            className={`${styles.fvContainer} relative flex min-h-screen w-full flex-col items-center overflow-hidden bg-sky-50 px-6 py-8 text-center text-sky-950`}
         >
+            <Header />
             {/* Contenido principal */}
             <h1 className="relative z-10 font-title text-4xl font-bold leading-tight tracking-tight text-sky-950 sm:text-6xl lg:text-7xl">
                 {t("FluyaVital.title")}

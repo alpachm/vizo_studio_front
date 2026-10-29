@@ -5,3 +5,8 @@
 /** Props for the FluyaVital screen component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IFluyaVitalProps {}
+
+/** Props for the Fluye Vital header component. */
+export interface IFluyaVitalHeaderProps {
+    className?: string;
+}

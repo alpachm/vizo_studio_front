@@ -10,3 +10,8 @@ export interface IFluyaVitalProps {}
 export interface IFluyaVitalHeaderProps {
     className?: string;
 }
+
+/** Props for the Fluye Vital hero component. */
+export interface IFluyaVitalHeroProps {
+    className?: string;
+}

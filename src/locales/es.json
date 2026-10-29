@@ -48,13 +48,20 @@
     "title": "Un poco de nuestro trabajo"
   },
   "FluyaVital": {
-    "title": "Fluye Vital",
+    "title": "Fluya Vital",
     "subtitle": "Pantalla de ejemplo en construcción",
     "header": {
-      "ariaLabel": "Colaboración entre Vizo Studio y Fluye Vital",
-      "logoAlt": "Logotipo de Fluye Vital",
-      "fluye": "Fluye",
+      "ariaLabel": "Colaboración entre Vizo Studio y Fluya Vital",
+      "logoAlt": "Logotipo de Fluya Vital",
+      "fluya": "Fluya",
       "vital": "Vital"
+    },
+    "hero": {
+      "ariaLabel": "Sección principal de la ruleta de Fluya Vital",
+      "overline": "Por ser un cliente fijo",
+      "headingLead": "Gira y gana con",
+      "headingBrand": "Fluya Vital",
+      "subtitle": "Participa en nuestra ruleta oficial y descubre el premio que tenemos para ti hoy."
     }
   },
   "HomeScreen": {

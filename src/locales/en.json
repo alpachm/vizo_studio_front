@@ -48,13 +48,20 @@
     "title": "A bit of our work"
   },
   "FluyaVital": {
-    "title": "Fluye Vital",
+    "title": "Fluya Vital",
     "subtitle": "Placeholder screen under construction",
     "header": {
-      "ariaLabel": "Vizo Studio and Fluye Vital collaboration",
-      "logoAlt": "Fluye Vital logo",
-      "fluye": "Fluye",
+      "ariaLabel": "Vizo Studio and Fluya Vital collaboration",
+      "logoAlt": "Fluya Vital logo",
+      "fluya": "Fluya",
       "vital": "Vital"
+    },
+    "hero": {
+      "ariaLabel": "Fluya Vital wheel hero section",
+      "overline": "For being a loyal customer",
+      "headingLead": "Spin and win with",
+      "headingBrand": "Fluya Vital",
+      "subtitle": "Join our official wheel and discover the prize we have for you today."
     }
   },
   "HomeScreen": {

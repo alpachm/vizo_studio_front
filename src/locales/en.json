@@ -55,6 +55,13 @@
       "logoAlt": "Fluye Vital logo",
       "fluye": "Fluye",
       "vital": "Vital"
+    },
+    "hero": {
+      "ariaLabel": "Fluye Vital wheel hero section",
+      "overline": "For being a loyal customer",
+      "headingLead": "Spin and win with",
+      "headingBrand": "Fluya Vital",
+      "subtitle": "Join our official wheel and discover the prize we have for you today."
     }
   },
   "HomeScreen": {

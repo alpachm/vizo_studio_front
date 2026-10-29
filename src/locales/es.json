@@ -55,6 +55,13 @@
       "logoAlt": "Logotipo de Fluye Vital",
       "fluye": "Fluye",
       "vital": "Vital"
+    },
+    "hero": {
+      "ariaLabel": "Sección principal de la ruleta de Fluye Vital",
+      "overline": "Por ser un cliente fijo",
+      "headingLead": "Gira y gana con",
+      "headingBrand": "Fluya Vital",
+      "subtitle": "Participa en nuestra ruleta oficial y descubre el premio que tenemos para ti hoy."
     }
   },
   "HomeScreen": {

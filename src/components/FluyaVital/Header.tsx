@@ -25,7 +25,7 @@ export const FluyaVitalHeader: React.FC<IFluyaVitalHeaderProps> = ({ className =
             aria-label={t("FluyaVital.header.ariaLabel")}
             className={`relative z-10 w-full bg-transparent ${className}`}
         >
-            <div className="flex items-center justify-start gap-2 px-4 py-3 sm:gap-4 sm:px-8 sm:py-6 lg:gap-6">
+            <div className="flex flex-row items-center justify-center gap-2 py-3 sm:flex-row sm:justify-start sm:gap-4 sm:py-6 lg:gap-6">
                 {/* ---- Vizo Studio brand ---- */}
                 <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
                     <span
@@ -55,7 +55,9 @@ export const FluyaVitalHeader: React.FC<IFluyaVitalHeaderProps> = ({ className =
                         alt={t("FluyaVital.header.logoAlt")}
                         className="h-8 w-auto object-contain sm:h-10 lg:h-12"
                     />
-                    <span className={`${styles.fvBrand} flex items-baseline gap-1.5 leading-none sm:gap-2`}>
+                    <span
+                        className={`${styles.fvBrand} flex items-baseline gap-1.5 leading-none sm:gap-2`}
+                    >
                         <span className="text-lg font-black text-[#0b2545] sm:text-2xl lg:text-3xl">
                             {t("FluyaVital.header.fluye")}
                         </span>

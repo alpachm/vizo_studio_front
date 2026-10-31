@@ -9,7 +9,7 @@ import styles from "../../screens/FluyaVital.module.css";
 
 /**
  * Crisp black outline applied to the white "Vizo" word so it stays legible
- * against the translucent liquid-glass card (mirrors the header brand lockup).
+ * against the white floating card (mirrors the header brand lockup).
  */
 const VIZO_OUTLINE_STYLE: React.CSSProperties = {
     color: "#ffffff",
@@ -19,8 +19,8 @@ const VIZO_OUTLINE_STYLE: React.CSSProperties = {
 
 /**
  * Collaboration footer for the Fluye Vital screen. Wraps the credits and CTA in
- * a liquid-glass card and links back to the home page (/) so visitors can meet
- * Vizo Studio.
+ * a clean floating white card and links back to the home page (/) so visitors
+ * can meet Vizo Studio.
  */
 export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className = "" }) => {
     const { t } = useTranslation();
@@ -30,8 +30,8 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
             aria-label={t("FluyaVital.footer.ariaLabel")}
             className={`relative z-10 w-full ${className}`}
         >
-            {/* ---- Liquid-glass card: eyebrow + description + CTA ---- */}
-            <div className="rounded-2xl border border-[#0b2545]/10 bg-white/70 px-6 py-8 backdrop-blur-sm sm:px-8 sm:py-10">
+            {/* ---- Floating card: eyebrow + description + CTA ---- */}
+            <div className="rounded-2xl border border-slate-200/60 bg-white p-8 shadow-2xl shadow-slate-900/5 md:p-10">
                 {/* Eyebrow */}
                 <p
                     className={`${styles.fvBrand} text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}

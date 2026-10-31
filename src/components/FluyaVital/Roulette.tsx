@@ -64,7 +64,7 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({ classNa
                 <div
                     role="status"
                     aria-live="polite"
-                    className="mt-6 w-full max-w-sm rounded-2xl border border-[#0b2545]/10 bg-white/70 px-6 py-4 backdrop-blur-sm"
+                    className="mt-6 w-full max-w-sm rounded-2xl border border-slate-200/60 bg-white px-6 py-4 shadow-2xl shadow-slate-900/5"
                 >
                     <p
                         className={`${styles.fvBrand} text-center text-sm font-light text-[#1e6091]`}

@@ -62,6 +62,9 @@
       "headingLead": "Gira y gana con",
       "headingBrand": "Fluya Vital",
       "subtitle": "Participa en nuestra ruleta oficial y descubre el premio que tenemos para ti hoy."
+    },
+    "roulette": {
+      "ariaLabel": "Ruleta de premios de Fluya Vital"
     }
   },
   "HomeScreen": {

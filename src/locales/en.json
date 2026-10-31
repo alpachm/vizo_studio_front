@@ -62,6 +62,9 @@
       "headingLead": "Spin and win with",
       "headingBrand": "Fluya Vital",
       "subtitle": "Join our official wheel and discover the prize we have for you today."
+    },
+    "roulette": {
+      "ariaLabel": "Fluya Vital prize wheel"
     }
   },
   "HomeScreen": {

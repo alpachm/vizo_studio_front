@@ -20,3 +20,8 @@ export interface IFluyaVitalHeroProps {
 export interface IFluyaVitalRouletteProps {
     className?: string;
 }
+
+/** Props for the Fluye Vital footer component. */
+export interface IFluyaVitalFooterProps {
+    className?: string;
+}

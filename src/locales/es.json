@@ -70,6 +70,14 @@
       "description": "Gira la ruleta y déjate sorprender por Fluya Vital.",
       "spinCta": "Girar la ruleta →",
       "prizePlaceholder": "Tu premio aparecerá aquí"
+    },
+    "footer": {
+      "ariaLabel": "Créditos y llamado a la acción de Vizo Studio",
+      "overline": "DISEÑADA PARA COMPARTIR LO BUENO",
+      "descriptionLead": "Esta ruleta fue creada por",
+      "descriptionAfter": "en colaboración con Fluya Vital. Conoce nuestro trabajo y descubre cómo podemos darle vida a tu marca.",
+      "cta": "Conócenos",
+      "subtext": "Vizo Studio × Fluya Vital · Hecho para hidratar tus ideas"
     }
   },
   "HomeScreen": {

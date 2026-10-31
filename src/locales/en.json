@@ -70,6 +70,14 @@
       "description": "Spin the wheel and let Fluya Vital surprise you.",
       "spinCta": "Spin the wheel →",
       "prizePlaceholder": "Your prize will appear here"
+    },
+    "footer": {
+      "ariaLabel": "Vizo Studio credits and call to action",
+      "overline": "DESIGNED TO SHARE THE GOOD",
+      "descriptionLead": "This roulette was created by",
+      "descriptionAfter": "in collaboration with Fluya Vital. Get to know our work and discover how we can bring your brand to life.",
+      "cta": "Get to know us",
+      "subtext": "Vizo Studio × Fluya Vital · Made to hydrate your ideas"
     }
   },
   "HomeScreen": {

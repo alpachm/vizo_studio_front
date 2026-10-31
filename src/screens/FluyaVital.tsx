@@ -8,6 +8,7 @@ import styles from "./FluyaVital.module.css";
 import Header from "../components/FluyaVital/Header";
 import Hero from "../components/FluyaVital/Hero";
 import FluyaVitalRoulette from "../components/FluyaVital/Roulette";
+import Footer from "../components/FluyaVital/Footer";
 
 export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
     return (
@@ -19,6 +20,7 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                 <Header />
                 <Hero className="mt-8 sm:mt12 lg:mt-12" />
                 <FluyaVitalRoulette />
+                <Footer className="mt-16 sm:mt-20" />
             </div>
 
             {/* Fondo de Agua — olas SVG apiladas (de atrás hacia delante) */}

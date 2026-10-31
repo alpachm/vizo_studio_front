@@ -64,7 +64,12 @@
       "subtitle": "Join our official wheel and discover the prize we have for you today."
     },
     "roulette": {
-      "ariaLabel": "Fluya Vital prize wheel"
+      "ariaLabel": "Fluya Vital prize wheel",
+      "overline": "Your benefit today",
+      "heading": "One spin can change your day.",
+      "description": "Spin the wheel and let Fluya Vital surprise you.",
+      "spinCta": "Spin the wheel →",
+      "prizePlaceholder": "Your prize will appear here"
     }
   },
   "HomeScreen": {

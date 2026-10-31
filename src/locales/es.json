@@ -64,7 +64,12 @@
       "subtitle": "Participa en nuestra ruleta oficial y descubre el premio que tenemos para ti hoy."
     },
     "roulette": {
-      "ariaLabel": "Ruleta de premios de Fluya Vital"
+      "ariaLabel": "Ruleta de premios de Fluya Vital",
+      "overline": "Tu beneficio de hoy",
+      "heading": "Una vuelta puede cambiar tu día.",
+      "description": "Gira la ruleta y déjate sorprender por Fluya Vital.",
+      "spinCta": "Girar la ruleta →",
+      "prizePlaceholder": "Tu premio aparecerá aquí"
     }
   },
   "HomeScreen": {

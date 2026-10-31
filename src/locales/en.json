@@ -62,6 +62,22 @@
       "headingLead": "Spin and win with",
       "headingBrand": "Fluya Vital",
       "subtitle": "Join our official wheel and discover the prize we have for you today."
+    },
+    "roulette": {
+      "ariaLabel": "Fluya Vital prize wheel",
+      "overline": "Today's Special Prize",
+      "heading": "Your loyalty deserves a gift.",
+      "description": "Spin the wheel and find out what surprise Fluya Vital has in store for you today.",
+      "spinCta": "Spin the wheel →",
+      "prizePlaceholder": "Your prize will appear here"
+    },
+    "footer": {
+      "ariaLabel": "Vizo Studio credits and call to action",
+      "overline": "DESIGNED TO SHARE THE GOOD",
+      "descriptionLead": "This roulette was created by",
+      "descriptionAfter": "in collaboration with Fluya Vital. Get to know our work and discover how we can bring your brand to life.",
+      "cta": "Get to know us",
+      "creditsLead": "Website created by"
     }
   },
   "HomeScreen": {

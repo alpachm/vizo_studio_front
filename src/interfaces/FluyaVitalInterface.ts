@@ -15,3 +15,13 @@ export interface IFluyaVitalHeaderProps {
 export interface IFluyaVitalHeroProps {
     className?: string;
 }
+
+/** Props for the Fluye Vital roulette component. */
+export interface IFluyaVitalRouletteProps {
+    className?: string;
+}
+
+/** Props for the Fluye Vital footer component. */
+export interface IFluyaVitalFooterProps {
+    className?: string;
+}

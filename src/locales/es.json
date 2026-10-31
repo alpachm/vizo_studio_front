@@ -62,6 +62,22 @@
       "headingLead": "Gira y gana con",
       "headingBrand": "Fluya Vital",
       "subtitle": "Participa en nuestra ruleta oficial y descubre el premio que tenemos para ti hoy."
+    },
+    "roulette": {
+      "ariaLabel": "Ruleta de premios de Fluya Vital",
+      "overline": "Premio especial de hoy",
+      "heading": "Tu fidelidad merece un regalo.",
+      "description": "Gira la ruleta y descubre qué sorpresa tiene Fluya Vital preparada para ti hoy.",
+      "spinCta": "Girar la ruleta →",
+      "prizePlaceholder": "Tu premio aparecerá aquí"
+    },
+    "footer": {
+      "ariaLabel": "Créditos y llamado a la acción de Vizo Studio",
+      "overline": "DISEÑADA PARA COMPARTIR LO BUENO",
+      "descriptionLead": "Esta ruleta fue creada por",
+      "descriptionAfter": "en colaboración con Fluya Vital. Conoce nuestro trabajo y descubre cómo podemos darle vida a tu marca.",
+      "cta": "Conócenos",
+      "creditsLead": "Sitio web creado por"
     }
   },
   "HomeScreen": {

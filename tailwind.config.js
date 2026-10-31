@@ -22,16 +22,16 @@ export default {
             keyframes: {
                 marquee: {
                     "0%": { transform: "translateX(0)" },
-                    "100%": { transform: "translateX(-50%)" },
+                    "100%": { transform: "translateX(-5%)" },
                 },
                 "wave-drift-left": {
                     "0%": { transform: "translateX(0%)" },
-                    "50%": { transform: "translateX(55%)" },
+                    "50%": { transform: "translateX(5%)" },
                     "100%": { transform: "translateX(0%)" },
                 },
                 "wave-drift-right": {
                     "0%": { transform: "translateX(0%)" },
-                    "50%": { transform: "translate(55%)" },
+                    "50%": { transform: "translateX(5%)" },
                     "100%": { transform: "translateX(0%)" },
                 },
             },

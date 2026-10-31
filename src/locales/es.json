@@ -65,9 +65,9 @@
     },
     "roulette": {
       "ariaLabel": "Ruleta de premios de Fluya Vital",
-      "overline": "Tu beneficio de hoy",
-      "heading": "Una vuelta puede cambiar tu día.",
-      "description": "Gira la ruleta y déjate sorprender por Fluya Vital.",
+      "overline": "Premio especial de hoy",
+      "heading": "Tu fidelidad merece un regalo.",
+      "description": "Gira la ruleta y descubre qué sorpresa tiene Fluya Vital preparada para ti hoy.",
       "spinCta": "Girar la ruleta →",
       "prizePlaceholder": "Tu premio aparecerá aquí"
     },

@@ -68,12 +68,14 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
                 className={`${styles.fvBrand} mt-6 text-center text-sm font-light text-[#0b2545]/70`}
             >
                 {t("FluyaVital.footer.creditsLead")}{" "}
-                <span className="whitespace-nowrap">
-                    <span className="font-black" style={VIZO_OUTLINE_STYLE}>
-                        {t("Common.logoVizo")}
-                    </span>{" "}
-                    <span className="font-black text-[#d97706]">{t("Common.logoStudio")}</span>
-                </span>
+                <Link to="/" className="inline-block hover:opacity-90 transition-opacity">
+                    <span className="whitespace-nowrap">
+                        <span className="font-black" style={VIZO_OUTLINE_STYLE}>
+                            {t("Common.logoVizo")}
+                        </span>{" "}
+                        <span className="font-black text-[#d97706]">{t("Common.logoStudio")}</span>
+                    </span>
+                </Link>
             </p>
         </footer>
     );

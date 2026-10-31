@@ -47,9 +47,7 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
                     <span className="font-bold" style={VIZO_OUTLINE_STYLE}>
                         {t("Common.logoVizo")}
                     </span>{" "}
-                    <span className="font-bold text-[#d97706]">
-                        {t("Common.logoStudio")}
-                    </span>{" "}
+                    <span className="font-bold text-[#d97706]">{t("Common.logoStudio")}</span>{" "}
                     {t("FluyaVital.footer.descriptionAfter")}
                 </p>
 
@@ -65,11 +63,17 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
                 </div>
             </div>
 
-            {/* ---- Bottom subtext ---- */}
+            {/* ---- Bottom signature ---- */}
             <p
                 className={`${styles.fvBrand} mt-6 text-center text-sm font-light text-[#0b2545]/70`}
             >
-                {t("FluyaVital.footer.subtext")}
+                {t("FluyaVital.footer.creditsLead")}{" "}
+                <span className="whitespace-nowrap">
+                    <span className="font-black" style={VIZO_OUTLINE_STYLE}>
+                        {t("Common.logoVizo")}
+                    </span>{" "}
+                    <span className="font-black text-[#d97706]">{t("Common.logoStudio")}</span>
+                </span>
             </p>
         </footer>
     );

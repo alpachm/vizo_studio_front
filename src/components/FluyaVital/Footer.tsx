@@ -31,28 +31,31 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
             className={`relative z-10 w-full ${className}`}
         >
             {/* ---- Floating card: eyebrow + description + CTA ---- */}
-            <div className="rounded-2xl border border-slate-200/60 bg-white p-8 shadow-2xl shadow-slate-900/5 md:p-10">
-                {/* Eyebrow */}
-                <p
-                    className={`${styles.fvBrand} text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}
-                >
-                    {t("FluyaVital.footer.overline")}
-                </p>
+            <div className="flex flex-col items-center justify-between gap-6 rounded-2xl border border-slate-200/60 bg-white p-8 shadow-2xl shadow-slate-900/5 md:p-10 lg:flex-row">
+                {/* Text block (eyebrow + description) */}
+                <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+                    {/* Eyebrow */}
+                    <p
+                        className={`${styles.fvBrand} text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}
+                    >
+                        {t("FluyaVital.footer.overline")}
+                    </p>
 
-                {/* Main description */}
-                <p
-                    className={`${styles.fvBrand} mt-4 max-w-3xl text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
-                >
-                    {t("FluyaVital.footer.descriptionLead")}{" "}
-                    <span className="font-bold" style={VIZO_OUTLINE_STYLE}>
-                        {t("Common.logoVizo")}
-                    </span>{" "}
-                    <span className="font-bold text-[#d97706]">{t("Common.logoStudio")}</span>{" "}
-                    {t("FluyaVital.footer.descriptionAfter")}
-                </p>
+                    {/* Main description */}
+                    <p
+                        className={`${styles.fvBrand} mt-4 max-w-3xl text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
+                    >
+                        {t("FluyaVital.footer.descriptionLead")}{" "}
+                        <span className="font-bold" style={VIZO_OUTLINE_STYLE}>
+                            {t("Common.logoVizo")}
+                        </span>{" "}
+                        <span className="font-bold text-[#d97706]">{t("Common.logoStudio")}</span>{" "}
+                        {t("FluyaVital.footer.descriptionAfter")}
+                    </p>
+                </div>
 
                 {/* Action button — right-aligned on desktop, centered on mobile */}
-                <div className="mt-7 flex justify-center lg:justify-end">
+                <div className="flex shrink-0 justify-center lg:justify-end">
                     <Link
                         to="/"
                         className={`${styles.fvBrand} inline-flex items-center justify-center gap-2 rounded-full bg-[#0b2545] px-8 py-4 text-base font-bold text-white shadow-lg shadow-[#0b2545]/30 transition-all duration-200 hover:scale-[1.03] hover:bg-[#1e6091] focus:outline-none focus:ring-4 focus:ring-[#00b4d8]/40 active:scale-95 sm:text-lg`}

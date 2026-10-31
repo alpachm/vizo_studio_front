@@ -1,5 +1,54 @@
 import type { SVGProps } from "react";
 
+// ---------------------------------------------------------------------------
+// Roulette slice labels — geometry helpers & slice content configuration.
+// ---------------------------------------------------------------------------
+
+/** Centre of the roulette wheel, shared by the eight coloured slices. */
+const WHEEL_CX = 255.85;
+const WHEEL_CY = 301.5;
+
+/** Radial distance (from the wheel centre) of the label text block anchor. */
+const TEXT_RADIUS = 162;
+
+/** Vertical gap between the two stacked text lines of the white slice label. */
+const TEXT_LINE_GAP = 12;
+
+/** Vertical gap between the text block and the icon placed directly below it. */
+const ICON_GAP = 24;
+
+/** Typography used by the slice labels (Fluye Vital brand font). */
+const SLICE_FONT_FAMILY = "'Montserrat', sans-serif";
+
+/**
+ * Computes the (x, y) coordinate that lies `radius` units away from the wheel
+ * centre along the radial axis of a slice. `angle` is measured clockwise from
+ * the 12 o'clock position, matching the SVG's y-down coordinate system.
+ */
+const radialPoint = (angle: number, radius: number) => {
+    const radians = (angle * Math.PI) / 180;
+    return {
+        x: WHEEL_CX + radius * Math.sin(radians),
+        y: WHEEL_CY - radius * Math.cos(radians),
+    };
+};
+
+/**
+ * The eight slices in clockwise order starting at 12 o'clock. `isPrize`
+ * identifies the blue "Premio" slices; the white slices display the
+ * "Sigue participando" consolation message.
+ */
+const SLICES = [
+    { angle: 0, isPrize: true },
+    { angle: 45, isPrize: false },
+    { angle: 90, isPrize: true },
+    { angle: 135, isPrize: false },
+    { angle: 180, isPrize: true },
+    { angle: 225, isPrize: false },
+    { angle: 270, isPrize: true },
+    { angle: 315, isPrize: false },
+];
+
 const RouletteSVG = (props: SVGProps<SVGSVGElement>) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={512} height={558} fill="none" {...props}>
         <ellipse cx={255.85} cy={70.5} fill="url(#a)" rx={47.5} ry={70.5} />
@@ -47,6 +96,100 @@ const RouletteSVG = (props: SVGProps<SVGSVGElement>) => (
             <g filter="url(#e)">
                 <circle cx={255.85} cy={301.5} r={208.948} stroke="#000" strokeWidth={20} />
             </g>
+            {/* ---- Slice labels: text + icon rotated to follow each wedge's radial angle ---- */}
+            {SLICES.map((slice) => {
+                const { angle, isPrize } = slice;
+                const labelFill = isPrize ? "#FFFFFF" : "#0B2545";
+
+                // On the left/bottom half of the wheel the radial rotation would
+                // leave the copy upside down, so counter-rotate it 180° to keep
+                // every label legible and the left/right sides visually balanced.
+                const isFlipped = angle > 90 && angle <= 270;
+                const labelAngle = isFlipped ? angle + 180 : angle;
+
+                // Text sits at the outer edge (rim); the icon sits just below it,
+                // radially inward (closer to the centre of the wheel).
+                const textAnchor = radialPoint(angle, TEXT_RADIUS);
+                const iconAnchor = radialPoint(
+                    angle,
+                    isPrize ? TEXT_RADIUS - ICON_GAP : TEXT_RADIUS - TEXT_LINE_GAP - ICON_GAP,
+                );
+                const topLineAnchor = radialPoint(angle, TEXT_RADIUS + TEXT_LINE_GAP);
+                const bottomLineAnchor = radialPoint(angle, TEXT_RADIUS - TEXT_LINE_GAP);
+
+                return (
+                    <g key={angle}>
+                        {isPrize ? (
+                            <text
+                                x={textAnchor.x}
+                                y={textAnchor.y}
+                                transform={`rotate(${labelAngle} ${textAnchor.x} ${textAnchor.y})`}
+                                textAnchor="middle"
+                                dominantBaseline="central"
+                                fontFamily={SLICE_FONT_FAMILY}
+                                fontSize={16}
+                                fontWeight={700}
+                                fill={labelFill}
+                            >
+                                Premio
+                            </text>
+                        ) : (
+                            <>
+                                <text
+                                    x={topLineAnchor.x}
+                                    y={topLineAnchor.y}
+                                    transform={`rotate(${labelAngle} ${topLineAnchor.x} ${topLineAnchor.y})`}
+                                    textAnchor="middle"
+                                    dominantBaseline="central"
+                                    fontFamily={SLICE_FONT_FAMILY}
+                                    fontSize={14}
+                                    fontWeight={700}
+                                    fill={labelFill}
+                                >
+                                    Sigue
+                                </text>
+                                <text
+                                    x={bottomLineAnchor.x}
+                                    y={bottomLineAnchor.y}
+                                    transform={`rotate(${labelAngle} ${bottomLineAnchor.x} ${bottomLineAnchor.y})`}
+                                    textAnchor="middle"
+                                    dominantBaseline="central"
+                                    fontFamily={SLICE_FONT_FAMILY}
+                                    fontSize={13}
+                                    fontWeight={700}
+                                    fill={labelFill}
+                                >
+                                    participando
+                                </text>
+                            </>
+                        )}
+
+                        <g transform={`rotate(${labelAngle} ${iconAnchor.x} ${iconAnchor.y})`}>
+                            {isPrize ? (
+                                <>
+                                    <rect x={iconAnchor.x - 9} y={iconAnchor.y - 1} width={18} height={13} rx={2} fill={labelFill} />
+                                    <rect x={iconAnchor.x - 1.5} y={iconAnchor.y - 5} width={3} height={17} fill={labelFill} />
+                                    <circle cx={iconAnchor.x - 4.5} cy={iconAnchor.y - 5} r={3} fill={labelFill} />
+                                    <circle cx={iconAnchor.x + 4.5} cy={iconAnchor.y - 5} r={3} fill={labelFill} />
+                                </>
+                            ) : (
+                                <>
+                                    <circle cx={iconAnchor.x} cy={iconAnchor.y} r={10} fill={labelFill} />
+                                    <circle cx={iconAnchor.x - 3.5} cy={iconAnchor.y - 2} r={1.7} fill="#FFFFFF" />
+                                    <circle cx={iconAnchor.x + 3.5} cy={iconAnchor.y - 2} r={1.7} fill="#FFFFFF" />
+                                    <path
+                                        d={`M ${iconAnchor.x - 5} ${iconAnchor.y + 3} Q ${iconAnchor.x} ${iconAnchor.y + 7} ${iconAnchor.x + 5} ${iconAnchor.y + 3}`}
+                                        stroke="#FFFFFF"
+                                        strokeWidth={2}
+                                        fill="none"
+                                        strokeLinecap="round"
+                                    />
+                                </>
+                            )}
+                        </g>
+                    </g>
+                );
+            })}
         </g>
         <circle cx={255.849} cy={301.5} r={58.386} fill="url(#f)" />
         <circle cx={255.851} cy={301.5} r={43.144} fill="#fff" />

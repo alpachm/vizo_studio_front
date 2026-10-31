@@ -23,17 +23,24 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                 <Footer className="mt-16 sm:mt-20" />
             </div>
 
-            {/* Fondo de Agua — olas SVG apiladas (de atrás hacia delante) */}
-            <Wave1
+            {/* Fondo de Agua — olas SVG apiladas (de atrás hacia delante).
+                Contenedor fijo al viewport (fixed inset-0) para que las olas
+                permanezcan ancladas al fondo durante el scroll. overflow-hidden
+                recorta el sobredimensionado de las olas y evita scrollbars
+                horizontales; pointer-events-none impide bloquear la interacción. */}
+            <div
                 aria-hidden="true"
-                className="pointer-events-none absolute bottom-0 left-[-10%] z-0 block h-auto w-[120%] will-change-transform animate-wave-drift-left"
-                style={{ animationDuration: "3.5s" }}
-            />
-            <Wave2
-                aria-hidden="true"
-                className="pointer-events-none absolute bottom-0 left-[-10%] z-[1] block h-auto w-[120%] will-change-transform animate-wave-drift-right"
-                style={{ animationDuration: "2s" }}
-            />
+                className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+            >
+                <Wave1
+                    className="pointer-events-none absolute bottom-0 left-[-10%] block h-auto w-[120%] will-change-transform animate-wave-drift-left"
+                    style={{ animationDuration: "3.5s" }}
+                />
+                <Wave2
+                    className="pointer-events-none absolute bottom-0 left-[-10%] block h-auto w-[120%] will-change-transform animate-wave-drift-right"
+                    style={{ animationDuration: "2s" }}
+                />
+            </div>
         </div>
     );
 };

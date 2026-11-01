@@ -1,6 +1,55 @@
-import type { SVGProps } from "react";
+import type { IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
 
-const RouletteSVG = (props: SVGProps<SVGSVGElement>) => (
+// ---------------------------------------------------------------------------
+// Roulette slice labels — geometry helpers & slice content configuration.
+// ---------------------------------------------------------------------------
+
+/** Centre of the roulette wheel, shared by the eight coloured slices. */
+const WHEEL_CX = 255.85;
+const WHEEL_CY = 301.5;
+
+/** Radial distance (from the wheel centre) of the label text block anchor. */
+const TEXT_RADIUS = 162;
+
+/** Vertical gap between the two stacked text lines of the white slice label. */
+const TEXT_LINE_GAP = 12;
+
+/** Vertical gap between the text block and the icon placed directly below it. */
+const ICON_GAP = 24;
+
+/** Typography used by the slice labels (Fluye Vital brand font). */
+const SLICE_FONT_FAMILY = "'Montserrat', sans-serif";
+
+/**
+ * Computes the (x, y) coordinate that lies `radius` units away from the wheel
+ * centre along the radial axis of a slice. `angle` is measured clockwise from
+ * the 12 o'clock position, matching the SVG's y-down coordinate system.
+ */
+const radialPoint = (angle: number, radius: number) => {
+    const radians = (angle * Math.PI) / 180;
+    return {
+        x: WHEEL_CX + radius * Math.sin(radians),
+        y: WHEEL_CY - radius * Math.cos(radians),
+    };
+};
+
+/**
+ * The eight slices in clockwise order starting at 12 o'clock. `isPrize`
+ * identifies the blue "Premio" slices; the white slices display the
+ * "Sigue participando" consolation message.
+ */
+const SLICES = [
+    { angle: 0, isPrize: true },
+    { angle: 45, isPrize: false },
+    { angle: 90, isPrize: true },
+    { angle: 135, isPrize: false },
+    { angle: 180, isPrize: true },
+    { angle: 225, isPrize: false },
+    { angle: 270, isPrize: true },
+    { angle: 315, isPrize: false },
+];
+
+const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={512} height={558} fill="none" {...props}>
         <ellipse cx={255.85} cy={70.5} fill="url(#a)" rx={47.5} ry={70.5} />
         <circle cx={255.85} cy={301.5} r={251.5} fill="url(#b)" />
@@ -20,32 +69,131 @@ const RouletteSVG = (props: SVGProps<SVGSVGElement>) => (
             <circle cx={255.85} cy={301.5} r={211.585} fill="#5E87FF" />
         </mask>
         <g mask="url(#d)">
-            <path
-                fill="#00B4D8"
-                d="M255.85 41.918c38.612 0 75.255 8.43 108.189 23.551L255.85 301.5 166.137 57.838c27.959-10.298 58.179-15.92 89.713-15.92Z"
-            />
-            <path
-                fill="#00B4D8"
-                d="M515.432 301.486c0 38.612-8.43 75.255-23.551 108.189L255.85 301.486l243.662-89.713c10.297 27.959 15.92 58.179 15.92 89.713ZM255.781 561.082c-38.612 0-75.256-8.431-108.19-23.551L255.78 301.5l89.713 243.662c-27.959 10.298-58.179 15.92-89.712 15.92Z"
-            />
-            <path
-                fill="#00B4D8"
-                d="M-3.733 301.564c0-38.612 8.43-75.255 23.551-108.189L255.85 301.564 12.188 391.277C1.89 363.318-3.733 333.098-3.733 301.564Z"
-            />
-            <path
-                fill="#fff"
-                d="M439.376 118.02c27.304 27.303 47.253 59.176 59.849 93.156l-243.4 90.397L364.683 65.842c27.051 12.488 52.396 29.88 74.693 52.178Z"
-            />
-            <path
-                fill="#fff"
-                d="M439.376 485.027c-27.303 27.303-59.175 47.252-93.155 59.848l-90.398-243.401 235.732 108.858c-12.489 27.052-29.882 52.397-52.179 74.695ZM72.237 485.026c-27.303-27.303-47.253-59.175-59.849-93.156l243.4-90.397L146.93 537.205c-27.051-12.488-52.396-29.881-74.693-52.179Z"
-            />
-            <path
-                fill="#fff"
-                d="M72.37 118.02c27.303-27.303 59.175-47.252 93.154-59.848l90.398 243.401-235.73-108.859c12.488-27.052 29.88-52.397 52.178-74.694Z"
-            />
-            <g filter="url(#e)">
-                <circle cx={255.85} cy={301.5} r={208.948} stroke="#000" strokeWidth={20} />
+            {/* ---- Rotating wheel group: slices + labels spin together around the centre ---- */}
+            <g transform={`rotate(${rotation} ${WHEEL_CX} ${WHEEL_CY})`}>
+                <path
+                    fill="#00B4D8"
+                    d="M255.85 41.918c38.612 0 75.255 8.43 108.189 23.551L255.85 301.5 166.137 57.838c27.959-10.298 58.179-15.92 89.713-15.92Z"
+                />
+                <path
+                    fill="#00B4D8"
+                    d="M515.432 301.486c0 38.612-8.43 75.255-23.551 108.189L255.85 301.486l243.662-89.713c10.297 27.959 15.92 58.179 15.92 89.713ZM255.781 561.082c-38.612 0-75.256-8.431-108.19-23.551L255.78 301.5l89.713 243.662c-27.959 10.298-58.179 15.92-89.712 15.92Z"
+                />
+                <path
+                    fill="#00B4D8"
+                    d="M-3.733 301.564c0-38.612 8.43-75.255 23.551-108.189L255.85 301.564 12.188 391.277C1.89 363.318-3.733 333.098-3.733 301.564Z"
+                />
+                <path
+                    fill="#fff"
+                    d="M439.376 118.02c27.304 27.303 47.253 59.176 59.849 93.156l-243.4 90.397L364.683 65.842c27.051 12.488 52.396 29.88 74.693 52.178Z"
+                />
+                <path
+                    fill="#fff"
+                    d="M439.376 485.027c-27.303 27.303-59.175 47.252-93.155 59.848l-90.398-243.401 235.732 108.858c-12.489 27.052-29.882 52.397-52.179 74.695ZM72.237 485.026c-27.303-27.303-47.253-59.175-59.849-93.156l243.4-90.397L146.93 537.205c-27.051-12.488-52.396-29.881-74.693-52.179Z"
+                />
+                <path
+                    fill="#fff"
+                    d="M72.37 118.02c27.303-27.303 59.175-47.252 93.154-59.848l90.398 243.401-235.73-108.859c12.488-27.052 29.88-52.397 52.178-74.694Z"
+                />
+                <g filter="url(#e)">
+                    <circle cx={255.85} cy={301.5} r={208.948} stroke="#000" strokeWidth={20} />
+                </g>
+                {/* ---- Slice labels: text + icon rotated to follow each wedge's radial angle ---- */}
+                {SLICES.map((slice) => {
+                    const { angle, isPrize } = slice;
+                    const labelFill = isPrize ? "#FFFFFF" : "#0B2545";
+
+                    // Each label is rotated by the slice's own radial angle so the top
+                    // of every glyph always points outward toward the rim. `radialPoint`
+                    // already positions each anchor along the slice axis (0° at 12
+                    // o'clock, increasing clockwise), so reusing that same angle as the
+                    // rotation keeps the copy readable and uniformly oriented around the
+                    // whole wheel — no extra 180° counter-rotation is required (that
+                    // flip was inverting the right-side and bottom sectors).
+
+                    // Text sits at the outer edge (rim); the icon sits just below it,
+                    // radially inward (closer to the centre of the wheel).
+                    const textAnchor = radialPoint(angle, TEXT_RADIUS);
+                    const iconAnchor = radialPoint(
+                        angle,
+                        isPrize ? TEXT_RADIUS - ICON_GAP : TEXT_RADIUS - TEXT_LINE_GAP - ICON_GAP,
+                    );
+                    const topLineAnchor = radialPoint(angle, TEXT_RADIUS + TEXT_LINE_GAP);
+                    const bottomLineAnchor = radialPoint(angle, TEXT_RADIUS - TEXT_LINE_GAP);
+
+                    return (
+                        <g key={angle}>
+                            {isPrize ? (
+                                <text
+                                    x={textAnchor.x}
+                                    y={textAnchor.y}
+                                    transform={`rotate(${angle} ${textAnchor.x} ${textAnchor.y})`}
+                                    textAnchor="middle"
+                                    dominantBaseline="central"
+                                    fontFamily={SLICE_FONT_FAMILY}
+                                    fontSize={16}
+                                    fontWeight={700}
+                                    fill={labelFill}
+                                >
+                                    Premio
+                                </text>
+                            ) : (
+                                <>
+                                    <text
+                                        x={topLineAnchor.x}
+                                        y={topLineAnchor.y}
+                                        transform={`rotate(${angle} ${topLineAnchor.x} ${topLineAnchor.y})`}
+                                        textAnchor="middle"
+                                        dominantBaseline="central"
+                                        fontFamily={SLICE_FONT_FAMILY}
+                                        fontSize={14}
+                                        fontWeight={700}
+                                        fill={labelFill}
+                                    >
+                                        Sigue
+                                    </text>
+                                    <text
+                                        x={bottomLineAnchor.x}
+                                        y={bottomLineAnchor.y}
+                                        transform={`rotate(${angle} ${bottomLineAnchor.x} ${bottomLineAnchor.y})`}
+                                        textAnchor="middle"
+                                        dominantBaseline="central"
+                                        fontFamily={SLICE_FONT_FAMILY}
+                                        fontSize={13}
+                                        fontWeight={700}
+                                        fill={labelFill}
+                                    >
+                                        participando
+                                    </text>
+                                </>
+                            )}
+
+                            <g transform={`rotate(${angle} ${iconAnchor.x} ${iconAnchor.y})`}>
+                                {isPrize ? (
+                                    <>
+                                        <rect x={iconAnchor.x - 9} y={iconAnchor.y - 1} width={18} height={13} rx={2} fill={labelFill} />
+                                        <rect x={iconAnchor.x - 1.5} y={iconAnchor.y - 5} width={3} height={17} fill={labelFill} />
+                                        <circle cx={iconAnchor.x - 4.5} cy={iconAnchor.y - 5} r={3} fill={labelFill} />
+                                        <circle cx={iconAnchor.x + 4.5} cy={iconAnchor.y - 5} r={3} fill={labelFill} />
+                                    </>
+                                ) : (
+                                    <>
+                                        <circle cx={iconAnchor.x} cy={iconAnchor.y} r={10} fill={labelFill} />
+                                        <circle cx={iconAnchor.x - 3.5} cy={iconAnchor.y - 2} r={1.7} fill="#FFFFFF" />
+                                        <circle cx={iconAnchor.x + 3.5} cy={iconAnchor.y - 2} r={1.7} fill="#FFFFFF" />
+                                        <path
+                                            d={`M ${iconAnchor.x - 5} ${iconAnchor.y + 3} Q ${iconAnchor.x} ${iconAnchor.y + 7} ${iconAnchor.x + 5} ${iconAnchor.y + 3}`}
+                                            stroke="#FFFFFF"
+                                            strokeWidth={2}
+                                            fill="none"
+                                            strokeLinecap="round"
+                                        />
+                                    </>
+                                )}
+                            </g>
+                        </g>
+                    );
+                })}
             </g>
         </g>
         <circle cx={255.849} cy={301.5} r={58.386} fill="url(#f)" />

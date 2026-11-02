@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
 
 // ---------------------------------------------------------------------------
@@ -49,8 +50,39 @@ const SLICES = [
     { angle: 315, isPrize: false },
 ];
 
+/**
+ * Staggered twinkle timings for the seven rim lightbulbs. The outer glow and
+ * the inner white core of a single bulb share the same entry so they pulse in
+ * perfect sync, while delays and durations vary across bulbs to produce an
+ * organic, non-uniform blinking pattern (no two bulbs blink in lockstep).
+ */
+const BULB_TWINKLE_TIMINGS: ReadonlyArray<{ duration: string; delay: string }> = [
+    { duration: "0.5s", delay: "0s" },
+    { duration: "0.5s", delay: "0.2s" },
+    { duration: "0.5s", delay: "0.4s" },
+    { duration: "0.5s", delay: "0.6s" },
+    { duration: "0.5s", delay: "0.8s" },
+    { duration: "0.5s", delay: "1s" },
+    { duration: "0.5s", delay: "1.2s" },
+];
+
+/** Builds the inline style that applies the twinkle animation to a bulb group. */
+const twinkleStyle = (index: number): CSSProperties => ({
+    animationName: "bulb-twinkle",
+    animationDuration: BULB_TWINKLE_TIMINGS[index].duration,
+    animationDelay: BULB_TWINKLE_TIMINGS[index].delay,
+    animationTimingFunction: "ease-in-out",
+    animationIterationCount: "infinite",
+});
+
 const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={512} height={558} fill="none" {...props}>
+        <style>{`
+            @keyframes bulb-twinkle {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.4; }
+            }
+        `}</style>
         <ellipse cx={255.85} cy={70.5} fill="url(#a)" rx={47.5} ry={70.5} />
         <circle cx={255.85} cy={301.5} r={251.5} fill="url(#b)" />
         <circle cx={255.849} cy={301.5} r={237.937} fill="url(#c)" />
@@ -171,16 +203,54 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                             <g transform={`rotate(${angle} ${iconAnchor.x} ${iconAnchor.y})`}>
                                 {isPrize ? (
                                     <>
-                                        <rect x={iconAnchor.x - 9} y={iconAnchor.y - 1} width={18} height={13} rx={2} fill={labelFill} />
-                                        <rect x={iconAnchor.x - 1.5} y={iconAnchor.y - 5} width={3} height={17} fill={labelFill} />
-                                        <circle cx={iconAnchor.x - 4.5} cy={iconAnchor.y - 5} r={3} fill={labelFill} />
-                                        <circle cx={iconAnchor.x + 4.5} cy={iconAnchor.y - 5} r={3} fill={labelFill} />
+                                        <rect
+                                            x={iconAnchor.x - 9}
+                                            y={iconAnchor.y - 1}
+                                            width={18}
+                                            height={13}
+                                            rx={2}
+                                            fill={labelFill}
+                                        />
+                                        <rect
+                                            x={iconAnchor.x - 1.5}
+                                            y={iconAnchor.y - 5}
+                                            width={3}
+                                            height={17}
+                                            fill={labelFill}
+                                        />
+                                        <circle
+                                            cx={iconAnchor.x - 4.5}
+                                            cy={iconAnchor.y - 5}
+                                            r={3}
+                                            fill={labelFill}
+                                        />
+                                        <circle
+                                            cx={iconAnchor.x + 4.5}
+                                            cy={iconAnchor.y - 5}
+                                            r={3}
+                                            fill={labelFill}
+                                        />
                                     </>
                                 ) : (
                                     <>
-                                        <circle cx={iconAnchor.x} cy={iconAnchor.y} r={10} fill={labelFill} />
-                                        <circle cx={iconAnchor.x - 3.5} cy={iconAnchor.y - 2} r={1.7} fill="#FFFFFF" />
-                                        <circle cx={iconAnchor.x + 3.5} cy={iconAnchor.y - 2} r={1.7} fill="#FFFFFF" />
+                                        <circle
+                                            cx={iconAnchor.x}
+                                            cy={iconAnchor.y}
+                                            r={10}
+                                            fill={labelFill}
+                                        />
+                                        <circle
+                                            cx={iconAnchor.x - 3.5}
+                                            cy={iconAnchor.y - 2}
+                                            r={1.7}
+                                            fill="#FFFFFF"
+                                        />
+                                        <circle
+                                            cx={iconAnchor.x + 3.5}
+                                            cy={iconAnchor.y - 2}
+                                            r={1.7}
+                                            fill="#FFFFFF"
+                                        />
                                         <path
                                             d={`M ${iconAnchor.x - 5} ${iconAnchor.y + 3} Q ${iconAnchor.x} ${iconAnchor.y + 7} ${iconAnchor.x + 5} ${iconAnchor.y + 3}`}
                                             stroke="#FFFFFF"
@@ -198,46 +268,46 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
         </g>
         <circle cx={255.849} cy={301.5} r={58.386} fill="url(#f)" />
         <circle cx={255.851} cy={301.5} r={43.144} fill="#fff" />
-        <g filter="url(#g)">
+        <g filter="url(#g)" style={twinkleStyle(0)}>
             <circle cx={77.913} cy={145.782} r={12.853} fill="#F7FF24" />
         </g>
-        <g filter="url(#h)">
+        <g filter="url(#h)" style={twinkleStyle(0)}>
             <circle cx={77.913} cy={145.782} r={8.336} fill="#fff" />
         </g>
-        <g filter="url(#i)">
+        <g filter="url(#i)" style={twinkleStyle(1)}>
             <circle cx={17.853} cy={304.793} r={12.853} fill="#F7FF24" />
         </g>
-        <g filter="url(#j)">
+        <g filter="url(#j)" style={twinkleStyle(1)}>
             <circle cx={17.852} cy={304.793} r={8.336} fill="#fff" />
         </g>
-        <g filter="url(#k)">
+        <g filter="url(#k)" style={twinkleStyle(2)}>
             <circle cx={67.972} cy={447.793} r={12.853} fill="#F7FF24" />
         </g>
-        <g filter="url(#l)">
+        <g filter="url(#l)" style={twinkleStyle(2)}>
             <circle cx={67.972} cy={447.793} r={8.336} fill="#fff" />
         </g>
-        <g filter="url(#m)">
+        <g filter="url(#m)" style={twinkleStyle(3)}>
             <circle cx={255.782} cy={539.373} r={12.853} fill="#F7FF24" />
         </g>
-        <g filter="url(#n)">
+        <g filter="url(#n)" style={twinkleStyle(3)}>
             <circle cx={255.782} cy={539.373} r={8.336} fill="#fff" />
         </g>
-        <g filter="url(#o)">
+        <g filter="url(#o)" style={twinkleStyle(4)}>
             <circle cx={443.342} cy={447.793} r={12.853} fill="#F7FF24" />
         </g>
-        <g filter="url(#p)">
+        <g filter="url(#p)" style={twinkleStyle(4)}>
             <circle cx={443.342} cy={447.793} r={8.336} fill="#fff" />
         </g>
-        <g filter="url(#q)">
+        <g filter="url(#q)" style={twinkleStyle(5)}>
             <circle cx={493.722} cy={304.023} r={12.853} fill="#F7FF24" />
         </g>
-        <g filter="url(#r)">
+        <g filter="url(#r)" style={twinkleStyle(5)}>
             <circle cx={493.722} cy={304.023} r={8.336} fill="#fff" />
         </g>
-        <g filter="url(#s)">
+        <g filter="url(#s)" style={twinkleStyle(6)}>
             <circle cx={434.952} cy={145.783} r={12.853} fill="#F7FF24" />
         </g>
-        <g filter="url(#t)">
+        <g filter="url(#t)" style={twinkleStyle(6)}>
             <circle cx={434.952} cy={145.783} r={8.336} fill="#fff" />
         </g>
         <path

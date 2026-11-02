@@ -21,6 +21,28 @@ export interface IFluyaVitalHeroProps {
 /** Props for the Fluye Vital roulette component. */
 export interface IFluyaVitalRouletteProps {
     className?: string;
+    /** True while the wheel is animating toward its final slice. */
+    isSpinning: boolean;
+    /** Current (accumulated) wheel rotation in degrees. */
+    rotation: number;
+    /** The slice the wheel landed on, or null before the first spin. */
+    selectedPrize: IFluyaVitalRouletteSlice | null;
+    /** Starts a new spin (no-op while the wheel is already spinning). */
+    onSpin: () => void;
+}
+
+/** Props for the Fluye Vital prize result modal. */
+export interface IPrizeResultModalProps {
+    /** Whether the modal is currently visible. */
+    isOpen: boolean;
+    /** Closes the modal (close button, backdrop click or Escape key). */
+    onClose: () => void;
+    /** The slice the wheel landed on, or null before the first spin. */
+    prize: IFluyaVitalRouletteSlice | null;
+    /** Whether the result is a winning "Premio" slice. */
+    isWinner: boolean;
+    /** Optional handler for the non-winning "try again" action. */
+    onRetry?: () => void;
 }
 
 /** Props for the Fluye Vital roulette SVG asset. */

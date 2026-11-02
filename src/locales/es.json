@@ -74,6 +74,19 @@
       "prizeWon": "¡Ganaste! Disfruta tu premio 🎉",
       "prizeLost": "Sigue participando. ¡Inténtalo de nuevo!"
     },
+    "modal": {
+      "ariaLabel": "Resultado del giro",
+      "close": "Cerrar modal",
+      "winnerEyebrow": "TU PREMIO TE ESTABA ESPERANDO",
+      "winnerTitle": "Premio {{number}}",
+      "winnerDescription": "¡Felicidades! Has ganado un premio exclusivo de Fluya Vital. Acércate a reclamarlo y disfruta de tu recompensa.",
+      "winnerInstruction": "Guarda esta pantalla para reclamarlo",
+      "winnerCta": "Seguir explorando",
+      "loserEyebrow": "CASI LO LOGRAS",
+      "loserTitle": "¡Sigue intentándolo!",
+      "loserDescription": "La suerte estuvo muy cerca. Gira de nuevo la ruleta y descubre el premio que Fluya Vital tiene para ti.",
+      "loserCta": "Intentar de nuevo"
+    },
     "footer": {
       "ariaLabel": "Créditos y llamado a la acción de Vizo Studio",
       "overline": "DISEÑADA PARA COMPARTIR LO BUENO",

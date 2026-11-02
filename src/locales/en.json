@@ -74,6 +74,19 @@
       "prizeWon": "You won! Enjoy your prize 🎉",
       "prizeLost": "Keep participating. Try again!"
     },
+    "modal": {
+      "ariaLabel": "Spin result",
+      "close": "Close modal",
+      "winnerEyebrow": "YOUR PRIZE WAS WAITING FOR YOU",
+      "winnerTitle": "Prize {{number}}",
+      "winnerDescription": "Congratulations! You won an exclusive Fluya Vital prize. Come claim it and enjoy your reward.",
+      "winnerInstruction": "Save this screen to claim it",
+      "winnerCta": "Keep exploring",
+      "loserEyebrow": "SO CLOSE",
+      "loserTitle": "Keep trying!",
+      "loserDescription": "Luck was almost on your side. Spin the wheel again and discover the prize Fluya Vital has for you.",
+      "loserCta": "Try again"
+    },
     "footer": {
       "ariaLabel": "Vizo Studio credits and call to action",
       "overline": "DESIGNED TO SHARE THE GOOD",

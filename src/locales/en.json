@@ -69,7 +69,10 @@
       "heading": "Your loyalty deserves a gift.",
       "description": "Spin the wheel and find out what surprise Fluya Vital has in store for you today.",
       "spinCta": "Spin the wheel →",
-      "prizePlaceholder": "Your prize will appear here"
+      "spinning": "Spinning…",
+      "prizePlaceholder": "Your prize will appear here",
+      "prizeWon": "You won! Enjoy your prize 🎉",
+      "prizeLost": "Keep participating. Try again!"
     },
     "footer": {
       "ariaLabel": "Vizo Studio credits and call to action",

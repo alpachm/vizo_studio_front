@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
+import { SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
 
 // ---------------------------------------------------------------------------
 // Roulette slice labels — geometry helpers & slice content configuration.
@@ -102,7 +103,15 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
         </mask>
         <g mask="url(#d)">
             {/* ---- Rotating wheel group: slices + labels spin together around the centre ---- */}
-            <g transform={`rotate(${rotation} ${WHEEL_CX} ${WHEEL_CY})`}>
+            <g
+                style={{
+                    transform: `rotate(${rotation}deg)`,
+                    transformOrigin: "center",
+                    transformBox: "fill-box",
+                    transition: `transform ${SPIN_DURATION_MS}ms ${SPIN_EASING}`,
+                    willChange: "transform",
+                }}
+            >
                 <path
                     fill="#00B4D8"
                     d="M255.85 41.918c38.612 0 75.255 8.43 108.189 23.551L255.85 301.5 166.137 57.838c27.959-10.298 58.179-15.92 89.713-15.92Z"

@@ -41,8 +41,10 @@ export interface IPrizeResultModalProps {
     prize: IFluyaVitalRouletteSlice | null;
     /** Whether the result is a winning "Premio" slice. */
     isWinner: boolean;
-    /** Optional handler for the non-winning "try again" action. */
+    /** Optional handler for the non-winning "try again" action (unlimited mode). */
     onRetry?: () => void;
+    /** When true, non-winning spins offer a retry; otherwise a conclusive close. */
+    allowMultipleSpins: boolean;
 }
 
 /** Props for the Fluye Vital roulette SVG asset. */

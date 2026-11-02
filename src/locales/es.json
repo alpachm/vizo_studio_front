@@ -85,7 +85,11 @@
       "loserEyebrow": "CASI LO LOGRAS",
       "loserTitle": "¡Sigue intentándolo!",
       "loserDescription": "La suerte estuvo muy cerca. Gira de nuevo la ruleta y descubre el premio que Fluya Vital tiene para ti.",
-      "loserCta": "Intentar de nuevo"
+      "loserCta": "Intentar de nuevo",
+      "noPrizeEyebrow": "GRACIAS POR PARTICIPAR",
+      "noPrizeTitle": "¡Hasta la próxima!",
+      "noPrizeDescription": "Gracias por participar en la ruleta de Fluya Vital. Esta vez no hubo premio, pero te esperamos en una próxima ocasión.",
+      "noPrizeCta": "Cerrar"
     },
     "footer": {
       "ariaLabel": "Créditos y llamado a la acción de Vizo Studio",

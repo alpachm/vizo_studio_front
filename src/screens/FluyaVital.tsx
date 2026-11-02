@@ -12,6 +12,7 @@ import FluyaVitalRoulette from "../components/FluyaVital/Roulette";
 import PrizeResultModal from "../components/FluyaVital/PrizeResultModal";
 import Footer from "../components/FluyaVital/Footer";
 import { useRoulette } from "../hooks/useRoulette";
+import { ALLOW_MULTIPLE_SPINS } from "../utils/featureFlags";
 
 export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
     const { isSpinning, rotation, selectedPrize, spinWheel } = useRoulette();
@@ -73,6 +74,7 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                 prize={selectedPrize}
                 isWinner={selectedPrize?.isPrize ?? false}
                 onRetry={handleSpin}
+                allowMultipleSpins={ALLOW_MULTIPLE_SPINS}
             />
         </div>
     );

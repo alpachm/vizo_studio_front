@@ -85,7 +85,11 @@
       "loserEyebrow": "SO CLOSE",
       "loserTitle": "Keep trying!",
       "loserDescription": "Luck was almost on your side. Spin the wheel again and discover the prize Fluya Vital has for you.",
-      "loserCta": "Try again"
+      "loserCta": "Try again",
+      "noPrizeEyebrow": "THANKS FOR PLAYING",
+      "noPrizeTitle": "See you next time!",
+      "noPrizeDescription": "Thanks for joining the Fluya Vital wheel. No prize this time, but we look forward to seeing you again.",
+      "noPrizeCta": "Close"
     },
     "footer": {
       "ariaLabel": "Vizo Studio credits and call to action",

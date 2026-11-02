@@ -69,7 +69,10 @@
       "heading": "Tu fidelidad merece un regalo.",
       "description": "Gira la ruleta y descubre qué sorpresa tiene Fluya Vital preparada para ti hoy.",
       "spinCta": "Girar la ruleta →",
-      "prizePlaceholder": "Tu premio aparecerá aquí"
+      "spinning": "Girando…",
+      "prizePlaceholder": "Tu premio aparecerá aquí",
+      "prizeWon": "¡Ganaste! Disfruta tu premio 🎉",
+      "prizeLost": "Sigue participando. ¡Inténtalo de nuevo!"
     },
     "footer": {
       "ariaLabel": "Créditos y llamado a la acción de Vizo Studio",

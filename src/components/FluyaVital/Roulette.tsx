@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { FiGift } from "react-icons/fi";
 import type { IFluyaVitalRouletteProps } from "../../interfaces/FluyaVitalInterface";
 import RouletteSVG from "../../assets/FluyaVital/SVG/rouletteSVG";
-import { useRoulette } from "../../hooks/useRoulette";
 import styles from "../../screens/FluyaVital.module.css";
 
 /**
@@ -17,9 +16,14 @@ import styles from "../../screens/FluyaVital.module.css";
  * On large screens the wheel sits on the left and the CTA copy on the right;
  * on mobile the two blocks stack vertically and centre themselves.
  */
-export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({ className = "" }) => {
+export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
+    className = "",
+    isSpinning,
+    rotation,
+    selectedPrize,
+    onSpin,
+}) => {
     const { t } = useTranslation();
-    const { isSpinning, rotation, selectedPrize, spinWheel } = useRoulette();
 
     return (
         <section
@@ -58,7 +62,7 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({ classNa
                 {/* Spin button — triggers the wheel animation via useRoulette */}
                 <button
                     type="button"
-                    onClick={spinWheel}
+                    onClick={onSpin}
                     disabled={isSpinning}
                     className={`${styles.fvBrand} mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#F2A83B] to-[#FED967] px-8 py-4 text-base font-bold text-[#0b2545] shadow-lg shadow-amber-500/30 transition-all duration-200 hover:scale-[1.03] focus:outline-none focus:ring-4 focus:ring-amber-300/60 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:active:scale-100 sm:text-lg`}
                 >

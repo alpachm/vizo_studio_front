@@ -25,25 +25,86 @@ export const SPIN_EASING = "cubic-bezier(0.15, 0.95, 0.25, 1)";
  * under the pointer always matches what is rendered on screen.
  */
 export const ROULETTE_SLICES: ReadonlyArray<IFluyaVitalRouletteSlice> = [
-    { angle: 0, isPrize: true },
+    { angle: 0, isPrize: true, prizeNumber: 1 },
     { angle: 45, isPrize: false },
-    { angle: 90, isPrize: true },
+    { angle: 90, isPrize: true, prizeNumber: 2 },
     { angle: 135, isPrize: false },
-    { angle: 180, isPrize: true },
+    { angle: 180, isPrize: true, prizeNumber: 3 },
     { angle: 225, isPrize: false },
-    { angle: 270, isPrize: true },
+    { angle: 270, isPrize: true, prizeNumber: 4 },
     { angle: 315, isPrize: false },
+];
+
+/**
+ * Winning odds (as a percentage) for each slice, aligned by index with
+ * `ROULETTE_SLICES`. Reading clockwise from 12 o'clock:
+ *
+ *   0 — Premio 1 (prize)          4 — Premio 3 (prize)
+ *   1 — Sigue participando        5 — Sigue participando
+ *   2 — Premio 2 (prize)          6 — Premio 4 (prize)
+ *   3 — Sigue participando        7 — Sigue participando
+ *
+ * Values are treated as relative weights and are normalized internally, so they
+ * never need to sum to exactly 100 — but keeping the total near 100 makes the
+ * odds easy to read and tweak. Edit these numbers any time to change the chance
+ * of landing on a given slice.
+ */
+export const ROULETTE_SLICE_WEIGHTS: ReadonlyArray<number> = [
+    5, // Premio 1 — rarest top prize
+    30, // Sigue participando
+    10, // Premio 2
+    20, // Sigue participando
+    15, // Premio 3
+    10, // Sigue participando
+    5, // Premio 4
+    5, // Sigue participando
 ];
 
 /** Returns a random integer in the inclusive range [min, max]. */
 const randomInt = (min: number, max: number): number =>
     Math.floor(Math.random() * (max - min + 1)) + min;
 
-/** Picks a random slice as the outcome of a spin. */
-export const pickRandomSlice = (): IFluyaVitalRouletteSlice => {
-    const index = randomInt(0, ROULETTE_SLICES.length - 1);
-    return ROULETTE_SLICES[index];
+/**
+ * Picks a winning slice index according to the configured weights, so rarer
+ * prizes land less often than the consolation slices. Each weight represents
+ * the relative chance of its slice; the total is normalized before the random
+ * draw, so the array never needs to sum to exactly 100.
+ *
+ * @param weights Per-slice weights, aligned by index with `ROULETTE_SLICES`.
+ * @returns The selected slice index (0–7).
+ */
+export const pickWeightedSliceIndex = (
+    weights: ReadonlyArray<number> = ROULETTE_SLICE_WEIGHTS,
+): number => {
+    const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+
+    // Guard against an empty or non-positive configuration so the wheel never
+    // breaks if the odds are misconfigured: fall back to a uniform pick.
+    if (totalWeight <= 0) {
+        return randomInt(0, ROULETTE_SLICES.length - 1);
+    }
+
+    let roll = Math.random() * totalWeight;
+    const sliceCount = Math.min(ROULETTE_SLICES.length, weights.length);
+
+    for (let index = 0; index < sliceCount; index += 1) {
+        roll -= weights[index];
+        if (roll < 0) {
+            return index;
+        }
+    }
+
+    // Floating-point rounding safety net: default to the final slice.
+    return sliceCount - 1;
 };
+
+/**
+ * Picks a winning slice using the weighted odds. Used by `useRoulette` before
+ * the target rotation is calculated, so the animation always stops on the slice
+ * that was actually chosen by the probability draw.
+ */
+export const pickWeightedSlice = (): IFluyaVitalRouletteSlice =>
+    ROULETTE_SLICES[pickWeightedSliceIndex()];
 
 /**
  * Calculates the absolute target rotation (degrees) that ends with the winning

@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
+import type { IFluyaVitalRouletteSlice, IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
 import { SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
 
 // ---------------------------------------------------------------------------
@@ -37,17 +37,17 @@ const radialPoint = (angle: number, radius: number) => {
 
 /**
  * The eight slices in clockwise order starting at 12 o'clock. `isPrize`
- * identifies the blue "Premio" slices; the white slices display the
- * "Sigue participando" consolation message.
+ * identifies the blue "Premio" slices (each tagged with its `prizeNumber`);
+ * the white slices display the "Sigue participando" consolation message.
  */
-const SLICES = [
-    { angle: 0, isPrize: true },
+const SLICES: ReadonlyArray<IFluyaVitalRouletteSlice> = [
+    { angle: 0, isPrize: true, prizeNumber: 1 },
     { angle: 45, isPrize: false },
-    { angle: 90, isPrize: true },
+    { angle: 90, isPrize: true, prizeNumber: 2 },
     { angle: 135, isPrize: false },
-    { angle: 180, isPrize: true },
+    { angle: 180, isPrize: true, prizeNumber: 3 },
     { angle: 225, isPrize: false },
-    { angle: 270, isPrize: true },
+    { angle: 270, isPrize: true, prizeNumber: 4 },
     { angle: 315, isPrize: false },
 ];
 
@@ -141,7 +141,7 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                 </g>
                 {/* ---- Slice labels: text + icon rotated to follow each wedge's radial angle ---- */}
                 {SLICES.map((slice) => {
-                    const { angle, isPrize } = slice;
+                    const { angle, isPrize, prizeNumber } = slice;
                     const labelFill = isPrize ? "#FFFFFF" : "#0B2545";
 
                     // Each label is rotated by the slice's own radial angle so the top
@@ -176,7 +176,7 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                                     fontWeight={700}
                                     fill={labelFill}
                                 >
-                                    Premio
+                                    {`Premio ${prizeNumber}`}
                                 </text>
                             ) : (
                                 <>

@@ -35,6 +35,8 @@ export interface IFluyaVitalRouletteSlice {
     angle: number;
     /** Whether this slice is a winning "Premio" slice (vs. the consolation slice). */
     isPrize: boolean;
+    /** Prize number (1–4) for "Premio" slices; absent on consolation slices. */
+    prizeNumber?: number;
 }
 
 /** State and actions exposed by the useRoulette hook. */

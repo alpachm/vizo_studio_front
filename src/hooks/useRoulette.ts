@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------------------
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { IFluyaVitalRouletteSlice, IUseRouletteResult } from "../interfaces/FluyaVitalInterface";
-import { SPIN_DURATION_MS, calculateTargetRotation, pickRandomSlice } from "../utils/rouletteUtils";
+import { SPIN_DURATION_MS, calculateTargetRotation, pickWeightedSlice } from "../utils/rouletteUtils";
 
 /**
  * Owns the roulette spin lifecycle: it picks the winning slice, computes the
@@ -30,7 +30,7 @@ export const useRoulette = (): IUseRouletteResult => {
     const spinWheel = useCallback(() => {
         if (spinningRef.current) return;
 
-        const winner = pickRandomSlice();
+        const winner = pickWeightedSlice();
         spinningRef.current = true;
         setIsSpinning(true);
         setSelectedPrize(null);

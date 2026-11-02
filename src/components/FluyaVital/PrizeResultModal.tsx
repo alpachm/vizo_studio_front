@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------------------
 import { useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import confetti from "canvas-confetti";
 import { FiCheck, FiGift, FiRefreshCw, FiStar, FiX } from "react-icons/fi";
 import type { IPrizeResultModalProps } from "../../interfaces/FluyaVitalInterface";
 import styles from "../../screens/FluyaVital.module.css";
@@ -71,6 +72,61 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
             document.body.style.overflow = "";
         };
     }, [isOpen, onClose]);
+
+    // Celebratory confetti — fires exactly once whenever a winning modal opens.
+    useEffect(() => {
+        if (!isOpen || !isWinner) return;
+
+        // Project palette: navy, blue, cyan, amber, yellow + white.
+        const PALETTE = ["#0b2545", "#1e6091", "#00b4d8", "#F2A83B", "#FED967", "#ffffff"];
+
+        // Central burst over the prize card for an immediate celebration.
+        confetti({
+            particleCount: 140,
+            spread: 120,
+            startVelocity: 40,
+            origin: { x: 0.5, y: 0.55 },
+            colors: PALETTE,
+            disableForReducedMotion: true,
+        });
+
+        // Gentle side cannons for a couple of seconds for a fuller effect.
+        const end = Date.now() + 2200;
+        let frameId = 0;
+
+        const sideBurst = () => {
+            confetti({
+                particleCount: 3,
+                angle: 60,
+                spread: 55,
+                startVelocity: 55,
+                origin: { x: 0, y: 0.7 },
+                colors: PALETTE,
+                disableForReducedMotion: true,
+            });
+            confetti({
+                particleCount: 3,
+                angle: 120,
+                spread: 55,
+                startVelocity: 55,
+                origin: { x: 1, y: 0.7 },
+                colors: PALETTE,
+                disableForReducedMotion: true,
+            });
+
+            if (Date.now() < end) {
+                frameId = requestAnimationFrame(sideBurst);
+            }
+        };
+
+        frameId = requestAnimationFrame(sideBurst);
+
+        // Clear any in-flight frames and leftover particles when closing.
+        return () => {
+            cancelAnimationFrame(frameId);
+            confetti.reset();
+        };
+    }, [isOpen, isWinner]);
 
     if (!isOpen) return null;
 

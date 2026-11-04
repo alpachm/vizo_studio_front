@@ -38,6 +38,12 @@
     font-family: "Montserrat", sans-serif;
 }
 
+/* Vizo Studio brand font — the agency's official identity. Loaded globally via
+   src/index.css; this class keeps the partner screen isolated from the theme. */
+.fvVizoBrand {
+    font-family: "Unbounded", sans-serif;
+}
+
 .fvAccent {
     width: 4rem;
     height: 0.25rem;

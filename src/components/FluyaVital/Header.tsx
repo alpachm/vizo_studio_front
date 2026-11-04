@@ -29,13 +29,13 @@ export const FluyaVitalHeader: React.FC<IFluyaVitalHeaderProps> = ({ className =
                 {/* ---- Vizo Studio brand ---- */}
                 <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
                     <span
-                        className={`${styles.fvBrand} text-lg font-black leading-none sm:text-2xl lg:text-3xl`}
+                        className={`${styles.fvVizoBrand} text-lg font-black leading-none sm:text-2xl lg:text-3xl`}
                         style={VIZO_OUTLINE_STYLE}
                     >
                         {t("Common.logoVizo")}
                     </span>
                     <span
-                        className={`${styles.fvBrand} text-lg font-black leading-none text-[#d97706] sm:text-2xl lg:text-3xl`}
+                        className={`${styles.fvVizoBrand} text-lg font-black leading-none text-[#d97706] sm:text-2xl lg:text-3xl`}
                     >
                         {t("Common.logoStudio")}
                     </span>

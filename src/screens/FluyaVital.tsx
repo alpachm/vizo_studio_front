@@ -35,7 +35,7 @@ const viewVariants = {
 };
 
 export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
-    const { isSpinning, rotation, selectedPrize, spinWheel, resetRoulette } = useRoulette();
+    const { isSpinning, rotation, selectedPrize, hasSpun, spinWheel, resetRoulette } = useRoulette();
     const [hasDismissed, setHasDismissed] = useState(false);
     const [showPostSpin, setShowPostSpin] = useState(false);
 
@@ -86,6 +86,7 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                                 isSpinning={isSpinning}
                                 rotation={rotation}
                                 selectedPrize={selectedPrize}
+                                hasSpun={hasSpun}
                                 onSpin={handleSpin}
                             />
                             <Footer className="mt-16 sm:mt-20" />

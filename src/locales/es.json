@@ -70,6 +70,7 @@
       "description": "Gira la ruleta y descubre qué sorpresa tiene Fluya Vital preparada para ti hoy.",
       "spinCta": "Girar la ruleta →",
       "spinning": "Girando…",
+      "alreadyParticipated": "Ya participaste",
       "prizePlaceholder": "Tu premio aparecerá aquí",
       "prizeWon": "¡Ganaste! Disfruta tu premio 🎉",
       "prizeLost": "Sigue participando. ¡Inténtalo de nuevo!"

@@ -21,9 +21,14 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
     isSpinning,
     rotation,
     selectedPrize,
+    hasSpun,
     onSpin,
 }) => {
     const { t } = useTranslation();
+
+    // The button is locked while the wheel animates or once the user has already
+    // participated in single-spin (production) mode.
+    const isSpinDisabled = isSpinning || hasSpun;
 
     return (
         <section
@@ -63,10 +68,16 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
                 <button
                     type="button"
                     onClick={onSpin}
-                    disabled={isSpinning}
+                    disabled={isSpinDisabled}
                     className={`${styles.fvBrand} mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#F2A83B] to-[#FED967] px-8 py-4 text-base font-bold text-[#0b2545] shadow-lg shadow-amber-500/30 transition-all duration-200 hover:scale-[1.03] focus:outline-none focus:ring-4 focus:ring-amber-300/60 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:active:scale-100 sm:text-lg`}
                 >
-                    {t(isSpinning ? "FluyaVital.roulette.spinning" : "FluyaVital.roulette.spinCta")}
+                    {t(
+                        isSpinning
+                            ? "FluyaVital.roulette.spinning"
+                            : hasSpun
+                                ? "FluyaVital.roulette.alreadyParticipated"
+                                : "FluyaVital.roulette.spinCta",
+                    )}
                 </button>
 
                 {/* Prize result box */}

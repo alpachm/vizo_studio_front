@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import type { IFluyaVitalRouletteSlice, IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
 import { SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
+import fluyaVitalLogo from "../fluyta-vital-logo.png";
 
 // ---------------------------------------------------------------------------
 // Roulette slice labels — geometry helpers & slice content configuration.
@@ -9,6 +10,17 @@ import { SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
 /** Centre of the roulette wheel, shared by the eight coloured slices. */
 const WHEEL_CX = 255.85;
 const WHEEL_CY = 301.5;
+
+/**
+ * Fluye Vital brand mark overlaid on the static white hub at the wheel's
+ * geometric centre. The height is sized so the mark sits comfortably inside
+ * the white cap (radius ≈ 43.1) with an even breathing border, while the width
+ * preserves the asset's intrinsic 398 × 482 aspect ratio to avoid distortion.
+ */
+const LOGO_HEIGHT = 54;
+const LOGO_WIDTH = LOGO_HEIGHT * (398 / 482);
+const LOGO_X = WHEEL_CX - LOGO_WIDTH / 2;
+const LOGO_Y = WHEEL_CY - LOGO_HEIGHT / 2;
 
 /** Radial distance (from the wheel centre) of the label text block anchor. */
 const TEXT_RADIUS = 162;
@@ -277,6 +289,15 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
         </g>
         <circle cx={255.849} cy={301.5} r={58.386} fill="url(#f)" />
         <circle cx={255.851} cy={301.5} r={43.144} fill="#fff" />
+        {/* ---- Centre cap: static Fluye Vital brand mark (does not rotate) ---- */}
+        <image
+            href={fluyaVitalLogo}
+            x={LOGO_X}
+            y={LOGO_Y}
+            width={LOGO_WIDTH}
+            height={LOGO_HEIGHT}
+            preserveAspectRatio="xMidYMid meet"
+        />
         <g filter="url(#g)" style={twinkleStyle(0)}>
             <circle cx={77.913} cy={145.782} r={12.853} fill="#F7FF24" />
         </g>

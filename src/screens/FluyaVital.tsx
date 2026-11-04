@@ -14,7 +14,6 @@ import PrizeResultModal from "../components/FluyaVital/PrizeResultModal";
 import PostSpinView from "../components/FluyaVital/PostSpinView";
 import Footer from "../components/FluyaVital/Footer";
 import { useRoulette } from "../hooks/useRoulette";
-import { ALLOW_MULTIPLE_SPINS } from "../utils/featureFlags";
 
 /** Shared easing curve for the roulette ↔ post-spin view swap. */
 const VIEW_EASE: [number, number, number, number] = [0.25, 1, 0.5, 1];
@@ -131,8 +130,6 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                 onClose={handleClose}
                 prize={selectedPrize}
                 isWinner={selectedPrize?.isPrize ?? false}
-                onRetry={handleSpin}
-                allowMultipleSpins={ALLOW_MULTIPLE_SPINS}
             />
         </div>
     );

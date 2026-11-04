@@ -1,10 +1,10 @@
 // ---------------------------------------------------------------------------
 // PrizeResultModal — Result modal shown after the Fluye Vital wheel stops
 // ---------------------------------------------------------------------------
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import confetti from "canvas-confetti";
-import { FiCheck, FiGift, FiRefreshCw, FiStar, FiX } from "react-icons/fi";
+import { FiCheck, FiGift, FiStar, FiX } from "react-icons/fi";
 import type { IPrizeResultModalProps } from "../../interfaces/FluyaVitalInterface";
 import styles from "../../screens/FluyaVital.module.css";
 
@@ -27,32 +27,19 @@ const MODAL_KEYFRAMES = `
 /**
  * Centered result dialog for the Fluye Vital prize wheel. The winning layout is
  * always a celebratory yellow badge + prize name + claim instruction. The
- * non-winning layout adapts to the configured spin limit:
+ * non-winning layout is always conclusive: a neutral consolation icon,
+ * "thanks for playing" copy and a "close" CTA that dismisses the modal and
+ * advances the flow into the post-spin view.
  *
- * - Unlimited / test mode (`allowMultipleSpins`): encouraging "try again" copy,
- *   a refresh icon and a retry CTA.
- * - Single-spin / production mode: a neutral consolation icon, concluding
- *   "thanks for playing" copy and a "close" CTA that keeps the wheel completed.
- *
- * Closes on the X button, a backdrop click or the Escape key.
+ * Closes on the X button, a backdrop click, the Escape key or the primary CTA.
  */
 export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
     isOpen,
     onClose,
     prize,
     isWinner,
-    onRetry,
-    allowMultipleSpins,
 }) => {
     const { t } = useTranslation();
-
-    const handlePrimaryAction = useCallback(() => {
-        if (isWinner || !allowMultipleSpins) {
-            onClose();
-            return;
-        }
-        (onRetry ?? onClose)();
-    }, [isWinner, allowMultipleSpins, onClose, onRetry]);
 
     // Escape-to-close + body scroll lock while the modal is open.
     useEffect(() => {
@@ -159,20 +146,16 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
                     <FiX className="h-5 w-5" aria-hidden="true" />
                 </button>
 
-                {/* Featured icon — yellow/orange for prizes, cool cyan otherwise */}
+                {/* Featured icon — yellow/orange for prizes, cool slate otherwise */}
                 <div
                     className={`mx-auto flex h-20 w-20 items-center justify-center rounded-full shadow-lg ${
                         isWinner
                             ? "bg-gradient-to-br from-[#F2A83B] to-[#FED967] text-[#0b2545] shadow-amber-500/30"
-                            : allowMultipleSpins
-                                ? "bg-gradient-to-br from-[#00b4d8] to-[#90e0ef] text-[#0b2545] shadow-cyan-500/30"
-                                : "bg-gradient-to-br from-slate-400 to-slate-200 text-[#0b2545] shadow-slate-400/30"
+                            : "bg-gradient-to-br from-slate-400 to-slate-200 text-[#0b2545] shadow-slate-400/30"
                     }`}
                 >
                     {isWinner ? (
                         <FiGift className="h-9 w-9" aria-hidden="true" />
-                    ) : allowMultipleSpins ? (
-                        <FiRefreshCw className="h-9 w-9" aria-hidden="true" />
                     ) : (
                         <FiStar className="h-9 w-9" aria-hidden="true" />
                     )}
@@ -183,9 +166,7 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
                     {t(
                         isWinner
                             ? "FluyaVital.modal.winnerEyebrow"
-                            : allowMultipleSpins
-                                ? "FluyaVital.modal.loserEyebrow"
-                                : "FluyaVital.modal.noPrizeEyebrow",
+                            : "FluyaVital.modal.noPrizeEyebrow",
                     )}
                 </p>
 
@@ -193,9 +174,7 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
                 <h2 className={`${styles.fvBrand} mt-4 text-3xl font-black leading-tight text-[#0b2545] sm:text-4xl`}>
                     {isWinner
                         ? t("FluyaVital.modal.winnerTitle", { number: prizeNumber })
-                        : allowMultipleSpins
-                            ? t("FluyaVital.modal.loserTitle")
-                            : t("FluyaVital.modal.noPrizeTitle")}
+                        : t("FluyaVital.modal.noPrizeTitle")}
                 </h2>
 
                 {/* Supporting description */}
@@ -203,9 +182,7 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
                     {t(
                         isWinner
                             ? "FluyaVital.modal.winnerDescription"
-                            : allowMultipleSpins
-                                ? "FluyaVital.modal.loserDescription"
-                                : "FluyaVital.modal.noPrizeDescription",
+                            : "FluyaVital.modal.noPrizeDescription",
                     )}
                 </p>
 
@@ -220,21 +197,17 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
                 {/* Primary CTA */}
                 <button
                     type="button"
-                    onClick={handlePrimaryAction}
+                    onClick={onClose}
                     className={`mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-bold transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-4 active:scale-95 sm:text-lg ${
                         isWinner
                             ? "bg-gradient-to-r from-[#F2A83B] to-[#FED967] text-[#0b2545] shadow-lg shadow-amber-500/30 focus:ring-amber-300/60"
-                            : allowMultipleSpins
-                                ? "bg-[#0b2545] text-white shadow-lg shadow-[#0b2545]/30 hover:bg-[#1e6091] focus:ring-[#00b4d8]/40"
-                                : "bg-slate-200 text-[#0b2545] shadow-lg shadow-slate-400/20 hover:bg-slate-300 focus:ring-slate-400/40"
+                            : "bg-slate-200 text-[#0b2545] shadow-lg shadow-slate-400/20 hover:bg-slate-300 focus:ring-slate-400/40"
                     }`}
                 >
                     {t(
                         isWinner
                             ? "FluyaVital.modal.winnerCta"
-                            : allowMultipleSpins
-                                ? "FluyaVital.modal.loserCta"
-                                : "FluyaVital.modal.noPrizeCta",
+                            : "FluyaVital.modal.noPrizeCta",
                     )}
                 </button>
             </div>

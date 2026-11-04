@@ -37,16 +37,12 @@ export interface IFluyaVitalRouletteProps {
 export interface IPrizeResultModalProps {
     /** Whether the modal is currently visible. */
     isOpen: boolean;
-    /** Closes the modal (close button, backdrop click or Escape key). */
+    /** Closes the modal (close button, backdrop click, Escape key or primary CTA). */
     onClose: () => void;
     /** The slice the wheel landed on, or null before the first spin. */
     prize: IFluyaVitalRouletteSlice | null;
     /** Whether the result is a winning "Premio" slice. */
     isWinner: boolean;
-    /** Optional handler for the non-winning "try again" action (unlimited mode). */
-    onRetry?: () => void;
-    /** When true, non-winning spins offer a retry; otherwise a conclusive close. */
-    allowMultipleSpins: boolean;
 }
 
 /** Props for the Fluye Vital post-spin view. */

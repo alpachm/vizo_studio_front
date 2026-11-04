@@ -27,6 +27,8 @@ export interface IFluyaVitalRouletteProps {
     rotation: number;
     /** The slice the wheel landed on, or null before the first spin. */
     selectedPrize: IFluyaVitalRouletteSlice | null;
+    /** True once the user has completed a spin and cannot spin again. */
+    hasSpun: boolean;
     /** Starts a new spin (no-op while the wheel is already spinning). */
     onSpin: () => void;
 }
@@ -35,16 +37,12 @@ export interface IFluyaVitalRouletteProps {
 export interface IPrizeResultModalProps {
     /** Whether the modal is currently visible. */
     isOpen: boolean;
-    /** Closes the modal (close button, backdrop click or Escape key). */
+    /** Closes the modal (close button, backdrop click, Escape key or primary CTA). */
     onClose: () => void;
     /** The slice the wheel landed on, or null before the first spin. */
     prize: IFluyaVitalRouletteSlice | null;
     /** Whether the result is a winning "Premio" slice. */
     isWinner: boolean;
-    /** Optional handler for the non-winning "try again" action (unlimited mode). */
-    onRetry?: () => void;
-    /** When true, non-winning spins offer a retry; otherwise a conclusive close. */
-    allowMultipleSpins: boolean;
 }
 
 /** Props for the Fluye Vital post-spin view. */
@@ -71,6 +69,14 @@ export interface IFluyaVitalRouletteSlice {
     prizeNumber?: number;
 }
 
+/** Persisted single-spin lock record stored in localStorage. */
+export interface ISpinLockRecord {
+    /** Epoch ms when the spin was executed. */
+    executedAt: number;
+    /** Epoch ms when the lock expires (executedAt + 48 hours). */
+    expiresAt: number;
+}
+
 /** State and actions exposed by the useRoulette hook. */
 export interface IUseRouletteResult {
     /** True while the wheel is animating toward its final slice. */
@@ -79,6 +85,8 @@ export interface IUseRouletteResult {
     rotation: number;
     /** The slice the wheel landed on, or null before the first spin. */
     selectedPrize: IFluyaVitalRouletteSlice | null;
+    /** True once the user has completed a spin during this session. */
+    hasSpun: boolean;
     /** Starts a new spin (no-op while the wheel is already spinning). */
     spinWheel: () => void;
     /** Resets the wheel and prize state back to the initial, pre-spin state. */

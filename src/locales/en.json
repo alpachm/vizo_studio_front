@@ -70,6 +70,7 @@
       "description": "Spin the wheel and find out what surprise Fluya Vital has in store for you today.",
       "spinCta": "Spin the wheel →",
       "spinning": "Spinning…",
+      "alreadyParticipated": "You already participated",
       "prizePlaceholder": "Your prize will appear here",
       "prizeWon": "You won! Enjoy your prize 🎉",
       "prizeLost": "Keep participating. Try again!"

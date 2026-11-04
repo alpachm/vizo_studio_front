@@ -13,5 +13,4 @@
 const rawAllowMultipleSpins: string =
     import.meta.env.VITE_ALLOW_MULTIPLE_SPINS;
 
-    console.log({rawAllowMultipleSpins})
 export const ALLOW_MULTIPLE_SPINS: boolean = rawAllowMultipleSpins === "true" ? true : false;

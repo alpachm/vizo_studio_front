@@ -38,6 +38,18 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
     const [hasDismissed, setHasDismissed] = useState(false);
     const [showPostSpin, setShowPostSpin] = useState(false);
 
+    // Tracks whether the one-time roulette entrance swing has already played.
+    // It lives here (on the screen, which never unmounts during the view swap)
+    // rather than in the roulette component, so returning from PostSpinView —
+    // which remounts the roulette — does not replay the entrance animation.
+    const [hasPlayedEntrance, setHasPlayedEntrance] = useState(false);
+
+    // Fired by framer-motion when the entrance swing finishes (an event callback,
+    // not a render/effect), so the swing is never replayed on later mounts.
+    const handleEntranceComplete = useCallback(() => {
+        setHasPlayedEntrance(true);
+    }, []);
+
     // The modal is open whenever a result is available and hasn't been
     // dismissed yet. Deriving this avoids a setState-in-effect.
     const isModalOpen = selectedPrize !== null && !hasDismissed;
@@ -87,6 +99,8 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                                 selectedPrize={selectedPrize}
                                 hasSpun={hasSpun}
                                 onSpin={handleSpin}
+                                playEntranceAnimation={!hasPlayedEntrance}
+                                onEntranceComplete={handleEntranceComplete}
                             />
                             <Footer className="mt-16 sm:mt-20" />
                         </div>

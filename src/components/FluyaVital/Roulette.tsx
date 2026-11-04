@@ -1,6 +1,7 @@
 // ---------------------------------------------------------------------------
 // FluyaVitalRoulette — Static prize-wheel assembly for the Fluye Vital screen
 // ---------------------------------------------------------------------------
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { FiGift } from "react-icons/fi";
 import type { IFluyaVitalRouletteProps } from "../../interfaces/FluyaVitalInterface";
@@ -23,6 +24,8 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
     selectedPrize,
     hasSpun,
     onSpin,
+    playEntranceAnimation,
+    onEntranceComplete,
 }) => {
     const { t } = useTranslation();
 
@@ -36,9 +39,17 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
             className={`relative z-10 flex w-full flex-col items-center justify-center gap-8 md:gap-12 lg:flex-row ${className}`}
         >
             {/* ---- Left / desktop: unified static roulette SVG ---- */}
-            <div className="flex w-full max-w-md shrink-0 items-center justify-center lg:max-w-lg">
+            {/* One-time entrance swing: a subtle side-to-side rotation that hints */}
+            {/* the wheel is interactive. It only runs when the screen first mounts. */}
+            <motion.div
+                className="flex w-full max-w-md shrink-0 items-center justify-center lg:max-w-lg"
+                initial={playEntranceAnimation ? { rotate: 0 } : false}
+                animate={{ rotate: [0, -3, 3, -2, 2, 0] }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+                onAnimationComplete={onEntranceComplete}
+            >
                 <RouletteSVG viewBox="0 0 512 558" rotation={rotation} className="h-auto w-full drop-shadow-xl" />
-            </div>
+            </motion.div>
 
             {/* ---- Right / desktop: call-to-action block ---- */}
             <div className="flex w-full max-w-lg flex-col items-center text-center lg:items-start lg:text-left">

@@ -98,6 +98,13 @@
       "descriptionAfter": "in collaboration with Fluya Vital. Get to know our work and discover how we can bring your brand to life.",
       "cta": "Get to know us",
       "creditsLead": "Website created by"
+    },
+    "postSpin": {
+      "ariaLabel": "Fluya Vital post-spin view",
+      "branding": "Developed by Vizo Studio",
+      "headline": "Custom software and web experiences built for your business.",
+      "description": "We design modern, fast digital platforms ready to grow with you.",
+      "backCta": "Back to the wheel"
     }
   },
   "HomeScreen": {

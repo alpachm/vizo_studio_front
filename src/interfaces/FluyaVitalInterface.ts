@@ -47,6 +47,14 @@ export interface IPrizeResultModalProps {
     allowMultipleSpins: boolean;
 }
 
+/** Props for the Fluye Vital post-spin view. */
+export interface IPostSpinViewProps {
+    /** Optional extra classes applied to the root section. */
+    className?: string;
+    /** Returns to the roulette view and resets the spin state. */
+    onBackToRoulette: () => void;
+}
+
 /** Props for the Fluye Vital roulette SVG asset. */
 export interface IRouletteSVGProps extends SVGProps<SVGSVGElement> {
     /** Wheel rotation angle (degrees), applied around the wheel centre. */
@@ -73,6 +81,8 @@ export interface IUseRouletteResult {
     selectedPrize: IFluyaVitalRouletteSlice | null;
     /** Starts a new spin (no-op while the wheel is already spinning). */
     spinWheel: () => void;
+    /** Resets the wheel and prize state back to the initial, pre-spin state. */
+    resetRoulette: () => void;
 }
 
 /** Props for the Fluye Vital footer component. */

@@ -98,6 +98,13 @@
       "descriptionAfter": "en colaboración con Fluya Vital. Conoce nuestro trabajo y descubre cómo podemos darle vida a tu marca.",
       "cta": "Conócenos",
       "creditsLead": "Sitio web creado por"
+    },
+    "postSpin": {
+      "ariaLabel": "Vista posterior al giro de la ruleta de Fluya Vital",
+      "branding": "Desarrollado por Vizo Studio",
+      "headline": "Software y experiencias web a la medida de tu negocio.",
+      "description": "Diseñamos plataformas digitales modernas, rápidas y listas para crecer contigo.",
+      "backCta": "Volver a la ruleta"
     }
   },
   "HomeScreen": {

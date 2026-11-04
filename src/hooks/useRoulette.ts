@@ -46,5 +46,18 @@ export const useRoulette = (): IUseRouletteResult => {
         }, SPIN_DURATION_MS);
     }, []);
 
-    return { isSpinning, rotation, selectedPrize, spinWheel };
+    // Resets the wheel back to its pristine, pre-spin state (used when the user
+    // leaves the post-spin view and returns to the roulette).
+    const resetRoulette = useCallback(() => {
+        if (timeoutRef.current !== null) {
+            window.clearTimeout(timeoutRef.current);
+            timeoutRef.current = null;
+        }
+        spinningRef.current = false;
+        setIsSpinning(false);
+        setRotation(0);
+        setSelectedPrize(null);
+    }, []);
+
+    return { isSpinning, rotation, selectedPrize, spinWheel, resetRoulette };
 };

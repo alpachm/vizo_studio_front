@@ -6,6 +6,7 @@ import type { IFluyaVitalRouletteSlice, IUseRouletteResult } from "../interfaces
 import { SPIN_DURATION_MS, calculateTargetRotation, pickWeightedSlice } from "../utils/rouletteUtils";
 import { ALLOW_MULTIPLE_SPINS } from "../utils/featureFlags";
 import { clearSpinLock, isSpinLockActive, writeSpinLock } from "../utils/spinLock";
+import { clearSpinResult, readSpinResult, writeSpinResult } from "../utils/spinResult";
 
 /**
  * Owns the roulette spin lifecycle: it picks the winning slice, computes the
@@ -18,7 +19,12 @@ import { clearSpinLock, isSpinLockActive, writeSpinLock } from "../utils/spinLoc
 export const useRoulette = (): IUseRouletteResult => {
     const [isSpinning, setIsSpinning] = useState(false);
     const [rotation, setRotation] = useState(0);
-    const [selectedPrize, setSelectedPrize] = useState<IFluyaVitalRouletteSlice | null>(null);
+    // In single-spin (production) mode a previously resolved result is restored
+    // from localStorage while its lock is still active, so the display keeps the
+    // saved outcome across reloads. Test mode always starts with a clean result.
+    const [selectedPrize, setSelectedPrize] = useState<IFluyaVitalRouletteSlice | null>(() =>
+        !ALLOW_MULTIPLE_SPINS && isSpinLockActive() ? readSpinResult() : null,
+    );
 
     // Restore the persisted single-spin lock during the initial render so a
     // reload keeps the wheel disabled for the remaining 48h window without a
@@ -39,6 +45,7 @@ export const useRoulette = (): IUseRouletteResult => {
         // is missing, leaving an active lock in place to keep the wheel locked.
         if (ALLOW_MULTIPLE_SPINS || !isSpinLockActive()) {
             clearSpinLock();
+            clearSpinResult();
         }
 
         return () => {
@@ -75,6 +82,12 @@ export const useRoulette = (): IUseRouletteResult => {
             spinningRef.current = false;
             setIsSpinning(false);
             setSelectedPrize(winner);
+
+            // Persist the resolved result in single-spin mode so a reload restores
+            // the saved outcome. Test mode keeps everything in memory only.
+            if (!ALLOW_MULTIPLE_SPINS) {
+                writeSpinResult(winner);
+            }
         }, SPIN_DURATION_MS);
     }, []);
 
@@ -90,18 +103,22 @@ export const useRoulette = (): IUseRouletteResult => {
         spinningRef.current = false;
         setIsSpinning(false);
         setRotation(0);
-        setSelectedPrize(null);
 
         if (ALLOW_MULTIPLE_SPINS) {
+            // Unlimited (test) mode: reset to a clean slate and re-arm the spin.
             hasSpunRef.current = false;
             setHasSpun(false);
+            setSelectedPrize(null);
         } else {
             // Production: re-read the persisted lock so returning to the wheel
             // keeps it disabled while the lock is active, and re-arms it only
-            // once the 48-hour window has actually expired.
+            // once the 48-hour window has actually expired. Restore the persisted
+            // result so the display keeps the saved outcome instead of falling
+            // back to the placeholder.
             const locked = isSpinLockActive();
             hasSpunRef.current = locked;
             setHasSpun(locked);
+            setSelectedPrize(locked ? readSpinResult() : null);
         }
     }, []);
 

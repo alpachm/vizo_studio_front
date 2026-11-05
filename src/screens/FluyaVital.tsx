@@ -35,7 +35,9 @@ const viewVariants = {
 
 export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
     const { isSpinning, rotation, selectedPrize, hasSpun, spinWheel, resetRoulette } = useRoulette();
-    const [hasDismissed, setHasDismissed] = useState(false);
+    // A result restored from localStorage (single-spin reload) is treated as
+    // already dismissed so the result modal does not auto-open over the display.
+    const [hasDismissed, setHasDismissed] = useState(selectedPrize !== null);
     const [showPostSpin, setShowPostSpin] = useState(false);
 
     // Tracks whether the one-time roulette entrance swing has already played.
@@ -68,9 +70,11 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
         spinWheel();
     }, [spinWheel]);
 
-    // Returns from the post-spin view to the roulette, resetting the wheel.
+    // Returns from the post-spin view to the roulette. The result modal stays
+    // dismissed: in single-spin mode a restored result is re-shown (never a new
+    // one), and in test mode the wheel starts clean for the next spin.
     const handleBackToRoulette = useCallback(() => {
-        setHasDismissed(false);
+        setHasDismissed(true);
         setShowPostSpin(false);
         resetRoulette();
     }, [resetRoulette]);

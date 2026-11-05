@@ -78,6 +78,18 @@ export interface IFluyaVitalRouletteSlice {
     prizeIcon?: IconType;
 }
 
+/** Serializable snapshot of the resolved roulette slice persisted to localStorage. */
+export interface IPersistedSpinResult {
+    /** Radial centre of the winning slice, measured clockwise from 12 o'clock (degrees). */
+    angle: number;
+    /** Whether this slice is a winning "Premio" slice (vs. the consolation slice). */
+    isPrize: boolean;
+    /** Prize number (1–4) for "Premio" slices; absent on consolation slices. */
+    prizeNumber?: number;
+    /** Prize display name (e.g. "5 recargas", "2x1"); absent on consolation slices. */
+    prizeLabel?: string;
+}
+
 /** Persisted single-spin lock record stored in localStorage. */
 export interface ISpinLockRecord {
     /** Epoch ms when the spin was executed. */

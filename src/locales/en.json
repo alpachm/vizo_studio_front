@@ -79,7 +79,7 @@
       "alreadyParticipated": "You already participated",
       "prizePlaceholder": "Your prize will appear here",
       "prizeWon": "You won! Enjoy your prize 🎉",
-      "prizeLost": "Keep participating. Try again!"
+      "prizeLost": "Keep participating"
     },
     "modal": {
       "ariaLabel": "Spin result",

@@ -79,7 +79,7 @@
       "alreadyParticipated": "Ya participaste",
       "prizePlaceholder": "Tu premio aparecerá aquí",
       "prizeWon": "¡Ganaste! Disfruta tu premio 🎉",
-      "prizeLost": "Sigue participando. ¡Inténtalo de nuevo!"
+      "prizeLost": "Sigue participando"
     },
     "modal": {
       "ariaLabel": "Resultado del giro",

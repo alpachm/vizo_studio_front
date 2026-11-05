@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // FluyaVitalRoulette — Static prize-wheel assembly for the Fluye Vital screen
 // ---------------------------------------------------------------------------
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { FiGift } from "react-icons/fi";
 import type { IFluyaVitalRouletteProps } from "../../interfaces/FluyaVitalInterface";
@@ -35,6 +35,14 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
 
     // Icon shown next to the prize name in the result box; null before a win.
     const PrizeIcon = selectedPrize?.isPrize ? (selectedPrize.prizeIcon ?? null) : null;
+
+    // Stable key identifying the current result state, driving the entrance/exit
+    // animation whenever the resolved prize changes (placeholder → win/loss).
+    const resultKey = selectedPrize
+        ? selectedPrize.isPrize
+            ? `prize-${selectedPrize.prizeNumber ?? 0}`
+            : "consolation"
+        : "placeholder";
 
     return (
         <section
@@ -94,32 +102,43 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
                     )}
                 </button>
 
-                {/* Prize result box */}
+                {/* Prize result box — swaps placeholder → prize name / consolation
+                    message with a smooth fade + slide once the spin resolves. */}
                 <div
                     role="status"
                     aria-live="polite"
                     className="mt-6 w-full max-w-sm rounded-2xl border border-slate-200/60 bg-white px-6 py-4 shadow-2xl shadow-slate-900/5"
                 >
-                    {PrizeIcon ? (
-                        <div className="flex items-center justify-center gap-3">
-                            <PrizeIcon className="h-6 w-6 shrink-0 text-[#00b4d8]" aria-hidden="true" />
-                            <p className={`${styles.fvBrand} text-base font-bold text-[#0b2545]`}>
-                                {t(`FluyaVital.prizes.${selectedPrize?.prizeNumber}`)}
-                            </p>
-                        </div>
-                    ) : (
-                        <p
-                            className={`${styles.fvBrand} text-center text-sm font-light text-[#1e6091]`}
+                    <AnimatePresence mode="wait" initial={false}>
+                        <motion.div
+                            key={resultKey}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
                         >
-                            {selectedPrize
-                                ? t(
-                                      selectedPrize.isPrize
-                                          ? "FluyaVital.roulette.prizeWon"
-                                          : "FluyaVital.roulette.prizeLost",
-                                  )
-                                : t("FluyaVital.roulette.prizePlaceholder")}
-                        </p>
-                    )}
+                            {PrizeIcon ? (
+                                <div className="flex items-center justify-center gap-3">
+                                    <PrizeIcon className="h-6 w-6 shrink-0 text-[#00b4d8]" aria-hidden="true" />
+                                    <p className={`${styles.fvBrand} text-base font-bold text-[#0b2545]`}>
+                                        {t(`FluyaVital.prizes.${selectedPrize?.prizeNumber}`)}
+                                    </p>
+                                </div>
+                            ) : (
+                                <p
+                                    className={`${styles.fvBrand} text-center text-sm font-light text-[#1e6091]`}
+                                >
+                                    {selectedPrize
+                                        ? t(
+                                              selectedPrize.isPrize
+                                                  ? "FluyaVital.roulette.prizeWon"
+                                                  : "FluyaVital.roulette.prizeLost",
+                                          )
+                                        : t("FluyaVital.roulette.prizePlaceholder")}
+                                </p>
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
             </div>
         </section>

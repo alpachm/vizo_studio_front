@@ -36,20 +36,20 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
                 <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                     {/* Eyebrow */}
                     <p
-                        className={`${styles.fvVizoBrand} text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}
+                        className={`${styles.fvBrand} text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}
                     >
                         {t("FluyaVital.footer.overline")}
                     </p>
 
                     {/* Main description */}
                     <p
-                        className={`${styles.fvVizoBrand} mt-4 max-w-3xl text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
+                        className={`${styles.fvBrand} mt-4 max-w-3xl text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
                     >
                         {t("FluyaVital.footer.descriptionLead")}{" "}
-                        <span className="font-bold" style={VIZO_OUTLINE_STYLE}>
+                        <span className={`${styles.fvVizoBrand} font-bold`} style={VIZO_OUTLINE_STYLE}>
                             {t("Common.logoVizo")}
                         </span>{" "}
-                        <span className="font-bold text-[#d97706]">{t("Common.logoStudio")}</span>{" "}
+                        <span className={`${styles.fvVizoBrand} font-bold text-[#d97706]`}>{t("Common.logoStudio")}</span>{" "}
                         {t("FluyaVital.footer.descriptionAfter")}
                     </p>
                 </div>
@@ -58,7 +58,7 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
                 <div className="flex shrink-0 justify-center lg:justify-end">
                     <Link
                         to="/"
-                        className={`${styles.fvVizoBrand} inline-flex items-center justify-center gap-2 rounded-full bg-[#0b2545] px-8 py-4 text-base font-bold text-white shadow-lg shadow-[#0b2545]/30 transition-all duration-200 hover:scale-[1.03] hover:bg-[#1e6091] focus:outline-none focus:ring-4 focus:ring-[#00b4d8]/40 active:scale-95 sm:text-lg`}
+                        className={`${styles.fvBrand} inline-flex items-center justify-center gap-2 rounded-full bg-[#0b2545] px-8 py-4 text-base font-bold text-white shadow-lg shadow-[#0b2545]/30 transition-all duration-200 hover:scale-[1.03] hover:bg-[#1e6091] focus:outline-none focus:ring-4 focus:ring-[#00b4d8]/40 active:scale-95 sm:text-lg`}
                     >
                         {t("FluyaVital.footer.cta")}
                         <FiArrowUpRight className="h-5 w-5 shrink-0" aria-hidden="true" />
@@ -68,15 +68,15 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
 
             {/* ---- Bottom signature ---- */}
             <p
-                className={`${styles.fvVizoBrand} mt-6 text-center text-sm font-light text-[#0b2545]/70`}
+                className={`${styles.fvBrand} mt-6 text-center text-sm font-light text-[#0b2545]/70`}
             >
                 {t("FluyaVital.footer.creditsLead")}{" "}
                 <Link to="/" className="inline-block hover:opacity-90 transition-opacity">
                     <span className="whitespace-nowrap">
-                        <span className="font-black" style={VIZO_OUTLINE_STYLE}>
+                        <span className={`${styles.fvVizoBrand} font-black`} style={VIZO_OUTLINE_STYLE}>
                             {t("Common.logoVizo")}
                         </span>{" "}
-                        <span className="font-black text-[#d97706]">{t("Common.logoStudio")}</span>
+                        <span className={`${styles.fvVizoBrand} font-black text-[#d97706]`}>{t("Common.logoStudio")}</span>
                     </span>
                 </Link>
             </p>

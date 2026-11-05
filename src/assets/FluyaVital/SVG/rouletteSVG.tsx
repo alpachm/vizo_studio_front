@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
-import type { IFluyaVitalRouletteSlice, IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
-import { SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
+import type { IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
+import { ROULETTE_SLICES, SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
 import fluyaVitalLogo from "../fluyta-vital-logo.png";
 
 // ---------------------------------------------------------------------------
@@ -48,20 +48,12 @@ const radialPoint = (angle: number, radius: number) => {
 };
 
 /**
- * The eight slices in clockwise order starting at 12 o'clock. `isPrize`
- * identifies the blue "Premio" slices (each tagged with its `prizeNumber`);
+ * The eight slices in clockwise order starting at 12 o'clock are declared once
+ * in `src/utils/rouletteUtils.ts` (`ROULETTE_SLICES`) so the labels, icons and
+ * winning geometry stay in sync with the spin logic. `isPrize` identifies the
+ * blue "Premio" slices (each tagged with its `prizeNumber` and `prizeIcon`);
  * the white slices display the "Sigue participando" consolation message.
  */
-const SLICES: ReadonlyArray<IFluyaVitalRouletteSlice> = [
-    { angle: 0, isPrize: true, prizeNumber: 1, prizeLabel: "5 recargas" },
-    { angle: 45, isPrize: false },
-    { angle: 90, isPrize: true, prizeNumber: 2, prizeLabel: "2x1" },
-    { angle: 135, isPrize: false },
-    { angle: 180, isPrize: true, prizeNumber: 3, prizeLabel: "1 recarga" },
-    { angle: 225, isPrize: false },
-    { angle: 270, isPrize: true, prizeNumber: 4, prizeLabel: "1 bolsa de hielo" },
-    { angle: 315, isPrize: false },
-];
 
 /**
  * Staggered twinkle timings for the seven rim lightbulbs. The outer glow and
@@ -152,8 +144,9 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                     <circle cx={255.85} cy={301.5} r={208.948} stroke="#000" strokeWidth={20} />
                 </g>
                 {/* ---- Slice labels: text + icon rotated to follow each wedge's radial angle ---- */}
-                {SLICES.map((slice) => {
-                    const { angle, isPrize, prizeLabel } = slice;
+                {ROULETTE_SLICES.map((slice) => {
+                    const { angle, isPrize, prizeLabel, prizeIcon } = slice;
+                    const PrizeIcon = prizeIcon;
                     const labelFill = isPrize ? "#FFFFFF" : "#0B2545";
 
                     // Each label is rotated by the slice's own radial angle so the top
@@ -223,35 +216,15 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
 
                             <g transform={`rotate(${angle} ${iconAnchor.x} ${iconAnchor.y})`}>
                                 {isPrize ? (
-                                    <>
-                                        <rect
-                                            x={iconAnchor.x - 9}
-                                            y={iconAnchor.y - 1}
-                                            width={18}
-                                            height={13}
-                                            rx={2}
-                                            fill={labelFill}
+                                    PrizeIcon ? (
+                                        <PrizeIcon
+                                            x={iconAnchor.x - 13}
+                                            y={iconAnchor.y - 13}
+                                            size={26}
+                                            color={labelFill}
+                                            aria-hidden="true"
                                         />
-                                        <rect
-                                            x={iconAnchor.x - 1.5}
-                                            y={iconAnchor.y - 5}
-                                            width={3}
-                                            height={17}
-                                            fill={labelFill}
-                                        />
-                                        <circle
-                                            cx={iconAnchor.x - 4.5}
-                                            cy={iconAnchor.y - 5}
-                                            r={3}
-                                            fill={labelFill}
-                                        />
-                                        <circle
-                                            cx={iconAnchor.x + 4.5}
-                                            cy={iconAnchor.y - 5}
-                                            r={3}
-                                            fill={labelFill}
-                                        />
-                                    </>
+                                    ) : null
                                 ) : (
                                     <>
                                         <circle

@@ -33,6 +33,9 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
     // participated in single-spin (production) mode.
     const isSpinDisabled = isSpinning || hasSpun;
 
+    // Icon shown next to the prize name in the result box; null before a win.
+    const PrizeIcon = selectedPrize?.isPrize ? (selectedPrize.prizeIcon ?? null) : null;
+
     return (
         <section
             aria-label={t("FluyaVital.roulette.ariaLabel")}
@@ -97,17 +100,26 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
                     aria-live="polite"
                     className="mt-6 w-full max-w-sm rounded-2xl border border-slate-200/60 bg-white px-6 py-4 shadow-2xl shadow-slate-900/5"
                 >
-                    <p
-                        className={`${styles.fvBrand} text-center text-sm font-light text-[#1e6091]`}
-                    >
-                        {selectedPrize
-                            ? t(
-                                  selectedPrize.isPrize
-                                      ? "FluyaVital.roulette.prizeWon"
-                                      : "FluyaVital.roulette.prizeLost",
-                              )
-                            : t("FluyaVital.roulette.prizePlaceholder")}
-                    </p>
+                    {PrizeIcon ? (
+                        <div className="flex items-center justify-center gap-3">
+                            <PrizeIcon className="h-6 w-6 shrink-0 text-[#00b4d8]" aria-hidden="true" />
+                            <p className={`${styles.fvBrand} text-base font-bold text-[#0b2545]`}>
+                                {t(`FluyaVital.prizes.${selectedPrize?.prizeNumber}`)}
+                            </p>
+                        </div>
+                    ) : (
+                        <p
+                            className={`${styles.fvBrand} text-center text-sm font-light text-[#1e6091]`}
+                        >
+                            {selectedPrize
+                                ? t(
+                                      selectedPrize.isPrize
+                                          ? "FluyaVital.roulette.prizeWon"
+                                          : "FluyaVital.roulette.prizeLost",
+                                  )
+                                : t("FluyaVital.roulette.prizePlaceholder")}
+                        </p>
+                    )}
                 </div>
             </div>
         </section>

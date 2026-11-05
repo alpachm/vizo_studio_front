@@ -118,6 +118,7 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
     if (!isOpen) return null;
 
     const prizeNumber = prize?.prizeNumber ?? 1;
+    const PrizeIcon = isWinner ? (prize?.prizeIcon ?? null) : null;
 
     return (
         <div
@@ -155,7 +156,11 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
                     }`}
                 >
                     {isWinner ? (
-                        <FiGift className="h-9 w-9" aria-hidden="true" />
+                        PrizeIcon ? (
+                            <PrizeIcon className="h-9 w-9" aria-hidden="true" />
+                        ) : (
+                            <FiGift className="h-9 w-9" aria-hidden="true" />
+                        )
                     ) : (
                         <FiStar className="h-9 w-9" aria-hidden="true" />
                     )}

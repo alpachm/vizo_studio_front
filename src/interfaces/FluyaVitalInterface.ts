@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------------------
 
 import type { SVGProps } from "react";
+import type { IconType } from "react-icons";
 
 /** Props for the FluyaVital screen component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -73,6 +74,8 @@ export interface IFluyaVitalRouletteSlice {
     prizeNumber?: number;
     /** Prize display name (e.g. "5 recargas", "2x1"); absent on consolation slices. */
     prizeLabel?: string;
+    /** Icon rendered alongside the prize name in the wheel and the result modal. */
+    prizeIcon?: IconType;
 }
 
 /** Persisted single-spin lock record stored in localStorage. */

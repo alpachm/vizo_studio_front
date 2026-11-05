@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------------------
 
 import type { SVGProps } from "react";
+import type { IconType } from "react-icons";
 
 /** Props for the FluyaVital screen component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -31,10 +32,6 @@ export interface IFluyaVitalRouletteProps {
     hasSpun: boolean;
     /** Starts a new spin (no-op while the wheel is already spinning). */
     onSpin: () => void;
-    /** True only on the initial page load so the wheel plays its one-time entrance swing. */
-    playEntranceAnimation: boolean;
-    /** Fired once the entrance swing completes so it never replays on later mounts. */
-    onEntranceComplete: () => void;
 }
 
 /** Props for the Fluye Vital prize result modal. */
@@ -71,6 +68,22 @@ export interface IFluyaVitalRouletteSlice {
     isPrize: boolean;
     /** Prize number (1–4) for "Premio" slices; absent on consolation slices. */
     prizeNumber?: number;
+    /** Prize display name (e.g. "5 recargas", "2x1"); absent on consolation slices. */
+    prizeLabel?: string;
+    /** Icon rendered alongside the prize name in the wheel and the result modal. */
+    prizeIcon?: IconType;
+}
+
+/** Serializable snapshot of the resolved roulette slice persisted to localStorage. */
+export interface IPersistedSpinResult {
+    /** Radial centre of the winning slice, measured clockwise from 12 o'clock (degrees). */
+    angle: number;
+    /** Whether this slice is a winning "Premio" slice (vs. the consolation slice). */
+    isPrize: boolean;
+    /** Prize number (1–4) for "Premio" slices; absent on consolation slices. */
+    prizeNumber?: number;
+    /** Prize display name (e.g. "5 recargas", "2x1"); absent on consolation slices. */
+    prizeLabel?: string;
 }
 
 /** Persisted single-spin lock record stored in localStorage. */

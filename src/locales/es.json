@@ -63,6 +63,12 @@
       "headingBrand": "Fluya Vital",
       "subtitle": "Participa en nuestra ruleta oficial y descubre el premio que tenemos para ti hoy."
     },
+    "prizes": {
+      "1": "5 recargas",
+      "2": "2x1",
+      "3": "1 recarga",
+      "4": "1 bolsa de hielo"
+    },
     "roulette": {
       "ariaLabel": "Ruleta de premios de Fluya Vital",
       "overline": "Premio especial de hoy",
@@ -73,13 +79,12 @@
       "alreadyParticipated": "Ya participaste",
       "prizePlaceholder": "Tu premio aparecerá aquí",
       "prizeWon": "¡Ganaste! Disfruta tu premio 🎉",
-      "prizeLost": "Sigue participando. ¡Inténtalo de nuevo!"
+      "prizeLost": "Sigue participando"
     },
     "modal": {
       "ariaLabel": "Resultado del giro",
       "close": "Cerrar modal",
       "winnerEyebrow": "TU PREMIO TE ESTABA ESPERANDO",
-      "winnerTitle": "Premio {{number}}",
       "winnerDescription": "¡Felicidades! Has ganado un premio exclusivo de Fluya Vital. Acércate a reclamarlo y disfruta de tu recompensa.",
       "winnerInstruction": "Guarda esta pantalla para reclamarlo",
       "winnerCta": "Seguir explorando",

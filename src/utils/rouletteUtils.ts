@@ -1,6 +1,7 @@
 // ---------------------------------------------------------------------------
 // rouletteUtils — Shared geometry & rotation helpers for the Fluye Vital wheel
 // ---------------------------------------------------------------------------
+import { FiCloudSnow, FiDroplet, FiTag } from "react-icons/fi";
 import type { IFluyaVitalRouletteSlice } from "../interfaces/FluyaVitalInterface";
 
 /** Degrees in a single full rotation. */
@@ -19,19 +20,20 @@ export const SPIN_DURATION_MS = 6000;
 export const SPIN_EASING = "cubic-bezier(0.15, 0.95, 0.25, 1)";
 
 /**
- * The eight slices in clockwise order starting at 12 o'clock. This mirrors the
- * geometry declared in `src/assets/FluyaVital/SVG/rouletteSVG.tsx` (45° per
- * slice, alternating prize / consolation), so the winning slice that lands
- * under the pointer always matches what is rendered on screen.
+ * The eight slices in clockwise order starting at 12 o'clock. This is the
+ * single source of truth for the wheel: `src/assets/FluyaVital/SVG/rouletteSVG.tsx`
+ * consumes these same slices (45° per slice, alternating prize / consolation)
+ * to render the labels and icons, so the winning slice that lands under the
+ * pointer always matches what is rendered on screen.
  */
 export const ROULETTE_SLICES: ReadonlyArray<IFluyaVitalRouletteSlice> = [
-    { angle: 0, isPrize: true, prizeNumber: 1 },
+    { angle: 0, isPrize: true, prizeNumber: 1, prizeLabel: "5 recargas", prizeIcon: FiDroplet },
     { angle: 45, isPrize: false },
-    { angle: 90, isPrize: true, prizeNumber: 2 },
+    { angle: 90, isPrize: true, prizeNumber: 2, prizeLabel: "2x1", prizeIcon: FiTag },
     { angle: 135, isPrize: false },
-    { angle: 180, isPrize: true, prizeNumber: 3 },
+    { angle: 180, isPrize: true, prizeNumber: 3, prizeLabel: "1 recarga", prizeIcon: FiDroplet },
     { angle: 225, isPrize: false },
-    { angle: 270, isPrize: true, prizeNumber: 4 },
+    { angle: 270, isPrize: true, prizeNumber: 4, prizeLabel: "1 bolsa de hielo", prizeIcon: FiCloudSnow },
     { angle: 315, isPrize: false },
 ];
 

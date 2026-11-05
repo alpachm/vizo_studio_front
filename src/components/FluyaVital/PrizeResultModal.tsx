@@ -173,7 +173,7 @@ export const PrizeResultModal: React.FC<IPrizeResultModalProps> = ({
                 {/* Dynamic main title */}
                 <h2 className={`${styles.fvBrand} mt-4 text-3xl font-black leading-tight text-[#0b2545] sm:text-4xl`}>
                     {isWinner
-                        ? t("FluyaVital.modal.winnerTitle", { number: prizeNumber })
+                        ? t(`FluyaVital.prizes.${prizeNumber}`)
                         : t("FluyaVital.modal.noPrizeTitle")}
                 </h2>
 

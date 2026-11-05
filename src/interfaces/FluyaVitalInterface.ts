@@ -71,6 +71,8 @@ export interface IFluyaVitalRouletteSlice {
     isPrize: boolean;
     /** Prize number (1–4) for "Premio" slices; absent on consolation slices. */
     prizeNumber?: number;
+    /** Prize display name (e.g. "5 recargas", "2x1"); absent on consolation slices. */
+    prizeLabel?: string;
 }
 
 /** Persisted single-spin lock record stored in localStorage. */

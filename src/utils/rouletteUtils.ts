@@ -25,13 +25,13 @@ export const SPIN_EASING = "cubic-bezier(0.15, 0.95, 0.25, 1)";
  * under the pointer always matches what is rendered on screen.
  */
 export const ROULETTE_SLICES: ReadonlyArray<IFluyaVitalRouletteSlice> = [
-    { angle: 0, isPrize: true, prizeNumber: 1 },
+    { angle: 0, isPrize: true, prizeNumber: 1, prizeLabel: "5 recargas" },
     { angle: 45, isPrize: false },
-    { angle: 90, isPrize: true, prizeNumber: 2 },
+    { angle: 90, isPrize: true, prizeNumber: 2, prizeLabel: "2x1" },
     { angle: 135, isPrize: false },
-    { angle: 180, isPrize: true, prizeNumber: 3 },
+    { angle: 180, isPrize: true, prizeNumber: 3, prizeLabel: "1 recarga" },
     { angle: 225, isPrize: false },
-    { angle: 270, isPrize: true, prizeNumber: 4 },
+    { angle: 270, isPrize: true, prizeNumber: 4, prizeLabel: "1 bolsa de hielo" },
     { angle: 315, isPrize: false },
 ];
 

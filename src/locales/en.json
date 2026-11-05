@@ -63,6 +63,12 @@
       "headingBrand": "Fluya Vital",
       "subtitle": "Join our official wheel and discover the prize we have for you today."
     },
+    "prizes": {
+      "1": "5 refills",
+      "2": "2x1",
+      "3": "1 refill",
+      "4": "1 ice bag"
+    },
     "roulette": {
       "ariaLabel": "Fluya Vital prize wheel",
       "overline": "Today's Special Prize",
@@ -79,7 +85,6 @@
       "ariaLabel": "Spin result",
       "close": "Close modal",
       "winnerEyebrow": "YOUR PRIZE WAS WAITING FOR YOU",
-      "winnerTitle": "Prize {{number}}",
       "winnerDescription": "Congratulations! You won an exclusive Fluya Vital prize. Come claim it and enjoy your reward.",
       "winnerInstruction": "Save this screen to claim it",
       "winnerCta": "Keep exploring",

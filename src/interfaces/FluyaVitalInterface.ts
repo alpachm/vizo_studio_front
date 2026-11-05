@@ -31,6 +31,10 @@ export interface IFluyaVitalRouletteProps {
     hasSpun: boolean;
     /** Starts a new spin (no-op while the wheel is already spinning). */
     onSpin: () => void;
+    /** True only on the initial page load so the wheel plays its one-time entrance swing. */
+    playEntranceAnimation: boolean;
+    /** Fired once the entrance swing completes so it never replays on later mounts. */
+    onEntranceComplete: () => void;
 }
 
 /** Props for the Fluye Vital prize result modal. */

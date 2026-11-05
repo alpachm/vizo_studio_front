@@ -93,3 +93,9 @@ Actúas como un **Desarrollador Web Front-End Senior** especializado en arquitec
 - Sigue las convenciones estrictas de rutas de TanStack Router (enrutamiento por código/archivos tipado).
 
 ---
+
+### Excepción de Estilos para Fluye Vital (`src/screens/FluyaVital.tsx`)
+
+- **Regla:** Se establece una excepción exclusiva para la pantalla `src/screens/FluyaVital.tsx` y su archivo asociado `src/screens/FluyaVital.module.css`.
+- **Uso del CSS Module:** El archivo `FluyaVital.module.css` se utilizará **únicamente** para alojar la importación de la tipografía (Google Fonts - Montserrat), las variables de color de la marca aliada y clases tipográficas estandarizadas.
+- **Uso de Tailwind:** Todo el diseño de layout, espaciados, posicionamiento y animaciones de esta screen (incluyendo el fondo claro y las capas de olas) debe desarrollarse utilizando exclusivamente clases de Tailwind CSS, manteniendo el estándar del proyecto para el resto del código.

@@ -47,6 +47,72 @@
   "Portfolio": {
     "title": "Un poco de nuestro trabajo"
   },
+  "FluyaVital": {
+    "title": "Fluya Vital",
+    "subtitle": "Pantalla de ejemplo en construcción",
+    "header": {
+      "ariaLabel": "Colaboración entre Vizo Studio y Fluya Vital",
+      "logoAlt": "Logotipo de Fluya Vital",
+      "fluya": "Fluya",
+      "vital": "Vital"
+    },
+    "hero": {
+      "ariaLabel": "Sección principal de la ruleta de Fluya Vital",
+      "overline": "Por ser un cliente fijo",
+      "headingLead": "Gira y gana con",
+      "headingBrand": "Fluya Vital",
+      "subtitle": "Participa en nuestra ruleta oficial y descubre el premio que tenemos para ti hoy."
+    },
+    "prizes": {
+      "1": "5 recargas",
+      "2": "2x1",
+      "3": "1 recarga",
+      "4": "1 bolsa de hielo"
+    },
+    "roulette": {
+      "ariaLabel": "Ruleta de premios de Fluya Vital",
+      "overline": "Premio especial de hoy",
+      "heading": "Tu fidelidad merece un regalo.",
+      "description": "Gira la ruleta y descubre qué sorpresa tiene Fluya Vital preparada para ti hoy.",
+      "spinCta": "Girar la ruleta →",
+      "spinning": "Girando…",
+      "alreadyParticipated": "Ya participaste",
+      "prizePlaceholder": "Tu premio aparecerá aquí",
+      "prizeWon": "¡Ganaste! Disfruta tu premio 🎉",
+      "prizeLost": "Sigue participando"
+    },
+    "modal": {
+      "ariaLabel": "Resultado del giro",
+      "close": "Cerrar modal",
+      "winnerEyebrow": "TU PREMIO TE ESTABA ESPERANDO",
+      "winnerDescription": "¡Felicidades! Has ganado un premio exclusivo de Fluya Vital. Acércate a reclamarlo y disfruta de tu recompensa.",
+      "winnerInstruction": "Guarda esta pantalla para reclamarlo",
+      "winnerCta": "Seguir explorando",
+      "loserEyebrow": "CASI LO LOGRAS",
+      "loserTitle": "¡Sigue intentándolo!",
+      "loserDescription": "La suerte estuvo muy cerca. Gira de nuevo la ruleta y descubre el premio que Fluya Vital tiene para ti.",
+      "loserCta": "Intentar de nuevo",
+      "noPrizeEyebrow": "GRACIAS POR PARTICIPAR",
+      "noPrizeTitle": "¡Hasta la próxima!",
+      "noPrizeDescription": "Gracias por participar en la ruleta de Fluya Vital. Esta vez no hubo premio, pero te esperamos en una próxima ocasión.",
+      "noPrizeCta": "Cerrar"
+    },
+    "footer": {
+      "ariaLabel": "Créditos y llamado a la acción de Vizo Studio",
+      "overline": "DISEÑADA PARA COMPARTIR LO BUENO",
+      "descriptionLead": "Esta ruleta fue creada por",
+      "descriptionAfter": "en colaboración con Fluya Vital. Conoce nuestro trabajo y descubre cómo podemos darle vida a tu marca.",
+      "cta": "Conócenos",
+      "creditsLead": "Sitio web creado por"
+    },
+    "postSpin": {
+      "ariaLabel": "Vista posterior al giro de la ruleta de Fluya Vital",
+      "branding": "Desarrollado por Vizo Studio",
+      "headline": "Software y experiencias web a la medida de tu negocio.",
+      "description": "Diseñamos plataformas digitales modernas, rápidas y listas para crecer contigo.",
+      "backCta": "Volver a la ruleta"
+    }
+  },
   "HomeScreen": {
     "Hero": {
       "title": "Transformamos tu idea en una plataforma digital de alto impacto",

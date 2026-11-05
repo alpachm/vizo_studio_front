@@ -47,6 +47,72 @@
   "Portfolio": {
     "title": "A bit of our work"
   },
+  "FluyaVital": {
+    "title": "Fluya Vital",
+    "subtitle": "Placeholder screen under construction",
+    "header": {
+      "ariaLabel": "Vizo Studio and Fluya Vital collaboration",
+      "logoAlt": "Fluya Vital logo",
+      "fluya": "Fluya",
+      "vital": "Vital"
+    },
+    "hero": {
+      "ariaLabel": "Fluya Vital wheel hero section",
+      "overline": "For being a loyal customer",
+      "headingLead": "Spin and win with",
+      "headingBrand": "Fluya Vital",
+      "subtitle": "Join our official wheel and discover the prize we have for you today."
+    },
+    "prizes": {
+      "1": "5 refills",
+      "2": "2x1",
+      "3": "1 refill",
+      "4": "1 ice bag"
+    },
+    "roulette": {
+      "ariaLabel": "Fluya Vital prize wheel",
+      "overline": "Today's Special Prize",
+      "heading": "Your loyalty deserves a gift.",
+      "description": "Spin the wheel and find out what surprise Fluya Vital has in store for you today.",
+      "spinCta": "Spin the wheel →",
+      "spinning": "Spinning…",
+      "alreadyParticipated": "You already participated",
+      "prizePlaceholder": "Your prize will appear here",
+      "prizeWon": "You won! Enjoy your prize 🎉",
+      "prizeLost": "Keep participating"
+    },
+    "modal": {
+      "ariaLabel": "Spin result",
+      "close": "Close modal",
+      "winnerEyebrow": "YOUR PRIZE WAS WAITING FOR YOU",
+      "winnerDescription": "Congratulations! You won an exclusive Fluya Vital prize. Come claim it and enjoy your reward.",
+      "winnerInstruction": "Save this screen to claim it",
+      "winnerCta": "Keep exploring",
+      "loserEyebrow": "SO CLOSE",
+      "loserTitle": "Keep trying!",
+      "loserDescription": "Luck was almost on your side. Spin the wheel again and discover the prize Fluya Vital has for you.",
+      "loserCta": "Try again",
+      "noPrizeEyebrow": "THANKS FOR PLAYING",
+      "noPrizeTitle": "See you next time!",
+      "noPrizeDescription": "Thanks for joining the Fluya Vital wheel. No prize this time, but we look forward to seeing you again.",
+      "noPrizeCta": "Close"
+    },
+    "footer": {
+      "ariaLabel": "Vizo Studio credits and call to action",
+      "overline": "DESIGNED TO SHARE THE GOOD",
+      "descriptionLead": "This roulette was created by",
+      "descriptionAfter": "in collaboration with Fluya Vital. Get to know our work and discover how we can bring your brand to life.",
+      "cta": "Get to know us",
+      "creditsLead": "Website created by"
+    },
+    "postSpin": {
+      "ariaLabel": "Fluya Vital post-spin view",
+      "branding": "Developed by Vizo Studio",
+      "headline": "Custom software and web experiences built for your business.",
+      "description": "We design modern, fast digital platforms ready to grow with you.",
+      "backCta": "Back to the wheel"
+    }
+  },
   "HomeScreen": {
     "Hero": {
       "title": "We turn your idea into a high-impact digital platform",

@@ -31,12 +31,13 @@ const LOGO_Y = WHEEL_CY - LOGO_HEIGHT / 2;
  * is scaled to a prominent height and repositioned to drape over the upper-right
  * quadrant of the golden rim (instead of the dead-centre top pin), then tilted
  * 15° clockwise around its brim's bottom-centre so it rests comfortably over
- * the rim while leaning to the right.
+ * the rim while leaning to the right. Its centre is also nudged a touch below
+ * the canvas top so the tilted tip and cone fabric clear the viewBox edge.
  */
 const CHRISTMAS_HAT_HEIGHT = 160;
 const CHRISTMAS_HAT_WIDTH = 1000;
 const CHRISTMAS_HAT_CENTER_X = 380;
-const CHRISTMAS_HAT_CENTER_Y = 42;
+const CHRISTMAS_HAT_CENTER_Y = 50; // Nudged down so the tilted tip clears the top edge
 const CHRISTMAS_HAT_X = CHRISTMAS_HAT_CENTER_X - CHRISTMAS_HAT_WIDTH / 2;
 const CHRISTMAS_HAT_Y = CHRISTMAS_HAT_CENTER_Y - CHRISTMAS_HAT_HEIGHT / 2;
 const CHRISTMAS_HAT_TILT = 27;
@@ -110,7 +111,7 @@ const CHRISTMAS_FRAME_START = "#E89228";
 const CHRISTMAS_FRAME_END = "#F39C12";
 
 const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteSVGProps) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width={512} height={558} fill="none" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -40 512 598" width={512} height={558} fill="none" {...props}>
         <style>{`
             @keyframes bulb-twinkle {
                 0%, 100% { opacity: 1; }

@@ -116,7 +116,7 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
                 animate={wheelControls}
             >
                 <RouletteSVG
-                    viewBox="0 0 512 558"
+                    viewBox="0 -40 512 598"
                     rotation={rotation}
                     isChristmas={isChristmas}
                     className={`h-auto w-full ${svgGlowClass}`}

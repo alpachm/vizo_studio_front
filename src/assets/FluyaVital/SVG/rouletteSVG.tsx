@@ -358,11 +358,15 @@ const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteS
                     width={CHRISTMAS_HAT_WIDTH}
                     height={CHRISTMAS_HAT_HEIGHT}
                     preserveAspectRatio="xMidYMid meet"
+                    filter="url(#christmas-hat-shadow)"
                     transform={`rotate(${CHRISTMAS_HAT_TILT} ${CHRISTMAS_HAT_PIVOT_X} ${CHRISTMAS_HAT_PIVOT_Y})`}
                 />
             </g>
         )}
         <defs>
+            <filter id="christmas-hat-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx={2} dy={6} stdDeviation={4} floodColor="#000000" floodOpacity={0.45} />
+            </filter>
             <filter
                 id="e"
                 width={485.896}

@@ -80,7 +80,14 @@ const twinkleStyle = (index: number): CSSProperties => ({
     animationIterationCount: "infinite",
 });
 
-const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
+/**
+ * Festive orange/gold accent colours for the roulette outer frame, applied only
+ * when the Fluye Vital Christmas mode is enabled (`VITE_CHRISTMAS_MODE=true`).
+ */
+const CHRISTMAS_FRAME_START = "#E89228";
+const CHRISTMAS_FRAME_END = "#F39C12";
+
+const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteSVGProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={512} height={558} fill="none" {...props}>
         <style>{`
             @keyframes bulb-twinkle {
@@ -521,8 +528,8 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                 y2={70.5}
                 gradientUnits="userSpaceOnUse"
             >
-                <stop stopColor="#F2B040" />
-                <stop offset={1} stopColor="#FAD060" />
+                <stop stopColor={isChristmas ? CHRISTMAS_FRAME_START : "#F2B040"} />
+                <stop offset={1} stopColor={isChristmas ? CHRISTMAS_FRAME_END : "#FAD060"} />
             </linearGradient>
             <linearGradient
                 id="b"
@@ -532,8 +539,8 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                 y2={553}
                 gradientUnits="userSpaceOnUse"
             >
-                <stop stopColor="#F2A83B" />
-                <stop offset={1} stopColor="#FED967" />
+                <stop stopColor={isChristmas ? CHRISTMAS_FRAME_START : "#F2A83B"} />
+                <stop offset={1} stopColor={isChristmas ? CHRISTMAS_FRAME_END : "#FED967"} />
             </linearGradient>
             <linearGradient
                 id="c"
@@ -543,8 +550,8 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                 y2={539.437}
                 gradientUnits="userSpaceOnUse"
             >
-                <stop stopColor="#FFD766" />
-                <stop offset={1} stopColor="#F4A73B" />
+                <stop stopColor={isChristmas ? CHRISTMAS_FRAME_END : "#FFD766"} />
+                <stop offset={1} stopColor={isChristmas ? CHRISTMAS_FRAME_START : "#F4A73B"} />
             </linearGradient>
             <linearGradient
                 id="f"

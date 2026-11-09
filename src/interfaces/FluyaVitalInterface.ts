@@ -58,6 +58,8 @@ export interface IPostSpinViewProps {
 export interface IRouletteSVGProps extends SVGProps<SVGSVGElement> {
     /** Wheel rotation angle (degrees), applied around the wheel centre. */
     rotation?: number;
+    /** True when the Fluye Vital Christmas mode is active, applying festive accents. */
+    isChristmas?: boolean;
 }
 
 /** A single slice of the Fluye Vital roulette wheel. */

@@ -1,6 +1,8 @@
 import type { CSSProperties } from "react";
 import type { IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
 import { ROULETTE_SLICES, SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
+import { CHRISTMAS_MODE } from "../../../config/christmasMode";
+import christmasHatPng from "../christmas-hat.png";
 import fluyaVitalLogo from "../fluyta-vital-logo.png";
 
 // ---------------------------------------------------------------------------
@@ -21,6 +23,27 @@ const LOGO_HEIGHT = 54;
 const LOGO_WIDTH = LOGO_HEIGHT * (398 / 482);
 const LOGO_X = WHEEL_CX - LOGO_WIDTH / 2;
 const LOGO_Y = WHEEL_CY - LOGO_HEIGHT / 2;
+
+/**
+ * Decorative Santa hat overlaid on the roulette when the Fluye Vital Christmas
+ * mode is enabled. It is rendered outside the rotating wheel group, so the
+ * slices spin underneath while the hat stays fixed on top. The 740 × 636 asset
+ * is scaled to a prominent height and repositioned to drape over the upper-right
+ * quadrant of the golden rim (instead of the dead-centre top pin), then tilted
+ * 15° clockwise around its brim's bottom-centre so it rests comfortably over
+ * the rim while leaning to the right. Its centre is also nudged a touch below
+ * the canvas top so the tilted tip and cone fabric clear the viewBox edge.
+ */
+const CHRISTMAS_HAT_HEIGHT = 160;
+const CHRISTMAS_HAT_WIDTH = 1000;
+const CHRISTMAS_HAT_CENTER_X = 380;
+const CHRISTMAS_HAT_CENTER_Y = 50; // Nudged down so the tilted tip clears the top edge
+const CHRISTMAS_HAT_X = CHRISTMAS_HAT_CENTER_X - CHRISTMAS_HAT_WIDTH / 2;
+const CHRISTMAS_HAT_Y = CHRISTMAS_HAT_CENTER_Y - CHRISTMAS_HAT_HEIGHT / 2;
+const CHRISTMAS_HAT_TILT = 27;
+/** Bottom-centre of the brim: the pivot the hat swings around as it tilts. */
+const CHRISTMAS_HAT_PIVOT_X = CHRISTMAS_HAT_CENTER_X;
+const CHRISTMAS_HAT_PIVOT_Y = CHRISTMAS_HAT_CENTER_Y + CHRISTMAS_HAT_HEIGHT / 2;
 
 /** Radial distance (from the wheel centre) of the label text block anchor. */
 const TEXT_RADIUS = 162;
@@ -80,8 +103,38 @@ const twinkleStyle = (index: number): CSSProperties => ({
     animationIterationCount: "infinite",
 });
 
-const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width={512} height={558} fill="none" {...props}>
+/**
+ * Festive orange/gold accent colours for the roulette outer frame, applied only
+ * when the Fluye Vital Christmas mode is enabled (`VITE_CHRISTMAS_MODE=true`).
+ */
+const CHRISTMAS_FRAME_START = "#E89228";
+const CHRISTMAS_FRAME_END = "#F39C12";
+
+/**
+ * Festive bulb palette for the seven rim lightbulbs. When the Fluye Vital
+ * Christmas mode is enabled the bulbs cycle through these colours in order,
+ * alternating festive red, emerald green and warm gold like holiday string
+ * lights. The original sunny-yellow glow (`#F7FF24`) is kept when the mode is
+ * off.
+ */
+const CHRISTMAS_BULB_COLORS: ReadonlyArray<string> = [
+    "#E74C3C", // festive red
+    "#2ECC71", // emerald green
+    "#F1C40F", // warm gold
+];
+
+/**
+ * Resolves the glow/fill colour for a rim bulb in the given mode. The bulb's
+ * index is mapped onto the Christmas palette (modulo its length) so the seven
+ * lights alternate red → green → gold around the rim; in normal mode every bulb
+ * keeps its original yellow glow. The accompanying Gaussian-blur filters derive
+ * their tint from this fill, so the halo automatically matches the active colour.
+ */
+const bulbGlowColor = (index: number, isChristmas: boolean): string =>
+    isChristmas ? CHRISTMAS_BULB_COLORS[index % CHRISTMAS_BULB_COLORS.length] : "#F7FF24";
+
+const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteSVGProps) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -40 512 598" width={512} height={558} fill="none" {...props}>
         <style>{`
             @keyframes bulb-twinkle {
                 0%, 100% { opacity: 1; }
@@ -272,43 +325,43 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
             preserveAspectRatio="xMidYMid meet"
         />
         <g filter="url(#g)" style={twinkleStyle(0)}>
-            <circle cx={77.913} cy={145.782} r={12.853} fill="#F7FF24" />
+            <circle cx={77.913} cy={145.782} r={12.853} fill={bulbGlowColor(0, isChristmas)} />
         </g>
         <g filter="url(#h)" style={twinkleStyle(0)}>
             <circle cx={77.913} cy={145.782} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#i)" style={twinkleStyle(1)}>
-            <circle cx={17.853} cy={304.793} r={12.853} fill="#F7FF24" />
+            <circle cx={17.853} cy={304.793} r={12.853} fill={bulbGlowColor(1, isChristmas)} />
         </g>
         <g filter="url(#j)" style={twinkleStyle(1)}>
             <circle cx={17.852} cy={304.793} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#k)" style={twinkleStyle(2)}>
-            <circle cx={67.972} cy={447.793} r={12.853} fill="#F7FF24" />
+            <circle cx={67.972} cy={447.793} r={12.853} fill={bulbGlowColor(2, isChristmas)} />
         </g>
         <g filter="url(#l)" style={twinkleStyle(2)}>
             <circle cx={67.972} cy={447.793} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#m)" style={twinkleStyle(3)}>
-            <circle cx={255.782} cy={539.373} r={12.853} fill="#F7FF24" />
+            <circle cx={255.782} cy={539.373} r={12.853} fill={bulbGlowColor(3, isChristmas)} />
         </g>
         <g filter="url(#n)" style={twinkleStyle(3)}>
             <circle cx={255.782} cy={539.373} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#o)" style={twinkleStyle(4)}>
-            <circle cx={443.342} cy={447.793} r={12.853} fill="#F7FF24" />
+            <circle cx={443.342} cy={447.793} r={12.853} fill={bulbGlowColor(4, isChristmas)} />
         </g>
         <g filter="url(#p)" style={twinkleStyle(4)}>
             <circle cx={443.342} cy={447.793} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#q)" style={twinkleStyle(5)}>
-            <circle cx={493.722} cy={304.023} r={12.853} fill="#F7FF24" />
+            <circle cx={493.722} cy={304.023} r={12.853} fill={bulbGlowColor(5, isChristmas)} />
         </g>
         <g filter="url(#r)" style={twinkleStyle(5)}>
             <circle cx={493.722} cy={304.023} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#s)" style={twinkleStyle(6)}>
-            <circle cx={434.952} cy={145.783} r={12.853} fill="#F7FF24" />
+            <circle cx={434.952} cy={145.783} r={12.853} fill={bulbGlowColor(6, isChristmas)} />
         </g>
         <g filter="url(#t)" style={twinkleStyle(6)}>
             <circle cx={434.952} cy={145.783} r={8.336} fill="#fff" />
@@ -317,7 +370,27 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
             fill="url(#u)"
             d="M255.785 18.095c12.948 0 23.445 10.785 23.445 24.09 0 2.239-.299 4.407-.855 6.464-2.744 16.69-12.839 73.817-22.525 73.817-9.805-.002-20.175-58.532-22.808-74.41a24.62 24.62 0 0 1-.613-3.783l-.024-.15.01-.013a25.04 25.04 0 0 1-.074-1.925c0-13.305 10.496-24.09 23.444-24.09Z"
         />
+        {/* ---- Static festive overlay: Santa hat draped over the upper-right rim ---- */}
+        {/* Rendered outside the rotating wheel group so the slices spin underneath */}
+        {/* while the hat stays fixed on top of the golden ring. */}
+        {CHRISTMAS_MODE && (
+            <g aria-hidden="true">
+                <image
+                    href={christmasHatPng}
+                    x={CHRISTMAS_HAT_X}
+                    y={CHRISTMAS_HAT_Y}
+                    width={CHRISTMAS_HAT_WIDTH}
+                    height={CHRISTMAS_HAT_HEIGHT}
+                    preserveAspectRatio="xMidYMid meet"
+                    filter="url(#christmas-hat-shadow)"
+                    transform={`rotate(${CHRISTMAS_HAT_TILT} ${CHRISTMAS_HAT_PIVOT_X} ${CHRISTMAS_HAT_PIVOT_Y})`}
+                />
+            </g>
+        )}
         <defs>
+            <filter id="christmas-hat-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx={2} dy={6} stdDeviation={4} floodColor="#000000" floodOpacity={0.45} />
+            </filter>
             <filter
                 id="e"
                 width={485.896}
@@ -521,8 +594,8 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                 y2={70.5}
                 gradientUnits="userSpaceOnUse"
             >
-                <stop stopColor="#F2B040" />
-                <stop offset={1} stopColor="#FAD060" />
+                <stop stopColor={isChristmas ? CHRISTMAS_FRAME_START : "#F2B040"} />
+                <stop offset={1} stopColor={isChristmas ? CHRISTMAS_FRAME_END : "#FAD060"} />
             </linearGradient>
             <linearGradient
                 id="b"
@@ -532,8 +605,8 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                 y2={553}
                 gradientUnits="userSpaceOnUse"
             >
-                <stop stopColor="#F2A83B" />
-                <stop offset={1} stopColor="#FED967" />
+                <stop stopColor={isChristmas ? CHRISTMAS_FRAME_START : "#F2A83B"} />
+                <stop offset={1} stopColor={isChristmas ? CHRISTMAS_FRAME_END : "#FED967"} />
             </linearGradient>
             <linearGradient
                 id="c"
@@ -543,8 +616,8 @@ const RouletteSVG = ({ rotation = 0, ...props }: IRouletteSVGProps) => (
                 y2={539.437}
                 gradientUnits="userSpaceOnUse"
             >
-                <stop stopColor="#FFD766" />
-                <stop offset={1} stopColor="#F4A73B" />
+                <stop stopColor={isChristmas ? CHRISTMAS_FRAME_END : "#FFD766"} />
+                <stop offset={1} stopColor={isChristmas ? CHRISTMAS_FRAME_START : "#F4A73B"} />
             </linearGradient>
             <linearGradient
                 id="f"

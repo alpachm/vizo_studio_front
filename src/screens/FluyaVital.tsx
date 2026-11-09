@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------------------
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Snowfall from "react-snowfall";
 import type { IFluyaVitalProps } from "../interfaces/FluyaVitalInterface";
 import Wave1 from "../assets/FluyaVital/SVG/wave-1";
 import Wave2 from "../assets/FluyaVital/SVG/wave-2";
@@ -13,6 +14,7 @@ import FluyaVitalRoulette from "../components/FluyaVital/Roulette";
 import PrizeResultModal from "../components/FluyaVital/PrizeResultModal";
 import PostSpinView from "../components/FluyaVital/PostSpinView";
 import Footer from "../components/FluyaVital/Footer";
+import { useChristmasMode } from "../hooks/useChristmasMode";
 import { useRoulette } from "../hooks/useRoulette";
 
 /** Shared easing curve for the roulette ↔ post-spin view swap. */
@@ -34,7 +36,9 @@ const viewVariants = {
 };
 
 export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
-    const { isSpinning, rotation, selectedPrize, hasSpun, spinWheel, resetRoulette } = useRoulette();
+    const { isSpinning, rotation, selectedPrize, hasSpun, spinWheel, resetRoulette } =
+        useRoulette();
+    const isChristmas = useChristmasMode();
     // A result restored from localStorage (single-spin reload) is treated as
     // already dismissed so the result modal does not auto-open over the display.
     const [hasDismissed, setHasDismissed] = useState(selectedPrize !== null);
@@ -127,6 +131,26 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                     style={{ animationDuration: "2s" }}
                 />
             </div>
+
+            {/* Nieve ambiente — canvas fijo a todo el viewport, detrás del contenido
+                interactivo y justo por encima de las olas (z-index 1). El efecto
+                se mantiene sutil para conservar una estética corporativa. Solo se
+                monta cuando el Modo Navidad está activo. */}
+            {isChristmas && (
+                <Snowfall
+                    snowflakeCount={150}
+                    speed={[0.6, 1.3]}
+                    wind={[-1.2, 0.4]}
+                    radius={[1.8, 2.9]}
+                    style={{
+                        position: "fixed",
+                        width: "100%",
+                        height: "100%",
+                        zIndex: 1,
+                        pointerEvents: "none",
+                    }}
+                />
+            )}
 
             {/* Resultado del giro — se abre automáticamente al terminar la animación */}
             <PrizeResultModal

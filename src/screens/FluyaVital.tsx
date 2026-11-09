@@ -7,6 +7,8 @@ import Snowfall from "react-snowfall";
 import type { IFluyaVitalProps } from "../interfaces/FluyaVitalInterface";
 import Wave1 from "../assets/FluyaVital/SVG/wave-1";
 import Wave2 from "../assets/FluyaVital/SVG/wave-2";
+import Garland from "../assets/FluyaVital/SVG/garland";
+import GarlandMobile from "../assets/FluyaVital/SVG/garlant-mobile";
 import styles from "./FluyaVital.module.css";
 import Header from "../components/FluyaVital/Header";
 import Hero from "../components/FluyaVital/Hero";
@@ -131,6 +133,30 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                     style={{ animationDuration: "2s" }}
                 />
             </div>
+
+            {/* Guirnalda navideña — banner decorativo fijo en la parte superior,
+                detrás del contenido interactivo (rueda, texto). Se monta solo
+                cuando el Modo Navidad está activo (CHRISTMAS_MODE). La variante
+                móvil se muestra en pantallas pequeñas (md:hidden) y la de
+                escritorio a partir del breakpoint md (md:block); overflow-hidden
+                evita cualquier desbordamiento horizontal. */}
+            {isChristmas && (
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none fixed top-0 left-0 z-0 w-full overflow-hidden"
+                >
+                    <GarlandMobile
+                        className="pointer-events-none block h-auto w-full md:hidden"
+                        viewBox="0 0 586 133"
+                        preserveAspectRatio="xMidYMin slice"
+                    />
+                    <Garland
+                        className="pointer-events-none hidden h-auto w-full md:block"
+                        viewBox="0 0 1112 155"
+                        preserveAspectRatio="xMidYMin slice"
+                    />
+                </div>
+            )}
 
             {/* Nieve ambiente — canvas fijo a todo el viewport, detrás del contenido
                 interactivo y justo por encima de las olas (z-index 1). El efecto

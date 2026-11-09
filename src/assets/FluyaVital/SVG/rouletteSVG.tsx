@@ -1,6 +1,8 @@
 import type { CSSProperties } from "react";
 import type { IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
 import { ROULETTE_SLICES, SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
+import { CHRISTMAS_MODE } from "../../../config/christmasMode";
+import christmasHatPng from "../christmas-hat.png";
 import fluyaVitalLogo from "../fluyta-vital-logo.png";
 
 // ---------------------------------------------------------------------------
@@ -21,6 +23,26 @@ const LOGO_HEIGHT = 54;
 const LOGO_WIDTH = LOGO_HEIGHT * (398 / 482);
 const LOGO_X = WHEEL_CX - LOGO_WIDTH / 2;
 const LOGO_Y = WHEEL_CY - LOGO_HEIGHT / 2;
+
+/**
+ * Decorative Santa hat overlaid on the roulette when the Fluye Vital Christmas
+ * mode is enabled. It is rendered outside the rotating wheel group, so the
+ * slices spin underneath while the hat stays fixed on top. The 740 × 636 asset
+ * is scaled to a prominent height and repositioned to drape over the upper-right
+ * quadrant of the golden rim (instead of the dead-centre top pin), then tilted
+ * 15° clockwise around its brim's bottom-centre so it rests comfortably over
+ * the rim while leaning to the right.
+ */
+const CHRISTMAS_HAT_HEIGHT = 160;
+const CHRISTMAS_HAT_WIDTH = 1000;
+const CHRISTMAS_HAT_CENTER_X = 380;
+const CHRISTMAS_HAT_CENTER_Y = 42;
+const CHRISTMAS_HAT_X = CHRISTMAS_HAT_CENTER_X - CHRISTMAS_HAT_WIDTH / 2;
+const CHRISTMAS_HAT_Y = CHRISTMAS_HAT_CENTER_Y - CHRISTMAS_HAT_HEIGHT / 2;
+const CHRISTMAS_HAT_TILT = 27;
+/** Bottom-centre of the brim: the pivot the hat swings around as it tilts. */
+const CHRISTMAS_HAT_PIVOT_X = CHRISTMAS_HAT_CENTER_X;
+const CHRISTMAS_HAT_PIVOT_Y = CHRISTMAS_HAT_CENTER_Y + CHRISTMAS_HAT_HEIGHT / 2;
 
 /** Radial distance (from the wheel centre) of the label text block anchor. */
 const TEXT_RADIUS = 162;
@@ -324,6 +346,22 @@ const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteS
             fill="url(#u)"
             d="M255.785 18.095c12.948 0 23.445 10.785 23.445 24.09 0 2.239-.299 4.407-.855 6.464-2.744 16.69-12.839 73.817-22.525 73.817-9.805-.002-20.175-58.532-22.808-74.41a24.62 24.62 0 0 1-.613-3.783l-.024-.15.01-.013a25.04 25.04 0 0 1-.074-1.925c0-13.305 10.496-24.09 23.444-24.09Z"
         />
+        {/* ---- Static festive overlay: Santa hat draped over the upper-right rim ---- */}
+        {/* Rendered outside the rotating wheel group so the slices spin underneath */}
+        {/* while the hat stays fixed on top of the golden ring. */}
+        {CHRISTMAS_MODE && (
+            <g aria-hidden="true">
+                <image
+                    href={christmasHatPng}
+                    x={CHRISTMAS_HAT_X}
+                    y={CHRISTMAS_HAT_Y}
+                    width={CHRISTMAS_HAT_WIDTH}
+                    height={CHRISTMAS_HAT_HEIGHT}
+                    preserveAspectRatio="xMidYMid meet"
+                    transform={`rotate(${CHRISTMAS_HAT_TILT} ${CHRISTMAS_HAT_PIVOT_X} ${CHRISTMAS_HAT_PIVOT_Y})`}
+                />
+            </g>
+        )}
         <defs>
             <filter
                 id="e"

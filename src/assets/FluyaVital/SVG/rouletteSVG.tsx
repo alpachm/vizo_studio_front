@@ -110,6 +110,29 @@ const twinkleStyle = (index: number): CSSProperties => ({
 const CHRISTMAS_FRAME_START = "#E89228";
 const CHRISTMAS_FRAME_END = "#F39C12";
 
+/**
+ * Festive bulb palette for the seven rim lightbulbs. When the Fluye Vital
+ * Christmas mode is enabled the bulbs cycle through these colours in order,
+ * alternating festive red, emerald green and warm gold like holiday string
+ * lights. The original sunny-yellow glow (`#F7FF24`) is kept when the mode is
+ * off.
+ */
+const CHRISTMAS_BULB_COLORS: ReadonlyArray<string> = [
+    "#E74C3C", // festive red
+    "#2ECC71", // emerald green
+    "#F1C40F", // warm gold
+];
+
+/**
+ * Resolves the glow/fill colour for a rim bulb in the given mode. The bulb's
+ * index is mapped onto the Christmas palette (modulo its length) so the seven
+ * lights alternate red → green → gold around the rim; in normal mode every bulb
+ * keeps its original yellow glow. The accompanying Gaussian-blur filters derive
+ * their tint from this fill, so the halo automatically matches the active colour.
+ */
+const bulbGlowColor = (index: number, isChristmas: boolean): string =>
+    isChristmas ? CHRISTMAS_BULB_COLORS[index % CHRISTMAS_BULB_COLORS.length] : "#F7FF24";
+
 const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteSVGProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -40 512 598" width={512} height={558} fill="none" {...props}>
         <style>{`
@@ -302,43 +325,43 @@ const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteS
             preserveAspectRatio="xMidYMid meet"
         />
         <g filter="url(#g)" style={twinkleStyle(0)}>
-            <circle cx={77.913} cy={145.782} r={12.853} fill="#F7FF24" />
+            <circle cx={77.913} cy={145.782} r={12.853} fill={bulbGlowColor(0, isChristmas)} />
         </g>
         <g filter="url(#h)" style={twinkleStyle(0)}>
             <circle cx={77.913} cy={145.782} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#i)" style={twinkleStyle(1)}>
-            <circle cx={17.853} cy={304.793} r={12.853} fill="#F7FF24" />
+            <circle cx={17.853} cy={304.793} r={12.853} fill={bulbGlowColor(1, isChristmas)} />
         </g>
         <g filter="url(#j)" style={twinkleStyle(1)}>
             <circle cx={17.852} cy={304.793} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#k)" style={twinkleStyle(2)}>
-            <circle cx={67.972} cy={447.793} r={12.853} fill="#F7FF24" />
+            <circle cx={67.972} cy={447.793} r={12.853} fill={bulbGlowColor(2, isChristmas)} />
         </g>
         <g filter="url(#l)" style={twinkleStyle(2)}>
             <circle cx={67.972} cy={447.793} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#m)" style={twinkleStyle(3)}>
-            <circle cx={255.782} cy={539.373} r={12.853} fill="#F7FF24" />
+            <circle cx={255.782} cy={539.373} r={12.853} fill={bulbGlowColor(3, isChristmas)} />
         </g>
         <g filter="url(#n)" style={twinkleStyle(3)}>
             <circle cx={255.782} cy={539.373} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#o)" style={twinkleStyle(4)}>
-            <circle cx={443.342} cy={447.793} r={12.853} fill="#F7FF24" />
+            <circle cx={443.342} cy={447.793} r={12.853} fill={bulbGlowColor(4, isChristmas)} />
         </g>
         <g filter="url(#p)" style={twinkleStyle(4)}>
             <circle cx={443.342} cy={447.793} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#q)" style={twinkleStyle(5)}>
-            <circle cx={493.722} cy={304.023} r={12.853} fill="#F7FF24" />
+            <circle cx={493.722} cy={304.023} r={12.853} fill={bulbGlowColor(5, isChristmas)} />
         </g>
         <g filter="url(#r)" style={twinkleStyle(5)}>
             <circle cx={493.722} cy={304.023} r={8.336} fill="#fff" />
         </g>
         <g filter="url(#s)" style={twinkleStyle(6)}>
-            <circle cx={434.952} cy={145.783} r={12.853} fill="#F7FF24" />
+            <circle cx={434.952} cy={145.783} r={12.853} fill={bulbGlowColor(6, isChristmas)} />
         </g>
         <g filter="url(#t)" style={twinkleStyle(6)}>
             <circle cx={434.952} cy={145.783} r={8.336} fill="#fff" />

@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type {
     ContactFormData,
     IContactProps,
+    IContactQuestionnaireAnswers,
     TContactStep,
 } from "../../interfaces/HomeScreenInterface";
 import { ContactStep } from "../../interfaces/HomeScreenInterface";
@@ -15,6 +16,7 @@ import { submitContact } from "../../services/contactService";
 import Step1 from "./Contact/Step1";
 import Step2 from "./Contact/Step2";
 import Step3 from "./Contact/Step3";
+import Step4 from "./Contact/Step4";
 
 /** Custom cubic-bezier easing for a natural slide feel */
 const EASE_CUBIC = [0.25, 1, 0.5, 1] as const;
@@ -50,6 +52,7 @@ function Contact(_props: IContactProps) {
         0,
     ]);
     const [submitError, setSubmitError] = useState<string | null>(null);
+    const [questionnaire, setQuestionnaire] = useState<IContactQuestionnaireAnswers | null>(null);
     const { scrollToSection } = useScrollToSection();
 
     const navigateTo = (nextStep: TContactStep) => {
@@ -61,6 +64,22 @@ function Contact(_props: IContactProps) {
     const goToStep1 = () => navigateTo(ContactStep.Step1);
     const goToStep2 = () => navigateTo(ContactStep.Step2);
     const goToStep3 = () => navigateTo(ContactStep.Step3);
+    const goToStep4 = () => navigateTo(ContactStep.Step4);
+
+    const exitToStep1 = () => {
+        setQuestionnaire(null);
+        goToStep1();
+    };
+
+    const handleQuestionnaireComplete = (answers: IContactQuestionnaireAnswers) => {
+        setQuestionnaire(answers);
+        goToStep3();
+    };
+
+    const handleWriteAgain = () => {
+        setQuestionnaire(null);
+        goToStep2();
+    };
 
     /**
      * Resolves a service-layer error to a localized user-facing message.
@@ -68,24 +87,24 @@ function Contact(_props: IContactProps) {
      */
     const resolveErrorMessage = (err: unknown): string => {
         if (!(err instanceof Error)) {
-            return t("HomeScreen.Contact.step2.form.errors.submitError") as string;
+            return t("HomeScreen.Contact.step3.form.errors.submitError") as string;
         }
         const msg = err.message;
 
         // Map known service-layer messages to i18n keys (matching is loose on purpose
         // so that minor wording changes in the service don't break the detection).
         if (msg.includes("VITE_BASE_URL")) {
-            return t("HomeScreen.Contact.step2.form.errors.configError") as string;
+            return t("HomeScreen.Contact.step3.form.errors.configError") as string;
         }
         if (msg.startsWith("Network error") || msg.includes("Unable to reach the server")) {
-            return t("HomeScreen.Contact.step2.form.errors.networkError") as string;
+            return t("HomeScreen.Contact.step3.form.errors.networkError") as string;
         }
         if (msg.includes("Server responded with status")) {
-            return t("HomeScreen.Contact.step2.form.errors.serverError") as string;
+            return t("HomeScreen.Contact.step3.form.errors.serverError") as string;
         }
 
         // Fallback to the generic submit error
-        return t("HomeScreen.Contact.step2.form.errors.submitError") as string;
+        return t("HomeScreen.Contact.step3.form.errors.submitError") as string;
     };
 
     const handleFormSubmit = async (data: ContactFormData) => {
@@ -94,7 +113,7 @@ function Contact(_props: IContactProps) {
         try {
             await submitContact(data);
             scrollToSection("contacto");
-            goToStep3();
+            goToStep4();
         } catch (err) {
             setSubmitError(resolveErrorMessage(err));
         }
@@ -134,9 +153,9 @@ function Contact(_props: IContactProps) {
                             className="w-full h-full"
                         >
                             <Step2
-                                onBack={goToStep1}
-                                onSubmitForm={handleFormSubmit}
-                                submitError={submitError}
+                                onBack={exitToStep1}
+                                onComplete={handleQuestionnaireComplete}
+                                initialAnswers={questionnaire}
                             />
                         </motion.div>
                     )}
@@ -151,7 +170,26 @@ function Contact(_props: IContactProps) {
                             exit="exit"
                             className="w-full h-full"
                         >
-                            <Step3 onWriteAgain={goToStep2} onExit={goToStep1} />
+                            <Step3
+                                onBack={goToStep2}
+                                onSubmitForm={handleFormSubmit}
+                                submitError={submitError}
+                                initialBudget={questionnaire?.budget ?? ""}
+                            />
+                        </motion.div>
+                    )}
+
+                    {currentStep === ContactStep.Step4 && (
+                        <motion.div
+                            key="step4"
+                            custom={direction}
+                            variants={pageVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            className="w-full h-full"
+                        >
+                            <Step4 onWriteAgain={handleWriteAgain} onExit={exitToStep1} />
                         </motion.div>
                     )}
                 </AnimatePresence>

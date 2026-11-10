@@ -76,6 +76,13 @@ export interface IFluyaVitalRouletteSlice {
     prizeIcon?: IconType;
 }
 
+/**
+ * Win-probability levels selectable through `VITE_ROULETTE_PROBABILITY_LEVEL`.
+ * Each level maps, in `src/utils/rouletteUtils.ts`, to a distinct per-slice
+ * weight distribution that controls how often the wheel lands on a prize.
+ */
+export type RouletteProbabilityLevel = "low" | "medium" | "high";
+
 /** Serializable snapshot of the resolved roulette slice persisted to localStorage. */
 export interface IPersistedSpinResult {
     /** Radial centre of the winning slice, measured clockwise from 12 o'clock (degrees). */

@@ -154,10 +154,38 @@
         "button": "Tell us"
       },
       "step2": {
-        "title": "Hello! Tell us all about your idea",
-        "subtitle": "I'm interested in...",
+        "title": "Tell us about your project",
+        "progress": "Question {{current}} of {{total}}",
+        "back": "Back",
+        "previous": "Previous",
+        "next": "Next",
+        "complete": "Continue",
+        "objective": {
+          "label": "What is the main objective of your project?",
+          "placeholder": "Describe the main objective of your project",
+          "error": "The main objective is required"
+        },
+        "stage": {
+          "label": "What stage are you at?",
+          "error": "Please select a stage",
+          "options": {
+            "idea": "I only have an idea",
+            "planning": "I have a complete plan but haven't started the project yet",
+            "developing": "I've already started developing the project"
+          }
+        },
+        "timeline": {
+          "label": "What is your time window to launch?",
+          "error": "Please select a time window",
+          "options": {
+            "oneMonth": "1 month",
+            "twoToFourMonths": "2-4 months",
+            "fivePlusMonths": "+5 months"
+          }
+        },
         "budget": {
-          "subtitle": "Budget for the project (USD)",
+          "subtitle": "What is your estimated investment range?",
+          "error": "Please select an investment range",
           "options": {
             "range1": "$200 - $400",
             "range2": "$400 - $600",
@@ -165,7 +193,11 @@
             "range4": "$800 - $1000",
             "range5": "+$1000"
           }
-        },
+        }
+      },
+      "step3": {
+        "title": "Hello! Tell us all about your idea",
+        "subtitle": "I'm interested in...",
         "options": {
           "website": "Website for my company/business",
           "mobileApp": "Mobile application",
@@ -194,7 +226,7 @@
           }
         }
       },
-      "step3": {
+      "step4": {
         "title": "Thank you for contacting us!",
         "message": "We have received your message successfully. Our team will review your project details and contact you as soon as possible.",
         "buttons": {

@@ -157,11 +157,6 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                 </div>
             )}
 
-            {/* Nieve ambiente — canvas fijo a todo el viewport, detrás del contenido
-                interactivo y justo por encima de las olas (z-index 1). El efecto
-                se mantiene sutil para conservar una estética corporativa. Solo se
-                monta cuando el Modo Navidad está activo. */}
-
             {/* Resultado del giro — se abre automáticamente al terminar la animación */}
             <PrizeResultModal
                 isOpen={isModalOpen}

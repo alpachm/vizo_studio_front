@@ -115,9 +115,9 @@
   },
   "HomeScreen": {
     "Hero": {
-      "title": "Transformamos tu idea en una plataforma digital de alto impacto",
+      "title": "Construimos software y aplicaciones web a medida que aceleran tu negocio",
       "description": "En Vizo Studio creamos páginas y aplicaciones web modernas, rápidas y listas para crecer. Trabajamos mano a mano contigo en cada paso para hacer realidad tu proyecto digital sin complicaciones",
-      "cta": "Hablemos de tu idea",
+      "cta": "Cotiza tu proyecto",
       "secondaryCta": "Mira nuestros servicios"
     },
     "AboutUs": {
@@ -154,10 +154,38 @@
         "button": "Cuéntanos"
       },
       "step2": {
-        "title": "¡Hola! Cuéntanos todo acerca de tu idea",
-        "subtitle": "Estoy interesado en...",
+        "title": "Cuéntanos sobre tu proyecto",
+        "progress": "Pregunta {{current}} de {{total}}",
+        "back": "Volver",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "complete": "Continuar",
+        "objective": {
+          "label": "¿Cuál es el objetivo principal de tu proyecto?",
+          "placeholder": "Escribe el objetivo principal de tu proyecto",
+          "error": "El objetivo principal es requerido"
+        },
+        "stage": {
+          "label": "¿En qué etapa te encuentras?",
+          "error": "Por favor, selecciona una etapa",
+          "options": {
+            "idea": "Solo tengo una idea",
+            "planning": "Tengo una planificación completa pero aún no he comenzado el proyecto",
+            "developing": "Ya comencé a desarrollar el proyecto"
+          }
+        },
+        "timeline": {
+          "label": "¿Cuál es tu ventana de tiempo para lanzar?",
+          "error": "Por favor, selecciona una ventana de tiempo",
+          "options": {
+            "oneMonth": "1 mes",
+            "twoToFourMonths": "2-4 meses",
+            "fivePlusMonths": "+5 meses"
+          }
+        },
         "budget": {
-          "subtitle": "Presupuesto para el proyecto (USD)",
+          "subtitle": "¿Cuál es tu rango estimado de inversión?",
+          "error": "Por favor, selecciona un rango de inversión",
           "options": {
             "range1": "$200 - $400",
             "range2": "$400 - $600",
@@ -165,7 +193,11 @@
             "range4": "$800 - $1000",
             "range5": "+$1000"
           }
-        },
+        }
+      },
+      "step3": {
+        "title": "¡Hola! Cuéntanos todo acerca de tu idea",
+        "subtitle": "Estoy interesado en...",
         "options": {
           "website": "Sitio web para mi empresa/negocio",
           "mobileApp": "Aplicación móvil",
@@ -194,7 +226,7 @@
           }
         }
       },
-      "step3": {
+      "step4": {
         "title": "¡Gracias por contactarnos!",
         "message": "Hemos recibido tu mensaje correctamente. Nuestro equipo revisará los detalles de tu proyecto y te contactará lo antes posible.",
         "buttons": {

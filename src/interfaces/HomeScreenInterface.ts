@@ -39,11 +39,12 @@ export const ContactStep = {
   Step1: 1,
   Step2: 2,
   Step3: 3,
+  Step4: 4,
 } as const;
 
 export type TContactStep = (typeof ContactStep)[keyof typeof ContactStep];
 
-/** Data shape for a single interest option in Step 2 */
+/** Data shape for a single interest option in the Step 3 form */
 export interface IContactInterestOption {
   id: string;
   translationKey: string;
@@ -58,20 +59,42 @@ export interface IContactStep1Props {
   onNextStep?: () => void;
 }
 
-/** Props for the Contact Step 2 component */
+/** Data shape for a single answer option in the Step 2 questionnaire */
+export interface IContactQuestionnaireOption {
+  id: string;
+  labelKey: string;
+}
+
+/** Data collected by the Step 2 questionnaire (one question at a time) */
+export interface IContactQuestionnaireAnswers {
+  objective: string;
+  stage: string;
+  timeline: string;
+  budget: string;
+}
+
+/** Props for the Contact Step 2 questionnaire component */
 export interface IContactStep2Props {
+  onBack?: () => void;
+  onComplete?: (answers: IContactQuestionnaireAnswers) => void;
+  initialAnswers?: IContactQuestionnaireAnswers | null;
+}
+
+/** Props for the Contact Step 3 form component */
+export interface IContactStep3Props {
   onBack?: () => void;
   onSubmitForm?: (data: ContactFormData) => void | Promise<void>;
   submitError?: string | null;
+  initialBudget?: string;
 }
 
-/** Props for the Contact Step 3 confirmation component */
-export interface IContactStep3Props {
+/** Props for the Contact Step 4 confirmation component */
+export interface IContactStep4Props {
   onWriteAgain?: () => void;
   onExit?: () => void;
 }
 
-/** Form data shape for Step 2 contact form */
+/** Form data shape for the Step 3 contact form */
 export interface ContactFormData {
   selectedInterests: string[];
   budget: string;

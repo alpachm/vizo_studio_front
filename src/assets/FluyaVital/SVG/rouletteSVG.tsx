@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import type { IRouletteSVGProps } from "../../../interfaces/FluyaVitalInterface";
 import { ROULETTE_SLICES, SPIN_DURATION_MS, SPIN_EASING } from "../../../utils/rouletteUtils";
 import { CHRISTMAS_MODE } from "../../../config/christmasMode";
-import christmasHatPng from "../christmas-hat.png";
+import christmasHatWebp from "../christmas-hat.webp";
 import fluyaVitalLogo from "../fluyta-vital-logo.png";
 
 // ---------------------------------------------------------------------------
@@ -134,7 +134,14 @@ const bulbGlowColor = (index: number, isChristmas: boolean): string =>
     isChristmas ? CHRISTMAS_BULB_COLORS[index % CHRISTMAS_BULB_COLORS.length] : "#F7FF24";
 
 const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteSVGProps) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -40 512 598" width={512} height={558} fill="none" {...props}>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 -40 512 598"
+        width={512}
+        height={558}
+        fill="none"
+        {...props}
+    >
         <style>{`
             @keyframes bulb-twinkle {
                 0%, 100% { opacity: 1; }
@@ -376,7 +383,7 @@ const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteS
         {CHRISTMAS_MODE && (
             <g aria-hidden="true">
                 <image
-                    href={christmasHatPng}
+                    href={christmasHatWebp}
                     x={CHRISTMAS_HAT_X}
                     y={CHRISTMAS_HAT_Y}
                     width={CHRISTMAS_HAT_WIDTH}
@@ -389,7 +396,13 @@ const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteS
         )}
         <defs>
             <filter id="christmas-hat-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx={2} dy={6} stdDeviation={4} floodColor="#000000" floodOpacity={0.45} />
+                <feDropShadow
+                    dx={2}
+                    dy={6}
+                    stdDeviation={4}
+                    floodColor="#000000"
+                    floodOpacity={0.45}
+                />
             </filter>
             <filter
                 id="e"

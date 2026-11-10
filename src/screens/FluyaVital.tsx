@@ -162,7 +162,7 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                 interactivo y justo por encima de las olas (z-index 1). El efecto
                 se mantiene sutil para conservar una estética corporativa. Solo se
                 monta cuando el Modo Navidad está activo. */}
-            {isChristmas && (
+            {/* {isChristmas && (
                 <Snowfall
                     snowflakeCount={150}
                     speed={[0.6, 1.3]}
@@ -176,7 +176,7 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                         pointerEvents: "none",
                     }}
                 />
-            )}
+            )} */}
 
             {/* Resultado del giro — se abre automáticamente al terminar la animación */}
             <PrizeResultModal

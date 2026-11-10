@@ -320,7 +320,7 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                         <button
                             type="button"
                             onClick={handlePrevious}
-                            className="flex items-center justify-center gap-2 bg-transparent border border-text/20 text-text font-body text-lg font-semibold px-8 py-3 rounded-none hover:border-text/50 active:scale-95 transition-all duration-200 cursor-pointer"
+                            className="self-start flex items-center justify-center gap-2 bg-transparent border border-text/20 text-text font-body text-lg sm:text-xl font-semibold px-10 py-4 sm:px-12 sm:py-5 rounded-none hover:border-text/50 active:scale-95 transition-all duration-200 cursor-pointer"
                         >
                             <FiArrowLeft className="text-lg" />
                             {t("HomeScreen.Contact.step2.previous")}
@@ -329,7 +329,7 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                     <button
                         type="button"
                         onClick={() => void handleNext()}
-                        className="bg-primary text-white font-body text-lg sm:text-xl font-bold px-10 py-4 sm:px-12 sm:py-5 rounded-none shadow-lg hover:brightness-110 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 self-start"
+                        className="self-start bg-primary text-white font-body text-lg sm:text-xl font-bold px-10 py-4 sm:px-12 sm:py-5 rounded-none shadow-lg hover:brightness-110 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
                     >
                         {questionIndex === LAST_QUESTION_INDEX
                             ? t("HomeScreen.Contact.step2.complete")

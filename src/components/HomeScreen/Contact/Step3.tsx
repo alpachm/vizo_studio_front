@@ -18,8 +18,6 @@ const INTEREST_OPTIONS: IContactInterestOption[] = [
     { id: "customSoftware", translationKey: "HomeScreen.Contact.step3.options.customSoftware" },
 ];
 
-
-
 function Step3({ onBack, onSubmitForm, submitError, initialBudget }: IContactStep3Props) {
     const { t } = useTranslation();
 
@@ -63,8 +61,6 @@ function Step3({ onBack, onSubmitForm, submitError, initialBudget }: IContactSte
             : [...selectedInterests, id];
         setValue("selectedInterests", updated, { shouldValidate: true });
     };
-
-    
 
     const onFormSubmit = async (data: ContactFormData) => {
         await onSubmitForm?.(data);

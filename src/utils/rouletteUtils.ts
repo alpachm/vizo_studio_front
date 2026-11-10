@@ -2,7 +2,8 @@
 // rouletteUtils — Shared geometry & rotation helpers for the Fluye Vital wheel
 // ---------------------------------------------------------------------------
 import { FiCloudSnow, FiDroplet, FiTag } from "react-icons/fi";
-import type { IFluyaVitalRouletteSlice } from "../interfaces/FluyaVitalInterface";
+import type { IFluyaVitalRouletteSlice, RouletteProbabilityLevel } from "../interfaces/FluyaVitalInterface";
+import { ROULETTE_PROBABILITY_LEVEL } from "../config/rouletteProbability";
 
 /** Degrees in a single full rotation. */
 export const FULL_TURN = 360;
@@ -39,7 +40,8 @@ export const ROULETTE_SLICES: ReadonlyArray<IFluyaVitalRouletteSlice> = [
 
 /**
  * Winning odds (as a percentage) for each slice, aligned by index with
- * `ROULETTE_SLICES`. Reading clockwise from 12 o'clock:
+ * `ROULETTE_SLICES`. This is the balanced / standard ("medium") distribution
+ * used as the default and fallback. Reading clockwise from 12 o'clock:
  *
  *   0 — Premio 1 (prize)          4 — Premio 3 (prize)
  *   1 — Sigue participando        5 — Sigue participando
@@ -48,8 +50,7 @@ export const ROULETTE_SLICES: ReadonlyArray<IFluyaVitalRouletteSlice> = [
  *
  * Values are treated as relative weights and are normalized internally, so they
  * never need to sum to exactly 100 — but keeping the total near 100 makes the
- * odds easy to read and tweak. Edit these numbers any time to change the chance
- * of landing on a given slice.
+ * odds easy to read and tweak.
  */
 export const ROULETTE_SLICE_WEIGHTS: ReadonlyArray<number> = [
     5, // Premio 1 — rarest top prize
@@ -61,6 +62,60 @@ export const ROULETTE_SLICE_WEIGHTS: ReadonlyArray<number> = [
     5, // Premio 4
     5, // Sigue participando
 ];
+
+/**
+ * "Low" win-probability weights: the "Sigue participando" consolation slices
+ * dominate the wheel and the top prizes are reduced to a minimal chance.
+ * Aligned by index with `ROULETTE_SLICES` (sums to 100 for readability).
+ */
+export const ROULETTE_WEIGHTS_LOW: ReadonlyArray<number> = [
+    2, // Premio 1 — 5 recargas (baja de 5 a 2)
+    40, // Sigue participando (sube de 30 a 40)
+    5, // Premio 2 — 2x1 (baja de 10 a 5)
+    25, // Sigue participando (sube de 20 a 25)
+    8, // Premio 3 — 1 recarga (baja de 15 a 8)
+    15, // Sigue participando (sube de 10 a 15)
+    2, // Premio 4 — 1 bolsa de hielo (baja de 5 a 2)
+    3, // Sigue participando (baja de 5 a 3)
+];
+
+/**
+ * "High" win-probability weights: winning slices (recargas and special prizes)
+ * are heavily favoured so a win happens much more frequently. Aligned by index
+ * with `ROULETTE_SLICES` (sums to 100 for readability).
+ */
+export const ROULETTE_WEIGHTS_HIGH: ReadonlyArray<number> = [
+    20, // Premio 1 — 5 recargas
+    8, // Sigue participando
+    16, // Premio 2 — 2x1
+    6, // Sigue participando
+    24, // Premio 3 — 1 recarga
+    6, // Sigue participando
+    12, // Premio 4 — 1 bolsa de hielo
+    8, // Sigue participando
+];
+
+/**
+ * Maps each win-probability level to its per-slice weight array. `medium` is
+ * the balanced/default `ROULETTE_SLICE_WEIGHTS` distribution.
+ */
+export const ROULETTE_WEIGHTS_BY_LEVEL: Readonly<
+    Record<RouletteProbabilityLevel, ReadonlyArray<number>>
+> = {
+    low: ROULETTE_WEIGHTS_LOW,
+    medium: ROULETTE_SLICE_WEIGHTS,
+    high: ROULETTE_WEIGHTS_HIGH,
+};
+
+/**
+ * Resolves the per-slice weights for the requested win-probability level.
+ *
+ * @param level Win-probability level (`"low" | "medium" | "high"`).
+ * @returns Per-slice weights, aligned by index with `ROULETTE_SLICES`.
+ */
+export const getRouletteWeights = (
+    level: RouletteProbabilityLevel,
+): ReadonlyArray<number> => ROULETTE_WEIGHTS_BY_LEVEL[level];
 
 /** Returns a random integer in the inclusive range [min, max]. */
 const randomInt = (min: number, max: number): number =>
@@ -101,12 +156,13 @@ export const pickWeightedSliceIndex = (
 };
 
 /**
- * Picks a winning slice using the weighted odds. Used by `useRoulette` before
- * the target rotation is calculated, so the animation always stops on the slice
- * that was actually chosen by the probability draw.
+ * Picks a winning slice using the odds for the configured probability level
+ * (`VITE_ROULETTE_PROBABILITY_LEVEL`). Used by `useRoulette` before the target
+ * rotation is calculated, so the animation always stops on the slice that was
+ * actually chosen by the probability draw.
  */
 export const pickWeightedSlice = (): IFluyaVitalRouletteSlice =>
-    ROULETTE_SLICES[pickWeightedSliceIndex()];
+    ROULETTE_SLICES[pickWeightedSliceIndex(getRouletteWeights(ROULETTE_PROBABILITY_LEVEL))];
 
 /**
  * Calculates the absolute target rotation (degrees) that ends with the winning

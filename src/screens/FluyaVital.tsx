@@ -3,7 +3,6 @@
 // ---------------------------------------------------------------------------
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Snowfall from "react-snowfall";
 import type { IFluyaVitalProps } from "../interfaces/FluyaVitalInterface";
 import Wave1 from "../assets/FluyaVital/SVG/wave-1";
 import Wave2 from "../assets/FluyaVital/SVG/wave-2";

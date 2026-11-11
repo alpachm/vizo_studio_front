@@ -37,12 +37,21 @@
       "contact": "Contact"
     },
     "backToTop": "Back to top",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok"
+    },
     "copyright": "© 2026 Vizo Studio. All rights reserved.",
     "location": "Venezuela",
     "legal": {
       "privacy": "Privacy",
       "terms": "Terms of Service"
     }
+  },
+  "FloatingButtons": {
+    "ariaLabel": "Quick contact actions",
+    "contactWhatsApp": "Contact us on WhatsApp"
   },
   "Portfolio": {
     "title": "A bit of our work"

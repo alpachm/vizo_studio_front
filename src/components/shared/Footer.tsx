@@ -33,6 +33,7 @@ const ROUTE_TO_SECTION_ID: Record<string, string> = {
 
 const DEFAULT_EMAIL = "vizostudio.dev@gmail.com";
 const DEFAULT_WHATSAPP = "+58 4146536468";
+const WHATSAPP_URL = import.meta.env.VITE_WHATSAPP_URL;
 
 const SOCIAL_LINKS: FooterSocialLink[] = [
     {
@@ -112,7 +113,7 @@ function Footer({
 
                             {/* WhatsApp */}
                             <a
-                                href={`https://wa.link/1jvyz3`}
+                                href={WHATSAPP_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2.5 font-body text-base sm:text-lg text-text-muted hover:text-primary transition-colors duration-200 w-fit"

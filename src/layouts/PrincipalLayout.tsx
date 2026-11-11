@@ -4,6 +4,7 @@
 import { Outlet, useLocation } from "@tanstack/react-router";
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
+import FloatingButtons from "../components/shared/FloatingButtons";
 
 /**
  * Routes that must render as isolated/standalone experiences without the
@@ -15,18 +16,25 @@ function PrincipalLayout() {
     const { pathname } = useLocation();
 
     // Standalone screens render directly, skipping the Header/Footer shell.
-    if (STANDALONE_ROUTES.has(pathname)) {
-        return <Outlet />;
-    }
+    const isStandalone = STANDALONE_ROUTES.has(pathname);
 
     return (
-        <div className="min-h-screen flex flex-col bg-bg text-text transition-colors duration-300">
-            <Header />
-            <main className="flex-1">
+        <>
+            {isStandalone ? (
                 <Outlet />
-            </main>
-            <Footer />
-        </div>
+            ) : (
+                <div className="min-h-screen flex flex-col bg-bg text-text transition-colors duration-300">
+                    <Header />
+                    <main className="flex-1">
+                        <Outlet />
+                    </main>
+                    <Footer />
+                </div>
+            )}
+
+            {/* Global floating action buttons — visible on every route */}
+            <FloatingButtons />
+        </>
     );
 }
 

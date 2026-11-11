@@ -9,6 +9,10 @@ export default {
                 secondary: "var(--color-secondary)",
                 text: "var(--color-text)",
                 "text-muted": "var(--color-text-muted)",
+                whatsapp: {
+                    DEFAULT: "#25D366",
+                    dark: "#20BD5A",
+                },
             },
             fontFamily: {
                 title: ["var(--font-title-val)", "sans-serif"],

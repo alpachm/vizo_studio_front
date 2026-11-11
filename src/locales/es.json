@@ -49,6 +49,10 @@
       "terms": "Términos de servicio"
     }
   },
+  "FloatingButtons": {
+    "ariaLabel": "Acciones de contacto rápido",
+    "contactWhatsApp": "Contáctanos por WhatsApp"
+  },
   "Portfolio": {
     "title": "Un poco de nuestro trabajo"
   },

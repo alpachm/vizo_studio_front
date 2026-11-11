@@ -5,9 +5,13 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { FiMail, FiArrowUp } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
-import type { FooterProps, FooterNavItem } from "../../interfaces/FooterInterface";
+import type {
+    FooterProps,
+    FooterNavItem,
+    FooterSocialLink,
+} from "../../interfaces/FooterInterface";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -29,6 +33,24 @@ const ROUTE_TO_SECTION_ID: Record<string, string> = {
 
 const DEFAULT_EMAIL = "vizostudio.dev@gmail.com";
 const DEFAULT_WHATSAPP = "+58 4146536468";
+
+const SOCIAL_LINKS: FooterSocialLink[] = [
+    {
+        labelKey: "Footer.social.facebook",
+        href: "https://www.facebook.com/profile.php?id=61594388864816",
+        icon: FaFacebookF,
+    },
+    {
+        labelKey: "Footer.social.instagram",
+        href: "https://www.instagram.com/vizostudio.dev/",
+        icon: FaInstagram,
+    },
+    {
+        labelKey: "Footer.social.tiktok",
+        href: "https://www.tiktok.com/@vizostudio.dev",
+        icon: FaTiktok,
+    },
+];
 
 // ---------------------------------------------------------------------------
 // Component
@@ -98,6 +120,22 @@ function Footer({
                                 <FaWhatsapp className="w-5 h-5 shrink-0" aria-hidden="true" />
                                 {whatsapp}
                             </a>
+                        </div>
+
+                        {/* Social media links */}
+                        <div className="flex items-center gap-5 mt-2">
+                            {SOCIAL_LINKS.map(({ href, labelKey, icon: Icon }) => (
+                                <a
+                                    key={href}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={t(labelKey)}
+                                    className="text-text-muted hover:text-primary transition-colors duration-200"
+                                >
+                                    <Icon className="w-6 h-6 shrink-0" aria-hidden="true" />
+                                </a>
+                            ))}
                         </div>
                     </div>
 

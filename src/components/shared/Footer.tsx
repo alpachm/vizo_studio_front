@@ -31,7 +31,7 @@ const ROUTE_TO_SECTION_ID: Record<string, string> = {
     "/contact": "contacto",
 };
 
-const DEFAULT_EMAIL = "vizostudio.dev@gmail.com";
+const DEFAULT_EMAIL = import.meta.env.VITE_EMAIL;
 const DEFAULT_WHATSAPP = "+58 4146536468";
 const WHATSAPP_URL = import.meta.env.VITE_WHATSAPP_URL;
 

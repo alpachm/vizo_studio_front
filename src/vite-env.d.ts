@@ -18,4 +18,5 @@ interface ImportMetaEnv {
     readonly VITE_ROULETTE_PROBABILITY_LEVEL: string;
     readonly VITE_GA_MEASUREMENT_ID: string;
     readonly VITE_WHATSAPP_URL: string;
+    readonly VITE_EMAIL: string;
 }

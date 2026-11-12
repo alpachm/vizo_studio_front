@@ -157,6 +157,29 @@
         }
       }
     },
+    "Methodology": {
+      "eyebrow": "Our Methodology",
+      "title": "A clear process to turn your idea into a real product.",
+      "intro": "Our methodology blends analysis, iteration and continuous deployment so every deliverable adds real value to your business, with total visibility and no surprises.",
+      "steps": {
+        "discovery": {
+          "title": "Architecture",
+          "description": "We analyze your requirements and define the technical architecture of your project: scope, stack, deliverables and clear priorities before writing a single line of code."
+        },
+        "development": {
+          "title": "Iterative Development",
+          "description": "We work in short sprints with continuous deliveries and constant feedback, so you can validate real progress and we can adjust course with total agility."
+        },
+        "qa": {
+          "title": "QA & Deployment",
+          "description": "We put every build through rigorous performance, security and usability testing, then deploy to production on the cloud."
+        },
+        "support": {
+          "title": "Support & Scaling",
+          "description": "We stay by your side after launch with ongoing maintenance, monitoring and progressive improvements so your product grows and evolves with you."
+        }
+      }
+    },
     "Contact": {
       "step1": {
         "title": "Do you have an idea?",

@@ -157,6 +157,29 @@
         }
       }
     },
+    "Methodology": {
+      "eyebrow": "Nuestra Metodología",
+      "title": "Un proceso claro para convertir tu idea en un producto real.",
+      "intro": "Nuestra metodología combina análisis, iteración y despliegue continuo para que cada entrega sume valor real a tu negocio, con total visibilidad y sin sorpresas.",
+      "steps": {
+        "discovery": {
+          "title": "Arquitectura",
+          "description": "Analizamos tus requerimientos y definimos la arquitectura técnica del proyecto: alcance, stack, entregables y prioridades claras antes de escribir una sola línea de código."
+        },
+        "development": {
+          "title": "Desarrollo Iterativo",
+          "description": "Trabajamos en sprints cortos con entregas continuas y feedback constante, para que valides avances reales y ajustemos el rumbo con total agilidad."
+        },
+        "qa": {
+          "title": "QA & Despliegue",
+          "description": "Sometemos cada build a pruebas rigurosas de rendimiento, seguridad y usabilidad, y desplegamos a producción en la nube."
+        },
+        "support": {
+          "title": "Soporte y Escalamiento",
+          "description": "Te acompañamos después del lanzamiento con mantenimiento continuo, monitoreo y mejoras progresivas para que tu producto crezca y evolucione contigo."
+        }
+      }
+    },
     "Contact": {
       "step1": {
         "title": "¿Tienes alguna idea?",

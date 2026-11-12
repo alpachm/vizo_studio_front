@@ -125,3 +125,16 @@ export interface BudgetOption {
 /** Props for the Portfolio section component */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IPortfolioProps {}
+
+/** Props for the Methodology section component */
+export interface IMethodologyProps {
+  className?: string;
+}
+
+/** Data shape for a single methodology process step */
+export interface IMethodologyStep {
+  id: string;
+  number: string;
+  titleKey: string;
+  descriptionKey: string;
+}

@@ -23,7 +23,7 @@ function Portfolio(_props: IPortfolioProps) {
         ));
 
     return (
-        <section className="w-full bg-white py-16 sm:py-20">
+        <section id="portfolio" className="w-full bg-white py-16 sm:py-20">
             {/* Header */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
                 <h2 className="font-title text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 text-right">

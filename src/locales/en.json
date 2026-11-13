@@ -17,15 +17,16 @@
   "Header": {
     "nav": {
       "blog": "Blog",
-      "services": "Services",
-      "aboutUs": "About us",
+      "services": "What we do",
+      "aboutUs": "The studio",
+      "projects": "Projects",
       "openMenu": "Open navigation menu",
       "closeMenu": "Close navigation menu",
       "desktopAriaLabel": "Main navigation",
       "mobileAriaLabel": "Mobile navigation"
     },
     "buttons": {
-      "contact": "Let's talk"
+      "contact": "Let's talk about your idea"
     }
   },
   "Footer": {

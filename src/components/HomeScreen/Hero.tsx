@@ -49,7 +49,7 @@ const WORD_KEYS = [
  *
  *   geometric display sans → high-fashion serif italic → modern display sans
  *   → editorial serif italic → humanist sans → technical mono → classic serif
- *   bold → geometric display extrabold → calligraphy script (final landing).
+ *   bold → geometric display extrabold → high-contrast editorial serif italic (final landing).
  *
  * Every weight/slant used here is actually shipped by the font imports, and
  * every word is tinted with `text-primary` at render time.
@@ -63,7 +63,7 @@ const WORD_VARIANTS = [
     "font-mono font-bold tracking-tight", // impeccable — technical mono
     "font-playfair-display font-bold", // attractive — classic serif bold
     "font-syne font-extrabold", // authentic — geometric display extrabold
-    "font-great-vibes tracking-normal leading-none text-[1.3em]", // professional (final) — calligraphy script
+    "font-playfair-display italic text-[1.12em]", // professional (final) — high-contrast editorial serif italic
 ] as const;
 
 const LAST_WORD_INDEX = WORD_KEYS.length - 1;

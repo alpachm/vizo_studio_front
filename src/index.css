@@ -16,7 +16,7 @@
 :root,
 [data-theme="dark"] {
     --color-bg: #000000;
-    --color-primary: #d97706;
+    --color-primary: #f3661d;
     --color-secondary: #f4a261;
     --color-text: #f3f4f6;
     --color-text-muted: #8e8e93;
@@ -24,7 +24,7 @@
 
 [data-theme="light"] {
     --color-bg: #fafafa;
-    --color-primary: #e63946;
+    --color-primary: #f3661d;
     --color-secondary: #d97706;
     --color-text: #111827;
     --color-text-muted: #4b5563;

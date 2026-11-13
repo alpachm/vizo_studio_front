@@ -127,10 +127,20 @@
   },
   "HomeScreen": {
     "Hero": {
-      "title": "Construimos software y aplicaciones web a medida que aceleran tu negocio",
-      "description": "En Vizo Studio creamos páginas y aplicaciones web modernas, rápidas y listas para crecer. Trabajamos mano a mano contigo en cada paso para hacer realidad tu proyecto digital sin complicaciones",
-      "cta": "Cotiza tu proyecto",
-      "secondaryCta": "Mira nuestros servicios"
+      "headlinePrefix": "¿Necesitas un sitio web",
+      "headlineSuffix": "?",
+      "scrollPrompt": "Haz scroll para descubrir",
+      "words": {
+        "modern": "moderno",
+        "aesthetic": "estético",
+        "profitable": "rentable",
+        "selling": "vendedor",
+        "competitive": "competitivo",
+        "impeccable": "impecable",
+        "attractive": "atractivo",
+        "authentic": "auténtico",
+        "professional": "profesional"
+      }
     },
     "AboutUs": {
       "title": "¿Quiénes somos?",

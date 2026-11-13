@@ -12,8 +12,8 @@ function BrandLogo({
 }: IBrandLogoProps) {
     const { t } = useTranslation();
 
-    // Brand orange by default; switches to pure white for monochrome variants.
-    const accentClass = monochrome ? "text-white" : "text-[#F96316]";
+    // Brand primary by default; switches to pure white for monochrome variants.
+    const accentClass = monochrome ? "text-white" : "text-[var(--color-primary)]";
 
     return (
         <span className={`group inline-flex items-baseline gap-2 ${className}`}>

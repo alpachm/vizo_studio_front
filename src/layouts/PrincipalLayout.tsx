@@ -5,6 +5,7 @@ import { Outlet, useLocation } from "@tanstack/react-router";
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
 import FloatingButtons from "../components/shared/FloatingButtons";
+import { HeroVisibilityProvider } from "../context/HeroVisibilityContext";
 
 /**
  * Routes that must render as isolated/standalone experiences without the
@@ -19,7 +20,7 @@ function PrincipalLayout() {
     const isStandalone = STANDALONE_ROUTES.has(pathname);
 
     return (
-        <>
+        <HeroVisibilityProvider>
             {isStandalone ? (
                 <Outlet />
             ) : (
@@ -34,7 +35,7 @@ function PrincipalLayout() {
 
             {/* Global floating action buttons — visible on every route */}
             <FloatingButtons />
-        </>
+        </HeroVisibilityProvider>
     );
 }
 

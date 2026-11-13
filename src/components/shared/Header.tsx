@@ -9,6 +9,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import BrandLogo from "./BrandLogo";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
+import { useHeroVisibility } from "../../context/HeroVisibilityContext";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------
@@ -43,6 +44,7 @@ function Header() {
     const [isOverlapping, setIsOverlapping] = useState(false);
     const headerRef = useRef<HTMLElement>(null);
     const shouldReduceMotion = useReducedMotion();
+    const { isHeroInView } = useHeroVisibility();
 
     useEffect(() => {
         let rafId: number | null = null;
@@ -101,7 +103,7 @@ function Header() {
         <header
             ref={headerRef}
             className={`fixed top-0 left-0 right-0 z-50 w-full ease-[cubic-bezier(0.22,1,0.36,1)] transition-[opacity,transform] duration-300 ${
-                isOverlapping
+                isOverlapping || isHeroInView
                     ? "-translate-y-full opacity-0 pointer-events-none"
                     : "translate-y-0 opacity-100"
             }`}
@@ -146,11 +148,11 @@ function Header() {
                             <button
                                 type="button"
                                 onClick={(e) => handleNavClick("/contact", e)}
-                                className="group hidden items-center gap-2 rounded-full border border-white/30 px-5 py-2.5 font-body text-sm font-medium text-white transition-[border-color,box-shadow] duration-300 hover:border-[#F96316]/70 hover:shadow-[0_0_20px_rgba(249,99,22,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F96316]/50 md:inline-flex"
+                                className="group hidden items-center gap-2 rounded-full border border-white/30 px-5 py-2.5 font-body text-sm font-medium text-white transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)] md:inline-flex"
                             >
                                 {t("Header.buttons.contact")}
                                 <FiArrowUpRight
-                                    className="h-4 w-4 shrink-0 text-[#F96316] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                    className="h-4 w-4 shrink-0 text-primary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                                     aria-hidden="true"
                                 />
                             </button>
@@ -271,11 +273,11 @@ function Header() {
                                     <button
                                         type="button"
                                         onClick={(e) => handleNavClick("/contact", e)}
-                                        className="group inline-flex w-full items-center justify-between rounded-full border border-white/30 px-6 py-4 font-body text-base font-medium text-white transition-[border-color,box-shadow] duration-300 hover:border-[#F96316]/70 hover:shadow-[0_0_20px_rgba(249,99,22,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F96316]/50"
+                                        className="group inline-flex w-full items-center justify-between rounded-full border border-white/30 px-6 py-4 font-body text-base font-medium text-white transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)]"
                                     >
                                         {t("Header.buttons.contact")}
                                         <FiArrowUpRight
-                                            className="h-5 w-5 shrink-0 text-[#F96316] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                            className="h-5 w-5 shrink-0 text-primary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                                             aria-hidden="true"
                                         />
                                     </button>

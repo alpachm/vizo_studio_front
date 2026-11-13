@@ -127,10 +127,20 @@
   },
   "HomeScreen": {
     "Hero": {
-      "title": "We build custom software and web applications that accelerate your business",
-      "description": "At Vizo Studio, we create modern, fast, and scalable websites and web applications. We work closely with you every step of the way to bring your digital project to life without any complications",
-      "cta": "Get a quote",
-      "secondaryCta": "View our services"
+      "headlinePrefix": "Need a website that's",
+      "headlineSuffix": "?",
+      "scrollPrompt": "Scroll to discover",
+      "words": {
+        "modern": "modern",
+        "aesthetic": "aesthetic",
+        "profitable": "profitable",
+        "selling": "persuasive",
+        "competitive": "competitive",
+        "impeccable": "impeccable",
+        "attractive": "attractive",
+        "authentic": "authentic",
+        "professional": "professional"
+      }
     },
     "AboutUs": {
       "title": "Who we are?",

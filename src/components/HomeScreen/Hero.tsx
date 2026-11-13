@@ -1,105 +1,296 @@
 // ---------------------------------------------------------------------------
-// Hero — Main hero section for the Home screen
+// Hero — Editorial typewriter hero with a rolling accent word & terminal cursor
 // ---------------------------------------------------------------------------
-import { useRef } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { FiArrowDown } from "react-icons/fi";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
-import type { IHeroProps } from "../../interfaces/HomeScreenInterface";
-import { BG_VIDEOS } from "../../utils";
+import { useTypewriter } from "../../hooks/useTypewriter";
+import { useHeroVisibility } from "../../context/HeroVisibilityContext";
 
-function Hero(_props: IHeroProps) {
+/** Editorial exponential ease-out curve used for reveals. */
+const EASE_OUT = [0.22, 1, 0.36, 1] as const;
+
+/** Delay (ms) before the typewriter starts typing. */
+const TYPEWRITER_START_DELAY_MS = 300;
+
+/** Interval (ms) between each typed character. */
+const TYPEWRITER_SPEED_MS = 55;
+
+/** Pause (ms) on the freshly typed accent word before the counter rolls. */
+const ROLLING_HOLD_MS = 400;
+
+/** Interval (ms) between each rolling-word swap. */
+const ROLLING_STEP_MS = 500;
+
+/**
+ * Ordered i18n keys of the rolling accent words. The dynamic slot cycles
+ * through these in order and settles permanently on the final one.
+ */
+const WORD_KEYS = [
+    "modern",
+    "aesthetic",
+    "profitable",
+    "selling",
+    "competitive",
+    "impeccable",
+    "attractive",
+    "authentic",
+    "professional",
+] as const;
+
+/**
+ * Per-position typography variant for each rolling word (must stay in sync
+ * with `WORD_KEYS`). Each entry pairs a distinct Google Font (loaded via
+ * `<link>` in `index.html` and mapped to a `font-*` utility in
+ * `tailwind.config.js`) with its own weight, slant and tracking, so that
+ * consecutive words read as genuinely different personalities:
+ *
+ *   geometric display sans → high-fashion serif italic → modern display sans
+ *   → editorial serif italic → humanist sans → technical mono → classic serif
+ *   bold → geometric display extrabold → high-contrast editorial serif italic (final landing).
+ *
+ * Every weight/slant used here is actually shipped by the font imports, and
+ * every word is tinted with `text-primary` at render time.
+ */
+const WORD_VARIANTS = [
+    "font-space-grotesk font-bold tracking-tight", // modern — geometric display sans
+    "font-playfair-display italic tracking-wide", // aesthetic — high-fashion serif italic
+    "font-syne font-bold tracking-tight", // profitable — modern display sans
+    "font-instrument-serif italic", // selling — editorial serif italic
+    "font-plus-jakarta-sans font-semibold tracking-tight", // competitive — humanist sans
+    "font-mono font-bold tracking-tight", // impeccable — technical mono
+    "font-playfair-display font-bold", // attractive — classic serif bold
+    "font-syne font-extrabold", // authentic — geometric display extrabold
+    "font-playfair-display italic text-[1.12em]", // professional (final) — high-contrast editorial serif italic
+] as const;
+
+const LAST_WORD_INDEX = WORD_KEYS.length - 1;
+
+function Hero() {
     const { t } = useTranslation();
     const { scrollToSection } = useScrollToSection();
-    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const shouldReduceMotion = useReducedMotion() ?? false;
+    const sectionRef = useRef<HTMLElement>(null);
+    const { setIsHeroInView } = useHeroVisibility();
 
-    const handleLoadedData = () => {
-        if (videoRef.current) {
-            videoRef.current.currentTime = 2;
-            videoRef.current.play().catch(() => {
-                // Autoplay blocked by browser — silently ignore
-            });
+    const prefix = t("HomeScreen.Hero.headlinePrefix");
+    const suffix = t("HomeScreen.Hero.headlineSuffix");
+
+    const words = useMemo(() => WORD_KEYS.map((key) => t(`HomeScreen.Hero.words.${key}`)), [t]);
+
+    // The typewriter reveals the static prefix first, then the initial accent
+    // word, which doubles as the first occupant of the rolling slot.
+    const typewriterLines = useMemo(() => [prefix, words[0]], [prefix, words]);
+
+    const {
+        displayedLines,
+        activeLineIndex,
+        isComplete: isTypingComplete,
+    } = useTypewriter(typewriterLines, TYPEWRITER_START_DELAY_MS, TYPEWRITER_SPEED_MS);
+
+    // Index of the currently-visible rolling word. Once typing finishes the
+    // counter advances one step at a time until it lands on the final word.
+    const [wordIndex, setWordIndex] = useState(0);
+
+    // Reduced motion skips the sequence and settles straight on the last word.
+    const effectiveWordIndex = shouldReduceMotion ? LAST_WORD_INDEX : wordIndex;
+
+    // Restart the sequence from scratch whenever the language (and therefore
+    // the word list) changes. Uses React's documented "adjust state during
+    // render" pattern (like `useTypewriter`) instead of an effect so the reset
+    // never triggers a cascading render.
+    const wordsSignature = words.join("\u0000");
+    const [prevWordsSignature, setPrevWordsSignature] = useState(wordsSignature);
+    if (prevWordsSignature !== wordsSignature) {
+        setPrevWordsSignature(wordsSignature);
+        setWordIndex(0);
+    }
+
+    // Schedule the rolling counter once the typewriter finishes typing.
+    useEffect(() => {
+        if (!isTypingComplete || shouldReduceMotion) return;
+
+        const timers: number[] = [];
+        for (let index = 1; index <= LAST_WORD_INDEX; index += 1) {
+            const delay = ROLLING_HOLD_MS + (index - 1) * ROLLING_STEP_MS;
+            timers.push(window.setTimeout(() => setWordIndex(index), delay));
         }
-    };
 
-    const handleTimeUpdate = () => {
-        if (videoRef.current && videoRef.current.currentTime >= 12) {
-            videoRef.current.currentTime = 2;
-        }
-    };
+        return () => {
+            timers.forEach((id) => window.clearTimeout(id));
+        };
+    }, [isTypingComplete, shouldReduceMotion]);
 
-    const handleScrollToContact = () => {
-        const contactSection = document.getElementById("contacto");
-        if (!contactSection) return;
+    const isSettled = isTypingComplete && effectiveWordIndex === LAST_WORD_INDEX;
+    const currentWord = words[effectiveWordIndex];
+    const wordVariant = WORD_VARIANTS[effectiveWordIndex];
 
-        // Calculate absolute document offset by walking up offsetParents.
-        // This is immune to viewport shifts (e.g. mobile address bar) that
-        // can skew getBoundingClientRect during long smooth scrolls.
-        let targetTop = 0;
-        let currentElement: HTMLElement | null = contactSection;
+    // Blinking block caret shown on whichever line is currently being typed.
+    const caret = (
+        <motion.span
+            aria-hidden="true"
+            animate={shouldReduceMotion ? undefined : { opacity: [1, 1, 0, 0] }}
+            transition={{
+                duration: 1.1,
+                times: [0, 0.5, 0.5, 1],
+                repeat: shouldReduceMotion ? 0 : Infinity,
+            }}
+            className="ml-1.5 inline-block h-[0.9em] w-[0.08em] bg-current align-baseline"
+        />
+    );
 
-        while (currentElement) {
-            targetTop += currentElement.offsetTop;
-            currentElement = currentElement.offsetParent as HTMLElement | null;
-        }
+    // Report visibility upward so the global Header & FloatingButtons can step
+    // aside while the hero occupies the viewport. A synchronous first evaluation
+    // (inside useLayoutEffect, before paint) prevents a one-frame flash on load.
+    useLayoutEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
 
-        window.scrollTo({
-            top: targetTop,
-            behavior: "smooth",
-        });
+        const applyVisibility = (isInView: boolean) => setIsHeroInView(isInView);
 
-        // Fallback correction: on mobile, dynamic browser chrome (address bar)
-        // can shift the viewport mid-scroll and cause the animation to stop
-        // short. After the smooth scroll completes (~600 ms), snap to the
-        // exact position so the Header's IntersectionObserver fires reliably.
-        setTimeout(() => {
-            const finalTop = contactSection.getBoundingClientRect().top + window.scrollY;
-            if (Math.abs(window.scrollY - finalTop) > 2) {
-                window.scrollTo({ top: finalTop, behavior: "smooth" });
-            }
-        }, 700);
-    };
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const rect = section.getBoundingClientRect();
+        applyVisibility(rect.bottom > 0 && rect.top < viewportHeight);
+
+        const observer = new IntersectionObserver(
+            ([entry]) => applyVisibility(entry.isIntersecting),
+            { threshold: 0 },
+        );
+        observer.observe(section);
+
+        return () => {
+            observer.disconnect();
+            setIsHeroInView(false);
+        };
+    }, [setIsHeroInView]);
 
     return (
-        <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden text-center pt-20 sm:pt-24 pb-12">
-            {/* Background Video */}
-            <video
-                ref={videoRef}
-                src={BG_VIDEOS.hero_bg}
-                autoPlay
-                muted
-                playsInline
-                onLoadedData={handleLoadedData}
-                onTimeUpdate={handleTimeUpdate}
-                className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
-            />
+        <section
+            ref={sectionRef}
+            id="hero"
+            className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black"
+        >
+            {/* Central message */}
+            <h1 className="relative z-10 text-center font-mono font-bold leading-[1.1] tracking-tight text-[clamp(1.25rem,6vw,6.5rem)]">
+                {/* Static prefix — line 1 */}
+                <span className="block whitespace-nowrap text-white">
+                    {displayedLines[0]}
+                    {!isTypingComplete && activeLineIndex === 0 && caret}
+                </span>
 
-            {/* 40% Black Overlay for Text Contrast */}
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-black/40" />
+                {/* Rolling accent word + deferred `?` + terminal cursor — line 2 */}
+                <span className="block whitespace-nowrap text-white">
+                    <span className="relative inline-grid whitespace-nowrap align-baseline text-center">
+                        {/* Invisible sizers reserve the widest word + `?` + caret
+                            so the trailing group never shifts horizontally. */}
+                        {words.map((word, index) => (
+                            <span
+                                key={`sizer-${index}`}
+                                aria-hidden="true"
+                                className="invisible col-start-1 row-start-1 flex items-baseline whitespace-nowrap"
+                            >
+                                <span className={WORD_VARIANTS[index]}>{word}</span>
+                                {suffix}
+                                <span
+                                    aria-hidden="true"
+                                    className="ml-1.5 inline-block w-[0.08em]"
+                                />
+                            </span>
+                        ))}
 
-            {/* Hero Content Layer */}
-            <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                <h1 className="font-title text-4xl font-bold tracking-tight text-text sm:text-6xl lg:text-7xl">
-                    {t("HomeScreen.Hero.title")}
-                </h1>
-                <p className="mx-auto mt-6 max-w-3xl font-body text-lg font-normal text-text-muted sm:text-xl">
-                    {t("HomeScreen.Hero.description")}
-                </p>
-                <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6">
-                    <button
-                        type="button"
-                        onClick={handleScrollToContact}
-                        className="inline-flex cursor-pointer items-center justify-center bg-primary px-8 py-4 font-body text-base font-semibold text-white shadow-lg transition-all duration-200 hover:opacity-90 active:scale-95 w-[250px] h-[60px]"
+                        {/* Word + `?` + caret flow inline (flex ignores inter-element
+                            whitespace) so the `?` hugs the final word — no gap. */}
+                        <span className="col-start-1 row-start-1 flex items-baseline justify-center whitespace-nowrap">
+                            {isTypingComplete ? (
+                                <AnimatePresence initial={false} mode="popLayout">
+                                    <motion.span
+                                        key={currentWord}
+                                        className={`whitespace-nowrap ${wordVariant} text-primary`}
+                                        initial={{ opacity: 0.35, y: "100%" }}
+                                        animate={{ opacity: 1, y: "0%" }}
+                                        exit={{ opacity: 0, y: "-100%" }}
+                                        transition={{
+                                            duration: shouldReduceMotion ? 0 : 0.3,
+                                            ease: EASE_OUT,
+                                        }}
+                                    >
+                                        {currentWord}
+                                    </motion.span>
+                                </AnimatePresence>
+                            ) : (
+                                <span className={`whitespace-nowrap ${WORD_VARIANTS[0]} text-primary`}>
+                                    {displayedLines[1]}
+                                    {activeLineIndex === 1 && caret}
+                                </span>
+                            )}
+
+                            {/* Closing `?` — hugs the final word; hidden until it lands. */}
+                            <motion.span
+                                aria-hidden={!isSettled}
+                                initial={false}
+                                animate={
+                                    shouldReduceMotion
+                                        ? undefined
+                                        : { opacity: isSettled ? 1 : 0 }
+                                }
+                                transition={{
+                                    duration: shouldReduceMotion ? 0 : 0.3,
+                                    ease: EASE_OUT,
+                                }}
+                                className="inline-block text-white"
+                            >
+                                {suffix}
+                            </motion.span>
+
+                            {/* Terminal caret — blinks like an active prompt once settled. */}
+                            <span
+                                aria-hidden="true"
+                                className={`inline-block transition-opacity ${
+                                    shouldReduceMotion ? "duration-0" : "duration-300"
+                                } ${isSettled ? "opacity-100" : "opacity-0"}`}
+                            >
+                                {caret}
+                            </span>
+                        </span>
+                    </span>
+                </span>
+            </h1>
+
+            {/* Scroll indicator — hidden while the typewriter & rolling counter
+                are running; fades in once the final word lands on "profesional?". */}
+            <div
+                className={`absolute bottom-8 left-1/2 z-10 -translate-x-1/2 transition-opacity sm:bottom-10 ${
+                    shouldReduceMotion ? "duration-0" : "duration-700"
+                } ${
+                    isSettled
+                        ? "pointer-events-auto opacity-100"
+                        : "pointer-events-none opacity-0"
+                }`}
+            >
+                <button
+                    type="button"
+                    onClick={() => scrollToSection("services")}
+                    aria-label={t("HomeScreen.Hero.scrollPrompt")}
+                    className="group flex cursor-pointer flex-col items-center gap-2 text-neutral-500 transition-colors duration-200 hover:text-neutral-300 focus-visible:text-neutral-300 focus-visible:outline-none"
+                >
+                    <span className="text-xs font-medium uppercase tracking-widest">
+                        {t("HomeScreen.Hero.scrollPrompt")}
+                    </span>
+                    <motion.span
+                        aria-hidden="true"
+                        animate={shouldReduceMotion ? undefined : { y: [0, 6, 0] }}
+                        transition={{
+                            duration: 1.6,
+                            repeat: shouldReduceMotion ? 0 : Infinity,
+                            ease: "easeInOut",
+                        }}
+                        className="text-xl leading-none"
                     >
-                        {t("HomeScreen.Hero.cta")}
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => scrollToSection("services")}
-                        className="inline-flex cursor-pointer items-center justify-center border border-text-muted bg-transparent px-8 py-4 font-body text-base font-semibold text-text transition-all duration-200 hover:border-text hover:text-white active:scale-95 w-[250px] h-[60px]"
-                    >
-                        {t("HomeScreen.Hero.secondaryCta")}
-                    </button>
-                </div>
+                        <FiArrowDown />
+                    </motion.span>
+                </button>
             </div>
         </section>
     );

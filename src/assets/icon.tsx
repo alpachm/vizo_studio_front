@@ -2,7 +2,7 @@ import type { SVGProps } from "react";
 
 /**
  * Vizo Studio brand mark (`>_` terminal lockup). Uses `currentColor` so the
- * mark inherits the surrounding text colour — pair with a `text-[#F96316]`
+ * mark inherits the surrounding text colour — pair with a `text-primary`
  * ancestor to render it in the vibrant brand orange.
  *
  * `viewBox="0 0 117 87"` mirrors the 117px × 87px source raster, and

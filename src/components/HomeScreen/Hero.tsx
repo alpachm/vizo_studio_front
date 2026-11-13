@@ -17,8 +17,8 @@ const TYPEWRITER_START_DELAY_MS = 300;
 /** Interval (ms) between each typed character. */
 const TYPEWRITER_SPEED_MS = 55;
 
-/** Per-line color treatment: line 0 white, line 1 brand orange (#F96316). */
-const LINE_CLASS_NAMES = ["text-white", "text-[#F96316]"] as const;
+/** Per-line color treatment: line 0 white, line 1 brand primary (--color-primary). */
+const LINE_CLASS_NAMES = ["text-white", "text-primary"] as const;
 
 function Hero() {
     const { t } = useTranslation();
@@ -27,10 +27,7 @@ function Hero() {
 
     // Two-line display heading — source of truth lives in i18n.
     const headingLines = useMemo(
-        () => [
-            t("HomeScreen.Hero.headingLine1"),
-            t("HomeScreen.Hero.headingLine2"),
-        ],
+        () => [t("HomeScreen.Hero.headingLine1"), t("HomeScreen.Hero.headingLine2")],
         [t],
     );
 
@@ -62,7 +59,7 @@ function Hero() {
                         repeat: shouldReduceMotion ? 0 : Infinity,
                         ease: "easeInOut",
                     }}
-                    className="h-[380px] w-[380px] rounded-full bg-[#F96316]/15 blur-[120px] will-change-transform sm:h-[540px] sm:w-[540px]"
+                    className="h-[380px] w-[380px] rounded-full bg-[color-mix(in_srgb,var(--color-primary)_15%,transparent)] blur-[120px] will-change-transform sm:h-[540px] sm:w-[540px]"
                 />
             </div>
 
@@ -77,11 +74,7 @@ function Hero() {
                         {index === activeLineIndex && (
                             <motion.span
                                 aria-hidden="true"
-                                animate={
-                                    shouldReduceMotion
-                                        ? undefined
-                                        : { opacity: [1, 1, 0, 0] }
-                                }
+                                animate={shouldReduceMotion ? undefined : { opacity: [1, 1, 0, 0] }}
                                 transition={{
                                     duration: 1.1,
                                     times: [0, 0.5, 0.5, 1],
@@ -118,11 +111,7 @@ function Hero() {
                         </span>
                         <motion.span
                             aria-hidden="true"
-                            animate={
-                                shouldReduceMotion
-                                    ? undefined
-                                    : { y: [0, 6, 0] }
-                            }
+                            animate={shouldReduceMotion ? undefined : { y: [0, 6, 0] }}
                             transition={{
                                 duration: 1.6,
                                 repeat: shouldReduceMotion ? 0 : Infinity,

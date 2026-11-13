@@ -182,7 +182,7 @@ function Hero() {
 
                 {/* Rolling accent word + deferred `?` + terminal cursor — line 2 */}
                 <span className="block whitespace-nowrap text-white">
-                    <span className="relative inline-grid whitespace-nowrap align-baseline text-left">
+                    <span className="relative inline-grid whitespace-nowrap align-baseline text-center">
                         {/* Invisible sizers reserve the widest word + `?` + caret
                             so the trailing group never shifts horizontally. */}
                         {words.map((word, index) => (
@@ -202,7 +202,7 @@ function Hero() {
 
                         {/* Word + `?` + caret flow inline (flex ignores inter-element
                             whitespace) so the `?` hugs the final word — no gap. */}
-                        <span className="col-start-1 row-start-1 flex items-baseline whitespace-nowrap">
+                        <span className="col-start-1 row-start-1 flex items-baseline justify-center whitespace-nowrap">
                             {isTypingComplete ? (
                                 <AnimatePresence initial={false} mode="popLayout">
                                     <motion.span
@@ -239,7 +239,7 @@ function Hero() {
                                     duration: shouldReduceMotion ? 0 : 0.3,
                                     ease: EASE_OUT,
                                 }}
-                                className="inline-block text-primary"
+                                className="inline-block text-white"
                             >
                                 {suffix}
                             </motion.span>
@@ -258,42 +258,39 @@ function Hero() {
                 </span>
             </h1>
 
-            {/* Scroll indicator */}
-            <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 sm:bottom-10">
-                <motion.div
-                    initial={false}
-                    animate={{
-                        opacity: isTypingComplete ? 1 : 0,
-                        y: isTypingComplete ? 0 : 16,
-                    }}
-                    transition={{
-                        duration: shouldReduceMotion ? 0 : 0.6,
-                        ease: EASE_OUT,
-                    }}
+            {/* Scroll indicator — hidden while the typewriter & rolling counter
+                are running; fades in once the final word lands on "profesional?". */}
+            <div
+                className={`absolute bottom-8 left-1/2 z-10 -translate-x-1/2 transition-opacity sm:bottom-10 ${
+                    shouldReduceMotion ? "duration-0" : "duration-700"
+                } ${
+                    isSettled
+                        ? "pointer-events-auto opacity-100"
+                        : "pointer-events-none opacity-0"
+                }`}
+            >
+                <button
+                    type="button"
+                    onClick={() => scrollToSection("services")}
+                    aria-label={t("HomeScreen.Hero.scrollPrompt")}
+                    className="group flex cursor-pointer flex-col items-center gap-2 text-neutral-500 transition-colors duration-200 hover:text-neutral-300 focus-visible:text-neutral-300 focus-visible:outline-none"
                 >
-                    <button
-                        type="button"
-                        onClick={() => scrollToSection("services")}
-                        aria-label={t("HomeScreen.Hero.scrollPrompt")}
-                        className="group flex cursor-pointer flex-col items-center gap-2 text-neutral-500 transition-colors duration-200 hover:text-neutral-300 focus-visible:text-neutral-300 focus-visible:outline-none"
+                    <span className="text-xs font-medium uppercase tracking-widest">
+                        {t("HomeScreen.Hero.scrollPrompt")}
+                    </span>
+                    <motion.span
+                        aria-hidden="true"
+                        animate={shouldReduceMotion ? undefined : { y: [0, 6, 0] }}
+                        transition={{
+                            duration: 1.6,
+                            repeat: shouldReduceMotion ? 0 : Infinity,
+                            ease: "easeInOut",
+                        }}
+                        className="text-xl leading-none"
                     >
-                        <span className="text-xs font-medium uppercase tracking-widest">
-                            {t("HomeScreen.Hero.scrollPrompt")}
-                        </span>
-                        <motion.span
-                            aria-hidden="true"
-                            animate={shouldReduceMotion ? undefined : { y: [0, 6, 0] }}
-                            transition={{
-                                duration: 1.6,
-                                repeat: shouldReduceMotion ? 0 : Infinity,
-                                ease: "easeInOut",
-                            }}
-                            className="text-xl leading-none"
-                        >
-                            <FiArrowDown />
-                        </motion.span>
-                    </button>
-                </motion.div>
+                        <FiArrowDown />
+                    </motion.span>
+                </button>
             </div>
         </section>
     );

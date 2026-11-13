@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// Hero — Editorial typewriter hero with a rolling accent word & fixed "?"
+// Hero — Editorial typewriter hero with a rolling accent word & terminal cursor
 // ---------------------------------------------------------------------------
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -19,10 +19,10 @@ const TYPEWRITER_START_DELAY_MS = 300;
 const TYPEWRITER_SPEED_MS = 55;
 
 /** Pause (ms) on the freshly typed accent word before the counter rolls. */
-const ROLLING_HOLD_MS = 700;
+const ROLLING_HOLD_MS = 400;
 
 /** Interval (ms) between each rolling-word swap. */
-const ROLLING_STEP_MS = 900;
+const ROLLING_STEP_MS = 500;
 
 /**
  * Ordered i18n keys of the rolling accent words. The dynamic slot cycles
@@ -119,7 +119,6 @@ function Hero() {
     const isSettled = isTypingComplete && effectiveWordIndex === LAST_WORD_INDEX;
     const currentWord = words[effectiveWordIndex];
     const wordVariant = WORD_VARIANTS[effectiveWordIndex];
-    const wordColorClass = isSettled ? "text-primary" : "text-white";
 
     // Blinking block caret shown on whichever line is currently being typed.
     const caret = (
@@ -174,7 +173,7 @@ function Hero() {
                     {!isTypingComplete && activeLineIndex === 0 && caret}
                 </span>
 
-                {/* Rolling accent word + fixed question mark — line 2 */}
+                {/* Rolling accent word + deferred `?` + terminal cursor — line 2 */}
                 <span className="block whitespace-nowrap text-white">
                     <span className="relative inline-grid whitespace-nowrap align-baseline text-left">
                         {/* Invisible sizers reserve the widest word so the
@@ -193,40 +192,21 @@ function Hero() {
                             <AnimatePresence initial={false}>
                                 <motion.span
                                     key={currentWord}
-                                    className={`col-start-1 row-start-1 whitespace-nowrap ${wordVariant} ${wordColorClass}`}
+                                    className={`col-start-1 row-start-1 whitespace-nowrap ${wordVariant} text-primary`}
                                     initial={{ opacity: 0.35, y: "100%" }}
                                     animate={{ opacity: 1, y: "0%" }}
                                     exit={{ opacity: 0, y: "-100%" }}
                                     transition={{
-                                        duration: shouldReduceMotion ? 0 : 0.45,
+                                        duration: shouldReduceMotion ? 0 : 0.3,
                                         ease: EASE_OUT,
                                     }}
                                 >
-                                    {isSettled ? (
-                                        <motion.span
-                                            animate={
-                                                shouldReduceMotion
-                                                    ? { opacity: 1 }
-                                                    : { opacity: [1, 0.45, 1] }
-                                            }
-                                            transition={{
-                                                duration: 1.7,
-                                                times: [0, 0.5, 1],
-                                                repeat: shouldReduceMotion ? 0 : Infinity,
-                                                ease: "easeInOut",
-                                            }}
-                                            className="inline-block"
-                                        >
-                                            {currentWord}
-                                        </motion.span>
-                                    ) : (
-                                        currentWord
-                                    )}
+                                    {currentWord}
                                 </motion.span>
                             </AnimatePresence>
                         ) : (
                             <span
-                                className={`col-start-1 row-start-1 whitespace-nowrap ${WORD_VARIANTS[0]}`}
+                                className={`col-start-1 row-start-1 whitespace-nowrap ${WORD_VARIANTS[0]} text-primary`}
                             >
                                 {displayedLines[1]}
                                 {activeLineIndex === 1 && caret}
@@ -234,7 +214,36 @@ function Hero() {
                         )}
                     </span>
 
-                    <span>{suffix}</span>
+                    {/* Closing `?` — its width is always reserved (so the line
+                        never re-centers) but it only becomes visible once the
+                        final word has landed. */}
+                    <motion.span
+                        aria-hidden={!isSettled}
+                        initial={false}
+                        animate={
+                            shouldReduceMotion
+                                ? undefined
+                                : { opacity: isSettled ? 1 : 0 }
+                        }
+                        transition={{
+                            duration: shouldReduceMotion ? 0 : 0.3,
+                            ease: EASE_OUT,
+                        }}
+                        className="inline-block"
+                    >
+                        {suffix}
+                    </motion.span>
+
+                    {/* Terminal caret — reserves its width and blinks like an
+                        active prompt only once the sequence has settled. */}
+                    <span
+                        aria-hidden="true"
+                        className={`inline-block transition-opacity ${
+                            shouldReduceMotion ? "duration-0" : "duration-300"
+                        } ${isSettled ? "opacity-100" : "opacity-0"}`}
+                    >
+                        {caret}
+                    </span>
                 </span>
             </h1>
 

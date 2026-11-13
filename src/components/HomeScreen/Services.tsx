@@ -9,6 +9,40 @@ import { Trans, useTranslation } from "react-i18next";
 import { FiCode, FiGlobe, FiSmartphone } from "react-icons/fi";
 import type { IServicesProps, IServiceCardItem, IServiceCardProps } from "../../interfaces/HomeScreenInterface";
 
+// ---------------------------------------------------------------------------
+// Brand glitch — self-contained inline keyframes for the "vizo studio" lockup.
+// A slow 6s loop punctuated by a few ~60–120ms hard-cut bursts: a chromatic
+// fringe (RGB split via text-shadow), a 1px jitter/skew and a single thin
+// `clip-path` slice. `steps(1, end)` is intentional — digital interference
+// should snap like a dropped frame rather than ease. The whole effect is
+// scoped to `.services-brand-glitch` and disabled for reduced-motion users.
+// ---------------------------------------------------------------------------
+const BRAND_GLITCH_KEYFRAMES = `
+@media (prefers-reduced-motion: no-preference) {
+    .services-brand-glitch {
+        display: inline-block;
+        animation: vizo-brand-glitch 6s steps(1, end) infinite;
+    }
+}
+
+@keyframes vizo-brand-glitch {
+    0%   { text-shadow: none; transform: none; clip-path: inset(0 0 0 0); opacity: 1; }
+    2%   { text-shadow: -1.5px 0 rgba(255, 31, 107, 0.55), 1.5px 0 rgba(0, 224, 255, 0.55); transform: translate(1px, 0) skewX(-2deg); }
+    4%   { text-shadow: 1px 0 rgba(0, 224, 255, 0.55), -1px 0 rgba(255, 31, 107, 0.55); transform: translate(-1px, -0.5px) skewX(1.5deg); clip-path: inset(8% 0 64% 0); }
+    6%   { text-shadow: none; transform: none; clip-path: inset(0 0 0 0); opacity: 1; }
+
+    39%  { text-shadow: 0 0 6px rgba(243, 102, 29, 0.45); transform: translate(-0.5px, 0) skewX(0.5deg); opacity: 0.96; }
+    40%  { text-shadow: none; transform: none; clip-path: inset(0 0 0 0); opacity: 1; }
+
+    64%  { text-shadow: -1px 0 rgba(255, 31, 107, 0.5), 1px 0 rgba(0, 224, 255, 0.5); transform: translate(0.5px, 0) skewX(-1deg); }
+    65%  { text-shadow: none; transform: none; clip-path: inset(0 0 0 0); }
+
+    89%  { transform: translate(0, 1px); clip-path: inset(74% 0 4% 0); opacity: 0.98; }
+    90%  { text-shadow: none; transform: none; clip-path: inset(0 0 0 0); opacity: 1; }
+    100% { text-shadow: none; transform: none; clip-path: inset(0 0 0 0); opacity: 1; }
+}
+`;
+
 const SERVICE_CARDS: IServiceCardItem[] = [
     {
         id: "web",
@@ -119,13 +153,16 @@ function Services(_props: IServicesProps) {
             id="services"
             className="w-full bg-bg py-32 sm:py-32 lg:py-36 overflow-x-clip relative"
         >
+            {/* Inline keyframes for the "vizo studio" interference/glitch lockup */}
+            <style>{BRAND_GLITCH_KEYFRAMES}</style>
+
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* ---- Section Header ---- */}
                 <div className="max-w-3xl">
                     <h2 className="font-title text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl">
                         <Trans
                             i18nKey="HomeScreen.Services.title"
-                            components={{ brand: <span className="font-mono lowercase text-primary" /> }}
+                            components={{ brand: <span className="services-brand-glitch font-mono lowercase text-primary" /> }}
                         />
                     </h2>
                     <p className="mt-4 max-w-2xl text-lg leading-relaxed text-text-muted sm:text-xl">

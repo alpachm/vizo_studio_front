@@ -66,6 +66,14 @@ export interface IWhyUsCardItem {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IServicesProps {}
 
+/** Data shape for a single Services card */
+export interface IServiceCardItem {
+  id: string;
+  icon: IconType;
+  titleKey: string;
+  descriptionKey: string;
+}
+
 /** Union of available contact form steps */
 export const ContactStep = {
   Step1: 1,

@@ -285,16 +285,21 @@
       }
     },
     "Services": {
-      "title": "¿Qué hacemos?",
-      "apps": {
-        "title": "Creación de <highlight>apps móviles</highlight>",
-        "imageAlt": "Servicio de creación de apps móviles",
-        "description": "Convertimos tus ideas en aplicaciones móviles rápidas, fáciles de usar y listas para crecer. Creamos software a la medida con diseño moderno y rendimiento garantizado en cualquier dispositivo tanto iPhone como Android"
-      },
-      "web": {
-        "title": "Creación de <highlight>páginas web</highlight>",
-        "imageAlt": "Servicio de creación de páginas web",
-        "description": "Creamos sitios web rápidos, seguros y diseñados a la medida de tu negocio. Desarrollamos plataformas modernas que se ven perfectas en cualquier dispositivo y están listas para hacer crecer tu marca"
+      "title": "Desarrollamos lo que tu negocio necesita.",
+      "subtitle": "Páginas web, aplicaciones móviles y software a medida. Tres formas de transformar tus ideas en soluciones que impulsan tu negocio.",
+      "cards": {
+        "web": {
+          "title": "Páginas web",
+          "description": "Creamos sitios web rápidos, seguros y diseñados a la medida de tu negocio. Desarrollamos plataformas modernas que se ven perfectas en cualquier dispositivo y están listas para hacer crecer tu marca."
+        },
+        "apps": {
+          "title": "Aplicaciones móviles",
+          "description": "Convertimos tus ideas en aplicaciones móviles rápidas, fáciles de usar y listas para crecer. Creamos software a la medida con diseño moderno y rendimiento garantizado en cualquier dispositivo tanto iPhone como Android."
+        },
+        "custom": {
+          "title": "Software a medida",
+          "description": "Desarrollamos sistemas y herramientas de software exclusivas adaptadas a los flujos operativos de tu empresa. Automatizamos procesos complejos, integramos datos y crecemos al ritmo de tu operación."
+        }
       }
     }
   }

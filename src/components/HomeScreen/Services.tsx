@@ -54,7 +54,7 @@ function Services(_props: IServicesProps) {
         <section
             ref={sectionRef}
             id="services"
-            className="w-full bg-bg py-16 sm:py-20 lg:py-24 overflow-x-clip relative"
+            className="w-full bg-bg py-32 sm:py-32 lg:py-36 overflow-x-clip relative"
         >
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* ---- Section Header ---- */}

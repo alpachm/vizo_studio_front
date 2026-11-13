@@ -127,9 +127,20 @@
   },
   "HomeScreen": {
     "Hero": {
-      "headingLine1": "¿Necesitas un sitio web",
-      "headingLine2": "profesional?",
-      "scrollPrompt": "Haz scroll para descubrir"
+      "headlinePrefix": "¿Necesitas un sitio web",
+      "headlineSuffix": "?",
+      "scrollPrompt": "Haz scroll para descubrir",
+      "words": {
+        "modern": "moderno",
+        "aesthetic": "estético",
+        "profitable": "rentable",
+        "selling": "vendedor",
+        "competitive": "competitivo",
+        "impeccable": "impecable",
+        "attractive": "atractivo",
+        "authentic": "auténtico",
+        "professional": "profesional"
+      }
     },
     "AboutUs": {
       "title": "¿Quiénes somos?",

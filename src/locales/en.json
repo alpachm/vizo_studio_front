@@ -127,9 +127,20 @@
   },
   "HomeScreen": {
     "Hero": {
-      "headingLine1": "Need a professional",
-      "headingLine2": "website?",
-      "scrollPrompt": "Scroll to discover"
+      "headlinePrefix": "Need a website that's",
+      "headlineSuffix": "?",
+      "scrollPrompt": "Scroll to discover",
+      "words": {
+        "modern": "modern",
+        "aesthetic": "aesthetic",
+        "profitable": "profitable",
+        "selling": "persuasive",
+        "competitive": "competitive",
+        "impeccable": "impeccable",
+        "attractive": "attractive",
+        "authentic": "authentic",
+        "professional": "professional"
+      }
     },
     "AboutUs": {
       "title": "Who we are?",

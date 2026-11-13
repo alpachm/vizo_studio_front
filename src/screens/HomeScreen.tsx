@@ -2,6 +2,7 @@
 // HomeScreen — Main landing screen view
 // ---------------------------------------------------------------------------
 import Hero from "../components/HomeScreen/Hero";
+import ValueProposition from "../components/HomeScreen/ValueProposition";
 import AboutUs from "../components/HomeScreen/AboutUs";
 import WhyUs from "../components/HomeScreen/WhyUs";
 import Services from "../components/HomeScreen/Services";
@@ -14,6 +15,7 @@ function HomeScreen(_props: IHomeScreenProps) {
     return (
         <>
             <Hero />
+            <ValueProposition />
             <Services />
             <Portfolio />
             <AboutUs />

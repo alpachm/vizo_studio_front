@@ -12,6 +12,11 @@ export interface IHomeScreenProps {}
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IHeroProps {}
 
+/** Props for the ValueProposition section component */
+export interface IValuePropositionProps {
+  className?: string;
+}
+
 /** Props for the AboutUs section component */
 export interface IAboutUsProps {
   className?: string;

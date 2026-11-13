@@ -9,6 +9,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import BrandLogo from "./BrandLogo";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
+import { useHeroVisibility } from "../../context/HeroVisibilityContext";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------
@@ -43,6 +44,7 @@ function Header() {
     const [isOverlapping, setIsOverlapping] = useState(false);
     const headerRef = useRef<HTMLElement>(null);
     const shouldReduceMotion = useReducedMotion();
+    const { isHeroInView } = useHeroVisibility();
 
     useEffect(() => {
         let rafId: number | null = null;
@@ -101,7 +103,7 @@ function Header() {
         <header
             ref={headerRef}
             className={`fixed top-0 left-0 right-0 z-50 w-full ease-[cubic-bezier(0.22,1,0.36,1)] transition-[opacity,transform] duration-300 ${
-                isOverlapping
+                isOverlapping || isHeroInView
                     ? "-translate-y-full opacity-0 pointer-events-none"
                     : "translate-y-0 opacity-100"
             }`}

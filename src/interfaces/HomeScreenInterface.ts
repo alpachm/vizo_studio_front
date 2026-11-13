@@ -66,6 +66,22 @@ export interface IWhyUsCardItem {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IServicesProps {}
 
+/** Data shape for a single Services card */
+export interface IServiceCardItem {
+  id: string;
+  icon: IconType;
+  titleKey: string;
+  descriptionKey: string;
+}
+
+/** Props for a single Services card rendered by the Services section */
+export interface IServiceCardProps {
+  /** Static content descriptor (icon + i18n keys) for this card */
+  card: IServiceCardItem;
+  /** Whether the parent section has entered the viewport (drives the entrance reveal) */
+  isSectionVisible: boolean;
+}
+
 /** Union of available contact form steps */
 export const ContactStep = {
   Step1: 1,

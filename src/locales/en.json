@@ -144,7 +144,7 @@
     },
     "ValueProposition": {
       "title": "Your competition isn't better than you; they just have a digital storefront that sells better.",
-      "subtitle": "At <brand>vizo studio</brand> we offer you the solution to improve your brand's presence on the internet."
+      "subtitle": "We offer you the solution to improve your brand's presence on the internet."
     },
     "AboutUs": {
       "title": "Who we are?",
@@ -285,16 +285,21 @@
       }
     },
     "Services": {
-      "title": "What we do?",
-      "apps": {
-        "title": "Creation of <highlight>mobile apps</highlight>",
-        "imageAlt": "Mobile app development service",
-        "description": "We turn your ideas into fast, user-friendly mobile applications ready to scale. We build custom software with modern design and guaranteed performance on any device, both iPhone and Android"
-      },
-      "web": {
-        "title": "Creation of <highlight>websites</highlight>",
-        "imageAlt": "Web development service",
-        "description": "We create fast, secure websites tailored to your business. We develop modern platforms that look perfect on any device and are ready to grow your brand"
+      "title": "At <brand>vizo studio</brand> we build what your business needs.",
+      "subtitle": "Websites, mobile apps, and custom software. Three ways to turn your ideas into solutions that drive your business forward.",
+      "cards": {
+        "web": {
+          "title": "Websites",
+          "description": "We create fast, secure websites tailored to your business. We develop modern platforms that look perfect on any device and are ready to grow your brand."
+        },
+        "apps": {
+          "title": "Mobile apps",
+          "description": "We turn your ideas into fast, user-friendly mobile applications ready to scale. We build custom software with modern design and guaranteed performance on any device, both iPhone and Android."
+        },
+        "custom": {
+          "title": "Custom software",
+          "description": "We develop exclusive software systems and tools tailored to your company's workflows. We automate complex processes, integrate data, and grow at the pace of your operation."
+        }
       }
     }
   }

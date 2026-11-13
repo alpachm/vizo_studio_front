@@ -117,7 +117,7 @@ function Header() {
                         {/* ---- Logo / Brand ---- */}
                         <Link
                             to="/"
-                            className="flex shrink-0 items-center justify-self-start"
+                            className="col-start-1 flex shrink-0 items-center justify-self-start"
                             aria-label={t("Common.appName")}
                             onClick={() => scrollToTop(closeMobile)}
                         >
@@ -126,7 +126,7 @@ function Header() {
 
                         {/* ---- Desktop Navigation (centered) ---- */}
                         <nav
-                            className="hidden items-center justify-self-center gap-8 md:flex lg:gap-10"
+                            className="col-start-2 hidden items-center justify-self-center gap-8 md:flex lg:gap-10"
                             aria-label={t("Header.nav.desktopAriaLabel")}
                         >
                             {navItems.map((item) => (
@@ -142,7 +142,7 @@ function Header() {
                         </nav>
 
                         {/* ---- Right: Desktop CTA + Mobile toggle ---- */}
-                        <div className="flex items-center justify-self-end gap-3">
+                        <div className="col-start-3 flex items-center justify-self-end gap-3">
                             <button
                                 type="button"
                                 onClick={(e) => handleNavClick("/contact", e)}

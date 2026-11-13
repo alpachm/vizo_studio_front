@@ -19,13 +19,14 @@
       "blog": "Blog",
       "services": "Services",
       "aboutUs": "About us",
+      "projects": "Projects",
       "openMenu": "Open navigation menu",
       "closeMenu": "Close navigation menu",
       "desktopAriaLabel": "Main navigation",
       "mobileAriaLabel": "Mobile navigation"
     },
     "buttons": {
-      "contact": "Let's talk"
+      "contact": "Let's talk about your idea"
     }
   },
   "Footer": {

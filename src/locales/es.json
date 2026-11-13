@@ -19,13 +19,14 @@
       "blog": "Blog",
       "services": "Servicios",
       "aboutUs": "Sobre nosotros",
+      "projects": "Proyectos",
       "openMenu": "Abrir menú de navegación",
       "closeMenu": "Cerrar menú de navegación",
       "desktopAriaLabel": "Navegación principal",
       "mobileAriaLabel": "Navegación móvil"
     },
     "buttons": {
-      "contact": "Hablemos"
+      "contact": "Hablemos de tu idea"
     }
   },
   "Footer": {

@@ -1,7 +1,8 @@
 // ---------------------------------------------------------------------------
-// HeroVisibilityContext — Tracks whether the Home hero section is in view so
-//                         the global shell (Header & FloatingButtons) can step
-//                         aside while the hero occupies the viewport.
+// HeroVisibilityContext — Tracks whether the Home hero OR the Value Proposition
+//                         section is in view so the global shell (Header &
+//                         FloatingButtons) steps aside while either intro
+//                         section occupies the viewport.
 // ---------------------------------------------------------------------------
 import { createContext, useCallback, useContext, useState } from "react";
 import type {
@@ -19,14 +20,24 @@ const HeroVisibilityContext = createContext<IHeroVisibilityContextValue | undefi
 // ---------------------------------------------------------------------------
 function HeroVisibilityProvider({ children }: IHeroVisibilityProviderProps) {
     const [isHeroInView, setIsHeroInViewState] = useState(false);
+    const [isValuePropositionInView, setIsValuePropositionInViewState] = useState(false);
 
-    // Stable setter so consumers (Hero's IntersectionObserver effect) don't
-    // re-subscribe on every render.
+    // Stable setters so consumers (Hero's & ValueProposition's IntersectionObserver
+    // effects) don't re-subscribe on every render.
     const setIsHeroInView = useCallback((isInView: boolean) => {
         setIsHeroInViewState(isInView);
     }, []);
 
-    const value: IHeroVisibilityContextValue = { isHeroInView, setIsHeroInView };
+    const setIsValuePropositionInView = useCallback((isInView: boolean) => {
+        setIsValuePropositionInViewState(isInView);
+    }, []);
+
+    const value: IHeroVisibilityContextValue = {
+        isHeroInView,
+        isValuePropositionInView,
+        setIsHeroInView,
+        setIsValuePropositionInView,
+    };
 
     return <HeroVisibilityContext.Provider value={value}>{children}</HeroVisibilityContext.Provider>;
 }

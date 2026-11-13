@@ -184,7 +184,7 @@ function ValueProposition({ className = "" }: IValuePropositionProps) {
                                 from={COLOR_OFF}
                                 to={group.isBrand ? COLOR_PRIMARY : COLOR_ON}
                                 reduceMotion={shouldReduceMotion}
-                                className={group.isBrand ? "font-semibold" : ""}
+                                className={group.isBrand ? "font-mono font-semibold" : ""}
                             >
                                 {group.text}
                             </IlluminatedWord>

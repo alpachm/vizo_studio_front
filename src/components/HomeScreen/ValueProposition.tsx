@@ -154,7 +154,7 @@ function ValueProposition({ className = "" }: IValuePropositionProps) {
             ref={containerRef}
             className={`relative h-[250vh] w-full bg-black scroll-mt-28 ${className}`}
         >
-            <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center text-center px-6">
+            <div className="sticky top-0 left-0 h-screen w-screen flex flex-col items-center justify-center text-center px-6 z-10">
                 {/* Centered display headline — words illuminate sequentially. */}
                 <h2 className="font-title text-3xl font-bold leading-[1.08] tracking-tight text-balance sm:text-5xl md:text-6xl lg:text-7xl">
                     {headlineWords.map((word, index) => (

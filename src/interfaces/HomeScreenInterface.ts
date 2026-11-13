@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------------------
 
 import type { IconType } from "react-icons";
+import type { MotionValue } from "framer-motion";
 
 /** Props for the HomeScreen component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -11,6 +12,37 @@ export interface IHomeScreenProps {}
 /** Props for the Hero section component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IHeroProps {}
+
+/** Props for the ValueProposition section component */
+export interface IValuePropositionProps {
+  className?: string;
+}
+
+/** Data shape for a single subtitle word group in the ValueProposition reveal */
+export interface IValuePropositionWordGroup {
+  /** The rendered word or small group of words */
+  text: string;
+  /** Whether this group is the branded "Vizo Studio" accent (text-primary) */
+  isBrand: boolean;
+}
+
+/** Props for a single scroll-illuminated word rendered by ValueProposition */
+export interface IValuePropositionWordProps {
+  /** Shared scroll-progress MotionValue (0 → 1) driving the reveal */
+  progress: MotionValue<number>;
+  /** Scroll-progress window [start, end] over which this word brightens */
+  range: [number, number];
+  /** Color of the word in its dimmed/off state */
+  from: string;
+  /** Color of the word once fully illuminated */
+  to: string;
+  /** Skips the scrub and renders the final color for reduced-motion users */
+  reduceMotion: boolean;
+  /** Optional additional Tailwind classes applied to the word span */
+  className?: string;
+  /** The word text to render */
+  children: string;
+}
 
 /** Props for the AboutUs section component */
 export interface IAboutUsProps {

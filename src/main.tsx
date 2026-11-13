@@ -33,6 +33,22 @@ declare module "@tanstack/react-router" {
     }
 }
 
+// ---------------------------------------------------------------------------
+// Global layout normalization — restore `position: sticky` support.
+//
+// `index.css` applies `overflow-x: hidden` to `html`, `body` and `#root` to
+// suppress horizontal scrollbars. On `body` and `#root` that value coerces
+// `overflow-y` into `auto`, which turns both elements into scroll containers —
+// the classic trap that completely breaks `position: sticky` for any descendant
+// (the nearest scrolling ancestor is no longer the viewport). `overflow-x:
+// clip` clips horizontal overflow identically but NEVER creates a scroll
+// container, so sticky anchoring is restored while horizontal scroll stays
+// locked. This runs at module scope (before first paint) instead of inside
+// `index.css`, which is intentionally left untouched.
+// ---------------------------------------------------------------------------
+document.body.style.overflowX = "clip";
+document.getElementById("root")!.style.overflowX = "clip";
+
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <AppProvider>

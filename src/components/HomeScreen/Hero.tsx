@@ -142,8 +142,9 @@ function Hero() {
     );
 
     // Report visibility upward so the global Header & FloatingButtons can step
-    // aside while the hero occupies the viewport. A synchronous first evaluation
-    // (inside useLayoutEffect, before paint) prevents a one-frame flash on load.
+    // aside while the hero (or the Value Proposition section below it) occupies
+    // the viewport. A synchronous first evaluation (inside useLayoutEffect,
+    // before paint) prevents a one-frame flash on load.
     useLayoutEffect(() => {
         const section = sectionRef.current;
         if (!section) return;

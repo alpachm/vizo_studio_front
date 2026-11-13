@@ -13,8 +13,7 @@ function BrandLogo({
     const { t } = useTranslation();
 
     // Brand primary by default; switches to pure white for monochrome variants.
-    const accentClass = monochrome ? "text-white" : "color-primary";
-    console.log({ accentClass, monochrome });
+    const accentClass = monochrome ? "text-white" : "text-[var(--color-primary)]";
 
     return (
         <span className={`group inline-flex items-baseline gap-2 ${className}`}>

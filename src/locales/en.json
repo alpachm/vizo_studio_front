@@ -143,13 +143,8 @@
       }
     },
     "ValueProposition": {
-      "eyebrow": "01 / WHY YOU NEED A WEBSITE",
-      "titleLead": "Your competition isn't better than you;",
-      "titleContrast": "they just have a digital storefront that sells better.",
-      "paragraph1": "81% of your customers research online before they buy. If your website doesn't build absolute trust, the money goes to someone else.",
-      "paragraph2": "At <brand>Vizo Studio</brand> we break away from generic templates. We're a development and design studio focused on creating high-performance digital experiences with real conversion.",
-      "paragraph3": "We don't just make your business look flawless: we build fast, scalable tools designed to turn visitors into real customers.",
-      "cta": "See what we can create"
+      "title": "Your competition isn't better than you; they just have a digital storefront that sells better.",
+      "subtitle": "At <brand>Vizo Studio</brand> we offer you the solution to improve your brand's presence on the internet."
     },
     "AboutUs": {
       "title": "Who we are?",

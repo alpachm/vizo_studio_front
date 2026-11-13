@@ -3,6 +3,8 @@
     "appName": "Vizo Studio",
     "logoVizo": "Vizo",
     "logoStudio": "Studio",
+    "brandName": "vizostudio",
+    "brandDomain": ".dev",
     "loading": "Cargando..."
   },
   "Theme": {

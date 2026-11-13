@@ -5,6 +5,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiMenu, FiX } from "react-icons/fi";
+import BrandLogo from "./BrandLogo";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
 import type { NavItem } from "../../interfaces/HeaderInterface";
@@ -108,24 +109,11 @@ function Header() {
                     {/* ---- Logo / Brand ---- */}
                     <Link
                         to="/"
-                        className="flex items-center shrink-0 gap-2 group cursor-pointer"
+                        className="flex items-center shrink-0 cursor-pointer"
                         aria-label={t("Common.appName")}
                         onClick={() => scrollToTop(closeMobile)}
                     >
-                        <span
-                            className={`font-title text-2xl sm:text-3xl font-black tracking-tight transition-colors duration-300 ${
-                                isScrolled ? "text-white" : "text-text-muted"
-                            }`}
-                        >
-                            {t("Common.logoVizo")}
-                        </span>
-                        <span
-                            className={`font-title text-2xl sm:text-3xl font-black tracking-tight transition-colors duration-300 ${
-                                isScrolled ? "text-primary" : "text-text-muted"
-                            }`}
-                        >
-                            {t("Common.logoStudio")}
-                        </span>
+                        <BrandLogo className="text-lg sm:text-xl" />
                     </Link>
 
                     {/* ---- Desktop Navigation ---- */}

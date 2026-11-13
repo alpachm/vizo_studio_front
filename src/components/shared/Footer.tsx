@@ -6,6 +6,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { FiMail, FiArrowUp } from "react-icons/fi";
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+import BrandLogo from "./BrandLogo";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import type {
     FooterProps,
@@ -80,9 +81,7 @@ function Footer({
                         ============================================================ */}
                     <div className="flex flex-col gap-6">
                         {/* Logo / Brand name */}
-                        <span className="font-title text-3xl sm:text-4xl font-black tracking-tight text-text">
-                            {t("Common.appName")}
-                        </span>
+                        <BrandLogo className="text-2xl sm:text-3xl" monochrome />
 
                         {/* Availability badge — green pulsing dot */}
                         <div className="inline-flex items-center gap-2.5">

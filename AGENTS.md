@@ -73,7 +73,7 @@ Actúas como un **Desarrollador Web Front-End Senior** especializado en arquitec
 
 ### 🚨 Regla 4: Uso Exclusivo de Tipografías
 
-- **Títulos (Headings):** **Única y exclusivamente** se utilizará la tipografía `Unbounded` para cualquier título (`h1`, `h2`, `h3`, `h4`, `h5`, `h6`) o elementos de encabezado principal.
+- **Títulos (Headings):** **Única y exclusivamente** se utilizará la tipografía `JetBrains Mono` para cualquier título (`h1`, `h2`, `h3`, `h4`, `h5`, `h6`) o elementos de encabezado principal.
 - **Cuerpo de texto (Body):** **Única y exclusivamente** se utilizará la tipografía `Inter` para párrafos, botones, descripciones, formularios, enlaces y textos de lectura general.
 
 ### 🚨 Regla 5: Iconografía Única

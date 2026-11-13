@@ -15,8 +15,12 @@ export default {
                 },
             },
             fontFamily: {
-                title: ["var(--font-title-val)", "sans-serif"],
-                body: ["var(--font-body-val)", "sans-serif"],
+                sans: ["Inter", "sans-serif"],
+                mono: ["JetBrains Mono", "monospace"],
+                // Backward-compatible aliases for the existing `font-title`
+                // (headings / logo) and `font-body` (copy) utility classes.
+                title: ["JetBrains Mono", "monospace"],
+                body: ["Inter", "sans-serif"],
             },
             animation: {
                 "marquee-scroll": "marquee 40s linear infinite",

@@ -58,7 +58,7 @@ function ValueProposition({ className = "" }: IValuePropositionProps) {
     return (
         <section
             id="value-proposition"
-            className={`w-full bg-black py-24 sm:py-28 lg:py-32 ${className}`}
+            className={`w-full bg-black scroll-mt-32 pt-60 pb-24 sm:pt-48 sm:pb-28 lg:pt-56 lg:pb-32 ${className}`}
         >
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Eyebrow / index tag — accent line + uppercase mono label */}
@@ -96,52 +96,40 @@ function ValueProposition({ className = "" }: IValuePropositionProps) {
 
                     {/* Right — persuasive copy & CTA */}
                     <motion.div
-                        variants={
-                            shouldReduceMotion ? undefined : copyContainerVariants
-                        }
+                        variants={shouldReduceMotion ? undefined : copyContainerVariants}
                         initial={shouldReduceMotion ? false : "hidden"}
                         whileInView="show"
                         viewport={{ once: true, amount: 0.2 }}
                         className="font-body lg:col-span-5"
                     >
                         <motion.p
-                            variants={
-                                shouldReduceMotion ? undefined : copyItemVariants
-                            }
+                            variants={shouldReduceMotion ? undefined : copyItemVariants}
                             className="text-pretty text-lg leading-relaxed text-neutral-300"
                         >
                             {t("HomeScreen.ValueProposition.paragraph1")}
                         </motion.p>
 
                         <motion.p
-                            variants={
-                                shouldReduceMotion ? undefined : copyItemVariants
-                            }
+                            variants={shouldReduceMotion ? undefined : copyItemVariants}
                             className="mt-6 text-pretty text-lg leading-relaxed text-neutral-300"
                         >
                             <Trans
                                 i18nKey="HomeScreen.ValueProposition.paragraph2"
                                 components={{
-                                    brand: (
-                                        <span className="font-semibold text-primary" />
-                                    ),
+                                    brand: <span className="font-semibold text-primary" />,
                                 }}
                             />
                         </motion.p>
 
                         <motion.p
-                            variants={
-                                shouldReduceMotion ? undefined : copyItemVariants
-                            }
+                            variants={shouldReduceMotion ? undefined : copyItemVariants}
                             className="mt-6 text-pretty text-lg leading-relaxed text-neutral-300"
                         >
                             {t("HomeScreen.ValueProposition.paragraph3")}
                         </motion.p>
 
                         <motion.div
-                            variants={
-                                shouldReduceMotion ? undefined : copyItemVariants
-                            }
+                            variants={shouldReduceMotion ? undefined : copyItemVariants}
                             className="mt-10"
                         >
                             <button

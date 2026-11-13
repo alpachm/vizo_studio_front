@@ -21,6 +21,13 @@ export default {
                 // (headings / logo) and `font-body` (copy) utility classes.
                 title: ["JetBrains Mono", "monospace"],
                 body: ["Inter", "sans-serif"],
+                // Expressive editorial / display families powering the Hero
+                // rolling counter. Each is loaded via <link> in `index.html`.
+                "instrument-serif": ['"Instrument Serif"', "serif"],
+                "playfair-display": ['"Playfair Display"', "serif"],
+                "space-grotesk": ['"Space Grotesk"', "sans-serif"],
+                syne: ['"Syne"', "sans-serif"],
+                "plus-jakarta-sans": ['"Plus Jakarta Sans"', "sans-serif"],
             },
             animation: {
                 "marquee-scroll": "marquee 40s linear infinite",

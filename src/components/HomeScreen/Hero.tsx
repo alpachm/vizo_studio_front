@@ -42,21 +42,28 @@ const WORD_KEYS = [
 
 /**
  * Per-position typography variant for each rolling word (must stay in sync
- * with `WORD_KEYS`). Families alternate between JetBrains Mono (`font-mono`)
- * and Inter (`font-body`), with shifting weight, slant and tracking for an
- * editorial, agency-grade rhythm. Every weight used here is actually shipped
- * by the font imports in `src/index.css`.
+ * with `WORD_KEYS`). Each entry pairs a distinct Google Font (loaded via
+ * `<link>` in `index.html` and mapped to a `font-*` utility in
+ * `tailwind.config.js`) with its own weight, slant and tracking, so that
+ * consecutive words read as genuinely different personalities:
+ *
+ *   geometric display sans → high-fashion serif italic → modern display sans
+ *   → editorial serif italic → humanist sans → technical mono → classic serif
+ *   bold → geometric display extrabold → editorial serif (final landing).
+ *
+ * Every weight/slant used here is actually shipped by the font imports, and
+ * every word is tinted with `text-primary` at render time.
  */
 const WORD_VARIANTS = [
-    "font-mono font-medium", // modern
-    "font-body font-normal tracking-wide", // aesthetic
-    "font-mono font-bold", // profitable
-    "font-body font-medium italic", // selling
-    "font-mono font-semibold", // competitive
-    "font-mono font-bold", // impeccable
-    "font-body font-medium tracking-tight", // attractive
-    "font-mono font-medium", // authentic
-    "font-mono font-bold", // professional (final)
+    "font-space-grotesk font-bold tracking-tight", // modern — geometric display sans
+    "font-playfair-display italic tracking-wide", // aesthetic — high-fashion serif italic
+    "font-syne font-bold tracking-tight", // profitable — modern display sans
+    "font-instrument-serif italic", // selling — editorial serif italic
+    "font-plus-jakarta-sans font-semibold tracking-tight", // competitive — humanist sans
+    "font-mono font-bold tracking-tight", // impeccable — technical mono
+    "font-playfair-display font-bold", // attractive — classic serif bold
+    "font-syne font-extrabold", // authentic — geometric display extrabold
+    "font-instrument-serif tracking-tight text-[1.12em]", // professional (final) — editorial serif
 ] as const;
 
 const LAST_WORD_INDEX = WORD_KEYS.length - 1;

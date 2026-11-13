@@ -27,8 +27,8 @@ const ROUTE_TO_SECTION_ID: Record<string, string> = {
 };
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
-    { labelKey: "Header.nav.aboutUs", to: "/about" },
     { labelKey: "Header.nav.services", to: "/services" },
+    { labelKey: "Header.nav.aboutUs", to: "/about" },
     { labelKey: "Header.nav.projects", to: "/portfolio" },
 ];
 
@@ -113,20 +113,20 @@ function Header() {
                 }`}
             >
                 <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between py-5">
+                    <div className="grid grid-cols-[1fr_auto_1fr] items-center py-5">
                         {/* ---- Logo / Brand ---- */}
                         <Link
                             to="/"
-                            className="flex shrink-0 items-center"
+                            className="flex shrink-0 items-center justify-self-start"
                             aria-label={t("Common.appName")}
                             onClick={() => scrollToTop(closeMobile)}
                         >
                             <BrandLogo className="text-lg sm:text-xl" />
                         </Link>
 
-                        {/* ---- Desktop Navigation ---- */}
+                        {/* ---- Desktop Navigation (centered) ---- */}
                         <nav
-                            className="hidden items-center gap-8 md:flex lg:gap-10"
+                            className="hidden items-center justify-self-center gap-8 md:flex lg:gap-10"
                             aria-label={t("Header.nav.desktopAriaLabel")}
                         >
                             {navItems.map((item) => (
@@ -139,12 +139,14 @@ function Header() {
                                     {t(item.labelKey)}
                                 </button>
                             ))}
+                        </nav>
 
-                            {/* Desktop CTA — pill outline with forwarding arrow */}
+                        {/* ---- Right: Desktop CTA + Mobile toggle ---- */}
+                        <div className="flex items-center justify-self-end gap-3">
                             <button
                                 type="button"
                                 onClick={(e) => handleNavClick("/contact", e)}
-                                className="group ml-2 inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 font-body text-sm font-medium text-white transition-colors duration-200 hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25 lg:ml-4"
+                                className="group hidden items-center gap-2 rounded-full border border-white/30 px-5 py-2.5 font-body text-sm font-medium text-white transition-[border-color,box-shadow] duration-300 hover:border-[#F96316]/70 hover:shadow-[0_0_20px_rgba(249,99,22,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F96316]/50 md:inline-flex"
                             >
                                 {t("Header.buttons.contact")}
                                 <FiArrowUpRight
@@ -152,47 +154,49 @@ function Header() {
                                     aria-hidden="true"
                                 />
                             </button>
-                        </nav>
 
-                    {/* ---- Mobile Menu Toggle ---- */}
-                        <button
-                            type="button"
-                            onClick={() => setMobileOpen((prev) => !prev)}
-                            aria-expanded={mobileOpen}
-                            aria-controls="mobile-menu"
-                            aria-label={
-                                mobileOpen ? t("Header.nav.closeMenu") : t("Header.nav.openMenu")
-                            }
-                            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors duration-200 hover:border-white/25 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25 md:hidden"
-                        >
-                            <AnimatePresence mode="wait" initial={false}>
-                                <motion.span
-                                    key={mobileOpen ? "close" : "open"}
-                                    initial={
-                                        shouldReduceMotion
-                                            ? { opacity: 0 }
-                                            : { opacity: 0, rotate: -90, scale: 0.8 }
-                                    }
-                                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                                    exit={
-                                        shouldReduceMotion
-                                            ? { opacity: 0 }
-                                            : { opacity: 0, rotate: 90, scale: 0.8 }
-                                    }
-                                    transition={{
-                                        duration: shouldReduceMotion ? 0 : 0.2,
-                                        ease: "easeOut",
-                                    }}
-                                    className="flex"
-                                >
-                                    {mobileOpen ? (
-                                        <FiX className="h-5 w-5" aria-hidden="true" />
-                                    ) : (
-                                        <FiMenu className="h-5 w-5" aria-hidden="true" />
-                                    )}
-                                </motion.span>
-                            </AnimatePresence>
-                        </button>
+                            {/* ---- Mobile Menu Toggle ---- */}
+                            <button
+                                type="button"
+                                onClick={() => setMobileOpen((prev) => !prev)}
+                                aria-expanded={mobileOpen}
+                                aria-controls="mobile-menu"
+                                aria-label={
+                                    mobileOpen
+                                        ? t("Header.nav.closeMenu")
+                                        : t("Header.nav.openMenu")
+                                }
+                                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors duration-200 hover:border-white/25 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25 md:hidden"
+                            >
+                                <AnimatePresence mode="wait" initial={false}>
+                                    <motion.span
+                                        key={mobileOpen ? "close" : "open"}
+                                        initial={
+                                            shouldReduceMotion
+                                                ? { opacity: 0 }
+                                                : { opacity: 0, rotate: -90, scale: 0.8 }
+                                        }
+                                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                        exit={
+                                            shouldReduceMotion
+                                                ? { opacity: 0 }
+                                                : { opacity: 0, rotate: 90, scale: 0.8 }
+                                        }
+                                        transition={{
+                                            duration: shouldReduceMotion ? 0 : 0.2,
+                                            ease: "easeOut",
+                                        }}
+                                        className="flex"
+                                    >
+                                        {mobileOpen ? (
+                                            <FiX className="h-5 w-5" aria-hidden="true" />
+                                        ) : (
+                                            <FiMenu className="h-5 w-5" aria-hidden="true" />
+                                        )}
+                                    </motion.span>
+                                </AnimatePresence>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -254,9 +258,7 @@ function Header() {
                                 {/* Mobile CTA — clean outline pill */}
                                 <motion.div
                                     initial={
-                                        shouldReduceMotion
-                                            ? { opacity: 0 }
-                                            : { opacity: 0, y: 16 }
+                                        shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }
                                     }
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{
@@ -269,7 +271,7 @@ function Header() {
                                     <button
                                         type="button"
                                         onClick={(e) => handleNavClick("/contact", e)}
-                                        className="group inline-flex w-full items-center justify-between rounded-full border border-white/10 px-6 py-4 font-body text-base font-medium text-white transition-colors duration-200 hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25"
+                                        className="group inline-flex w-full items-center justify-between rounded-full border border-white/30 px-6 py-4 font-body text-base font-medium text-white transition-[border-color,box-shadow] duration-300 hover:border-[#F96316]/70 hover:shadow-[0_0_20px_rgba(249,99,22,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F96316]/50"
                                     >
                                         {t("Header.buttons.contact")}
                                         <FiArrowUpRight

@@ -17,8 +17,8 @@
   "Header": {
     "nav": {
       "blog": "Blog",
-      "services": "What we do",
-      "aboutUs": "The studio",
+      "services": "Services",
+      "aboutUs": "About us",
       "projects": "Projects",
       "openMenu": "Open navigation menu",
       "closeMenu": "Close navigation menu",

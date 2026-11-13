@@ -28,6 +28,7 @@ export default {
                 "space-grotesk": ['"Space Grotesk"', "sans-serif"],
                 syne: ['"Syne"', "sans-serif"],
                 "plus-jakarta-sans": ['"Plus Jakarta Sans"', "sans-serif"],
+                "great-vibes": ['"Great Vibes"', "cursive"],
             },
             animation: {
                 "marquee-scroll": "marquee 40s linear infinite",

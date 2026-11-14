@@ -11,6 +11,10 @@ import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
 import { useHeroVisibility } from "../../context/HeroVisibilityContext";
 import { useTheme } from "../../context/ThemeContext";
+import {
+    saveHomeScrollY,
+    skipNextHomeScrollRestore,
+} from "../../utils/homeScrollPosition";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------
@@ -86,6 +90,7 @@ function Header() {
                 if (pathname === "/") {
                     scrollToSection(sectionId);
                 } else {
+                    skipNextHomeScrollRestore();
                     void navigate({ to: "/" }).then(() => {
                         window.setTimeout(() => {
                             scrollToSection(sectionId);
@@ -99,13 +104,15 @@ function Header() {
                 if (pathname === "/") {
                     scrollToTop();
                 } else {
-                    void navigate({ to: "/" }).then(() => {
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                    });
+                    // Navigate back to "/" and let HomeScreen restore the exact scroll position
+                    void navigate({ to: "/", resetScroll: false });
                 }
                 return;
             }
 
+            if (pathname === "/") {
+                saveHomeScrollY(window.scrollY);
+            }
             void navigate({ to });
         },
         [pathname, navigate, scrollToSection, scrollToTop, closeMobile],
@@ -141,9 +148,15 @@ function Header() {
                         {/* ---- Logo / Brand ---- */}
                         <Link
                             to="/"
+                            resetScroll={false}
                             className="col-start-1 flex shrink-0 items-center justify-self-start"
                             aria-label={t("Common.appName")}
-                            onClick={() => scrollToTop(closeMobile)}
+                            onClick={() => {
+                                closeMobile();
+                                if (pathname === "/") {
+                                    scrollToTop();
+                                }
+                            }}
                         >
                             <BrandLogo className="text-lg sm:text-xl" />
                         </Link>

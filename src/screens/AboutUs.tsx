@@ -25,6 +25,7 @@ import {
 } from "react-icons/hi2";
 import aboutUsImg from "../assets/HomeScreen/images/about_us.webp";
 import { useScrollToSection } from "../hooks/useScrollToSection";
+import { skipNextHomeScrollRestore } from "../utils/homeScrollPosition";
 import type {
     IAboutUsPhilosophyItem,
     IAboutUsScreenProps,
@@ -127,6 +128,7 @@ function AboutUs(_props: IAboutUsScreenProps) {
     }, []);
 
     const handleGoToContact = () => {
+        skipNextHomeScrollRestore();
         void navigate({ to: "/" }).then(() => {
             window.setTimeout(() => {
                 scrollToSection("contacto");
@@ -151,6 +153,7 @@ function AboutUs(_props: IAboutUsScreenProps) {
                     <div className="mb-8">
                         <Link
                             to="/"
+                            resetScroll={false}
                             className="group inline-flex items-center gap-2.5 rounded-full border border-neutral-500/30 bg-neutral-500/[0.04] px-4 py-2 font-body text-xs font-medium text-text-muted transition-all duration-300 hover:border-primary/60 hover:text-text sm:text-sm"
                         >
                             <FiArrowLeft
@@ -451,6 +454,7 @@ function AboutUs(_props: IAboutUsScreenProps) {
                             <div className="flex flex-wrap items-center gap-4">
                                 <Link
                                     to="/"
+                                    resetScroll={false}
                                     className="group inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full border border-neutral-500/25 bg-neutral-500/[0.04] px-6 py-3.5 font-body text-sm font-medium text-text-muted transition-all duration-300 hover:border-neutral-500/50 hover:text-text sm:text-base"
                                 >
                                     <FiArrowLeft

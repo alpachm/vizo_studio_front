@@ -7,7 +7,7 @@
 // pinned 100vh stage so native vertical scroll drives horizontal translation
 // at 60/120fps without fighting the browser compositor.
 // ---------------------------------------------------------------------------
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type {
     IPortfolioProjectItem,
@@ -212,8 +212,12 @@ function Portfolio(_props: IPortfolioProps) {
         if (!viewport || !track) return;
 
         const nextMax = Math.max(0, track.scrollWidth - viewport.clientWidth);
+        const nextHeight = window.innerHeight + nextMax;
         maxOffsetRef.current = nextMax;
-        setRunwayHeight(window.innerHeight + nextMax);
+        if (sectionRef.current) {
+            sectionRef.current.style.height = `${nextHeight}px`;
+        }
+        setRunwayHeight(nextHeight);
 
         if (targetOffsetRef.current > nextMax) {
             targetOffsetRef.current = nextMax;
@@ -226,7 +230,7 @@ function Portfolio(_props: IPortfolioProps) {
         syncWithScroll();
     }, [applyTrackTransform, syncWithScroll]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         updateMeasurements();
 
         const resizeObserver = new ResizeObserver(() => {

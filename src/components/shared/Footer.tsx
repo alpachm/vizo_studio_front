@@ -9,6 +9,10 @@ import { FiMail, FiArrowUp } from "react-icons/fi";
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 import BrandLogo from "./BrandLogo";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
+import {
+    saveHomeScrollY,
+    skipNextHomeScrollRestore,
+} from "../../utils/homeScrollPosition";
 import type {
     FooterProps,
     FooterNavItem,
@@ -165,6 +169,7 @@ function Footer({
                                             if (pathname === "/") {
                                                 scrollToSection(sectionId);
                                             } else {
+                                                skipNextHomeScrollRestore();
                                                 void navigate({ to: "/" }).then(() => {
                                                     window.setTimeout(() => {
                                                         scrollToSection(sectionId);
@@ -172,6 +177,9 @@ function Footer({
                                                 });
                                             }
                                             return;
+                                        }
+                                        if (pathname === "/") {
+                                            saveHomeScrollY(window.scrollY);
                                         }
                                         void navigate({ to: item.to });
                                     }}

@@ -1,10 +1,14 @@
 // ---------------------------------------------------------------------------
 // Portfolio — "Menos palabras. Más «quiero eso»." editorial project grid.
-// Two blocks of four dark minimalist cards; each thumbnail performs a soft,
-// smooth zoom on hover (`overflow-hidden` + `group-hover:scale-105`).
+// Two blocks of four immersive image cards with overlaid copy, top-right
+// diagonal arrow badge, and smooth hover zoom (`hover:scale-105`).
 // ---------------------------------------------------------------------------
 import { useTranslation } from "react-i18next";
-import type { IPortfolioProjectItem } from "../../interfaces/HomeScreenInterface";
+import { FiArrowUpRight } from "react-icons/fi";
+import type {
+    IPortfolioProjectItem,
+    IPortfolioProps,
+} from "../../interfaces/HomeScreenInterface";
 import portfolio1 from "../../assets/HomeScreen/images/portfolio/portfolio-1.webp";
 import portfolio2 from "../../assets/HomeScreen/images/portfolio/portfolio-2.webp";
 import portfolio3 from "../../assets/HomeScreen/images/portfolio/portfolio-3.webp";
@@ -87,30 +91,63 @@ const PORTFOLIO_BLOCKS: IPortfolioProjectItem[][] = Array.from(
         ),
 );
 
-function Portfolio() {
+function Portfolio(_props: IPortfolioProps) {
     const { t } = useTranslation();
+
+    // Split the localized editorial headline after the first sentence period so
+    // "Menos palabras." sits on line 1 and "Más «quiero eso»." stacks underneath.
+    const rawTitle = t("Portfolio.title");
+    const [firstTitleLine, ...restTitleLines] = rawTitle.split(/(?<=\.)\s+/);
+    const secondTitleLine = restTitleLines.join(" ");
 
     const renderProjectCard = (project: IPortfolioProjectItem) => (
         <article
             key={project.id}
-            className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 transition-colors duration-300 hover:border-white/25"
+            className="group relative isolate flex aspect-[4/3] w-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 transition-colors duration-300 hover:border-white/25"
         >
-            {/* Thumbnail — soft zoom on hover, clipped by the overflow wrapper. */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <img
-                    src={project.image}
-                    alt={t(project.imageAltKey)}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                />
+            {/* Immersive background screenshot — subtle zoom on card hover. */}
+            <img
+                src={project.image}
+                alt={t(project.imageAltKey)}
+                loading="lazy"
+                className="
+                    absolute inset-0 -z-20 h-full w-full object-cover object-top
+                    transition-transform duration-500 ease-out
+                    hover:scale-105 group-hover:scale-105
+                "
+            />
+
+            {/* Editorial dark scrim so overlaid badge and typography stay legible. */}
+            <div
+                aria-hidden="true"
+                className="
+                    pointer-events-none absolute inset-0 -z-10
+                    bg-gradient-to-t from-black/90 via-black/45 to-black/15
+                    transition-opacity duration-300 group-hover:from-black/95
+                "
+            />
+
+            {/* Top-right circular diagonal arrow badge. */}
+            <div className="flex justify-end p-4 sm:p-5">
+                <span
+                    aria-hidden="true"
+                    className="
+                        flex h-9 w-9 items-center justify-center rounded-full
+                        border border-white/15 bg-black/60 text-white backdrop-blur-md
+                        transition-all duration-300
+                        group-hover:border-white/30 group-hover:bg-black/80
+                    "
+                >
+                    <FiArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
             </div>
 
-            {/* Card copy — category overline + project title. */}
-            <div className="flex flex-col gap-2 p-5 sm:p-6">
+            {/* Overlaid card copy — category overline + project title. */}
+            <div className="flex flex-col gap-1.5 p-5 pt-0 sm:p-6 sm:pt-0">
                 <p className="text-xs font-medium uppercase tracking-widest text-primary">
                     {t(project.categoryKey)}
                 </p>
-                <h3 className="font-title text-lg font-bold leading-snug text-white sm:text-xl">
+                <h3 className="font-title text-base font-bold leading-snug text-white sm:text-lg">
                     {t(project.titleKey)}
                 </h3>
             </div>
@@ -120,17 +157,20 @@ function Portfolio() {
     return (
         <section id="portfolio" className="w-full bg-bg py-20 sm:py-24 lg:py-28">
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                {/* Section header — editorial catchphrase + supporting line. */}
+                {/* Section header — stacked editorial headline + supporting subtitle. */}
                 <div className="max-w-3xl">
-                    <h2 className="font-title text-3xl font-bold tracking-tight text-text sm:text-4xl lg:text-5xl">
-                        {t("Portfolio.title")}
+                    <h2 className="font-title text-3xl font-bold leading-tight tracking-tight text-text sm:text-4xl lg:text-5xl">
+                        <span className="block">{firstTitleLine}</span>
+                        {secondTitleLine ? (
+                            <span className="mt-1 block">{secondTitleLine}</span>
+                        ) : null}
                     </h2>
                     <p className="mt-4 max-w-2xl text-lg leading-relaxed text-text-muted sm:text-xl">
                         {t("Portfolio.subtitle")}
                     </p>
                 </div>
 
-                {/* Two editorial blocks of four project cards. */}
+                {/* Two editorial blocks of four immersive project cards. */}
                 <div className="mt-12 space-y-6 lg:mt-16 lg:space-y-8">
                     {PORTFOLIO_BLOCKS.map((block, blockIndex) => (
                         <div

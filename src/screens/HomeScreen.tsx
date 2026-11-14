@@ -24,9 +24,7 @@ function HomeScreen(_props: IHomeScreenProps) {
             <SeoMetricsDemo />
             <ThemeToggleDemo />
             <LanguageSwitcherDemo />
-            <AboutUs />
             <Methodology />
-            <WhyUs />
             <Contact />
         </>
     );

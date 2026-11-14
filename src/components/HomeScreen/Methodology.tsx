@@ -183,7 +183,7 @@ function Methodology({ className = "" }: IMethodologyProps) {
                             viewport={{ once: true, amount: 0.2 }}
                         >
                             <h2 className="font-title text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-                                <span className="block text-primary">
+                                <span className="block font-playfair-display italic text-primary">
                                     {t("HomeScreen.Methodology.eyebrow")}
                                 </span>
                                 <span className="mt-2 block text-text transition-colors duration-500">

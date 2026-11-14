@@ -78,6 +78,8 @@ export interface IServiceCardItem {
 export interface IServiceCardProps {
   /** Static content descriptor (icon + i18n keys) for this card */
   card: IServiceCardItem;
+  /** Zero-based position of the card in the deck (drives the stacking stagger) */
+  index: number;
   /** Whether the parent section has entered the viewport (drives the entrance reveal) */
   isSectionVisible: boolean;
 }
@@ -231,4 +233,19 @@ export interface IResponsiveDevicePreset {
 /** Props for the ResponsiveDemo section component */
 export interface IResponsiveDemoProps {
   className?: string;
+}
+
+/** Direction of the brief typography swap during the glitch animation */
+export type TGlitchFontSwapMode = "mono-to-playfair" | "playfair-to-mono";
+
+/** Configuration options for the reusable glitch animation generator */
+export interface IGlitchAnimationOptions {
+  /** Scoped CSS class name attached to the glitching text element */
+  className: string;
+  /** Direction of the momentary typography glitch swap */
+  fontSwapMode?: TGlitchFontSwapMode;
+  /** Total loop duration in seconds (defaults to 4.2s) */
+  durationSeconds?: number;
+  /** Optional fixed/minimum width (in em) so font swaps never reflow surrounding text */
+  minWidth?: string;
 }

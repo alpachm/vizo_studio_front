@@ -8,6 +8,12 @@ import { FiArrowDown } from "react-icons/fi";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useTypewriter } from "../../hooks/useTypewriter";
 import { useHeroVisibility } from "../../context/HeroVisibilityContext";
+import { getGlitchAnimationStyles } from "../../utils/glitchAnimation";
+
+const HERO_PROFESSIONAL_GLITCH_STYLES = getGlitchAnimationStyles({
+    className: "hero-professional-glitch",
+    fontSwapMode: "playfair-to-mono",
+});
 
 /** Editorial exponential ease-out curve used for reveals. */
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
@@ -173,6 +179,9 @@ function Hero() {
             id="hero"
             className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black"
         >
+            {/* Reusable glitch keyframes for the final settled word ("profesional") */}
+            <style>{HERO_PROFESSIONAL_GLITCH_STYLES}</style>
+
             {/* Central message */}
             <h1 className="relative z-10 text-center font-mono font-bold leading-[1.1] tracking-tight text-[clamp(1.25rem,6vw,6.5rem)]">
                 {/* Static prefix — line 1 */}
@@ -217,11 +226,19 @@ function Hero() {
                                             ease: EASE_OUT,
                                         }}
                                     >
-                                        {currentWord}
+                                        <span
+                                            className={
+                                                isSettled ? "hero-professional-glitch" : undefined
+                                            }
+                                        >
+                                            {currentWord}
+                                        </span>
                                     </motion.span>
                                 </AnimatePresence>
                             ) : (
-                                <span className={`whitespace-nowrap ${WORD_VARIANTS[0]} text-primary`}>
+                                <span
+                                    className={`whitespace-nowrap ${WORD_VARIANTS[0]} text-primary`}
+                                >
                                     {displayedLines[1]}
                                     {activeLineIndex === 1 && caret}
                                 </span>
@@ -232,9 +249,7 @@ function Hero() {
                                 aria-hidden={!isSettled}
                                 initial={false}
                                 animate={
-                                    shouldReduceMotion
-                                        ? undefined
-                                        : { opacity: isSettled ? 1 : 0 }
+                                    shouldReduceMotion ? undefined : { opacity: isSettled ? 1 : 0 }
                                 }
                                 transition={{
                                     duration: shouldReduceMotion ? 0 : 0.3,
@@ -265,9 +280,7 @@ function Hero() {
                 className={`absolute bottom-8 left-1/2 z-10 -translate-x-1/2 transition-opacity sm:bottom-10 ${
                     shouldReduceMotion ? "duration-0" : "duration-700"
                 } ${
-                    isSettled
-                        ? "pointer-events-auto opacity-100"
-                        : "pointer-events-none opacity-0"
+                    isSettled ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
                 }`}
             >
                 <button

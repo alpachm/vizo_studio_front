@@ -19,21 +19,21 @@ const EASE_CUBIC = [0.25, 1, 0.5, 1] as const;
 const questionVariants = {
     initial: (direction: number) => ({
         opacity: 0,
-        x: direction > 0 ? 40 : -40,
+        x: direction > 0 ? 28 : -28,
     }),
     animate: {
         opacity: 1,
         x: 0,
         transition: {
-            duration: 0.35,
+            duration: 0.3,
             ease: EASE_CUBIC,
         },
     },
     exit: (direction: number) => ({
         opacity: 0,
-        x: direction > 0 ? -40 : 40,
+        x: direction > 0 ? -28 : 28,
         transition: {
-            duration: 0.25,
+            duration: 0.2,
             ease: EASE_CUBIC,
         },
     }),
@@ -71,10 +71,13 @@ const QUESTION_FIELDS: Array<keyof IContactQuestionnaireAnswers> = [
 ];
 const LAST_QUESTION_INDEX = QUESTION_FIELDS.length - 1;
 
-function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
+function Step2({ onComplete, initialAnswers }: IContactStep2Props) {
     const { t } = useTranslation();
 
-    const [[questionIndex, direction], setQuestionState] = useState<[number, number]>([0, 0]);
+    const [[questionIndex, direction], setQuestionState] = useState<[number, number]>([
+        initialAnswers ? LAST_QUESTION_INDEX : 0,
+        0,
+    ]);
 
     const {
         register,
@@ -113,7 +116,7 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                 (value && value !== "") ||
                 (t("HomeScreen.Contact.step2.budget.error") as string),
         });
-    }, [register]);
+    }, [register, t]);
 
     const goToQuestion = (nextIndex: number) => {
         setQuestionState([nextIndex, nextIndex > questionIndex ? 1 : -1]);
@@ -144,17 +147,20 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
         setValue(field, current === labelKey ? "" : labelKey, { shouldValidate: true });
     };
 
-    const inputBaseClasses =
-        "bg-transparent border-b border-text/30 focus:border-primary focus:outline-none rounded-none py-3 px-1 transition-colors w-full text-text placeholder:text-text/40 font-body text-base";
+    const progressPercentage = ((questionIndex + 1) / QUESTION_FIELDS.length) * 100;
 
-    const errorTextClasses = "text-red-400 text-sm mt-2 font-body";
+    const inputBaseClasses =
+        "w-full rounded-xl border border-neutral-500/25 bg-neutral-500/[0.03] px-4 py-3.5 text-base font-body text-text placeholder:text-text-muted/60 focus:border-primary focus:outline-none transition-colors duration-200";
+
+    const errorTextClasses = "text-red-400 text-sm mt-2 font-body block";
+
     const renderOptions = (
         options: IContactQuestionnaireOption[],
         selected: string,
         stack: boolean,
         field: "stage" | "timeline" | "budget",
     ) => (
-        <div className={stack ? "flex flex-col gap-3 w-full" : "flex flex-wrap gap-3 sm:gap-4 w-full"}>
+        <div className={stack ? "flex flex-col gap-3 w-full" : "flex flex-wrap gap-3 w-full"}>
             {options.map((option) => {
                 const isActive = selected === option.labelKey;
 
@@ -163,12 +169,12 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                         key={option.id}
                         type="button"
                         onClick={() => selectOption(field, option.labelKey)}
-                        className={`font-body text-base sm:text-lg font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-none transition-all duration-200 cursor-pointer border ${
+                        className={`font-body text-sm sm:text-base font-medium px-4 py-3.5 rounded-xl transition-all duration-200 cursor-pointer border ${
                             stack ? "w-full text-left" : ""
                         } ${
                             isActive
-                                ? "bg-primary border-primary text-white shadow-lg scale-[1.02]"
-                                : "bg-transparent border-text/20 text-text hover:border-primary"
+                                ? "bg-primary border-primary text-white shadow-md"
+                                : "bg-neutral-500/[0.03] border-neutral-500/25 text-text hover:border-primary/60"
                         }`}
                     >
                         {t(option.labelKey)}
@@ -179,33 +185,26 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
     );
 
     return (
-        <div className="w-full h-auto min-h-dvh flex flex-col bg-bg px-4 py-12 sm:px-8 md:px-16 lg:px-24">
-            {/* Back to the previous step */}
-            {onBack && (
-                <button
-                    type="button"
-                    onClick={onBack}
-                    className="flex items-center gap-2 text-text/60 hover:text-text transition-colors mb-8 self-start font-body text-sm cursor-pointer"
-                >
-                    <FiArrowLeft className="text-lg" />
-                    {t("HomeScreen.Contact.step2.back")}
-                </button>
-            )}
+        <div className="w-full flex flex-col">
+            {/* Top progress header & orange progress bar */}
+            <div className="w-full mb-7">
+                <div className="flex items-center justify-between">
+                    <span className="font-body text-xs sm:text-sm font-medium text-text-muted">
+                        {t("HomeScreen.Contact.step2.progress", {
+                            current: questionIndex + 1,
+                            total: QUESTION_FIELDS.length,
+                        })}
+                    </span>
+                </div>
+                <div className="w-full h-1 bg-neutral-500/20 rounded-full overflow-hidden mt-3">
+                    <div
+                        className="h-full bg-primary rounded-full transition-all duration-300 ease-out"
+                        style={{ width: `${progressPercentage}%` }}
+                    />
+                </div>
+            </div>
 
-            {/* Title */}
-            <h2 className="font-title text-2xl sm:text-4xl lg:text-5xl font-bold text-text mb-4">
-                {t("HomeScreen.Contact.step2.title")}
-            </h2>
-
-            {/* Progress indicator */}
-            <p className="font-body text-sm text-text/50 mb-10">
-                {t("HomeScreen.Contact.step2.progress", {
-                    current: questionIndex + 1,
-                    total: QUESTION_FIELDS.length,
-                })}
-            </p>
-
-            <div className="w-full max-w-2xl flex flex-col">
+            <div className="w-full flex flex-col min-h-[11rem] justify-between">
                 <AnimatePresence mode="wait" custom={direction}>
                     {/* 1. Objective — text input */}
                     {questionIndex === 0 && (
@@ -220,7 +219,7 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                         >
                             <label
                                 htmlFor="contact-objective"
-                                className="font-title text-xl sm:text-2xl font-bold text-text mb-6 block"
+                                className="font-title text-base sm:text-lg font-semibold text-text mb-4 block"
                             >
                                 {t("HomeScreen.Contact.step2.objective.label")}
                             </label>
@@ -261,7 +260,7 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                             exit="exit"
                             className="w-full"
                         >
-                            <p className="font-title text-xl sm:text-2xl font-bold text-text mb-6">
+                            <p className="font-title text-base sm:text-lg font-semibold text-text mb-4">
                                 {t("HomeScreen.Contact.step2.stage.label")}
                             </p>
                             {renderOptions(STAGE_OPTIONS, stage, true, "stage")}
@@ -282,7 +281,7 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                             exit="exit"
                             className="w-full"
                         >
-                            <p className="font-title text-xl sm:text-2xl font-bold text-text mb-6">
+                            <p className="font-title text-base sm:text-lg font-semibold text-text mb-4">
                                 {t("HomeScreen.Contact.step2.timeline.label")}
                             </p>
                             {renderOptions(TIMELINE_OPTIONS, timeline, false, "timeline")}
@@ -303,7 +302,7 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                             exit="exit"
                             className="w-full"
                         >
-                            <p className="font-title text-xl sm:text-2xl font-bold text-text mb-6">
+                            <p className="font-title text-base sm:text-lg font-semibold text-text mb-4">
                                 {t("HomeScreen.Contact.step2.budget.subtitle")}
                             </p>
                             {renderOptions(BUDGET_OPTIONS, budget, false, "budget")}
@@ -314,27 +313,27 @@ function Step2({ onBack, onComplete, initialAnswers }: IContactStep2Props) {
                     )}
                 </AnimatePresence>
 
-                {/* Navigation controls */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mt-10">
+                {/* Navigation controls — "Anterior" only renders when questionIndex > 0 */}
+                <div className="flex items-center justify-between gap-4 mt-8 pt-2">
                     {questionIndex > 0 && (
                         <button
                             type="button"
                             onClick={handlePrevious}
-                            className="self-start flex items-center justify-center gap-2 bg-transparent border border-text/20 text-text font-body text-lg sm:text-xl font-semibold px-10 py-4 sm:px-12 sm:py-5 rounded-none hover:border-text/50 active:scale-95 transition-all duration-200 cursor-pointer"
+                            className="inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-500/25 bg-transparent px-5 py-3 font-body text-sm sm:text-base font-medium text-text hover:border-neutral-500/50 active:scale-[0.98] transition-all duration-200 cursor-pointer"
                         >
-                            <FiArrowLeft className="text-lg" />
+                            <FiArrowLeft className="w-4 h-4 shrink-0" aria-hidden="true" />
                             {t("HomeScreen.Contact.step2.previous")}
                         </button>
                     )}
                     <button
                         type="button"
                         onClick={() => void handleNext()}
-                        className="self-start bg-primary text-white font-body text-lg sm:text-xl font-bold px-10 py-4 sm:px-12 sm:py-5 rounded-none shadow-lg hover:brightness-110 active:scale-95 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+                        className="ml-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-primary px-6 py-3 font-body text-sm sm:text-base font-semibold text-white shadow-md hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer"
                     >
                         {questionIndex === LAST_QUESTION_INDEX
                             ? t("HomeScreen.Contact.step2.complete")
                             : t("HomeScreen.Contact.step2.next")}
-                        {questionIndex !== LAST_QUESTION_INDEX && <FiArrowRight className="text-lg" />}
+                        <FiArrowRight className="w-4 h-4 shrink-0" aria-hidden="true" />
                     </button>
                 </div>
             </div>

@@ -241,6 +241,10 @@
       }
     },
     "Contact": {
+      "titleLine1": "Tu negocio ya es increíble.",
+      "titleLine2": "Que tu web también lo sea.",
+      "subtitle": "Cuéntanos qué tienes en mente. Empezamos con una conversación, sin compromiso y sin lenguaje complicado.",
+      "tagline": "Tú pones la idea. Nosotros, el siguiente paso.",
       "step1": {
         "title": "¿Tienes alguna idea?",
         "button": "Cuéntanos"

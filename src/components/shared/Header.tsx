@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // Header — Global fixed header with navigation and CTA
 // ---------------------------------------------------------------------------
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
@@ -42,8 +42,6 @@ function Header() {
     const { t } = useTranslation();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isOverlapping, setIsOverlapping] = useState(false);
-    const headerRef = useRef<HTMLElement>(null);
     const shouldReduceMotion = useReducedMotion();
     const { isHeroInView, isValuePropositionInView } = useHeroVisibility();
     const { theme } = useTheme();
@@ -58,18 +56,6 @@ function Header() {
 
             rafId = requestAnimationFrame(() => {
                 setIsScrolled(window.scrollY > 20);
-
-                // Pixel-perfect overlap detection with #contacto via getBoundingClientRect
-                const contactSection = document.getElementById("contacto");
-                if (contactSection) {
-                    const headerHeight = headerRef.current?.offsetHeight ?? 80;
-                    const contactRect = contactSection.getBoundingClientRect();
-                    // Header overlaps Contact ONLY when Contact's top edge is
-                    // at or above the Header's bottom edge AND Contact's bottom
-                    // edge is still below the viewport's top.
-                    setIsOverlapping(contactRect.top <= headerHeight && contactRect.bottom >= 0);
-                }
-
                 rafId = null;
             });
         };
@@ -104,9 +90,8 @@ function Header() {
 
     return (
         <header
-            ref={headerRef}
             className={`fixed top-0 left-0 right-0 z-50 w-full ease-[cubic-bezier(0.22,1,0.36,1)] transition-[opacity,transform] duration-300 ${
-                isOverlapping || isHeroInView || isValuePropositionInView
+                isHeroInView || isValuePropositionInView
                     ? "-translate-y-full opacity-0 pointer-events-none"
                     : "translate-y-0 opacity-100"
             }`}

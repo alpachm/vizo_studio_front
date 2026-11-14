@@ -403,6 +403,34 @@
         "featuredSnippet": "Your value proposition, in front of the right people.",
         "footnote": "This is what gaining visibility looks like. SEO positions your brand in front of people already searching for you."
       }
+    },
+    "ResponsiveDemo": {
+      "titleLine1": "Flawless design.",
+      "titleLine2": "On every screen.",
+      "subtitle": "Your clients visit you from their phone, tablet, or computer. We build 100% responsive websites that fluidly reorganize every element to look and feel effortless on any device.",
+      "tags": {
+        "mobileFirst": "Mobile-First",
+        "fluidLayout": "Fluid layout",
+        "allDevices": "All devices"
+      },
+      "cta": "Let's build your responsive web",
+      "card": {
+        "devices": {
+          "desktop": "Desktop",
+          "tablet": "Tablet",
+          "mobile": "Mobile"
+        },
+        "preview": {
+          "domain": "yourbusiness.com",
+          "badge": "100% Adaptive",
+          "headline": "Your brand, ready for every screen",
+          "ctaPill": "Explore",
+          "card1": "Speed",
+          "card2": "Clarity",
+          "card3": "Conversion"
+        },
+        "footnote": "The interface automatically adapts in real time. Tap any device to test the viewport."
+      }
     }
   }
 }

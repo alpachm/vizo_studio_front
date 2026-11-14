@@ -197,6 +197,7 @@ export interface IMethodologyProps {
 export interface IMethodologyStep {
   id: string;
   number: string;
+  icon: IconType;
   titleKey: string;
   descriptionKey: string;
 }

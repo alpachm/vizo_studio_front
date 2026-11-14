@@ -8,6 +8,12 @@ import { FiArrowDown } from "react-icons/fi";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useTypewriter } from "../../hooks/useTypewriter";
 import { useHeroVisibility } from "../../context/HeroVisibilityContext";
+import { getGlitchAnimationStyles } from "../../utils/glitchAnimation";
+
+const HERO_PROFESSIONAL_GLITCH_STYLES = getGlitchAnimationStyles({
+    className: "hero-professional-glitch",
+    fontSwapMode: "playfair-to-mono",
+});
 
 /** Editorial exponential ease-out curve used for reveals. */
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
@@ -173,6 +179,9 @@ function Hero() {
             id="hero"
             className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black"
         >
+            {/* Reusable glitch keyframes for the final settled word ("profesional") */}
+            <style>{HERO_PROFESSIONAL_GLITCH_STYLES}</style>
+
             {/* Central message */}
             <h1 className="relative z-10 text-center font-mono font-bold leading-[1.1] tracking-tight text-[clamp(1.25rem,6vw,6.5rem)]">
                 {/* Static prefix — line 1 */}
@@ -217,7 +226,15 @@ function Hero() {
                                             ease: EASE_OUT,
                                         }}
                                     >
-                                        {currentWord}
+                                        <span
+                                            className={
+                                                isSettled
+                                                    ? "hero-professional-glitch"
+                                                    : undefined
+                                            }
+                                        >
+                                            {currentWord}
+                                        </span>
                                     </motion.span>
                                 </AnimatePresence>
                             ) : (

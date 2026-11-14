@@ -232,3 +232,16 @@ export interface IResponsiveDevicePreset {
 export interface IResponsiveDemoProps {
   className?: string;
 }
+
+/** Direction of the brief typography swap during the glitch animation */
+export type TGlitchFontSwapMode = "mono-to-playfair" | "playfair-to-mono";
+
+/** Configuration options for the reusable glitch animation generator */
+export interface IGlitchAnimationOptions {
+  /** Scoped CSS class name attached to the glitching text element */
+  className: string;
+  /** Direction of the momentary typography glitch swap */
+  fontSwapMode?: TGlitchFontSwapMode;
+  /** Total loop duration in seconds (defaults to 4.5s) */
+  durationSeconds?: number;
+}

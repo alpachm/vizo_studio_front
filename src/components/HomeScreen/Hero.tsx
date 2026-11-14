@@ -177,7 +177,7 @@ function Hero() {
         <section
             ref={sectionRef}
             id="hero"
-            className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black"
+            className="relative flex h-dvh w-full flex-col items-center justify-center overflow-hidden bg-black"
         >
             {/* Reusable glitch keyframes for the final settled word ("profesional") */}
             <style>{HERO_PROFESSIONAL_GLITCH_STYLES}</style>
@@ -277,7 +277,7 @@ function Hero() {
             {/* Scroll indicator — hidden while the typewriter & rolling counter
                 are running; fades in once the final word lands on "profesional?". */}
             <div
-                className={`absolute bottom-8 left-1/2 z-10 -translate-x-1/2 transition-opacity sm:bottom-10 ${
+                className={`absolute bottom-20 left-1/2 z-10 -translate-x-1/2 transition-opacity sm:bottom-12 ${
                     shouldReduceMotion ? "duration-0" : "duration-700"
                 } ${
                     isSettled ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"

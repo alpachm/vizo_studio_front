@@ -134,7 +134,7 @@ function Contact(_props: IContactProps) {
                         <span className="block text-text">
                             {t("HomeScreen.Contact.titleLine1")}
                         </span>
-                        <span className="block text-primary mt-1">
+                        <span className="block font-playfair-display italic text-primary mt-1">
                             {t("HomeScreen.Contact.titleLine2")}
                         </span>
                     </h2>

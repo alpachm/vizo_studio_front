@@ -114,7 +114,7 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
                             <span className="block text-text transition-colors duration-500">
                                 {t("HomeScreen.ThemeToggleDemo.titleLine1")}
                             </span>
-                            <span className="mt-1 block text-primary">
+                            <span className="mt-1 block font-playfair-display italic text-primary">
                                 {t("HomeScreen.ThemeToggleDemo.titleLine2")}
                             </span>
                         </h2>

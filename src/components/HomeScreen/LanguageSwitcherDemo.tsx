@@ -142,7 +142,7 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
                                     "HomeScreen.LanguageSwitcherDemo.titleLine1",
                                 )}
                             </span>
-                            <span className="mt-1 block text-primary">
+                            <span className="mt-1 block font-playfair-display italic text-primary">
                                 {t(
                                     "HomeScreen.LanguageSwitcherDemo.titleLine2",
                                 )}

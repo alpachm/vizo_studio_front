@@ -150,7 +150,7 @@ function ResponsiveDemo({ className = "" }: IResponsiveDemoProps) {
                             <span className="block text-text transition-colors duration-500">
                                 {t("HomeScreen.ResponsiveDemo.titleLine1")}
                             </span>
-                            <span className="mt-1 block text-primary">
+                            <span className="mt-1 block font-playfair-display italic text-primary">
                                 {t("HomeScreen.ResponsiveDemo.titleLine2")}
                             </span>
                         </h2>

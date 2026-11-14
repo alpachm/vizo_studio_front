@@ -344,6 +344,39 @@
           "description": "We develop exclusive software systems and tools tailored to your company's workflows. We automate complex processes, integrate data, and grow at the pace of your operation."
         }
       }
+    },
+    "ThemeToggleDemo": {
+      "titleLine1": "Your web adapts.",
+      "titleLine2": "Not the other way around.",
+      "subtitle": "Did you notice the theme change? We build intuitive, accessible interfaces that adapt naturally to every user, making their experience smoother and more comfortable.",
+      "card": {
+        "badge": "One web, more possibilities",
+        "toggleAriaLabel": "Toggle between light and dark mode",
+        "titleLine1": "Same identity.",
+        "titleLine2": "An experience designed for you.",
+        "footnote": "The theme changes as you scroll through this section."
+      }
+    },
+    "LanguageSwitcherDemo": {
+      "titleLine1": "Your business.",
+      "titleLine2": "Without language barriers.",
+      "subtitle": "Speaking your users' language builds trust and opens the door to new markets. We develop multilingual websites and applications with experiences tailored to every audience.",
+      "cta": "Let's talk about your multilingual project",
+      "card": {
+        "switchToEn": "Try in English",
+        "switchToEs": "Back to Spanish",
+        "footnote": "Test the language switch: press the button to explore the website in English. You can switch back to Spanish anytime.",
+        "rotatingTitles": {
+          "en": "Your next opportunity might speak another language.",
+          "zh": "您的下一个机会可能说着另一种语言。",
+          "ar": "فرصتك القادمة قد تتحدث لغة أخرى.",
+          "fr": "Votre prochaine opportunité parle peut-être une autre langue.",
+          "pt": "Sua próxima oportunidade pode falar outro idioma.",
+          "de": "Ihre nächste Chance spricht vielleicht eine andere Sprache.",
+          "it": "La tua prossima opportunità può parlare un'altra lingua.",
+          "es": "Tu próxima oportunidad puede hablar otro idioma."
+        }
+      }
     }
   }
 }

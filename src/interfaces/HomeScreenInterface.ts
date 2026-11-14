@@ -200,3 +200,13 @@ export interface IMethodologyStep {
   titleKey: string;
   descriptionKey: string;
 }
+
+/** Props for the ThemeToggleDemo section component */
+export interface IThemeToggleDemoProps {
+  className?: string;
+}
+
+/** Props for the LanguageSwitcherDemo section component */
+export interface ILanguageSwitcherDemoProps {
+  className?: string;
+}

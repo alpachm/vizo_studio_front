@@ -8,6 +8,8 @@ import WhyUs from "../components/HomeScreen/WhyUs";
 import Services from "../components/HomeScreen/Services";
 import type { IHomeScreenProps } from "../interfaces/HomeScreenInterface";
 import Portfolio from "../components/HomeScreen/Portfolio";
+import ThemeToggleDemo from "../components/HomeScreen/ThemeToggleDemo";
+import LanguageSwitcherDemo from "../components/HomeScreen/LanguageSwitcherDemo";
 import Methodology from "../components/HomeScreen/Methodology";
 import Contact from "../components/HomeScreen/Contact";
 
@@ -18,6 +20,8 @@ function HomeScreen(_props: IHomeScreenProps) {
             <ValueProposition />
             <Services />
             <Portfolio />
+            <ThemeToggleDemo />
+            <LanguageSwitcherDemo />
             <AboutUs />
             <Methodology />
             <WhyUs />

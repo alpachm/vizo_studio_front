@@ -210,3 +210,8 @@ export interface IThemeToggleDemoProps {
 export interface ILanguageSwitcherDemoProps {
   className?: string;
 }
+
+/** Props for the SeoMetricsDemo section component */
+export interface ISeoMetricsDemoProps {
+  className?: string;
+}

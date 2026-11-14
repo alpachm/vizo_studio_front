@@ -259,7 +259,7 @@ function Portfolio(_props: IPortfolioProps) {
             key={project.id}
             className="
                 group relative isolate flex w-full flex-col justify-end overflow-hidden
-                aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/8.5]
+                h-[clamp(10rem,26vh,16rem)]
                 rounded-2xl border border-white/10 bg-neutral-900
                 transition-colors duration-300 hover:border-white/25
             "
@@ -287,8 +287,8 @@ function Portfolio(_props: IPortfolioProps) {
             />
 
             {/* Overlaid card copy — category overline + project title. */}
-            <div className="flex flex-col gap-1.5 p-5 sm:p-6">
-                <p className="text-xs font-medium uppercase tracking-widest text-primary">
+            <div className="flex flex-col gap-1 p-4 sm:gap-1.5 sm:p-5">
+                <p className="text-[11px] font-medium uppercase tracking-widest text-primary sm:text-xs">
                     {t(project.categoryKey)}
                 </p>
                 <h3 className="font-title text-base font-bold leading-snug text-white sm:text-lg lg:text-xl">
@@ -309,20 +309,20 @@ function Portfolio(_props: IPortfolioProps) {
         >
             <div
                 ref={stageRef}
-                className="absolute inset-x-0 top-0 z-10 flex h-screen w-full flex-col justify-center overflow-hidden bg-bg py-8 sm:py-12"
+                className="absolute inset-x-0 top-0 z-10 flex h-screen w-full flex-col justify-center bg-bg pt-20 pb-6 sm:pt-24 sm:pb-8"
             >
                 <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
                     {/* Section header — stacked editorial headline + supporting subtitle. */}
                     <div className="max-w-3xl">
-                        <h2 className="font-title text-2xl font-bold leading-tight tracking-tight text-text sm:text-4xl lg:text-5xl">
+                        <h2 className="font-title text-2xl font-bold leading-snug tracking-tight text-text sm:text-3xl lg:text-4xl">
                             <span className="block">{firstTitleLine}</span>
                             {secondTitleLine ? (
-                                <span className="mt-1 block">
+                                <span className="mt-0.5 block">
                                     {secondTitleLine}
                                 </span>
                             ) : null}
                         </h2>
-                        <p className="mt-3 max-w-2xl text-base leading-relaxed text-text-muted sm:mt-4 sm:text-lg lg:text-xl">
+                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted sm:mt-3 sm:text-base lg:text-lg">
                             {t("Portfolio.subtitle")}
                         </p>
                     </div>
@@ -332,16 +332,16 @@ function Portfolio(_props: IPortfolioProps) {
                         - Desktop (lg+): 2 columns of 2 vertically stacked projects (2x2 = 4) in view. */}
                     <div
                         ref={viewportRef}
-                        className="mt-6 w-full overflow-hidden sm:mt-8 lg:mt-10"
+                        className="mt-5 w-full overflow-hidden sm:mt-6 lg:mt-7"
                     >
                         <div
                             ref={trackRef}
-                            className="flex w-full gap-4 sm:gap-6 lg:gap-8 will-change-transform"
+                            className="flex w-full gap-4 sm:gap-5 lg:gap-6 will-change-transform"
                         >
                             {PORTFOLIO_COLUMNS.map((column, columnIndex) => (
                                 <div
                                     key={`portfolio-column-${columnIndex}`}
-                                    className="flex w-full shrink-0 flex-col gap-4 sm:gap-6 lg:w-[calc((100%-2rem)/2)] lg:gap-8"
+                                    className="flex w-full shrink-0 flex-col gap-4 sm:gap-5 lg:w-[calc((100%-1.5rem)/2)] lg:gap-5"
                                 >
                                     {column.map(renderProjectCard)}
                                 </div>

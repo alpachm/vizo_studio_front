@@ -2,7 +2,7 @@
 // Header — Global fixed header with navigation and CTA
 // ---------------------------------------------------------------------------
 import { useState, useCallback, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -11,6 +11,10 @@ import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
 import { useHeroVisibility } from "../../context/HeroVisibilityContext";
 import { useTheme } from "../../context/ThemeContext";
+import {
+    saveHomeScrollY,
+    skipNextHomeScrollRestore,
+} from "../../utils/homeScrollPosition";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------
@@ -23,7 +27,6 @@ const EASE_OUT_EXPO: [number, number, number, number] = [0.22, 1, 0.36, 1];
 /** Maps route paths to their corresponding home‑page section IDs. */
 const ROUTE_TO_SECTION_ID: Record<string, string> = {
     "/services": "services",
-    "/about": "about-us",
     "/portfolio": "portfolio",
     "/contact": "contacto",
 };
@@ -40,6 +43,8 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
 
 function Header() {
     const { t } = useTranslation();
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const shouldReduceMotion = useReducedMotion();
@@ -77,16 +82,46 @@ function Header() {
 
     const handleNavClick = useCallback(
         (to: string, e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
-            const sectionId = ROUTE_TO_SECTION_ID[to];
-            if (!sectionId) return; // fallback to default link behavior
-
             e.preventDefault();
-            scrollToSection(sectionId, closeMobile);
+            closeMobile();
+
+            const sectionId = ROUTE_TO_SECTION_ID[to];
+            if (sectionId) {
+                if (pathname === "/") {
+                    scrollToSection(sectionId);
+                } else {
+                    skipNextHomeScrollRestore();
+                    void navigate({ to: "/" }).then(() => {
+                        window.setTimeout(() => {
+                            scrollToSection(sectionId);
+                        }, 120);
+                    });
+                }
+                return;
+            }
+
+            if (to === "/") {
+                if (pathname === "/") {
+                    scrollToTop();
+                } else {
+                    // Navigate back to "/" and let HomeScreen restore the exact scroll position
+                    void navigate({ to: "/", resetScroll: false });
+                }
+                return;
+            }
+
+            if (pathname === "/") {
+                saveHomeScrollY(window.scrollY);
+            }
+            void navigate({ to });
         },
-        [scrollToSection, closeMobile],
+        [pathname, navigate, scrollToSection, scrollToTop, closeMobile],
     );
 
-    const navItems = DEFAULT_NAV_ITEMS;
+    const navItems: NavItem[] =
+        pathname === "/"
+            ? DEFAULT_NAV_ITEMS
+            : [{ labelKey: "Header.nav.home", to: "/" }, ...DEFAULT_NAV_ITEMS];
 
     return (
         <header
@@ -113,9 +148,15 @@ function Header() {
                         {/* ---- Logo / Brand ---- */}
                         <Link
                             to="/"
+                            resetScroll={false}
                             className="col-start-1 flex shrink-0 items-center justify-self-start"
                             aria-label={t("Common.appName")}
-                            onClick={() => scrollToTop(closeMobile)}
+                            onClick={() => {
+                                closeMobile();
+                                if (pathname === "/") {
+                                    scrollToTop();
+                                }
+                            }}
                         >
                             <BrandLogo className="text-lg sm:text-xl" />
                         </Link>

@@ -3,11 +3,16 @@
 //           contact, navigation, back-to-top, and sub-footer legal row.
 // ---------------------------------------------------------------------------
 import { useCallback } from "react";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiMail, FiArrowUp } from "react-icons/fi";
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 import BrandLogo from "./BrandLogo";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
+import {
+    saveHomeScrollY,
+    skipNextHomeScrollRestore,
+} from "../../utils/homeScrollPosition";
 import type {
     FooterProps,
     FooterNavItem,
@@ -28,7 +33,6 @@ const DEFAULT_NAV_ITEMS: FooterNavItem[] = [
 /** Maps route paths to their corresponding home‑page section IDs. */
 const ROUTE_TO_SECTION_ID: Record<string, string> = {
     "/services": "services",
-    "/about": "about-us",
     "/contact": "contacto",
 };
 
@@ -64,6 +68,8 @@ function Footer({
     whatsapp = DEFAULT_WHATSAPP,
 }: FooterProps) {
     const { t } = useTranslation();
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
 
     const { scrollToSection } = useScrollToSection();
 
@@ -160,8 +166,22 @@ function Footer({
                                     onClick={() => {
                                         const sectionId = ROUTE_TO_SECTION_ID[item.to];
                                         if (sectionId) {
-                                            scrollToSection(sectionId);
+                                            if (pathname === "/") {
+                                                scrollToSection(sectionId);
+                                            } else {
+                                                skipNextHomeScrollRestore();
+                                                void navigate({ to: "/" }).then(() => {
+                                                    window.setTimeout(() => {
+                                                        scrollToSection(sectionId);
+                                                    }, 120);
+                                                });
+                                            }
+                                            return;
                                         }
+                                        if (pathname === "/") {
+                                            saveHomeScrollY(window.scrollY);
+                                        }
+                                        void navigate({ to: item.to });
                                     }}
                                     className="font-body text-base sm:text-lg text-text-muted hover:text-primary transition-colors duration-200 w-fit bg-transparent border-none cursor-pointer"
                                 >

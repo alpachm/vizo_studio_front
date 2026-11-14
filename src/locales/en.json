@@ -16,6 +16,7 @@
   },
   "Header": {
     "nav": {
+      "home": "Home",
       "blog": "Blog",
       "services": "Services",
       "aboutUs": "About us",
@@ -431,6 +432,91 @@
         },
         "footnote": "The interface automatically adapts in real time. Tap any device to test the viewport."
       }
+    }
+  },
+  "AboutUsScreen": {
+    "backToHome": "Back to home",
+    "hero": {
+      "eyebrow": "About Vizo Studio",
+      "titleLine1": "More than developers.",
+      "titleLine2": "Your technology partner.",
+      "lead": "We turn ambitious ideas and operational challenges into modern, fast digital platforms designed to deliver real business results."
+    },
+    "story": {
+      "title": "Who we are?",
+      "paragraph1": "At Vizostudio we have a passionate team with over 3 years of experience developing custom software. We have supported brands and entrepreneurs in <country>Venezuela</country>, <country>Colombia</country> and <country>Argentina</country>, transforming complex challenges into agile, secure and efficient digital platforms.",
+      "paragraph2": "Working with us means rigorous planning, transparent communication and constant feedback at every stage. We focus on delivering stable and scalable products, becoming the technical partner your project needs to grow.",
+      "paragraph3": "We combine modern software engineering, user-centered interface design, and performance optimization so every website, mobile app, or custom system reflects the true value of your business.",
+      "imageAlt": "Vizostudio development team view",
+      "regionBadge": "Venezuela • Colombia • Argentina"
+    },
+    "stats": {
+      "experience": {
+        "value": "+3 years",
+        "label": "Proven experience",
+        "description": "Designing and deploying high-impact digital solutions."
+      },
+      "countries": {
+        "value": "3 countries",
+        "label": "Regional presence",
+        "description": "Powering projects across Venezuela, Colombia, and Argentina with a global mindset."
+      },
+      "custom": {
+        "value": "100%",
+        "label": "Custom built",
+        "description": "Clean code, scalable architecture, and zero generic templates."
+      }
+    },
+    "philosophy": {
+      "titleLine1": "Our vision.",
+      "titleLine2": "Building with purpose.",
+      "mission": {
+        "badge": "Our Mission",
+        "title": "Empowering businesses through clear, effective technology",
+        "description": "We build digital tools that solve real problems, automate workflows, and elevate how every brand is perceived by its customers."
+      },
+      "vision": {
+        "badge": "Our Vision",
+        "title": "To be the go-to technology studio for ambitious brands",
+        "description": "We strive to lead the digital evolution of companies across Latin America and beyond, uniting technical excellence, memorable design, and close collaboration."
+      }
+    },
+    "pillars": {
+      "titleLine1": "Why choose us?",
+      "titleLine2": "We make your project stand out.",
+      "subtitle": "Every line of code and every design decision is crafted for stability, speed, and long-term product growth.",
+      "cards": {
+        "proactive": {
+          "title": "Proactive Work",
+          "description": "We don't just follow instructions. We analyze your project, propose advanced solutions, and anticipate technical challenges before they affect your development."
+        },
+        "organized": {
+          "title": "Organized Management",
+          "description": "We plan each project phase with clear methodologies, ensuring timely deliveries, well-defined milestones, and full visibility of progress."
+        },
+        "quality": {
+          "title": "High Quality Standards",
+          "description": "We build with clean code, scalable architecture, high loading speed, and integrated security, applying the best modern web environment practices."
+        },
+        "communication": {
+          "title": "Communication & Feedback",
+          "description": "We maintain a constant and transparent flow at all times. We listen to your requirements, iterate with your ideas, and keep you informed without complex technical jargon."
+        },
+        "scalability": {
+          "title": "Scalable Architecture",
+          "description": "We engineer every system with your company's future in mind, making it seamless to add new features, users, and markets without rebuilding from scratch."
+        },
+        "partnership": {
+          "title": "Ongoing Partnership",
+          "description": "We don't disappear after launch. We back you up with technical support, monitoring, and continuous improvements so your digital product performs at its peak."
+        }
+      }
+    },
+    "cta": {
+      "titleLine1": "Have a project in mind?",
+      "titleLine2": "Let's build it together.",
+      "subtitle": "Tell us about your idea and let's discover how to take your digital presence and business operations to the next level.",
+      "button": "Let's talk about your idea"
     }
   }
 }

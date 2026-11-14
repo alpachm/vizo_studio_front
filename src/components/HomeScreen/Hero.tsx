@@ -9,6 +9,10 @@ import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useTypewriter } from "../../hooks/useTypewriter";
 import { useHeroVisibility } from "../../context/HeroVisibilityContext";
 import { getGlitchAnimationStyles } from "../../utils/glitchAnimation";
+import {
+    hasCompletedHeroIntro,
+    markHeroIntroCompleted,
+} from "../../utils/homeScrollPosition";
 
 const HERO_PROFESSIONAL_GLITCH_STYLES = getGlitchAnimationStyles({
     className: "hero-professional-glitch",
@@ -77,7 +81,9 @@ const LAST_WORD_INDEX = WORD_KEYS.length - 1;
 function Hero() {
     const { t } = useTranslation();
     const { scrollToSection } = useScrollToSection();
-    const shouldReduceMotion = useReducedMotion() ?? false;
+    const prefersReducedMotion = useReducedMotion() ?? false;
+    const [skipIntro] = useState<boolean>(() => hasCompletedHeroIntro());
+    const shouldReduceMotion = prefersReducedMotion || skipIntro;
     const sectionRef = useRef<HTMLElement>(null);
     const { setIsHeroInView } = useHeroVisibility();
 
@@ -90,11 +96,16 @@ function Hero() {
     // word, which doubles as the first occupant of the rolling slot.
     const typewriterLines = useMemo(() => [prefix, words[0]], [prefix, words]);
 
-    const {
-        displayedLines,
-        activeLineIndex,
-        isComplete: isTypingComplete,
-    } = useTypewriter(typewriterLines, TYPEWRITER_START_DELAY_MS, TYPEWRITER_SPEED_MS);
+    const typewriterResult = useTypewriter(
+        typewriterLines,
+        TYPEWRITER_START_DELAY_MS,
+        TYPEWRITER_SPEED_MS,
+    );
+    const displayedLines = skipIntro ? typewriterLines : typewriterResult.displayedLines;
+    const activeLineIndex = skipIntro
+        ? typewriterLines.length - 1
+        : typewriterResult.activeLineIndex;
+    const isTypingComplete = skipIntro ? true : typewriterResult.isComplete;
 
     // Index of the currently-visible rolling word. Once typing finishes the
     // counter advances one step at a time until it lands on the final word.
@@ -132,6 +143,15 @@ function Hero() {
     const isSettled = isTypingComplete && effectiveWordIndex === LAST_WORD_INDEX;
     const currentWord = words[effectiveWordIndex];
     const wordVariant = WORD_VARIANTS[effectiveWordIndex];
+
+    useEffect(() => {
+        if (isSettled) {
+            markHeroIntroCompleted();
+        }
+        return () => {
+            markHeroIntroCompleted();
+        };
+    }, [isSettled]);
 
     // Blinking block caret shown on whichever line is currently being typed.
     const caret = (

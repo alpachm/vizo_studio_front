@@ -9,9 +9,24 @@ import ReactGA from "react-ga4";
 
 // Import the auto-generated route tree (produced by TanStack Router Vite plugin)
 import { routeTree } from "./routeTree.gen";
+import { saveHomeScrollY } from "./utils/homeScrollPosition";
 
-// Create the router instance
-const router = createRouter({ routeTree });
+// Create the router instance.
+// Returning `false` for `location.pathname === "/"` prevents TanStack Router's
+// internal `onRendered` listener from resetting `window.scrollY` to `0` after
+// `HomeScreen` restores the user's saved scroll position.
+const router = createRouter({
+    routeTree,
+    scrollRestoration: ({ location }) => location.pathname !== "/",
+});
+
+// Snapshot the exact scroll position of "/" right before any route transition
+// away from the Home screen begins (before DOM teardown can clamp `scrollY`).
+router.subscribe("onBeforeLoad", ({ fromLocation, toLocation }) => {
+    if (fromLocation?.pathname === "/" && toLocation.pathname !== "/") {
+        saveHomeScrollY(window.scrollY);
+    }
+});
 
 const TRACKING_ID: string | undefined = import.meta.env.VITE_GA_MEASUREMENT_ID;
 

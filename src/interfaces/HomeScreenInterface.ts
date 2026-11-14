@@ -216,3 +216,19 @@ export interface ILanguageSwitcherDemoProps {
 export interface ISeoMetricsDemoProps {
   className?: string;
 }
+
+/** Device viewport identifiers for the ResponsiveDemo showcase */
+export type TResponsiveDevice = "desktop" | "tablet" | "mobile";
+
+/** Descriptor for a single device preset in the ResponsiveDemo showcase */
+export interface IResponsiveDevicePreset {
+  id: TResponsiveDevice;
+  icon: IconType;
+  labelKey: string;
+  viewportLabel: string;
+}
+
+/** Props for the ResponsiveDemo section component */
+export interface IResponsiveDemoProps {
+  className?: string;
+}

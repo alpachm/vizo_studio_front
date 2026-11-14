@@ -6,6 +6,7 @@ import ValueProposition from "../components/HomeScreen/ValueProposition";
 import Services from "../components/HomeScreen/Services";
 import type { IHomeScreenProps } from "../interfaces/HomeScreenInterface";
 import Portfolio from "../components/HomeScreen/Portfolio";
+import ResponsiveDemo from "../components/HomeScreen/ResponsiveDemo";
 import SeoMetricsDemo from "../components/HomeScreen/SeoMetricsDemo";
 import ThemeToggleDemo from "../components/HomeScreen/ThemeToggleDemo";
 import LanguageSwitcherDemo from "../components/HomeScreen/LanguageSwitcherDemo";
@@ -19,6 +20,7 @@ function HomeScreen(_props: IHomeScreenProps) {
             <ValueProposition />
             <Services />
             <Portfolio />
+            <ResponsiveDemo />
             <SeoMetricsDemo />
             <ThemeToggleDemo />
             <LanguageSwitcherDemo />

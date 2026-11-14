@@ -403,6 +403,34 @@
         "featuredSnippet": "Tu propuesta, frente a las personas correctas.",
         "footnote": "Así se ve ganar visibilidad. El SEO posiciona tu marca frente a quienes ya te están buscando."
       }
+    },
+    "ResponsiveDemo": {
+      "titleLine1": "Diseño impecable.",
+      "titleLine2": "En cualquier pantalla.",
+      "subtitle": "Tus clientes te visitan desde su teléfono, tablet o computadora. Creamos sitios web 100% responsivos que reorganizan cada elemento con fluidez para verse e interactuar perfecto en todo dispositivo.",
+      "tags": {
+        "mobileFirst": "Mobile-First",
+        "fluidLayout": "Diseño fluido",
+        "allDevices": "Todo dispositivo"
+      },
+      "cta": "Creemos tu web adaptable",
+      "card": {
+        "devices": {
+          "desktop": "Escritorio",
+          "tablet": "Tablet",
+          "mobile": "Móvil"
+        },
+        "preview": {
+          "domain": "tunegocio.com",
+          "badge": "100% Adaptable",
+          "headline": "Tu marca, lista para cada pantalla",
+          "ctaPill": "Explorar",
+          "card1": "Velocidad",
+          "card2": "Claridad",
+          "card3": "Conversión"
+        },
+        "footnote": "La interfaz se adapta automáticamente en tiempo real. Pulsa cualquier dispositivo para probar la vista."
+      }
     }
   }
 }

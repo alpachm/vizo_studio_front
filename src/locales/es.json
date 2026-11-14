@@ -16,6 +16,7 @@
   },
   "Header": {
     "nav": {
+      "home": "Inicio",
       "blog": "Blog",
       "services": "Servicios",
       "aboutUs": "Sobre nosotros",
@@ -431,6 +432,91 @@
         },
         "footnote": "La interfaz se adapta automáticamente en tiempo real. Pulsa cualquier dispositivo para probar la vista."
       }
+    }
+  },
+  "AboutUsScreen": {
+    "backToHome": "Volver al inicio",
+    "hero": {
+      "eyebrow": "Sobre Vizo Studio",
+      "titleLine1": "Más que desarrolladores.",
+      "titleLine2": "Tu aliado tecnológico.",
+      "lead": "Transformamos ideas ambiciosas y desafíos operativos en plataformas digitales modernas, rápidas y diseñadas para generar resultados reales."
+    },
+    "story": {
+      "title": "¿Quiénes somos?",
+      "paragraph1": "En Vizostudio contamos con un equipo apasionado que suma más de 3 años desarrollando software a la medida. Hemos acompañado a marcas y emprendedores en <country>Venezuela</country>, <country>Colombia</country> y <country>Argentina</country>, transformando desafíos complejos en plataformas digitales ágiles, seguras y eficientes.",
+      "paragraph2": "Trabajar con nosotros significa planificación rigurosa, comunicación transparente y feedback constante en cada etapa. Nos enfocamos en entregar productos estables y escalables, convirtiéndonos en el aliado técnico que tu proyecto necesita para crecer.",
+      "paragraph3": "Combinamos ingeniería de software moderna, diseño de interfaces centrado en el usuario y optimización de rendimiento para que cada sitio web, aplicación móvil o sistema a medida refleje el verdadero valor de tu negocio.",
+      "imageAlt": "Vista del equipo de desarrollo de Vizostudio",
+      "regionBadge": "Venezuela • Colombia • Argentina"
+    },
+    "stats": {
+      "experience": {
+        "value": "+3 años",
+        "label": "Experiencia comprobada",
+        "description": "Diseñando y desplegando soluciones digitales de alto impacto."
+      },
+      "countries": {
+        "value": "3 países",
+        "label": "Presencia regional",
+        "description": "Impulsando proyectos en Venezuela, Colombia y Argentina con visión global."
+      },
+      "custom": {
+        "value": "100%",
+        "label": "Desarrollo a medida",
+        "description": "Código limpio, arquitectura escalable y cero plantillas genéricas."
+      }
+    },
+    "philosophy": {
+      "titleLine1": "Nuestra visión.",
+      "titleLine2": "Construir con propósito.",
+      "mission": {
+        "badge": "Nuestra Misión",
+        "title": "Impulsar negocios a través de tecnología clara y efectiva",
+        "description": "Creamos herramientas digitales que resuelven problemas reales, automatizan procesos y elevan la percepción de cada marca frente a sus clientes."
+      },
+      "vision": {
+        "badge": "Nuestra Visión",
+        "title": "Ser el estudio tecnológico de referencia para marcas que buscan crecer",
+        "description": "Aspiramos a liderar la evolución digital de empresas en Latinoamérica y el mundo, combinando excelencia técnica, diseño memorable y cercanía humana."
+      }
+    },
+    "pillars": {
+      "titleLine1": "¿Por qué elegirnos?",
+      "titleLine2": "Hacemos que tu proyecto marque la diferencia.",
+      "subtitle": "Cada línea de código y cada decisión de diseño están orientadas a la estabilidad, velocidad y crecimiento de tu producto.",
+      "cards": {
+        "proactive": {
+          "title": "Trabajo Proactivo",
+          "description": "No nos limitamos a seguir instrucciones. Analizamos tu proyecto, proponemos soluciones avanzadas y nos anticipamos a los retos técnicos antes de que afecten tu desarrollo."
+        },
+        "organized": {
+          "title": "Gestión Organizada",
+          "description": "Planificamos cada fase del proyecto con metodologías claras, garantizando entregas puntuales, hitos bien definidos y total visibilidad del progreso."
+        },
+        "quality": {
+          "title": "Altos Estándares de Calidad",
+          "description": "Construimos con código limpio, arquitectura escalable, alta velocidad de carga y seguridad integrada, aplicando las mejores prácticas modernas del entorno web."
+        },
+        "communication": {
+          "title": "Comunicación y Feedback",
+          "description": "Mantenemos un flujo constante y transparente en todo momento. Escuchamos tus requerimientos, iteramos con tus ideas y te mantenemos al tanto sin tecnicismos complejos."
+        },
+        "scalability": {
+          "title": "Arquitectura Escalable",
+          "description": "Diseñamos cada sistema pensando en el futuro de tu empresa, permitiendo integrar nuevas funciones, usuarios y mercados sin rehacer tu plataforma."
+        },
+        "partnership": {
+          "title": "Acompañamiento Continuo",
+          "description": "No desaparecemos tras el lanzamiento. Te respaldamos con soporte técnico, monitoreo y evolución continua para que tu producto digital siga rindiendo al máximo."
+        }
+      }
+    },
+    "cta": {
+      "titleLine1": "¿Tienes un proyecto en mente?",
+      "titleLine2": "Hagámoslo realidad juntos.",
+      "subtitle": "Cuéntanos tu idea y descubramos cómo llevar la presencia digital y las operaciones de tu negocio al siguiente nivel.",
+      "button": "Hablemos de tu idea"
     }
   }
 }

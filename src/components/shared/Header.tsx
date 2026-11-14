@@ -2,7 +2,7 @@
 // Header — Global fixed header with navigation and CTA
 // ---------------------------------------------------------------------------
 import { useState, useCallback, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -23,7 +23,6 @@ const EASE_OUT_EXPO: [number, number, number, number] = [0.22, 1, 0.36, 1];
 /** Maps route paths to their corresponding home‑page section IDs. */
 const ROUTE_TO_SECTION_ID: Record<string, string> = {
     "/services": "services",
-    "/about": "about-us",
     "/portfolio": "portfolio",
     "/contact": "contacto",
 };
@@ -40,6 +39,8 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
 
 function Header() {
     const { t } = useTranslation();
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const shouldReduceMotion = useReducedMotion();
@@ -77,16 +78,43 @@ function Header() {
 
     const handleNavClick = useCallback(
         (to: string, e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
-            const sectionId = ROUTE_TO_SECTION_ID[to];
-            if (!sectionId) return; // fallback to default link behavior
-
             e.preventDefault();
-            scrollToSection(sectionId, closeMobile);
+            closeMobile();
+
+            const sectionId = ROUTE_TO_SECTION_ID[to];
+            if (sectionId) {
+                if (pathname === "/") {
+                    scrollToSection(sectionId);
+                } else {
+                    void navigate({ to: "/" }).then(() => {
+                        window.setTimeout(() => {
+                            scrollToSection(sectionId);
+                        }, 120);
+                    });
+                }
+                return;
+            }
+
+            if (to === "/") {
+                if (pathname === "/") {
+                    scrollToTop();
+                } else {
+                    void navigate({ to: "/" }).then(() => {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    });
+                }
+                return;
+            }
+
+            void navigate({ to });
         },
-        [scrollToSection, closeMobile],
+        [pathname, navigate, scrollToSection, scrollToTop, closeMobile],
     );
 
-    const navItems = DEFAULT_NAV_ITEMS;
+    const navItems: NavItem[] =
+        pathname === "/"
+            ? DEFAULT_NAV_ITEMS
+            : [{ labelKey: "Header.nav.home", to: "/" }, ...DEFAULT_NAV_ITEMS];
 
     return (
         <header

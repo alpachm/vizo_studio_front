@@ -78,6 +78,8 @@ export interface IServiceCardItem {
 export interface IServiceCardProps {
   /** Static content descriptor (icon + i18n keys) for this card */
   card: IServiceCardItem;
+  /** Zero-based position of the card in the deck (drives the stacking stagger) */
+  index: number;
   /** Whether the parent section has entered the viewport (drives the entrance reveal) */
   isSectionVisible: boolean;
 }

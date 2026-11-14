@@ -5,10 +5,14 @@
 // border highlight as it scrolls through the vertical center of the viewport.
 // ---------------------------------------------------------------------------
 import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Trans, useTranslation } from "react-i18next";
 import { FiCode, FiGlobe, FiSmartphone } from "react-icons/fi";
 import type { IServicesProps, IServiceCardItem, IServiceCardProps } from "../../interfaces/HomeScreenInterface";
 import { getGlitchAnimationStyles } from "../../utils/glitchAnimation";
+
+/** Spring-like cubic-bezier curve for the card-stacking entrance & exit */
+const EASE_STACK = [0.22, 1, 0.36, 1] as const;
 
 const BRAND_GLITCH_STYLES = getGlitchAnimationStyles({
     className: "services-brand-glitch",
@@ -43,8 +47,9 @@ const SERVICE_CARDS: IServiceCardItem[] = [
  * accent-border highlight as it scrolls through the vertical center of the
  * viewport, lighting cards up sequentially as the user scrolls.
  */
-function ServiceCard({ card, isSectionVisible }: IServiceCardProps) {
+function ServiceCard({ card, index, isSectionVisible }: IServiceCardProps) {
     const { t } = useTranslation();
+    const shouldReduceMotion = useReducedMotion() ?? false;
     const cardRef = useRef<HTMLElement | null>(null);
     const [isHighlighted, setIsHighlighted] = useState(false);
 
@@ -72,12 +77,62 @@ function ServiceCard({ card, isSectionVisible }: IServiceCardProps) {
 
     const IconComponent = card.icon;
 
+    // Stacked origin offset: each subsequent card starts tucked behind/below the
+    // previous one and fans out into its slot with a staggered delay when entering
+    // view, then folds back out when leaving view.
+    const hiddenX = -index * 52;
+    const hiddenY = 56 + index * 22;
+    const hiddenScale = 0.9 - index * 0.03;
+    const hiddenRotate = -index * 2.5;
+
+    const enterDelay = index * 0.16;
+    const exitDelay = (SERVICE_CARDS.length - 1 - index) * 0.08;
+
     return (
-        <article
+        <motion.article
             ref={cardRef}
-            className={`flex flex-col rounded-2xl border bg-white/5 p-6 sm:p-8 transition-all duration-700 ease-out will-change-transform ${
-                isSectionVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-            } ${
+            initial={
+                shouldReduceMotion
+                    ? false
+                    : {
+                          opacity: 0,
+                          x: hiddenX,
+                          y: hiddenY,
+                          scale: hiddenScale,
+                          rotate: hiddenRotate,
+                      }
+            }
+            animate={
+                shouldReduceMotion
+                    ? { opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 }
+                    : isSectionVisible
+                      ? {
+                            opacity: 1,
+                            x: 0,
+                            y: 0,
+                            scale: 1,
+                            rotate: 0,
+                            transition: {
+                                duration: 0.65,
+                                delay: enterDelay,
+                                ease: EASE_STACK,
+                            },
+                        }
+                      : {
+                            opacity: 0,
+                            x: hiddenX,
+                            y: hiddenY,
+                            scale: hiddenScale,
+                            rotate: hiddenRotate,
+                            transition: {
+                                duration: 0.45,
+                                delay: exitDelay,
+                                ease: EASE_STACK,
+                            },
+                        }
+            }
+            style={{ zIndex: SERVICE_CARDS.length - index }}
+            className={`flex flex-col rounded-2xl border bg-white/5 p-6 sm:p-8 transition-colors duration-500 will-change-transform ${
                 isHighlighted
                     ? "border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)]"
                     : "border-neutral-500/20"
@@ -94,7 +149,7 @@ function ServiceCard({ card, isSectionVisible }: IServiceCardProps) {
             <p className="mt-3 text-sm leading-relaxed text-text-muted sm:text-base">
                 {t(card.descriptionKey)}
             </p>
-        </article>
+        </motion.article>
     );
 }
 
@@ -110,7 +165,7 @@ function Services(_props: IServicesProps) {
             ([entry]) => {
                 setIsVisible(entry.isIntersecting);
             },
-            { root: null, rootMargin: "0px", threshold: 0.2 },
+            { root: null, rootMargin: "-10% 0px -10% 0px", threshold: 0.12 },
         );
 
         if (sectionRef.current) {
@@ -145,8 +200,13 @@ function Services(_props: IServicesProps) {
 
                 {/* ---- 3-Column Service Cards Grid ---- */}
                 <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 lg:mt-16 lg:gap-8">
-                    {SERVICE_CARDS.map((card) => (
-                        <ServiceCard key={card.id} card={card} isSectionVisible={isVisible} />
+                    {SERVICE_CARDS.map((card, index) => (
+                        <ServiceCard
+                            key={card.id}
+                            card={card}
+                            index={index}
+                            isSectionVisible={isVisible}
+                        />
                     ))}
                 </div>
             </div>

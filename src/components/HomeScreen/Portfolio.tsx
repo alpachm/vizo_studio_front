@@ -318,7 +318,23 @@ function Portfolio(_props: IPortfolioProps) {
                             <span className="block">{firstTitleLine}</span>
                             {secondTitleLine ? (
                                 <span className="mt-0.5 block">
-                                    {secondTitleLine}
+                                    {secondTitleLine
+                                        .split(/(«[^»]+»)/)
+                                        .map((segment, segmentIndex) =>
+                                            segment.startsWith("«") &&
+                                            segment.endsWith("»") ? (
+                                                <span
+                                                    key={segmentIndex}
+                                                    className="font-playfair-display italic text-primary"
+                                                >
+                                                    {segment}
+                                                </span>
+                                            ) : (
+                                                <span key={segmentIndex}>
+                                                    {segment}
+                                                </span>
+                                            ),
+                                        )}
                                 </span>
                             ) : null}
                         </h2>

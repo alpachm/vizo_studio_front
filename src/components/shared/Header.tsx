@@ -10,6 +10,7 @@ import BrandLogo from "./BrandLogo";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
 import { useHeroVisibility } from "../../context/HeroVisibilityContext";
+import { useTheme } from "../../context/ThemeContext";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------
@@ -45,6 +46,8 @@ function Header() {
     const headerRef = useRef<HTMLElement>(null);
     const shouldReduceMotion = useReducedMotion();
     const { isHeroInView, isValuePropositionInView } = useHeroVisibility();
+    const { theme } = useTheme();
+    const isLight = theme === "light";
 
     useEffect(() => {
         let rafId: number | null = null;
@@ -110,8 +113,14 @@ function Header() {
         >
             {/* ---- Glass bar — bottom hairline separates it from the page ---- */}
             <div
-                className={`border-b border-white/10 backdrop-blur-md transition-colors duration-300 ${
-                    isScrolled ? "bg-black/90" : "bg-black/80"
+                className={`border-b backdrop-blur-md transition-colors duration-500 ease-out ${
+                    isLight
+                        ? isScrolled
+                            ? "border-black/10 bg-white/90"
+                            : "border-black/10 bg-white/80"
+                        : isScrolled
+                          ? "border-white/10 bg-black/90"
+                          : "border-white/10 bg-black/80"
                 }`}
             >
                 <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -136,7 +145,7 @@ function Header() {
                                     key={item.to}
                                     type="button"
                                     onClick={(e) => handleNavClick(item.to, e)}
-                                    className="font-body text-sm font-medium text-neutral-400 transition-colors duration-200 hover:text-white focus-visible:text-white focus-visible:outline-none"
+                                    className="font-body text-sm font-medium text-text-muted transition-colors duration-300 hover:text-text focus-visible:text-text focus-visible:outline-none"
                                 >
                                     {t(item.labelKey)}
                                 </button>
@@ -148,7 +157,7 @@ function Header() {
                             <button
                                 type="button"
                                 onClick={(e) => handleNavClick("/contact", e)}
-                                className="group hidden items-center gap-2 rounded-full border border-white/30 px-5 py-2.5 font-body text-sm font-medium text-white transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)] md:inline-flex"
+                                className="group hidden items-center gap-2 rounded-full border border-neutral-500/35 px-5 py-2.5 font-body text-sm font-medium text-text transition-[border-color,box-shadow,color] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)] md:inline-flex"
                             >
                                 {t("Header.buttons.contact")}
                                 <FiArrowUpRight
@@ -168,7 +177,7 @@ function Header() {
                                         ? t("Header.nav.closeMenu")
                                         : t("Header.nav.openMenu")
                                 }
-                                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors duration-200 hover:border-white/25 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25 md:hidden"
+                                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-500/20 bg-neutral-500/10 text-text transition-colors duration-300 hover:border-neutral-500/40 hover:bg-neutral-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500/30 md:hidden"
                             >
                                 <AnimatePresence mode="wait" initial={false}>
                                     <motion.span
@@ -228,7 +237,9 @@ function Header() {
                             duration: shouldReduceMotion ? 0 : 0.45,
                             ease: EASE_OUT_EXPO,
                         }}
-                        className="md:hidden bg-black/95 backdrop-blur-lg"
+                        className={`md:hidden backdrop-blur-lg transition-colors duration-500 ${
+                            isLight ? "bg-white/95" : "bg-black/95"
+                        }`}
                     >
                         <nav
                             className="mx-auto w-full max-w-7xl px-4 pb-8 sm:px-6 lg:px-8"
@@ -251,7 +262,7 @@ function Header() {
                                             ease: EASE_OUT_EXPO,
                                             delay: shouldReduceMotion ? 0 : index * 0.07,
                                         }}
-                                        className="border-b border-white/10 py-4 text-left font-body text-lg font-medium text-neutral-200 transition-colors duration-200 hover:text-white focus-visible:text-white focus-visible:outline-none"
+                                        className="border-b border-neutral-500/20 py-4 text-left font-body text-lg font-medium text-text transition-colors duration-200 hover:text-primary focus-visible:text-primary focus-visible:outline-none"
                                     >
                                         {t(item.labelKey)}
                                     </motion.button>
@@ -273,7 +284,7 @@ function Header() {
                                     <button
                                         type="button"
                                         onClick={(e) => handleNavClick("/contact", e)}
-                                        className="group inline-flex w-full items-center justify-between rounded-full border border-white/30 px-6 py-4 font-body text-base font-medium text-white transition-[border-color,box-shadow] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)]"
+                                        className="group inline-flex w-full items-center justify-between rounded-full border border-neutral-500/35 px-6 py-4 font-body text-base font-medium text-text transition-[border-color,box-shadow,color] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)]"
                                     >
                                         {t("Header.buttons.contact")}
                                         <FiArrowUpRight

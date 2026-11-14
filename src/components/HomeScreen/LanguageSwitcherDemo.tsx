@@ -158,7 +158,7 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
                     {/* 2 (Mobile) / Left Column (Desktop) — Language Card */}
                     {/* -------------------------------------------------- */}
                     <div className="order-2 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-center">
-                        <div className="rounded-3xl border border-text/10 bg-text/[0.03] p-7 shadow-sm transition-colors duration-500 sm:p-10">
+                        <div className="rounded-3xl border border-neutral-500/20 bg-neutral-500/[0.04] p-7 shadow-sm transition-colors duration-500 sm:p-10">
                             {/* Top Row — Language Icon + Interactive Switch Pill */}
                             <div className="flex flex-wrap items-center justify-between gap-4">
                                 <HiOutlineLanguage
@@ -169,7 +169,7 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
                                 <button
                                     type="button"
                                     onClick={handleLanguageToggle}
-                                    className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-primary/40 bg-primary/5 px-4 py-2 text-xs font-medium text-primary transition-all duration-300 hover:border-primary hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 sm:text-sm"
+                                    className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-orange-500/40 bg-orange-500/5 px-4 py-2 text-xs font-medium text-primary transition-all duration-300 hover:border-primary hover:bg-orange-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:text-sm"
                                 >
                                     <HiOutlineLanguage
                                         className="h-4 w-4 shrink-0"
@@ -226,7 +226,7 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
                             </div>
 
                             {/* Divider */}
-                            <div className="my-7 border-t border-text/10 transition-colors duration-500" />
+                            <div className="my-7 border-t border-neutral-500/20 transition-colors duration-500" />
 
                             {/* Bottom Footnote */}
                             <p className="text-xs leading-relaxed text-text-muted transition-colors duration-500 sm:text-sm">
@@ -244,7 +244,7 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
                         <button
                             type="button"
                             onClick={() => scrollToSection("contacto")}
-                            className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-text/30 px-5 py-2.5 font-body text-sm font-medium text-text transition-[border-color,box-shadow,color] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)]"
+                            className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-neutral-500/35 px-5 py-2.5 font-body text-sm font-medium text-text transition-[border-color,box-shadow,color] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)]"
                         >
                             <span>
                                 {t("HomeScreen.LanguageSwitcherDemo.cta")}

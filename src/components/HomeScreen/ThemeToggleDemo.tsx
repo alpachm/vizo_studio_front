@@ -104,7 +104,7 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
                     {/* Right Column — Interactive Theme Toggle Card       */}
                     {/* -------------------------------------------------- */}
                     <div className="lg:col-span-6">
-                        <div className="rounded-3xl border border-text/10 bg-text/[0.03] p-7 shadow-sm transition-colors duration-500 sm:p-10">
+                        <div className="rounded-3xl border border-neutral-500/20 bg-neutral-500/[0.04] p-7 shadow-sm transition-colors duration-500 sm:p-10">
                             {/* Top Row — Toggle Switch + Pill Badge */}
                             <div className="flex flex-wrap items-center justify-between gap-4">
                                 <button
@@ -115,7 +115,7 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
                                         "HomeScreen.ThemeToggleDemo.card.toggleAriaLabel",
                                     )}
                                     onClick={() => toggleTheme()}
-                                    className="group relative inline-flex h-11 w-20 shrink-0 cursor-pointer items-center rounded-full border-2 border-primary bg-text/10 p-1 transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                                    className="group relative inline-flex h-11 w-20 shrink-0 cursor-pointer items-center rounded-full border-2 border-primary bg-neutral-500/15 p-1 transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                                 >
                                     <span
                                         className={`flex h-8 w-8 items-center justify-center rounded-full bg-primary text-black shadow-md transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
@@ -138,7 +138,7 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
                                     </span>
                                 </button>
 
-                                <span className="rounded-full border border-primary/35 bg-primary/5 px-4 py-1.5 text-xs font-medium text-primary">
+                                <span className="rounded-full border border-orange-500/35 bg-orange-500/5 px-4 py-1.5 text-xs font-medium text-primary">
                                     {t("HomeScreen.ThemeToggleDemo.card.badge")}
                                 </span>
                             </div>
@@ -158,7 +158,7 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
                             </h3>
 
                             {/* Divider */}
-                            <div className="my-7 border-t border-text/10 transition-colors duration-500" />
+                            <div className="my-7 border-t border-neutral-500/20 transition-colors duration-500" />
 
                             {/* Bottom Footnote */}
                             <div className="flex items-center gap-2.5 text-xs text-text-muted transition-colors duration-500 sm:text-sm">

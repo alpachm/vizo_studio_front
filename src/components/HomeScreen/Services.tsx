@@ -13,6 +13,7 @@ import { getGlitchAnimationStyles } from "../../utils/glitchAnimation";
 const BRAND_GLITCH_STYLES = getGlitchAnimationStyles({
     className: "services-brand-glitch",
     fontSwapMode: "mono-to-playfair",
+    minWidth: "6.6em",
 });
 
 const SERVICE_CARDS: IServiceCardItem[] = [

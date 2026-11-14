@@ -242,6 +242,8 @@ export interface IGlitchAnimationOptions {
   className: string;
   /** Direction of the momentary typography glitch swap */
   fontSwapMode?: TGlitchFontSwapMode;
-  /** Total loop duration in seconds (defaults to 4.5s) */
+  /** Total loop duration in seconds (defaults to 4.2s) */
   durationSeconds?: number;
+  /** Optional fixed/minimum width (in em) so font swaps never reflow surrounding text */
+  minWidth?: string;
 }

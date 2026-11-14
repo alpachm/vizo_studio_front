@@ -17,10 +17,12 @@ export function getGlitchAnimationStyles({
     className,
     fontSwapMode = "mono-to-playfair",
     durationSeconds = 4.2,
+    minWidth,
 }: IGlitchAnimationOptions): string {
     const keyframeName = `${className}-keyframes`;
 
     const isPlayfairBase = fontSwapMode === "playfair-to-mono";
+    const minWidthRule = minWidth ? `min-width: ${minWidth}; white-space: nowrap;` : "";
 
     const baseFontCss = isPlayfairBase
         ? `font-family: "Playfair Display", serif; font-style: italic; font-weight: 400; letter-spacing: 0em;`
@@ -34,6 +36,7 @@ export function getGlitchAnimationStyles({
 @media (prefers-reduced-motion: no-preference) {
     .${className} {
         display: inline-block;
+        ${minWidthRule}
         will-change: transform, text-shadow, clip-path;
         animation: ${keyframeName} ${durationSeconds}s steps(1, end) infinite;
     }

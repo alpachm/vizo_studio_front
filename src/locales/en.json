@@ -57,7 +57,50 @@
     "contactWhatsApp": "Contact us on WhatsApp"
   },
   "Portfolio": {
-    "title": "A bit of our work"
+    "title": "Less words. More «I want that».",
+    "subtitle": "Design concepts to imagine how far your brand can go.",
+    "projects": {
+      "1": {
+        "category": "FOUNDATION",
+        "title": "Website for a foundation",
+        "imageAlt": "Foundation website preview"
+      },
+      "2": {
+        "category": "PROFESSIONALS",
+        "title": "Website for a lawyer",
+        "imageAlt": "Lawyer website preview"
+      },
+      "3": {
+        "category": "PROFESSIONALS",
+        "title": "Website for a psychologist",
+        "imageAlt": "Psychologist website preview"
+      },
+      "4": {
+        "category": "PROFESSIONALS",
+        "title": "Website for a developer",
+        "imageAlt": "Developer website preview"
+      },
+      "5": {
+        "category": "CUSTOM SOFTWARE",
+        "title": "Custom software for a motorcycle lineup",
+        "imageAlt": "Motorcycle lineup software preview"
+      },
+      "6": {
+        "category": "CUSTOM SOFTWARE",
+        "title": "Personal finance website",
+        "imageAlt": "Personal finance website preview"
+      },
+      "7": {
+        "category": "E-COMMERCE",
+        "title": "Online store specialized in clothing",
+        "imageAlt": "Online clothing store preview"
+      },
+      "8": {
+        "category": "CORPORATE",
+        "title": "Website for a construction company",
+        "imageAlt": "Construction company website preview"
+      }
+    }
   },
   "FluyaVital": {
     "title": "Fluya Vital",

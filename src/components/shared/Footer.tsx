@@ -72,7 +72,7 @@ function Footer({
     }, []);
 
     return (
-        <footer className="bg-bg py-24 sm:py-28 px-6 sm:px-12 lg:px-20 transition-colors duration-300">
+        <footer className="bg-bg border-t border-neutral-500/15 py-20 sm:py-24 px-6 sm:px-10 lg:px-16 transition-colors duration-300">
             <div className="w-full max-w-7xl mx-auto">
                 {/* ---- Main footer grid ---- */}
                 <div className="grid grid-cols-1 gap-14 md:grid-cols-2">
@@ -84,12 +84,12 @@ function Footer({
                         <BrandLogo className="text-2xl sm:text-3xl" monochrome />
 
                         {/* Availability badge — green pulsing dot */}
-                        <div className="inline-flex items-center gap-2.5">
-                            <span className="relative flex h-3 w-3" aria-hidden="true">
+                        <div className="inline-flex items-center gap-2.5 w-fit rounded-full border border-neutral-500/20 bg-neutral-500/[0.04] px-3.5 py-1.5">
+                            <span className="relative flex h-2.5 w-2.5" aria-hidden="true">
                                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                                <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500" />
+                                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
                             </span>
-                            <span className="font-body text-sm sm:text-base font-medium text-text/80">
+                            <span className="font-body text-xs sm:text-sm font-medium text-text">
                                 {t("Footer.status")}
                             </span>
                         </div>
@@ -100,13 +100,13 @@ function Footer({
                         </p>
 
                         {/* Contact links */}
-                        <div className="flex flex-col gap-2.5 mt-2">
+                        <div className="flex flex-col gap-2.5 mt-1">
                             {/* Email */}
                             <a
                                 href={`mailto:${email}`}
                                 className="inline-flex items-center gap-2.5 font-body text-base sm:text-lg text-text-muted hover:text-primary transition-colors duration-200 w-fit"
                             >
-                                <FiMail className="w-5 h-5 shrink-0" aria-hidden="true" />
+                                <FiMail className="w-5 h-5 shrink-0 text-primary" aria-hidden="true" />
                                 {email}
                             </a>
 
@@ -117,13 +117,13 @@ function Footer({
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2.5 font-body text-base sm:text-lg text-text-muted hover:text-primary transition-colors duration-200 w-fit"
                             >
-                                <FaWhatsapp className="w-5 h-5 shrink-0" aria-hidden="true" />
+                                <FaWhatsapp className="w-5 h-5 shrink-0 text-primary" aria-hidden="true" />
                                 {whatsapp}
                             </a>
                         </div>
 
                         {/* Social media links */}
-                        <div className="flex items-center gap-5 mt-2">
+                        <div className="flex items-center gap-3 mt-1">
                             {SOCIAL_LINKS.map(({ href, labelKey, icon: Icon }) => (
                                 <a
                                     key={href}
@@ -131,9 +131,9 @@ function Footer({
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label={t(labelKey)}
-                                    className="text-text-muted hover:text-primary transition-colors duration-200"
+                                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-500/20 bg-neutral-500/[0.04] text-text-muted hover:text-primary hover:border-primary/50 transition-all duration-200"
                                 >
-                                    <Icon className="w-6 h-6 shrink-0" aria-hidden="true" />
+                                    <Icon className="w-4 h-4 shrink-0" aria-hidden="true" />
                                 </a>
                             ))}
                         </div>
@@ -144,7 +144,7 @@ function Footer({
                         ============================================================ */}
                     <div className="flex flex-col gap-6 md:items-end">
                         {/* Navigation header */}
-                        <span className="font-title text-xs sm:text-sm uppercase tracking-[0.2em] text-text/50 font-semibold">
+                        <span className="font-title text-xs sm:text-sm uppercase tracking-[0.2em] text-text-muted font-semibold">
                             {t("Footer.navTitle")}
                         </span>
 
@@ -174,10 +174,10 @@ function Footer({
                         <button
                             type="button"
                             onClick={scrollToTop}
-                            className="mt-4 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-text/15 bg-bg text-sm sm:text-base font-body font-medium text-text-muted hover:text-text hover:border-text/30 transition-all duration-300 cursor-pointer w-fit group"
+                            className="mt-4 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-neutral-500/25 bg-neutral-500/[0.04] text-sm sm:text-base font-body font-medium text-text-muted hover:text-text hover:border-primary/50 transition-all duration-300 cursor-pointer w-fit group"
                         >
                             <FiArrowUp
-                                className="w-4 h-4 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5"
+                                className="w-4 h-4 shrink-0 text-primary transition-transform duration-300 group-hover:-translate-y-0.5"
                                 aria-hidden="true"
                             />
                             {t("Footer.backToTop")}
@@ -188,28 +188,12 @@ function Footer({
                 {/* ================================================================
                     SUB-FOOTER — Copyright & Legal (separated by top border)
                     ================================================================ */}
-                <div className="mt-14 sm:mt-16 pt-8 border-t border-text/10">
+                <div className="mt-14 sm:mt-16 pt-8 border-t border-neutral-500/15">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                         {/* Left: copyright + location */}
-                        <p className="font-body text-xs sm:text-sm text-text/40">
+                        <p className="font-body text-xs sm:text-sm text-text-muted">
                             {t("Footer.copyright")} &bull; {t("Footer.location")}
                         </p>
-
-                        {/* Right: legal links */}
-                        {/* <div className="flex items-center gap-5 sm:gap-6">
-                            <a
-                                href="/privacy"
-                                className="font-body text-xs sm:text-sm text-text/40 hover:text-text-muted transition-colors duration-200"
-                            >
-                                {t("Footer.legal.privacy")}
-                            </a>
-                            <a
-                                href="/terms"
-                                className="font-body text-xs sm:text-sm text-text/40 hover:text-text-muted transition-colors duration-200"
-                            >
-                                {t("Footer.legal.terms")}
-                            </a>
-                        </div> */}
                     </div>
                 </div>
             </div>

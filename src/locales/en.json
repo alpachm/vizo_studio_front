@@ -241,6 +241,10 @@
       }
     },
     "Contact": {
+      "titleLine1": "Your business is already incredible.",
+      "titleLine2": "Let your website be incredible too.",
+      "subtitle": "Tell us what you have in mind. We start with a conversation, with no commitment and no complicated jargon.",
+      "tagline": "You bring the idea. We take care of the next step.",
       "step1": {
         "title": "Do you have an idea?",
         "button": "Tell us"

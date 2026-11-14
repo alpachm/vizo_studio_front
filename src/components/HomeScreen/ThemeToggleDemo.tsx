@@ -16,59 +16,81 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
     const { t } = useTranslation();
     const { theme, toggleTheme } = useTheme();
     const sectionRef = useRef<HTMLElement | null>(null);
+    const isInViewCenterRef = useRef<boolean>(false);
 
     const isLight = theme === "light";
 
-    // Switch to Light Mode ONLY when this section is centered in the viewport,
-    // and always revert to Dark Mode when leaving view (or on initial load at top).
+    // Switch to Light Mode when the section is centered in the viewport and
+    // restore Dark Mode as soon as it leaves, using an rAF-throttled scroll
+    // listener so mobile touch/momentum scrolling and dynamic URL bars never miss.
     useEffect(() => {
-        const sectionNode = sectionRef.current;
-        if (!sectionNode) return;
-
+        let rafId: number | null = null;
         let timerId: number | null = null;
-        let hasActivatedLight = false;
 
-        const isSectionCenteredInViewport = (): boolean => {
-            if (window.scrollY < 100) return false;
+        const evaluateCenterState = () => {
+            rafId = null;
+            const sectionNode = sectionRef.current;
+            if (!sectionNode) return;
+
+            const vh =
+                window.innerHeight || document.documentElement.clientHeight;
             const rect = sectionNode.getBoundingClientRect();
-            const vh = window.innerHeight;
-            return rect.top < vh * 0.65 && rect.bottom > vh * 0.35;
-        };
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
+            // Section is considered active/centered when the user has scrolled
+            // past the hero and the section occupies the middle band of the viewport.
+            const isCentered =
+                window.scrollY > 100 &&
+                rect.top <= vh * 0.6 &&
+                rect.bottom >= vh * 0.4;
+
+            if (isCentered && !isInViewCenterRef.current) {
+                isInViewCenterRef.current = true;
+                if (timerId !== null) {
+                    window.clearTimeout(timerId);
+                }
+                timerId = window.setTimeout(() => {
+                    timerId = null;
+                    if (isInViewCenterRef.current) {
+                        toggleTheme("light");
+                    }
+                }, AUTO_TOGGLE_DELAY_MS);
+            } else if (!isCentered && isInViewCenterRef.current) {
+                isInViewCenterRef.current = false;
                 if (timerId !== null) {
                     window.clearTimeout(timerId);
                     timerId = null;
                 }
+                toggleTheme("dark");
+            }
+        };
 
-                if (entry.isIntersecting && isSectionCenteredInViewport()) {
-                    timerId = window.setTimeout(() => {
-                        if (isSectionCenteredInViewport()) {
-                            hasActivatedLight = true;
-                            toggleTheme("light");
-                        }
-                    }, AUTO_TOGGLE_DELAY_MS);
-                } else if (hasActivatedLight) {
-                    hasActivatedLight = false;
-                    toggleTheme("dark");
-                }
-            },
-            {
-                root: null,
-                rootMargin: "-35% 0px -35% 0px",
-                threshold: 0,
-            },
-        );
+        const handleScrollOrResize = () => {
+            if (rafId !== null) return;
+            rafId = window.requestAnimationFrame(evaluateCenterState);
+        };
 
-        observer.observe(sectionNode);
+        window.addEventListener("scroll", handleScrollOrResize, {
+            passive: true,
+        });
+        window.addEventListener("resize", handleScrollOrResize, {
+            passive: true,
+        });
+        window.addEventListener("touchmove", handleScrollOrResize, {
+            passive: true,
+        });
 
         return () => {
-            observer.disconnect();
+            window.removeEventListener("scroll", handleScrollOrResize);
+            window.removeEventListener("resize", handleScrollOrResize);
+            window.removeEventListener("touchmove", handleScrollOrResize);
+            if (rafId !== null) {
+                window.cancelAnimationFrame(rafId);
+            }
             if (timerId !== null) {
                 window.clearTimeout(timerId);
             }
-            if (hasActivatedLight) {
+            if (isInViewCenterRef.current) {
+                isInViewCenterRef.current = false;
                 toggleTheme("dark");
             }
         };

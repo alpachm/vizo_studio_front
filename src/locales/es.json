@@ -57,7 +57,50 @@
     "contactWhatsApp": "Contáctanos por WhatsApp"
   },
   "Portfolio": {
-    "title": "Un poco de nuestro trabajo"
+    "title": "Menos palabras. Más «quiero eso».",
+    "subtitle": "Conceptos de diseño para imaginar hasta dónde puede llegar tu marca.",
+    "projects": {
+      "1": {
+        "category": "FUNDACION",
+        "title": "Sitio web para fundacion",
+        "imageAlt": "Vista del sitio web para fundación"
+      },
+      "2": {
+        "category": "PROFESIONALES",
+        "title": "Sitio web para abogado",
+        "imageAlt": "Vista del sitio web para abogado"
+      },
+      "3": {
+        "category": "PROFESIONALES",
+        "title": "Sitio web para psicologa",
+        "imageAlt": "Vista del sitio web para psicóloga"
+      },
+      "4": {
+        "category": "PROFESIONALES",
+        "title": "Sitio web para desarrollador",
+        "imageAlt": "Vista del sitio web para desarrollador"
+      },
+      "5": {
+        "category": "SOFTWARE A MEDIDA",
+        "title": "Software a medida para linea de moto",
+        "imageAlt": "Vista del software a medida para línea de moto"
+      },
+      "6": {
+        "category": "SOFTWARE A MEDIDA",
+        "title": "Sitio web de finanzas personales",
+        "imageAlt": "Vista del sitio web de finanzas personales"
+      },
+      "7": {
+        "category": "E-COMMERCE",
+        "title": "Tienda online especializada en venta de ropa",
+        "imageAlt": "Vista de la tienda online de ropa"
+      },
+      "8": {
+        "category": "CORPORATIVO",
+        "title": "Sitio web para empresa de construccion",
+        "imageAlt": "Vista del sitio web para empresa de construcción"
+      }
+    }
   },
   "FluyaVital": {
     "title": "Fluya Vital",

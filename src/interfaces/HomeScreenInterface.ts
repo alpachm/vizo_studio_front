@@ -174,6 +174,20 @@ export interface BudgetOption {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IPortfolioProps {}
 
+/** Data shape for a single Portfolio project card */
+export interface IPortfolioProjectItem {
+    /** Stable identifier for the project card */
+    id: string;
+    /** Imported local WebP asset used as the card thumbnail */
+    image: string;
+    /** i18n key for the category overline (e.g. "FUNDACION") */
+    categoryKey: string;
+    /** i18n key for the project title */
+    titleKey: string;
+    /** i18n key for the image alt text */
+    imageAltKey: string;
+}
+
 /** Props for the Methodology section component */
 export interface IMethodologyProps {
   className?: string;

@@ -13,13 +13,38 @@ import { useScrollToSection } from "../../hooks/useScrollToSection";
 import type { ILanguageSwitcherDemoProps } from "../../interfaces/HomeScreenInterface";
 
 /** Ordered keys for the multi-language card headline sequence (settles on "es"). */
-const ROTATING_LANGUAGE_KEYS = ["en", "fr", "pt", "de", "it", "es"] as const;
+const ROTATING_LANGUAGE_KEYS = [
+    "en",
+    "zh",
+    "ar",
+    "fr",
+    "pt",
+    "de",
+    "it",
+    "es",
+] as const;
+
+/**
+ * Per-language typography classes (mirrors the expressive Google Fonts in
+ * `tailwind.config.js`) to accentuate each script/language swap before landing
+ * on `font-title` (`JetBrains Mono`) for the final Spanish headline.
+ */
+const ROTATING_LANGUAGE_FONTS = [
+    "font-space-grotesk font-bold tracking-tight", // en — geometric display sans
+    "font-plus-jakarta-sans font-bold tracking-wider", // zh — clean modern CJK/sans rhythm
+    "font-playfair-display font-bold tracking-normal", // ar — high-contrast calligraphic feel
+    "font-playfair-display italic font-semibold tracking-wide", // fr — editorial serif italic
+    "font-syne font-bold tracking-tight", // pt — expressive display sans
+    "font-mono font-bold tracking-tight", // de — technical monospace
+    "font-instrument-serif italic font-normal tracking-wide text-[1.12em]", // it — classic editorial serif
+    "font-title font-bold tracking-tight", // es (final) — brand heading mono
+] as const;
 
 /** Final index in `ROTATING_LANGUAGE_KEYS` ("es" — Spanish). */
 const FINAL_ROTATING_INDEX = ROTATING_LANGUAGE_KEYS.length - 1;
 
-/** Interval (ms) between each language step while the headline rotates. */
-const ROTATION_STEP_MS = 650;
+/** Faster interval (ms) between each language step while the headline rotates. */
+const ROTATION_STEP_MS = 360;
 
 /** Editorial exponential ease-out curve for the headline transition. */
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
@@ -92,6 +117,8 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
         ? FINAL_ROTATING_INDEX
         : activePhraseIndex;
     const currentPhrase = rotatingPhrases[displayedPhraseIndex];
+    const currentFontClass = ROTATING_LANGUAGE_FONTS[displayedPhraseIndex];
+    const currentLangKey = ROTATING_LANGUAGE_KEYS[displayedPhraseIndex];
 
     const handleLanguageToggle = () => {
         changeLanguage(language === "es" ? "en" : "es");
@@ -104,11 +131,33 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
             className={`w-full bg-bg py-24 sm:py-28 lg:py-32 transition-colors duration-500 ease-out ${className}`}
         >
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+                <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-8">
                     {/* -------------------------------------------------- */}
-                    {/* Left Column — Interactive Language Switcher Card    */}
+                    {/* 1 (Mobile) / Right Top (Desktop) — Headline & copy */}
                     {/* -------------------------------------------------- */}
-                    <div className="order-2 lg:order-1 lg:col-span-6">
+                    <div className="order-1 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-start-1 lg:self-end">
+                        <h2 className="font-title text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+                            <span className="block text-text transition-colors duration-500">
+                                {t(
+                                    "HomeScreen.LanguageSwitcherDemo.titleLine1",
+                                )}
+                            </span>
+                            <span className="mt-1 block text-primary">
+                                {t(
+                                    "HomeScreen.LanguageSwitcherDemo.titleLine2",
+                                )}
+                            </span>
+                        </h2>
+
+                        <p className="mt-6 max-w-xl text-base leading-relaxed text-text-muted transition-colors duration-500 sm:text-lg">
+                            {t("HomeScreen.LanguageSwitcherDemo.subtitle")}
+                        </p>
+                    </div>
+
+                    {/* -------------------------------------------------- */}
+                    {/* 2 (Mobile) / Left Column (Desktop) — Language Card */}
+                    {/* -------------------------------------------------- */}
+                    <div className="order-2 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-center">
                         <div className="rounded-3xl border border-text/10 bg-text/[0.03] p-7 shadow-sm transition-colors duration-500 sm:p-10">
                             {/* Top Row — Language Icon + Interactive Switch Pill */}
                             <div className="flex flex-wrap items-center justify-between gap-4">
@@ -143,28 +192,33 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
                             </div>
 
                             {/* Middle — Multi-language rotating headline (settles on Spanish) */}
-                            <div className="mt-10 grid min-h-[4.25rem] items-center sm:min-h-[4.75rem]">
+                            <div className="mt-10 grid min-h-[4.5rem] items-center sm:min-h-[5rem]">
                                 <AnimatePresence mode="wait" initial={false}>
                                     <motion.h3
                                         key={`${displayedPhraseIndex}-${currentPhrase}`}
+                                        dir={
+                                            currentLangKey === "ar"
+                                                ? "rtl"
+                                                : "ltr"
+                                        }
                                         initial={
                                             shouldReduceMotion
                                                 ? false
-                                                : { opacity: 0, y: 10 }
+                                                : { opacity: 0, y: 8 }
                                         }
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={
                                             shouldReduceMotion
                                                 ? undefined
-                                                : { opacity: 0, y: -10 }
+                                                : { opacity: 0, y: -8 }
                                         }
                                         transition={{
                                             duration: shouldReduceMotion
                                                 ? 0
-                                                : 0.28,
+                                                : 0.18,
                                             ease: EASE_OUT,
                                         }}
-                                        className="font-title text-xl font-bold leading-snug text-text transition-colors duration-500 sm:text-2xl"
+                                        className={`${currentFontClass} text-xl leading-snug text-text transition-colors duration-500 sm:text-2xl`}
                                     >
                                         {currentPhrase}
                                     </motion.h3>
@@ -184,41 +238,22 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
                     </div>
 
                     {/* -------------------------------------------------- */}
-                    {/* Right Column — Stacked headline, summary & CTA     */}
+                    {/* 3 (Mobile, Last) / Right Bottom (Desktop) — CTA    */}
                     {/* -------------------------------------------------- */}
-                    <div className="order-1 lg:order-2 lg:col-span-6">
-                        <h2 className="font-title text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-                            <span className="block text-text transition-colors duration-500">
-                                {t(
-                                    "HomeScreen.LanguageSwitcherDemo.titleLine1",
-                                )}
+                    <div className="order-3 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-start-2 lg:self-start">
+                        <button
+                            type="button"
+                            onClick={() => scrollToSection("contacto")}
+                            className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-text/30 px-5 py-2.5 font-body text-sm font-medium text-text transition-[border-color,box-shadow,color] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)]"
+                        >
+                            <span>
+                                {t("HomeScreen.LanguageSwitcherDemo.cta")}
                             </span>
-                            <span className="mt-1 block text-primary">
-                                {t(
-                                    "HomeScreen.LanguageSwitcherDemo.titleLine2",
-                                )}
-                            </span>
-                        </h2>
-
-                        <p className="mt-6 max-w-xl text-base leading-relaxed text-text-muted transition-colors duration-500 sm:text-lg">
-                            {t("HomeScreen.LanguageSwitcherDemo.subtitle")}
-                        </p>
-
-                        <div className="mt-8">
-                            <button
-                                type="button"
-                                onClick={() => scrollToSection("contacto")}
-                                className="group inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-primary transition-colors duration-200 hover:text-secondary focus-visible:outline-none sm:text-base"
-                            >
-                                <span>
-                                    {t("HomeScreen.LanguageSwitcherDemo.cta")}
-                                </span>
-                                <FiArrowUpRight
-                                    className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                                    aria-hidden="true"
-                                />
-                            </button>
-                        </div>
+                            <FiArrowUpRight
+                                className="h-4 w-4 shrink-0 text-primary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                aria-hidden="true"
+                            />
+                        </button>
                     </div>
                 </div>
             </div>

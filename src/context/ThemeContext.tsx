@@ -18,23 +18,15 @@ interface ThemeProviderProps {
 }
 
 function ThemeProvider({ children }: ThemeProviderProps) {
-    const [theme, setTheme] = useState<ThemeMode>(() => {
-        // Read persisted preference or fall back to system preference
-        if (typeof window !== "undefined") {
-            const stored = localStorage.getItem("theme") as ThemeMode | null;
-            if (stored === "light" || stored === "dark") return stored;
+    // Always default to "dark" mode on initial load; ThemeToggleDemo switches
+    // to "light" only while the user is centered on that section.
+    const [theme, setTheme] = useState<ThemeMode>("dark");
 
-            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-            return prefersDark ? "dark" : "light";
-        }
-        return "dark"; // safe fallback
-    });
-
-    // Sync the `data-theme` attribute on <html> and persist to localStorage
+    // Sync the `data-theme` attribute on <html>
     useEffect(() => {
         const root = document.documentElement;
         root.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
+        localStorage.removeItem("theme");
     }, [theme]);
 
     const toggleTheme = useCallback((mode?: ThemeMode) => {

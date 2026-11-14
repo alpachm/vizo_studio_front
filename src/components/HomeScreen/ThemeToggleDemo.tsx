@@ -19,22 +19,39 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
 
     const isLight = theme === "light";
 
-    // Automatically switch to Light Mode when the section is centered in the viewport.
+    // Switch to Light Mode ONLY when this section is centered in the viewport,
+    // and always revert to Dark Mode when leaving view (or on initial load at top).
     useEffect(() => {
         const sectionNode = sectionRef.current;
         if (!sectionNode) return;
 
         let timerId: number | null = null;
+        let hasActivatedLight = false;
+
+        const isSectionCenteredInViewport = (): boolean => {
+            if (window.scrollY < 100) return false;
+            const rect = sectionNode.getBoundingClientRect();
+            const vh = window.innerHeight;
+            return rect.top < vh * 0.65 && rect.bottom > vh * 0.35;
+        };
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    timerId = window.setTimeout(() => {
-                        toggleTheme("light");
-                    }, AUTO_TOGGLE_DELAY_MS);
-                } else if (timerId !== null) {
+                if (timerId !== null) {
                     window.clearTimeout(timerId);
                     timerId = null;
+                }
+
+                if (entry.isIntersecting && isSectionCenteredInViewport()) {
+                    timerId = window.setTimeout(() => {
+                        if (isSectionCenteredInViewport()) {
+                            hasActivatedLight = true;
+                            toggleTheme("light");
+                        }
+                    }, AUTO_TOGGLE_DELAY_MS);
+                } else if (hasActivatedLight) {
+                    hasActivatedLight = false;
+                    toggleTheme("dark");
                 }
             },
             {
@@ -50,6 +67,9 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
             observer.disconnect();
             if (timerId !== null) {
                 window.clearTimeout(timerId);
+            }
+            if (hasActivatedLight) {
+                toggleTheme("dark");
             }
         };
     }, [toggleTheme]);

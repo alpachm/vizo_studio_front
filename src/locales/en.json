@@ -349,6 +349,7 @@
       "titleLine1": "Your web adapts.",
       "titleLine2": "Not the other way around.",
       "subtitle": "Did you notice the theme change? We build intuitive, accessible interfaces that adapt naturally to every user, making their experience smoother and more comfortable.",
+      "cta": "Let's design your custom experience",
       "card": {
         "badge": "One web, more possibilities",
         "toggleAriaLabel": "Toggle between light and dark mode",
@@ -376,6 +377,27 @@
           "it": "La tua prossima opportunità può parlare un'altra lingua.",
           "es": "Tu próxima oportunidad puede hablar otro idioma."
         }
+      }
+    },
+    "SeoMetricsDemo": {
+      "titleLine1": "A great website.",
+      "titleLine2": "Where people also find you.",
+      "subtitle": "Your next clients are already searching for what you offer. We optimize your website's structure, speed, and content so Google understands your business and you attract high-intent visitors.",
+      "tags": {
+        "technical": "Technical SEO",
+        "content": "Relevant content",
+        "performance": "Web performance"
+      },
+      "cta": "Let's make your business visible",
+      "card": {
+        "brand": "Google",
+        "searchQuery": "services for my business",
+        "resultsLabel": "Search results",
+        "visibilityBadge": "More visibility",
+        "featuredDomain": "yourbusiness.com",
+        "featuredTitle": "Your business — Just what you need",
+        "featuredSnippet": "Your value proposition, in front of the right people.",
+        "footnote": "This is what gaining visibility looks like. SEO positions your brand in front of people already searching for you."
       }
     }
   }

@@ -349,6 +349,7 @@
       "titleLine1": "Tu web se adapta.",
       "titleLine2": "No al revés.",
       "subtitle": "¿Notaste el cambio de tema? Desarrollamos interfaces intuitivas y accesibles que se adaptan con naturalidad a cada usuario, haciendo su experiencia más cómoda y fluida.",
+      "cta": "Diseñemos tu experiencia a medida",
       "card": {
         "badge": "Una web, más posibilidades",
         "toggleAriaLabel": "Alternar entre modo claro y oscuro",
@@ -376,6 +377,27 @@
           "it": "La tua prossima opportunità può parlare un'altra lingua.",
           "es": "Tu próxima oportunidad puede hablar otro idioma."
         }
+      }
+    },
+    "SeoMetricsDemo": {
+      "titleLine1": "Una gran web.",
+      "titleLine2": "Que también te encuentren.",
+      "subtitle": "Tus próximos clientes ya están buscando lo que ofrecen tus servicios. Optimizamos la estructura, velocidad y contenido de tu web para que Google entienda tu negocio y atraigas visitas reales.",
+      "tags": {
+        "technical": "SEO técnico",
+        "content": "Contenido relevante",
+        "performance": "Rendimiento web"
+      },
+      "cta": "Hagamos visible tu negocio",
+      "card": {
+        "brand": "Google",
+        "searchQuery": "servicios para mi negocio",
+        "resultsLabel": "Resultados de búsqueda",
+        "visibilityBadge": "Más visibilidad",
+        "featuredDomain": "tunegocio.com",
+        "featuredTitle": "Tu negocio — Justo lo que buscas",
+        "featuredSnippet": "Tu propuesta, frente a las personas correctas.",
+        "footnote": "Así se ve ganar visibilidad. El SEO posiciona tu marca frente a quienes ya te están buscando."
       }
     }
   }

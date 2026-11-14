@@ -5,8 +5,9 @@
 // ---------------------------------------------------------------------------
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { FiCheck, FiMoon, FiSun } from "react-icons/fi";
+import { FiArrowUpRight, FiCheck, FiMoon, FiSun } from "react-icons/fi";
 import { useTheme } from "../../context/ThemeContext";
+import { useScrollToSection } from "../../hooks/useScrollToSection";
 import type { IThemeToggleDemoProps } from "../../interfaces/HomeScreenInterface";
 
 /** Delay (ms) after centering so the user sees the switch glide into Light Mode. */
@@ -15,6 +16,7 @@ const AUTO_TOGGLE_DELAY_MS = 220;
 function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
     const { t } = useTranslation();
     const { theme, toggleTheme } = useTheme();
+    const { scrollToSection } = useScrollToSection();
     const sectionRef = useRef<HTMLElement | null>(null);
     const isInViewCenterRef = useRef<boolean>(false);
 
@@ -103,11 +105,11 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
             className={`w-full bg-bg py-24 sm:py-28 lg:py-32 transition-colors duration-500 ease-out ${className}`}
         >
             <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+                <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-8">
                     {/* -------------------------------------------------- */}
-                    {/* Left Column — Stacked headline & concise summary   */}
+                    {/* 1 (Mobile) / Left Top (Desktop) — Headline & copy  */}
                     {/* -------------------------------------------------- */}
-                    <div className="lg:col-span-6">
+                    <div className="order-1 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-start-1 lg:self-end">
                         <h2 className="font-title text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
                             <span className="block text-text transition-colors duration-500">
                                 {t("HomeScreen.ThemeToggleDemo.titleLine1")}
@@ -123,9 +125,9 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
                     </div>
 
                     {/* -------------------------------------------------- */}
-                    {/* Right Column — Interactive Theme Toggle Card       */}
+                    {/* 2 (Mobile) / Right Column (Desktop) — Theme Card   */}
                     {/* -------------------------------------------------- */}
-                    <div className="lg:col-span-6">
+                    <div className="order-2 lg:order-none lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1 lg:self-center">
                         <div className="rounded-3xl border border-neutral-500/20 bg-neutral-500/[0.04] p-7 shadow-sm transition-colors duration-500 sm:p-10">
                             {/* Top Row — Toggle Switch + Pill Badge */}
                             <div className="flex flex-wrap items-center justify-between gap-4">
@@ -195,6 +197,25 @@ function ThemeToggleDemo({ className = "" }: IThemeToggleDemoProps) {
                                 </span>
                             </div>
                         </div>
+                    </div>
+
+                    {/* -------------------------------------------------- */}
+                    {/* 3 (Mobile, Last) / Left Bottom (Desktop) — CTA     */}
+                    {/* -------------------------------------------------- */}
+                    <div className="order-3 lg:order-none lg:col-span-6 lg:col-start-1 lg:row-start-2 lg:self-start">
+                        <button
+                            type="button"
+                            onClick={() => scrollToSection("contacto")}
+                            className="group inline-flex cursor-pointer items-center gap-2 rounded-full border border-neutral-500/35 px-5 py-2.5 font-body text-sm font-medium text-text transition-[border-color,box-shadow,color] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)]"
+                        >
+                            <span>
+                                {t("HomeScreen.ThemeToggleDemo.cta")}
+                            </span>
+                            <FiArrowUpRight
+                                className="h-4 w-4 shrink-0 text-primary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                aria-hidden="true"
+                            />
+                        </button>
                     </div>
                 </div>
             </div>

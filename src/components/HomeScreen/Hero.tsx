@@ -228,9 +228,7 @@ function Hero() {
                                     >
                                         <span
                                             className={
-                                                isSettled
-                                                    ? "hero-professional-glitch"
-                                                    : undefined
+                                                isSettled ? "hero-professional-glitch" : undefined
                                             }
                                         >
                                             {currentWord}
@@ -238,7 +236,9 @@ function Hero() {
                                     </motion.span>
                                 </AnimatePresence>
                             ) : (
-                                <span className={`whitespace-nowrap ${WORD_VARIANTS[0]} text-primary`}>
+                                <span
+                                    className={`whitespace-nowrap ${WORD_VARIANTS[0]} text-primary`}
+                                >
                                     {displayedLines[1]}
                                     {activeLineIndex === 1 && caret}
                                 </span>
@@ -249,9 +249,7 @@ function Hero() {
                                 aria-hidden={!isSettled}
                                 initial={false}
                                 animate={
-                                    shouldReduceMotion
-                                        ? undefined
-                                        : { opacity: isSettled ? 1 : 0 }
+                                    shouldReduceMotion ? undefined : { opacity: isSettled ? 1 : 0 }
                                 }
                                 transition={{
                                     duration: shouldReduceMotion ? 0 : 0.3,
@@ -282,9 +280,7 @@ function Hero() {
                 className={`absolute bottom-8 left-1/2 z-10 -translate-x-1/2 transition-opacity sm:bottom-10 ${
                     shouldReduceMotion ? "duration-0" : "duration-700"
                 } ${
-                    isSettled
-                        ? "pointer-events-auto opacity-100"
-                        : "pointer-events-none opacity-0"
+                    isSettled ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
                 }`}
             >
                 <button

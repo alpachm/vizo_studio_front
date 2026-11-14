@@ -3,8 +3,6 @@
 // ---------------------------------------------------------------------------
 import Hero from "../components/HomeScreen/Hero";
 import ValueProposition from "../components/HomeScreen/ValueProposition";
-import AboutUs from "../components/HomeScreen/AboutUs";
-import WhyUs from "../components/HomeScreen/WhyUs";
 import Services from "../components/HomeScreen/Services";
 import type { IHomeScreenProps } from "../interfaces/HomeScreenInterface";
 import Portfolio from "../components/HomeScreen/Portfolio";

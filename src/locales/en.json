@@ -49,8 +49,9 @@
     "copyright": "© 2026 Vizo Studio. All rights reserved.",
     "location": "Venezuela",
     "legal": {
-      "privacy": "Privacy",
-      "terms": "Terms of Service"
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
     }
   },
   "FloatingButtons": {
@@ -517,6 +518,214 @@
       "titleLine2": "Let's build it together.",
       "subtitle": "Tell us about your idea and let's discover how to take your digital presence and business operations to the next level.",
       "button": "Let's talk about your idea"
+    }
+  },
+  "CookieConsentBanner": {
+    "ariaLabel": "Cookie consent notice",
+    "description": "We use cookies to improve your experience on our site. Learn more in our",
+    "acceptAll": "Accept",
+    "essentialOnly": "Essential only",
+    "cookiePolicyLink": "Cookie Policy"
+  },
+  "LegalCommon": {
+    "backToHome": "Back to home",
+    "lastUpdated": "Last updated: March 2026",
+    "navAriaLabel": "Vizo Studio legal documents",
+    "tabs": {
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
+    },
+    "contactBox": {
+      "titleLine1": "Have any legal or data privacy questions?",
+      "titleLine2": "We are here to answer with full transparency.",
+      "description": "You can reach out directly if you need clarification regarding our commercial terms, how we handle your information, or our use of analytics cookies.",
+      "emailLabel": "Email us at",
+      "contactButton": "Go to contact"
+    }
+  },
+  "TermsAndConditionsScreen": {
+    "hero": {
+      "eyebrow": "Legal & Commercial Framework",
+      "titleLine1": "Terms & Conditions.",
+      "titleLine2": "Clear rules, lasting partnerships.",
+      "lead": "These Terms and Conditions govern access to and use of the Vizo Studio website (vizostudio.dev), as well as the general guidelines applicable to our custom software development proposals and services."
+    },
+    "sections": {
+      "s1": {
+        "title": "Identification and Website Purpose",
+        "p1": "Vizo Studio is a studio specialized in web design, software architecture, and custom software development serving clients across Venezuela, Colombia, Argentina, and worldwide.",
+        "p2": "This website is designed to showcase our portfolio, work methodology, and interactive demonstrations, and to provide the initial contact channel for evaluating and quoting digital projects."
+      },
+      "s2": {
+        "title": "Acceptance and Proper Use of the Site",
+        "p1": "By browsing and interacting with this website, the user freely and knowingly accepts these Terms and Conditions. Users agree to use the platform lawfully and respectfully.",
+        "b1": "Do not engage in activities that compromise the security, availability, or performance of the website infrastructure.",
+        "b2": "Do not use automated scripts, bulk scraping, or fraudulent submissions in the interactive contact wizard.",
+        "b3": "Provide accurate and up-to-date information when requesting a consultation or project quote."
+      },
+      "s3": {
+        "title": "Services, Quotes, and Commercial Scope",
+        "p1": "Information submitted through our interactive contact wizard constitutes a preliminary diagnostic request and does not by itself represent a binding contract.",
+        "p2": "Every software or web development project will be formalized through a specific technical and commercial proposal detailing scope, deliverables, sprint schedule, costs, and payment terms agreed between Vizo Studio and the client."
+      },
+      "s4": {
+        "title": "Intellectual Property and Copyright",
+        "p1": "All visual content, copy, logos, animations, interactive demos, source code, and editorial design on this website are the exclusive property of Vizo Studio or their respective authorized owners and partners.",
+        "p2": "For client projects, ownership of source code or usage licenses for final deliverables are governed by the specific commercial agreement of each project once corresponding payments are completed."
+      },
+      "s5": {
+        "title": "Technical Warranty and Limitation of Liability",
+        "p1": "Vizo Studio applies high standards of engineering, performance, and security across its website. However, it cannot guarantee the complete absence of interruptions caused by external internet providers, hosting services, or scheduled maintenance.",
+        "p2": "The metrics and interactive interfaces displayed on the home page (such as the SEO metrics simulator, multi-device responsiveness preview, dark/light theme switcher, and language switcher) are illustrative demonstrations of our technical capabilities."
+      },
+      "s6": {
+        "title": "Updates and Legal Contact",
+        "p1": "Vizo Studio reserves the right to update these Terms and Conditions to reflect regulatory changes or improvements to our services. The date of the latest revision will always be displayed at the top of this page.",
+        "p2": "For any inquiries regarding these terms, you can reach our team directly at {{email}}."
+      }
+    }
+  },
+  "PrivacyPolicyScreen": {
+    "hero": {
+      "eyebrow": "Data Protection & Transparency",
+      "titleLine1": "Privacy Policy.",
+      "titleLine2": "Your information safe and under your control.",
+      "lead": "At Vizo Studio we respect your privacy. Here we clearly explain what data we collect when you complete our contact form or browse our website, including our use of Google Analytics."
+    },
+    "highlights": {
+      "noSale": {
+        "title": "Zero data selling",
+        "description": "We never sell, rent, or trade your personal or business information with third parties."
+      },
+      "analytics": {
+        "title": "Transparent analytics (GA4)",
+        "description": "We use Google Analytics solely to understand which sections bring the most value and optimize the web experience."
+      },
+      "control": {
+        "title": "Full user control",
+        "description": "You can request deletion of your data or disable analytics cookies at any time."
+      }
+    },
+    "sections": {
+      "s1": {
+        "title": "Data Controller",
+        "p1": "The party responsible for processing data collected through the vizostudio.dev website is Vizo Studio, reachable at our official email address {{email}}.",
+        "p2": "We process personal information from our visitors and prospective clients under strict principles of confidentiality, data minimization, and technical security."
+      },
+      "s2": {
+        "title": "Data We Collect",
+        "p1": "We collect only the necessary information through two clearly separated channels:",
+        "b1": "Data voluntarily provided in the Contact Wizard: full name, company or brand name, email address, phone / WhatsApp number, and your answers regarding your project's goals, design, and features.",
+        "b2": "Browsing and web analytics data (Google Analytics 4): when you accept analytics cookies, we collect aggregated, anonymous statistical data such as visited pages, time on site, device/browser type, approximate country or city, and Google Analytics session identifiers.",
+        "b3": "Technical performance metrics (Vercel Speed Insights): anonymous technical metrics on loading speed (Core Web Vitals) to ensure the website runs fast across all devices."
+      },
+      "s3": {
+        "title": "Use of Google Analytics and Statistical Tracking",
+        "p1": "This website implements Google Analytics 4 (via the official react-ga4 library) provided by Google LLC. Google Analytics uses first-party cookies (_ga and _ga_*) to analyze how visitors interact with the different sections and routes of the site.",
+        "p2": "The information generated by Google Analytics is used exclusively for internal statistical purposes to improve usability, content, and platform performance. We do not merge analytics data with personally identifiable information without your express consent, and you can disable this tracking at any time by selecting «Essential only» in our cookie manager."
+      },
+      "s4": {
+        "title": "Purpose and Legal Basis of Processing",
+        "p1": "We use your data exclusively for the following legitimate purposes:",
+        "b1": "Evaluating your project inquiry, answering your questions, and preparing a tailored technical or commercial proposal.",
+        "b2": "Maintaining direct communication via email or WhatsApp when requested by you through our contact channels.",
+        "b3": "Analyzing aggregated web traffic and performance metrics via Google Analytics (based on your cookie consent)."
+      },
+      "s5": {
+        "title": "Data Retention, Security, and Technology Providers",
+        "p1": "Your contact details are retained only for the time needed to address your commercial inquiry or while an active professional relationship exists.",
+        "p2": "We use encrypted HTTPS/TLS connections and top-tier cloud infrastructure (such as Vercel and Google). We do not share your data with third parties except when required by law."
+      },
+      "s6": {
+        "title": "User Rights (Access, Rectification, and Deletion)",
+        "p1": "As the owner of your data, you have the right at any time to know what information we hold about you, request its correction, update, or permanent deletion, and withdraw your consent for web analytics.",
+        "p2": "To exercise any of these rights immediately and without complex procedures, email us at {{email}} stating your request."
+      }
+    }
+  },
+  "CookiePolicyScreen": {
+    "hero": {
+      "eyebrow": "Technical Transparency",
+      "titleLine1": "Cookie Policy.",
+      "titleLine2": "How they work and how you control them.",
+      "lead": "On this page we detail the exact cookies and local storage technologies used by the Vizo Studio website, including Google Analytics measurement cookies and how you can manage your preferences in real time."
+    },
+    "preferencesCard": {
+      "badge": "Active Preferences Panel",
+      "title": "Your current cookie settings",
+      "statusAll": "You currently have all cookies enabled (Essential + Google Analytics).",
+      "statusEssential": "You currently have essential cookies and storage enabled only (Google Analytics disabled).",
+      "statusUnset": "You have not selected a custom cookie preference yet.",
+      "allowAllBtn": "Accept all (Enable analytics)",
+      "essentialOnlyBtn": "Essential only (Disable analytics)"
+    },
+    "table": {
+      "titleLine1": "Technical inventory.",
+      "titleLine2": "Cookie and storage breakdown.",
+      "subtitle": "Below we transparently list every item stored in your browser when visiting vizostudio.dev:",
+      "headers": {
+        "name": "Name / Key",
+        "provider": "Provider",
+        "purpose": "Purpose",
+        "duration": "Duration",
+        "type": "Category"
+      },
+      "types": {
+        "essential": "Essential",
+        "analytics": "Analytics (GA4)"
+      },
+      "rows": {
+        "theme": {
+          "name": "theme",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Remembers your visual preference between Dark Mode and Light Mode.",
+          "duration": "Persistent"
+        },
+        "lang": {
+          "name": "i18nextLng",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Stores your selected language (Spanish or English) to display the localized interface.",
+          "duration": "Persistent"
+        },
+        "consent": {
+          "name": "vizo_cookie_consent",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Stores your decision regarding acceptance or rejection of analytics cookies.",
+          "duration": "Persistent"
+        },
+        "ga": {
+          "name": "_ga",
+          "provider": "Google Analytics (Google LLC)",
+          "purpose": "Registers a unique anonymous identifier to distinguish visitors and generate website usage statistics.",
+          "duration": "2 years"
+        },
+        "gaSession": {
+          "name": "_ga_<ID>",
+          "provider": "Google Analytics 4 (Google LLC)",
+          "purpose": "Used by Google Analytics 4 to maintain and count session state and pageviews.",
+          "duration": "2 years"
+        }
+      }
+    },
+    "sections": {
+      "s1": {
+        "title": "What Are Cookies and Local Storage?",
+        "p1": "Cookies and local storage (localStorage) are small text files or records saved by your browser on your device (computer, tablet, or mobile phone) when you visit a website.",
+        "p2": "Their purpose is to allow the website to remember your interface preferences (such as language or dark/light theme) and, if you authorize it, collect anonymous metrics on how you interact with pages to help us improve them."
+      },
+      "s2": {
+        "title": "Google Analytics Cookies on Our Website",
+        "p1": "At Vizo Studio we use Google Analytics 4 to understand the performance of our pages: which sections are most helpful, what devices visitors use, and how navigation flows across screens.",
+        "b1": "The _ga and _ga_<ID> cookies collect information statistically and in aggregate without personally identifying visitors.",
+        "b2": "We do not use behavioral advertising cookies or invasive third-party remarketing networks.",
+        "b3": "If you select «Essential only» in the bottom banner or in the panel at the top of this page, we disable Google Analytics tracking and remove _ga cookies from your browser."
+      },
+      "s3": {
+        "title": "How to Manage or Delete Cookies from Your Browser?",
+        "p1": "In addition to using our interactive selector at any time, you can block or delete cookies directly from your web browser's privacy settings (Google Chrome, Safari, Mozilla Firefox, Microsoft Edge, or Brave).",
+        "p2": "Please note that if you clear essential local storage, preferences such as your selected language or color theme will revert to their default values on your next visit."
+      }
     }
   }
 }

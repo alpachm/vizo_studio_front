@@ -5,6 +5,7 @@ import { Outlet, useLocation } from "@tanstack/react-router";
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
 import FloatingButtons from "../components/shared/FloatingButtons";
+import CookieConsentBanner from "../components/shared/CookieConsentBanner";
 import { HeroVisibilityProvider } from "../context/HeroVisibilityContext";
 
 /**
@@ -33,8 +34,9 @@ function PrincipalLayout() {
                 </div>
             )}
 
-            {/* Global floating action buttons — visible on every route */}
+            {/* Global floating action buttons & cookie consent banner */}
             <FloatingButtons />
+            <CookieConsentBanner />
         </HeroVisibilityProvider>
     );
 }

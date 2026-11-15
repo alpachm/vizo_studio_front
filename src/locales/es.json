@@ -49,8 +49,9 @@
     "copyright": "© 2026 Vizo Studio. Todos los derechos reservados.",
     "location": "Venezuela",
     "legal": {
-      "privacy": "Privacidad",
-      "terms": "Términos de servicio"
+      "terms": "Términos y condiciones",
+      "privacy": "Política de privacidad",
+      "cookies": "Política de cookies"
     }
   },
   "FloatingButtons": {
@@ -517,6 +518,214 @@
       "titleLine2": "Hagámoslo realidad juntos.",
       "subtitle": "Cuéntanos tu idea y descubramos cómo llevar la presencia digital y las operaciones de tu negocio al siguiente nivel.",
       "button": "Hablemos de tu idea"
+    }
+  },
+  "CookieConsentBanner": {
+    "ariaLabel": "Aviso de consentimiento de cookies",
+    "description": "Usamos cookies para mejorar tu experiencia en nuestro sitio. Más detalles en nuestra",
+    "acceptAll": "Aceptar",
+    "essentialOnly": "Solo esenciales",
+    "cookiePolicyLink": "Política de cookies"
+  },
+  "LegalCommon": {
+    "backToHome": "Volver al inicio",
+    "lastUpdated": "Última actualización: Marzo 2026",
+    "navAriaLabel": "Documentos legales de Vizo Studio",
+    "tabs": {
+      "terms": "Términos y Condiciones",
+      "privacy": "Políticas de Privacidad",
+      "cookies": "Política de Cookies"
+    },
+    "contactBox": {
+      "titleLine1": "¿Tienes alguna duda legal o sobre tus datos?",
+      "titleLine2": "Estamos para responderte con total transparencia.",
+      "description": "Puedes escribirnos directamente si necesitas aclaraciones sobre nuestros términos comerciales, el tratamiento de tu información o el uso de cookies analíticas.",
+      "emailLabel": "Escríbenos a",
+      "contactButton": "Ir a contacto"
+    }
+  },
+  "TermsAndConditionsScreen": {
+    "hero": {
+      "eyebrow": "Marco Legal y Comercial",
+      "titleLine1": "Términos y Condiciones.",
+      "titleLine2": "Reglas claras, relaciones duraderas.",
+      "lead": "Estos Términos y Condiciones regulan el acceso y uso del sitio web de Vizo Studio (vizostudio.dev), así como los lineamientos generales aplicables a nuestras propuestas y servicios de desarrollo de software a medida."
+    },
+    "sections": {
+      "s1": {
+        "title": "Identificación y Objeto del Sitio Web",
+        "p1": "Vizo Studio es un estudio especializado en diseño web, arquitectura y desarrollo de software a la medida con operaciones para clientes en Venezuela, Colombia, Argentina y el resto del mundo.",
+        "p2": "El presente sitio web tiene como finalidad presentar nuestro portafolio, metodología de trabajo, demostraciones interactivas y facilitar el canal de contacto inicial para la evaluación y cotización de proyectos digitales."
+      },
+      "s2": {
+        "title": "Aceptación y Uso Adecuado del Sitio",
+        "p1": "Al navegar e interactuar con este sitio web, el usuario acepta de forma libre e informada los presentes Términos y Condiciones. El usuario se compromete a hacer un uso lícito y respetuoso de la plataforma.",
+        "b1": "No realizar actividades que comprometan la seguridad, disponibilidad o el rendimiento de la infraestructura del sitio.",
+        "b2": "No utilizar scripts automatizados, scraping masivo ni envíos fraudulentos en el asistente de contacto.",
+        "b3": "Suministrar información veraz y actualizada al solicitar una asesoría o cotización de proyecto."
+      },
+      "s3": {
+        "title": "Servicios, Cotizaciones y Alcance Comercial",
+        "p1": "La información completada a través de nuestro formulario o asistente interactivo de contacto constituye una solicitud preliminar de diagnóstico y no representa por sí misma un contrato vinculante.",
+        "p2": "Todo proyecto de desarrollo de software o sitio web se formalizará mediante una propuesta técnica y comercial específica que detallará el alcance, entregables, cronograma por sprints, costos y condiciones de pago acordadas entre Vizo Studio y el cliente."
+      },
+      "s4": {
+        "title": "Propiedad Intelectual y Derechos de Autor",
+        "p1": "Todos los contenidos visuales, textos, logotipos, animaciones, demostraciones interactivas, código fuente y diseño editorial de este sitio web son propiedad exclusiva de Vizo Studio o de sus respectivos titulares y aliados autorizados.",
+        "p2": "En los proyectos desarrollados para clientes, la titularidad del código o las licencias de uso sobre los entregables finales se rigen por lo estipulado en el acuerdo comercial de cada proyecto una vez completados los pagos correspondientes."
+      },
+      "s5": {
+        "title": "Garantía Técnica y Limitación de Responsabilidad",
+        "p1": "Vizo Studio aplica altos estándares de ingeniería, rendimiento y seguridad en su sitio web. Sin embargo, no garantiza la ausencia absoluta de interrupciones derivadas de proveedores externos de internet, hosting o mantenimiento programado.",
+        "p2": "Las métricas e interfaces interactivas mostradas en la página principal (como el simulador de métricas SEO, adaptabilidad multidispositivo, modo oscuro/claro y selector de idioma) son demostraciones ilustrativas de nuestras capacidades técnicas."
+      },
+      "s6": {
+        "title": "Modificaciones y Contacto Legal",
+        "p1": "Vizo Studio se reserva el derecho de actualizar estos Términos y Condiciones para adaptarlos a cambios normativos o mejoras en nuestros servicios. La fecha de la última revisión estará siempre visible en el encabezado de esta página.",
+        "p2": "Para cualquier consulta relacionada con estos términos, puedes comunicarte directamente con nuestro equipo a través de {{email}}."
+      }
+    }
+  },
+  "PrivacyPolicyScreen": {
+    "hero": {
+      "eyebrow": "Protección de Datos y Transparencia",
+      "titleLine1": "Políticas de Privacidad.",
+      "titleLine2": "Tu información segura y bajo tu control.",
+      "lead": "En Vizo Studio respetamos tu privacidad. Aquí explicamos de forma clara qué datos recopilamos cuando completas nuestro formulario de contacto o navegas por nuestro sitio, incluyendo el uso de Google Analytics."
+    },
+    "highlights": {
+      "noSale": {
+        "title": "Cero venta de datos",
+        "description": "Jamás vendemos, alquilamos ni comercializamos tu información personal o empresarial con terceros."
+      },
+      "analytics": {
+        "title": "Analítica transparente (GA4)",
+        "description": "Usamos Google Analytics únicamente para entender qué secciones aportan más valor y optimizar la experiencia web."
+      },
+      "control": {
+        "title": "Control total del usuario",
+        "description": "Puedes solicitar la eliminación de tus datos o desactivar las cookies analíticas en cualquier momento."
+      }
+    },
+    "sections": {
+      "s1": {
+        "title": "Responsable del Tratamiento de los Datos",
+        "p1": "El responsable del tratamiento de los datos recopilados a través del sitio web vizostudio.dev es Vizo Studio, con correo electrónico de contacto oficial {{email}}.",
+        "p2": "Tratamos la información personal de nuestros visitantes y clientes potenciales bajo principios de confidencialidad, minimización de datos y seguridad técnica."
+      },
+      "s2": {
+        "title": "Datos que Recopilamos",
+        "p1": "Recopilamos únicamente la información necesaria a través de dos vías claramente diferenciadas:",
+        "b1": "Datos suministrados voluntariamente en el Asistente de Contacto: nombre completo, nombre de empresa o marca, correo electrónico, número de teléfono / WhatsApp y las respuestas sobre los objetivos, diseño y funcionalidades de tu proyecto.",
+        "b2": "Datos de navegación y analítica web (Google Analytics 4): cuando aceptas las cookies analíticas, recopilamos datos estadísticos agregados y anónimos como páginas visitadas, tiempo de permanencia, tipo de dispositivo/navegador, país o ciudad aproximada e identificadores de sesión de Google Analytics.",
+        "b3": "Métricas técnicas de rendimiento (Vercel Speed Insights): datos técnicos anónimos sobre tiempos de carga (Core Web Vitals) para asegurar que el sitio funcione con rapidez en todos los dispositivos."
+      },
+      "s3": {
+        "title": "Uso de Google Analytics y Seguimiento Estadístico",
+        "p1": "Este sitio web implementa Google Analytics 4 (a través de la librería oficial react-ga4) provisto por Google LLC. Google Analytics utiliza cookies propias (_ga y _ga_*) para analizar cómo los usuarios interactúan con las distintas secciones y rutas del sitio.",
+        "p2": "La información generada por Google Analytics se emplea exclusivamente con fines estadísticos internos para mejorar la usabilidad, el contenido y el rendimiento de nuestra plataforma. No combinamos estos datos analíticos con información que te identifique personalmente sin tu consentimiento expreso, y puedes desactivar este seguimiento en cualquier momento seleccionando «Solo esenciales» en nuestro gestor de cookies."
+      },
+      "s4": {
+        "title": "Finalidad y Base Legal del Tratamiento",
+        "p1": "Utilizamos tus datos exclusivamente para las siguientes finalidades legítimas:",
+        "b1": "Evaluar tu solicitud de proyecto, responder a tus consultas y enviarte una propuesta técnica o comercial personalizada.",
+        "b2": "Mantener comunicación directa por correo electrónico o WhatsApp cuando tú mismo lo solicitas a través de nuestros canales de contacto.",
+        "b3": "Analizar métricas agregadas de tráfico y rendimiento web mediante Google Analytics (basado en tu consentimiento de cookies)."
+      },
+      "s5": {
+        "title": "Conservación, Seguridad yProveedores Tecnológicos",
+        "p1": "Tus datos de contacto se conservan únicamente durante el tiempo necesario para atender tu solicitud comercial o mientras exista una relación profesional activa.",
+        "p2": "Utilizamos conexiones cifradas mediante protocolo HTTPS/TLS e infraestructura en la nube de primer nivel (como Vercel y Google). No compartimos tus datos con terceros salvo obligación legal."
+      },
+      "s6": {
+        "title": "Derechos del Usuario (Acceso, Rectificación y Eliminación)",
+        "p1": "Como titular de tus datos, tienes derecho en todo momento a conocer qué información conservamos sobre ti, solicitar su corrección, actualización o eliminación definitiva, así como revocar tu consentimiento para analítica web.",
+        "p2": "Para ejercer cualquiera de estos derechos de forma inmediata y sin trámites complejos, escríbenos a {{email}} indicando tu solicitud."
+      }
+    }
+  },
+  "CookiePolicyScreen": {
+    "hero": {
+      "eyebrow": "Transparencia Técnica",
+      "titleLine1": "Política de Cookies.",
+      "titleLine2": "Cómo funcionan y cómo las gestionas.",
+      "lead": "En esta página te detallamos con exactitud qué cookies y tecnologías de almacenamiento local utiliza el sitio web de Vizo Studio, incluyendo las cookies de medición de Google Analytics y cómo puedes administrar tus preferencias en tiempo real."
+    },
+    "preferencesCard": {
+      "badge": "Panel de Preferencias Activo",
+      "title": "Tu configuración actual de cookies",
+      "statusAll": "Actualmente tienes activadas todas las cookies (Esenciales + Google Analytics).",
+      "statusEssential": "Actualmente tienes activadas únicamente las cookies y almacenamientos esenciales (Google Analytics desactivado).",
+      "statusUnset": "Aún no has seleccionado una preferencia personalizada de cookies.",
+      "allowAllBtn": "Aceptar todas (Activar analítica)",
+      "essentialOnlyBtn": "Solo esenciales (Desactivar analítica)"
+    },
+    "table": {
+      "titleLine1": "Inventario técnico.",
+      "titleLine2": "Detalle de cookies y almacenamiento.",
+      "subtitle": "A continuación listamos de forma transparente cada elemento almacenado en tu navegador al visitar vizostudio.dev:",
+      "headers": {
+        "name": "Nombre / Clave",
+        "provider": "Proveedor",
+        "purpose": "Finalidad",
+        "duration": "Duración",
+        "type": "Categoría"
+      },
+      "types": {
+        "essential": "Esencial",
+        "analytics": "Analítica (GA4)"
+      },
+      "rows": {
+        "theme": {
+          "name": "theme",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Recuerda tu preferencia visual entre el Modo Oscuro y el Modo Claro.",
+          "duration": "Persistente"
+        },
+        "lang": {
+          "name": "i18nextLng",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Guarda tu idioma seleccionado (Español o Inglés) para mostrar la interfaz traducida.",
+          "duration": "Persistente"
+        },
+        "consent": {
+          "name": "vizo_cookie_consent",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Almacena tu decisión sobre la aceptación o rechazo de cookies analíticas.",
+          "duration": "Persistente"
+        },
+        "ga": {
+          "name": "_ga",
+          "provider": "Google Analytics (Google LLC)",
+          "purpose": "Registra un identificador anónimo único para distinguir visitantes y generar estadísticas de uso del sitio web.",
+          "duration": "2 años"
+        },
+        "gaSession": {
+          "name": "_ga_<ID>",
+          "provider": "Google Analytics 4 (Google LLC)",
+          "purpose": "Utilizada por Google Analytics 4 para mantener y contabilizar el estado de la sesión y las vistas de página.",
+          "duration": "2 años"
+        }
+      }
+    },
+    "sections": {
+      "s1": {
+        "title": "¿Qué son las Cookies y el Almacenamiento Local?",
+        "p1": "Las cookies y el almacenamiento local (localStorage) son pequeños archivos o registros de texto que el navegador guarda en tu dispositivo (computadora, tablet o teléfono móvil) cuando visitas un sitio web.",
+        "p2": "Su objetivo es permitir que el sitio recuerde tus preferencias de interfaz (como el idioma o el tema oscuro/claro) y, si lo autorizas, recopilar métricas anónimas sobre cómo interactúas con las páginas para ayudarnos a mejorarlas."
+      },
+      "s2": {
+        "title": "Cookies de Google Analytics en Nuestro Sitio",
+        "p1": "En Vizo Studio utilizamos Google Analytics 4 para comprender el rendimiento de nuestras páginas: qué secciones resultan más útiles, desde qué dispositivos nos visitan y cómo fluye la navegación entre nuestras pantallas.",
+        "b1": "Las cookies _ga y _ga_<ID> recopilan información de forma estadística y agregada sin identificar personalmente al visitante.",
+        "b2": "No utilizamos cookies de publicidad comportamental ni redes de remarketing invasivo de terceros.",
+        "b3": "Si seleccionas la opción «Solo esenciales» en el banner inferior o en el panel superior de esta misma página, desactivamos el seguimiento de Google Analytics y eliminamos las cookies _ga de tu navegador."
+      },
+      "s3": {
+        "title": "¿Cómo Administrar o Eliminar Cookies desde tu Navegador?",
+        "p1": "Además de utilizar nuestro selector interactivo en cualquier momento, puedes bloquear o eliminar las cookies directamente desde la configuración de privacidad de tu navegador web (Google Chrome, Safari, Mozilla Firefox, Microsoft Edge o Brave).",
+        "p2": "Ten en cuenta que si borras el almacenamiento local esencial, preferencias como el idioma seleccionado o el modo de color volverán a sus valores predeterminados en tu próxima visita."
+      }
     }
   }
 }

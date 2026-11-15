@@ -3,7 +3,7 @@
 //           contact, navigation, back-to-top, and sub-footer legal row.
 // ---------------------------------------------------------------------------
 import { useCallback } from "react";
-import { useLocation, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { FiMail, FiArrowUp } from "react-icons/fi";
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
@@ -214,6 +214,28 @@ function Footer({
                         <p className="font-body text-xs sm:text-sm text-text-muted">
                             {t("Footer.copyright")} &bull; {t("Footer.location")}
                         </p>
+
+                        {/* Right: Legal links */}
+                        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-body text-xs sm:text-sm">
+                            <Link
+                                to="/terms"
+                                className="text-text-muted transition-colors duration-200 hover:text-primary"
+                            >
+                                {t("Footer.legal.terms")}
+                            </Link>
+                            <Link
+                                to="/privacy"
+                                className="text-text-muted transition-colors duration-200 hover:text-primary"
+                            >
+                                {t("Footer.legal.privacy")}
+                            </Link>
+                            <Link
+                                to="/cookies"
+                                className="text-text-muted transition-colors duration-200 hover:text-primary"
+                            >
+                                {t("Footer.legal.cookies")}
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

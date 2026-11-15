@@ -61,6 +61,7 @@
   "Portfolio": {
     "title": "Less words. More «I want that».",
     "subtitle": "Design concepts to imagine how far your brand can go.",
+    "scrollHint": "Keep scrolling",
     "projects": {
       "1": {
         "category": "FOUNDATION",

@@ -19,7 +19,10 @@ const HeroVisibilityContext = createContext<IHeroVisibilityContextValue | undefi
 // Provider
 // ---------------------------------------------------------------------------
 function HeroVisibilityProvider({ children }: IHeroVisibilityProviderProps) {
-    const [isHeroInView, setIsHeroInViewState] = useState(false);
+    const [isHeroInView, setIsHeroInViewState] = useState<boolean>(() => {
+        if (typeof window === "undefined") return true;
+        return window.location.pathname === "/";
+    });
     const [isValuePropositionInView, setIsValuePropositionInViewState] = useState(false);
 
     // Stable setters so consumers (Hero's & ValueProposition's IntersectionObserver

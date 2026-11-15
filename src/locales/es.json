@@ -727,5 +727,18 @@
         "p2": "Ten en cuenta que si borras el almacenamiento local esencial, preferencias como el idioma seleccionado o el modo de color volverán a sus valores predeterminados en tu próxima visita."
       }
     }
+  },
+  "NotFoundScreen": {
+    "code": "404",
+    "oops": "¡Ups!",
+    "subtitle": "Parece que esta página se rompió.",
+    "descriptionLine1": "El enlace al que intentas acceder no existe o fue movido.",
+    "descriptionLine2": "Regresa al inicio para continuar navegando en vizostudio.dev.",
+    "backButton": "VOLVER",
+    "homeButton": "INICIO",
+    "contactButton": "CONTACTO",
+    "illustrationAria": "Ilustración de ventana web desconectada",
+    "browserUrl": "vizostudio.dev/404",
+    "errorTag": "ERR_PAGE_NOT_FOUND"
   }
 }

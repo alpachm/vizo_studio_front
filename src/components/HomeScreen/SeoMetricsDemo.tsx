@@ -25,7 +25,10 @@ const RANKING_STEPS: readonly (readonly string[])[] = [
 ];
 
 /** Delay (ms) before advancing from #3 -> #2 and #2 -> #1. */
-const CLIMB_STEP_DELAY_MS = 550;
+const CLIMB_STEP_DELAY_MS = 650;
+
+/** Hold duration (ms) at #1 before restarting the continuous loop. */
+const TOP_RANK_HOLD_MS = 2000;
 
 /** Editorial exponential ease-out curve for the layout reorder. */
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
@@ -54,31 +57,41 @@ function SeoMetricsDemo({ className = "" }: ISeoMetricsDemoProps) {
             timers = [];
         };
 
+        const runClimbCycle = () => {
+            clearClimbTimers();
+            setStepIndex(0);
+
+            timers.push(
+                window.setTimeout(() => {
+                    setStepIndex(1);
+                }, CLIMB_STEP_DELAY_MS),
+            );
+
+            timers.push(
+                window.setTimeout(() => {
+                    setStepIndex(2);
+                }, CLIMB_STEP_DELAY_MS * 2),
+            );
+
+            timers.push(
+                window.setTimeout(() => {
+                    runClimbCycle();
+                }, CLIMB_STEP_DELAY_MS * 2 + TOP_RANK_HOLD_MS),
+            );
+        };
+
         const observer = new IntersectionObserver(
             ([entry]) => {
-                clearClimbTimers();
-
                 if (entry.isIntersecting) {
-                    setStepIndex(0);
-
-                    timers.push(
-                        window.setTimeout(() => {
-                            setStepIndex(1);
-                        }, CLIMB_STEP_DELAY_MS),
-                    );
-
-                    timers.push(
-                        window.setTimeout(() => {
-                            setStepIndex(2);
-                        }, CLIMB_STEP_DELAY_MS * 2),
-                    );
+                    runClimbCycle();
                 } else {
+                    clearClimbTimers();
                     setStepIndex(0);
                 }
             },
             {
                 root: null,
-                rootMargin: "-20% 0px -20% 0px",
+                rootMargin: "-10% 0px -10% 0px",
                 threshold: 0,
             },
         );

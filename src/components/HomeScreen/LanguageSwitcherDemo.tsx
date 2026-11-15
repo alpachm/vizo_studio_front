@@ -56,6 +56,9 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
     const shouldReduceMotion = useReducedMotion() ?? false;
 
     const sectionRef = useRef<HTMLElement | null>(null);
+    const languageRef = useRef(language);
+    languageRef.current = language;
+
     const [activePhraseIndex, setActivePhraseIndex] =
         useState<number>(FINAL_ROTATING_INDEX);
 
@@ -113,14 +116,47 @@ function LanguageSwitcherDemo({ className = "" }: ILanguageSwitcherDemoProps) {
         };
     }, [shouldReduceMotion]);
 
+    // Automatically restore the page language back to Spanish ("es") when the
+    // LanguageSwitcherDemo section leaves the viewport.
+    useEffect(() => {
+        const sectionNode = sectionRef.current;
+        if (!sectionNode) return;
+
+        const exitObserver = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting && languageRef.current !== "es") {
+                    changeLanguage("es");
+                }
+            },
+            {
+                root: null,
+                threshold: 0,
+            },
+        );
+
+        exitObserver.observe(sectionNode);
+
+        return () => {
+            exitObserver.disconnect();
+        };
+    }, [changeLanguage]);
+
     const displayedPhraseIndex = shouldReduceMotion
         ? FINAL_ROTATING_INDEX
         : activePhraseIndex;
-    const currentPhrase = rotatingPhrases[displayedPhraseIndex];
+    const isSettled = displayedPhraseIndex === FINAL_ROTATING_INDEX;
+    const currentPhrase = isSettled
+        ? language === "en"
+            ? t("HomeScreen.LanguageSwitcherDemo.card.rotatingTitles.en")
+            : t("HomeScreen.LanguageSwitcherDemo.card.rotatingTitles.es")
+        : rotatingPhrases[displayedPhraseIndex];
     const currentFontClass = ROTATING_LANGUAGE_FONTS[displayedPhraseIndex];
-    const currentLangKey = ROTATING_LANGUAGE_KEYS[displayedPhraseIndex];
+    const currentLangKey = isSettled
+        ? language
+        : ROTATING_LANGUAGE_KEYS[displayedPhraseIndex];
 
     const handleLanguageToggle = () => {
+        setActivePhraseIndex(FINAL_ROTATING_INDEX);
         changeLanguage(language === "es" ? "en" : "es");
     };
 

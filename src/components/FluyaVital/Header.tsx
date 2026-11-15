@@ -7,16 +7,6 @@ import type { IFluyaVitalHeaderProps } from "../../interfaces/FluyaVitalInterfac
 import fluyaVitalLogo from "../../assets/FluyaVital/fluyta-vital-logo.png";
 import styles from "../../screens/FluyaVital.module.css";
 
-/**
- * Crisp black outline applied to the white "Vizo" word so it remains legible
- * against the light Fluye Vital background.
- */
-const VIZO_OUTLINE_STYLE: React.CSSProperties = {
-    color: "#ffffff",
-    WebkitTextStroke: "1.5px #000000",
-    paintOrder: "stroke fill",
-};
-
 export const FluyaVitalHeader: React.FC<IFluyaVitalHeaderProps> = ({ className = "" }) => {
     const { t } = useTranslation();
 
@@ -29,13 +19,12 @@ export const FluyaVitalHeader: React.FC<IFluyaVitalHeaderProps> = ({ className =
                 {/* ---- Vizo Studio brand ---- */}
                 <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
                     <span
-                        className={`${styles.fvVizoBrand} text-lg font-black leading-none sm:text-2xl lg:text-3xl`}
-                        style={VIZO_OUTLINE_STYLE}
+                        className={`${styles.fvVizoBrand} font-mono text-lg font-black lowercase leading-none text-primary sm:text-2xl lg:text-3xl`}
                     >
                         {t("Common.logoVizo")}
                     </span>
                     <span
-                        className={`${styles.fvVizoBrand} text-lg font-black leading-none text-[#d97706] sm:text-2xl lg:text-3xl`}
+                        className={`${styles.fvVizoBrand} font-mono text-lg font-black lowercase leading-none text-primary sm:text-2xl lg:text-3xl`}
                     >
                         {t("Common.logoStudio")}
                     </span>

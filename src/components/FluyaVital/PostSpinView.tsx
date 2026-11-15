@@ -28,11 +28,8 @@ export const PostSpinView: React.FC<IPostSpinViewProps> = ({
                 className={`${styles.fvBrand} text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}
             >
                 {t("FluyaVital.postSpin.brandingLead")}{" "}
-                <span className={`${styles.fvVizoBrand} font-bold normal-case tracking-normal text-[#0b2545]`}>
-                    {t("Common.logoVizo")}
-                </span>{" "}
-                <span className={`${styles.fvVizoBrand} font-bold normal-case tracking-normal text-[#d97706]`}>
-                    {t("Common.logoStudio")}
+                <span className={`${styles.fvVizoBrand} font-mono font-bold lowercase tracking-normal text-primary`}>
+                    {t("Common.logoVizo")} {t("Common.logoStudio")}
                 </span>
             </p>
 

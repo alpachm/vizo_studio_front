@@ -36,10 +36,9 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
                         className={`${styles.fvBrand} mt-3 max-w-3xl text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
                     >
                         {t("FluyaVital.footer.descriptionLead")}{" "}
-                        <span className={`${styles.fvVizoBrand} font-bold text-[#0b2545]`}>
-                            {t("Common.logoVizo")}
+                        <span className={`${styles.fvVizoBrand} font-mono font-bold lowercase text-primary`}>
+                            {t("Common.logoVizo")} {t("Common.logoStudio")}
                         </span>{" "}
-                        <span className={`${styles.fvVizoBrand} font-bold text-[#d97706]`}>{t("Common.logoStudio")}</span>{" "}
                         {t("FluyaVital.footer.descriptionAfter")}
                     </p>
                 </div>
@@ -64,10 +63,9 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
                     {t("FluyaVital.footer.creditsLead")}{" "}
                     <Link to="/" className="inline-block transition-opacity hover:opacity-80">
                         <span className="whitespace-nowrap">
-                            <span className={`${styles.fvVizoBrand} font-black text-[#0b2545]`}>
-                                {t("Common.logoVizo")}
-                            </span>{" "}
-                            <span className={`${styles.fvVizoBrand} font-black text-[#d97706]`}>{t("Common.logoStudio")}</span>
+                            <span className={`${styles.fvVizoBrand} font-mono font-black lowercase text-primary`}>
+                                {t("Common.logoVizo")} {t("Common.logoStudio")}
+                            </span>
                         </span>
                     </Link>
                 </p>

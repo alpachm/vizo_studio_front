@@ -8,16 +8,6 @@ import type { IPostSpinViewProps } from "../../interfaces/FluyaVitalInterface";
 import styles from "../../screens/FluyaVital.module.css";
 
 /**
- * Crisp black outline applied to the white "Vizo" word so it stays legible
- * against the light Fluye Vital background (mirrors the header brand lockup).
- */
-const VIZO_OUTLINE_STYLE: React.CSSProperties = {
-    color: "#ffffff",
-    WebkitTextStroke: "1.5px #000000",
-    paintOrder: "stroke fill",
-};
-
-/**
  * Minimal, corporate closing view that replaces the roulette once the result
  * modal is dismissed. It credits the agency, states the value proposition and
  * offers two actions: meet Vizo Studio (home) or return to the wheel.
@@ -38,7 +28,7 @@ export const PostSpinView: React.FC<IPostSpinViewProps> = ({
                 className={`${styles.fvBrand} text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}
             >
                 {t("FluyaVital.postSpin.brandingLead")}{" "}
-                <span className={`${styles.fvVizoBrand} font-bold normal-case tracking-normal`} style={VIZO_OUTLINE_STYLE}>
+                <span className={`${styles.fvVizoBrand} font-bold normal-case tracking-normal text-[#0b2545]`}>
                     {t("Common.logoVizo")}
                 </span>{" "}
                 <span className={`${styles.fvVizoBrand} font-bold normal-case tracking-normal text-[#d97706]`}>

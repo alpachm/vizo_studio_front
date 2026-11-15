@@ -4,7 +4,7 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { FiGift } from "react-icons/fi";
+import { FiGift, FiRotateCw } from "react-icons/fi";
 import type { IFluyaVitalRouletteProps } from "../../interfaces/FluyaVitalInterface";
 import RouletteSVG from "../../assets/FluyaVital/SVG/rouletteSVG";
 import { useChristmasMode } from "../../hooks/useChristmasMode";
@@ -100,8 +100,8 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
         : "bg-gradient-to-r from-[#F2A83B] to-[#FED967] text-[#0b2545] shadow-lg shadow-amber-500/30 focus:ring-amber-300/60";
 
     const resultBoxThemeClass = isChristmas
-        ? "rounded-full border-2 border-dashed border-[#F39C12] bg-orange-50/80 shadow-xl shadow-orange-500/20"
-        : "rounded-2xl border border-slate-200/60 bg-white shadow-2xl shadow-slate-900/5";
+        ? "rounded-2xl border border-amber-300/80 bg-white/85 shadow-lg shadow-amber-500/10 backdrop-blur-md"
+        : "rounded-2xl border border-slate-200/70 bg-white/90 shadow-lg shadow-slate-900/5 backdrop-blur-md";
 
     const prizeIconThemeClass = isChristmas ? "text-[#E89228]" : "text-[#00b4d8]";
 
@@ -113,7 +113,12 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
             {/* ---- Left / desktop: unified static roulette SVG ---- */}
             {/* Periodic idle swing: a subtle side-to-side rotation that hints the */}
             {/* wheel is interactive. It repeats every 3s while the wheel is idle. */}
-            <div className="relative flex w-full max-w-md shrink-0 items-center justify-center lg:max-w-lg">
+            <div
+                onClick={!isSpinDisabled ? onSpin : undefined}
+                className={`relative flex w-full max-w-md shrink-0 items-center justify-center lg:max-w-lg ${
+                    !isSpinDisabled ? "cursor-pointer" : ""
+                }`}
+            >
                 <div
                     aria-hidden="true"
                     className={`pointer-events-none absolute inset-[-6%] rounded-full ${wheelGlowClass}`}
@@ -133,9 +138,9 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
 
             {/* ---- Right / desktop: call-to-action block ---- */}
             <div className="flex w-full max-w-lg flex-col items-center text-center lg:items-start lg:text-left">
-                {/* Overline */}
+                {/* Overline pill */}
                 <p
-                    className={`${styles.fvBrand} flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}
+                    className={`${styles.fvBrand} inline-flex items-center gap-2 rounded-full border border-[#00b4d8]/20 bg-white/75 px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.25em] text-[#1e6091] shadow-sm backdrop-blur-sm sm:text-sm`}
                 >
                     <FiGift aria-hidden="true" className="h-4 w-4 shrink-0 text-[#00b4d8]" />
                     {t("FluyaVital.roulette.overline")}
@@ -143,14 +148,14 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
 
                 {/* Main heading */}
                 <h2
-                    className={`${styles.fvBrand} mt-5 text-3xl font-black leading-tight text-[#0b2545] sm:text-4xl lg:text-5xl`}
+                    className={`${styles.fvBrand} mt-4 text-3xl font-black leading-tight text-[#0b2545] sm:text-4xl lg:text-5xl`}
                 >
                     {t("FluyaVital.roulette.heading")}
                 </h2>
 
                 {/* Description */}
                 <p
-                    className={`${styles.fvBrand} mt-5 max-w-md text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
+                    className={`${styles.fvBrand} mt-4 max-w-md text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
                 >
                     {t("FluyaVital.roulette.description")}
                 </p>
@@ -160,8 +165,12 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
                     type="button"
                     onClick={onSpin}
                     disabled={isSpinDisabled}
-                    className={`${styles.fvBrand} mt-8 inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-bold transition-all duration-200 hover:scale-[1.03] focus:outline-none focus:ring-4 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:active:scale-100 sm:text-lg ${spinButtonThemeClass}`}
+                    className={`${styles.fvBrand} mt-8 inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-full px-8 py-4 text-base font-bold transition-all duration-200 hover:scale-[1.03] focus:outline-none focus:ring-4 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:active:scale-100 sm:text-lg ${spinButtonThemeClass}`}
                 >
+                    <FiRotateCw
+                        aria-hidden="true"
+                        className={`h-5 w-5 shrink-0 ${isSpinning ? "animate-spin" : ""}`}
+                    />
                     {t(
                         isSpinning
                             ? "FluyaVital.roulette.spinning"

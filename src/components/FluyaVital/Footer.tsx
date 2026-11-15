@@ -8,16 +8,6 @@ import type { IFluyaVitalFooterProps } from "../../interfaces/FluyaVitalInterfac
 import styles from "../../screens/FluyaVital.module.css";
 
 /**
- * Crisp black outline applied to the white "Vizo" word so it stays legible
- * against the white floating card (mirrors the header brand lockup).
- */
-const VIZO_OUTLINE_STYLE: React.CSSProperties = {
-    color: "#ffffff",
-    WebkitTextStroke: "1.5px #000000",
-    paintOrder: "stroke fill",
-};
-
-/**
  * Collaboration footer for the Fluye Vital screen. Wraps the credits and CTA in
  * a clean floating white card and links back to the home page (/) so visitors
  * can meet Vizo Studio.
@@ -31,22 +21,22 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
             className={`relative z-10 w-full ${className}`}
         >
             {/* ---- Floating card: eyebrow + description + CTA ---- */}
-            <div className="flex flex-col items-center justify-between gap-6 rounded-2xl border border-slate-200/60 bg-white p-8 shadow-2xl shadow-slate-900/5 md:p-10 lg:flex-row">
+            <div className="flex flex-col items-center justify-between gap-6 rounded-2xl border border-white/80 bg-white/90 p-8 shadow-xl shadow-sky-950/10 backdrop-blur-md md:p-10 lg:flex-row">
                 {/* Text block (eyebrow + description) */}
                 <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
                     {/* Eyebrow */}
                     <p
-                        className={`${styles.fvBrand} text-xs font-semibold uppercase tracking-[0.35em] text-[#1e6091] sm:text-sm`}
+                        className={`${styles.fvBrand} text-xs font-semibold uppercase tracking-[0.3em] text-[#1e6091] sm:text-sm`}
                     >
                         {t("FluyaVital.footer.overline")}
                     </p>
 
                     {/* Main description */}
                     <p
-                        className={`${styles.fvBrand} mt-4 max-w-3xl text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
+                        className={`${styles.fvBrand} mt-3 max-w-3xl text-base font-light leading-relaxed text-[#1e6091] sm:text-lg`}
                     >
                         {t("FluyaVital.footer.descriptionLead")}{" "}
-                        <span className={`${styles.fvVizoBrand} font-bold`} style={VIZO_OUTLINE_STYLE}>
+                        <span className={`${styles.fvVizoBrand} font-bold text-[#0b2545]`}>
                             {t("Common.logoVizo")}
                         </span>{" "}
                         <span className={`${styles.fvVizoBrand} font-bold text-[#d97706]`}>{t("Common.logoStudio")}</span>{" "}
@@ -67,19 +57,21 @@ export const FluyaVitalFooter: React.FC<IFluyaVitalFooterProps> = ({ className =
             </div>
 
             {/* ---- Bottom signature ---- */}
-            <p
-                className={`${styles.fvBrand} mt-6 text-center text-sm font-light text-[#0b2545]/70`}
-            >
-                {t("FluyaVital.footer.creditsLead")}{" "}
-                <Link to="/" className="inline-block hover:opacity-90 transition-opacity">
-                    <span className="whitespace-nowrap">
-                        <span className={`${styles.fvVizoBrand} font-black`} style={VIZO_OUTLINE_STYLE}>
-                            {t("Common.logoVizo")}
-                        </span>{" "}
-                        <span className={`${styles.fvVizoBrand} font-black text-[#d97706]`}>{t("Common.logoStudio")}</span>
-                    </span>
-                </Link>
-            </p>
+            <div className="mt-6 flex justify-center">
+                <p
+                    className={`${styles.fvBrand} inline-flex items-center gap-1.5 rounded-full border border-white/75 bg-white/80 px-4 py-1.5 text-center text-sm font-normal text-[#0b2545] shadow-sm backdrop-blur-sm`}
+                >
+                    {t("FluyaVital.footer.creditsLead")}{" "}
+                    <Link to="/" className="inline-block transition-opacity hover:opacity-80">
+                        <span className="whitespace-nowrap">
+                            <span className={`${styles.fvVizoBrand} font-black text-[#0b2545]`}>
+                                {t("Common.logoVizo")}
+                            </span>{" "}
+                            <span className={`${styles.fvVizoBrand} font-black text-[#d97706]`}>{t("Common.logoStudio")}</span>
+                        </span>
+                    </Link>
+                </p>
+            </div>
         </footer>
     );
 };

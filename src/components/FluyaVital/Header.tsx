@@ -23,9 +23,9 @@ export const FluyaVitalHeader: React.FC<IFluyaVitalHeaderProps> = ({ className =
     return (
         <header
             aria-label={t("FluyaVital.header.ariaLabel")}
-            className={`relative z-10 w-full bg-transparent ${className}`}
+            className={`relative z-10 flex w-full justify-center bg-transparent py-2 sm:py-4 ${className}`}
         >
-            <div className="flex flex-row items-center justify-center gap-2 py-3 sm:flex-row sm:justify-start sm:gap-4 sm:py-6 lg:gap-6">
+            <div className="inline-flex flex-row items-center justify-center gap-2.5 rounded-full border border-white/80 bg-white/70 px-5 py-2.5 shadow-sm backdrop-blur-md sm:gap-4 sm:px-7 sm:py-3 lg:gap-5">
                 {/* ---- Vizo Studio brand ---- */}
                 <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
                     <span

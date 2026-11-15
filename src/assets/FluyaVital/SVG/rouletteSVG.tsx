@@ -135,16 +135,6 @@ const CHRISTMAS_BULB_COLORS: ReadonlyArray<string> = [
     "#F1C40F", // warm gold
 ];
 
-/**
- * Resolves the glow/fill colour for a rim bulb in the given mode. The bulb's
- * index is mapped onto the Christmas palette (modulo its length) so the seven
- * lights alternate red → green → gold around the rim; in normal mode every bulb
- * keeps its original yellow glow. The accompanying Gaussian-blur filters derive
- * their tint from this fill, so the halo automatically matches the active colour.
- */
-const bulbGlowColor = (index: number, isChristmas: boolean): string =>
-    isChristmas ? CHRISTMAS_BULB_COLORS[index % CHRISTMAS_BULB_COLORS.length] : "#F7FF24";
-
 const RouletteSVG = ({ rotation = 0, isChristmas = false, ...props }: IRouletteSVGProps) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -17,8 +17,8 @@ import type {
 } from "../../interfaces/HomeScreenInterface";
 
 /** Portion of the scroll progress spent illuminating the words; the remaining
- *  15% is reserved to smoothly release the sticky lock before the next section. */
-const REVEAL_FINAL_PROGRESS = 0.85;
+ *  6% is reserved to smoothly release the sticky lock before the next section. */
+const REVEAL_FINAL_PROGRESS = 0.94;
 
 /** Dimmed ("off") state — the Tailwind `neutral-700` value. */
 const COLOR_OFF = "#404040";
@@ -110,7 +110,7 @@ function ValueProposition({ className = "" }: IValuePropositionProps) {
         <section
             id="value-proposition"
             ref={containerRef}
-            className={`relative h-[250vh] w-full bg-black scroll-mt-28 ${className}`}
+            className={`relative h-[180vh] w-full bg-black scroll-mt-28 ${className}`}
         >
             <div className="sticky top-0 left-0 h-screen w-screen flex flex-col items-center justify-center text-center px-6 z-10">
                 {/* Centered display headline — words illuminate sequentially. */}

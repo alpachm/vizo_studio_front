@@ -9,6 +9,7 @@
 // ---------------------------------------------------------------------------
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FiArrowDown } from "react-icons/fi";
 import type {
     IPortfolioProjectItem,
     IPortfolioProps,
@@ -109,6 +110,7 @@ function Portfolio(_props: IPortfolioProps) {
     const stageRef = useRef<HTMLDivElement | null>(null);
     const viewportRef = useRef<HTMLDivElement | null>(null);
     const trackRef = useRef<HTMLDivElement | null>(null);
+    const progressBarRef = useRef<HTMLSpanElement | null>(null);
 
     // Target and smoothed horizontal translation (px) driven via requestAnimationFrame.
     const targetOffsetRef = useRef<number>(0);
@@ -129,8 +131,15 @@ function Portfolio(_props: IPortfolioProps) {
     /** Writes the current horizontal offset directly to the DOM track node. */
     const applyTrackTransform = useCallback((x: number) => {
         const track = trackRef.current;
-        if (!track) return;
-        track.style.transform = `translate3d(-${x.toFixed(2)}px, 0, 0)`;
+        if (track) {
+            track.style.transform = `translate3d(-${x.toFixed(2)}px, 0, 0)`;
+        }
+        const progressBar = progressBarRef.current;
+        if (progressBar) {
+            const maxOffset = maxOffsetRef.current;
+            const progressRatio = maxOffset > 0 ? Math.min(1, Math.max(0, x / maxOffset)) : 0;
+            progressBar.style.transform = `scaleX(${progressRatio.toFixed(4)})`;
+        }
     }, []);
 
     /** Applies the stage positioning (`start`, `pinned`, or `end`) directly to the DOM. */
@@ -316,35 +325,58 @@ function Portfolio(_props: IPortfolioProps) {
                 className="absolute inset-x-0 top-0 z-10 flex h-screen w-full flex-col justify-center bg-bg pt-20 pb-6 sm:pt-24 sm:pb-8"
             >
                 <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-                    {/* Section header — stacked editorial headline + supporting subtitle. */}
-                    <div className="max-w-3xl">
-                        <h2 className="font-title text-2xl font-bold leading-snug tracking-tight text-text sm:text-3xl lg:text-4xl">
-                            <span className="block">{firstTitleLine}</span>
-                            {secondTitleLine ? (
-                                <span className="mt-0.5 block">
-                                    {secondTitleLine
-                                        .split(/(«[^»]+»)/)
-                                        .map((segment, segmentIndex) =>
-                                            segment.startsWith("«") &&
-                                            segment.endsWith("»") ? (
-                                                <span
-                                                    key={segmentIndex}
-                                                    className="font-playfair-display italic text-primary"
-                                                >
-                                                    {segment}
-                                                </span>
-                                            ) : (
-                                                <span key={segmentIndex}>
-                                                    {segment}
-                                                </span>
-                                            ),
-                                        )}
+                    {/* Section header — stacked editorial headline + supporting subtitle + vertical scroll hint. */}
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                        <div className="max-w-3xl">
+                            <h2 className="font-title text-2xl font-bold leading-snug tracking-tight text-text sm:text-3xl lg:text-4xl">
+                                <span className="block">{firstTitleLine}</span>
+                                {secondTitleLine ? (
+                                    <span className="mt-0.5 block">
+                                        {secondTitleLine
+                                            .split(/(«[^»]+»)/)
+                                            .map((segment, segmentIndex) =>
+                                                segment.startsWith("«") &&
+                                                segment.endsWith("»") ? (
+                                                    <span
+                                                        key={segmentIndex}
+                                                        className="font-playfair-display italic text-primary"
+                                                    >
+                                                        {segment}
+                                                    </span>
+                                                ) : (
+                                                    <span key={segmentIndex}>
+                                                        {segment}
+                                                    </span>
+                                                ),
+                                            )}
+                                    </span>
+                                ) : null}
+                            </h2>
+                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted sm:mt-3 sm:text-base lg:text-lg">
+                                {t("Portfolio.subtitle")}
+                            </p>
+                        </div>
+
+                        {/* Subtle vertical-scroll indicator + live progress bar */}
+                        <div
+                            aria-hidden="true"
+                            className="flex shrink-0 flex-col items-start gap-2 sm:items-end"
+                        >
+                            <div className="inline-flex items-center gap-2 rounded-full border border-neutral-500/20 bg-neutral-500/[0.04] px-3 py-1.5 text-[11px] font-medium text-text-muted sm:text-xs">
+                                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-orange-500/15 text-primary">
+                                    <FiArrowDown className="h-3 w-3 animate-bounce" />
                                 </span>
-                            ) : null}
-                        </h2>
-                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted sm:mt-3 sm:text-base lg:text-lg">
-                            {t("Portfolio.subtitle")}
-                        </p>
+                                <span>{t("Portfolio.scrollHint")}</span>
+                            </div>
+
+                            <div className="h-1 w-36 overflow-hidden rounded-full bg-neutral-500/20 sm:w-44">
+                                <span
+                                    ref={progressBarRef}
+                                    style={{ transform: "scaleX(0)" }}
+                                    className="block h-full w-full origin-left rounded-full bg-primary will-change-transform"
+                                />
+                            </div>
+                        </div>
                     </div>
 
                     {/* Horizontal project viewport:

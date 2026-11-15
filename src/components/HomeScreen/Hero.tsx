@@ -48,6 +48,7 @@ const WORD_KEYS = [
     "attractive",
     "authentic",
     "professional",
+    "custom",
 ] as const;
 
 /**
@@ -59,7 +60,7 @@ const WORD_KEYS = [
  *
  *   geometric display sans → high-fashion serif italic → modern display sans
  *   → editorial serif italic → humanist sans → technical mono → classic serif
- *   bold → geometric display extrabold → high-contrast editorial serif italic (final landing).
+ *   bold → geometric display extrabold → humanist display bold → high-contrast editorial serif italic (final landing).
  *
  * Every weight/slant used here is actually shipped by the font imports, and
  * every word is tinted with `text-primary` at render time.
@@ -73,7 +74,8 @@ const WORD_VARIANTS = [
     "font-mono font-bold tracking-tight", // impeccable — technical mono
     "font-playfair-display font-bold", // attractive — classic serif bold
     "font-syne font-extrabold", // authentic — geometric display extrabold
-    "font-playfair-display italic text-[1.12em]", // professional (final) — high-contrast editorial serif italic
+    "font-plus-jakarta-sans font-bold tracking-tight", // professional — humanist display bold
+    "font-playfair-display italic text-[1.12em]", // custom (final) — high-contrast editorial serif italic
 ] as const;
 
 const LAST_WORD_INDEX = WORD_KEYS.length - 1;
@@ -157,11 +159,11 @@ function Hero() {
     const caret = (
         <motion.span
             aria-hidden="true"
-            animate={shouldReduceMotion ? undefined : { opacity: [1, 1, 0, 0] }}
+            animate={prefersReducedMotion ? undefined : { opacity: [1, 1, 0, 0] }}
             transition={{
                 duration: 1.1,
                 times: [0, 0.5, 0.5, 1],
-                repeat: shouldReduceMotion ? 0 : Infinity,
+                repeat: prefersReducedMotion ? 0 : Infinity,
             }}
             className="ml-1.5 inline-block h-[0.9em] w-[0.08em] bg-current align-baseline"
         />

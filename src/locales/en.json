@@ -177,19 +177,20 @@
       "scrollPrompt": "Scroll to discover",
       "words": {
         "modern": "modern",
-        "aesthetic": "aesthetic",
+        "aesthetic": "fast",
         "profitable": "profitable",
-        "selling": "persuasive",
+        "selling": "professional",
         "competitive": "competitive",
-        "impeccable": "impeccable",
-        "attractive": "attractive",
-        "authentic": "authentic",
-        "professional": "professional"
+        "impeccable": "memorable",
+        "attractive": "impeccable",
+        "authentic": "attractive",
+        "professional": "corporate",
+        "custom": "custom-built"
       }
     },
     "ValueProposition": {
-      "title": "Your competition isn't better than you; they just have a digital storefront that sells better.",
-      "subtitle": "We offer you the solution to improve your brand's presence on the internet."
+      "title": "You know your business; we build the technology so it runs seamlessly.",
+      "subtitle": "From professional web platforms to custom management systems, we develop solutions that organize, automate, and simplify your day-to-day."
     },
     "AboutUs": {
       "title": "Who we are?",
@@ -386,15 +387,15 @@
       }
     },
     "SeoMetricsDemo": {
-      "titleLine1": "A great website.",
-      "titleLine2": "Where people also find you.",
-      "subtitle": "Your next clients are already searching for what you offer. We optimize your website's structure, speed, and content so Google understands your business and you attract high-intent visitors.",
+      "titleLine1": "Clean code.",
+      "titleLine2": "Frictionless indexing.",
+      "subtitle": "Search engines don't guess; they read code. We engineer the semantic architecture, metadata structure, and performance of your platform so any web engine indexes your software with pinpoint precision.",
       "tags": {
         "technical": "Technical SEO",
-        "content": "Relevant content",
+        "content": "Clean architecture",
         "performance": "Web performance"
       },
-      "cta": "Let's make your business visible",
+      "cta": "Let's build your platform",
       "card": {
         "brand": "Google",
         "searchQuery": "services for my business",
@@ -403,7 +404,7 @@
         "featuredDomain": "yourbusiness.com",
         "featuredTitle": "Your business — Just what you need",
         "featuredSnippet": "Your value proposition, in front of the right people.",
-        "footnote": "This is what gaining visibility looks like. SEO positions your brand in front of people already searching for you."
+        "footnote": "This is how an optimized platform performs. Top-tier performance, speed, and technical structure."
       }
     },
     "ResponsiveDemo": {

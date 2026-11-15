@@ -102,16 +102,23 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                         exit="exit"
                         className="relative z-10 w-full"
                     >
-                        <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+                        <div
+                            className={`mx-auto w-full max-w-7xl px-4 pb-10 sm:px-6 lg:px-8 ${
+                                isChristmas ? "pt-16 sm:pt-20 lg:pt-24" : "pt-8 sm:pt-10"
+                            }`}
+                        >
                             <Header />
-                            <Hero className="mt-8 sm:mt12 lg:mt-12" />
-                            <FluyaVitalRoulette
-                                isSpinning={isSpinning}
-                                rotation={rotation}
-                                selectedPrize={selectedPrize}
-                                hasSpun={hasSpun}
-                                onSpin={handleSpin}
-                            />
+                            <main>
+                                <Hero className="mt-8 sm:mt-12" />
+                                <FluyaVitalRoulette
+                                    className="mt-10 sm:mt-14 lg:mt-16"
+                                    isSpinning={isSpinning}
+                                    rotation={rotation}
+                                    selectedPrize={selectedPrize}
+                                    hasSpun={hasSpun}
+                                    onSpin={handleSpin}
+                                />
+                            </main>
                             <Footer className="mt-16 sm:mt-20" />
                         </div>
                     </motion.div>

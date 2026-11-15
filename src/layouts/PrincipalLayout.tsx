@@ -34,8 +34,8 @@ function PrincipalLayout() {
                 </div>
             )}
 
-            {/* Global floating action buttons & cookie consent banner */}
-            <FloatingButtons />
+            {/* Global floating action buttons (hidden on standalone screens) & cookie consent banner */}
+            {!isStandalone && <FloatingButtons />}
             <CookieConsentBanner />
         </HeroVisibilityProvider>
     );

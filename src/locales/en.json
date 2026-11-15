@@ -727,5 +727,18 @@
         "p2": "Please note that if you clear essential local storage, preferences such as your selected language or color theme will revert to their default values on your next visit."
       }
     }
+  },
+  "NotFoundScreen": {
+    "code": "404",
+    "oops": "Oops!",
+    "subtitle": "Looks like this page is broken.",
+    "descriptionLine1": "The link you are trying to reach does not exist or has been moved.",
+    "descriptionLine2": "Head back home to keep exploring vizostudio.dev.",
+    "backButton": "BACK",
+    "homeButton": "HOME",
+    "contactButton": "CONTACT",
+    "illustrationAria": "Disconnected browser window illustration",
+    "browserUrl": "vizostudio.dev/404",
+    "errorTag": "ERR_PAGE_NOT_FOUND"
   }
 }

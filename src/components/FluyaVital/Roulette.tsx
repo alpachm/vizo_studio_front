@@ -89,9 +89,11 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
     // ---- Christmas mode visual accents (gated by VITE_CHRISTMAS_MODE) ----
     // The wheel, spin button and result box swap to holiday colours while the
     // rest of the layout, typography and spacing stay untouched.
-    const svgGlowClass = isChristmas
-        ? "drop-shadow-[0_0_45px_rgba(232,146,40,0.55)]"
-        : "drop-shadow-xl";
+    // Static radial glow behind the rotating wheel avoids re-rasterizing a
+    // full-SVG CSS drop-shadow on every animation frame.
+    const wheelGlowClass = isChristmas
+        ? "bg-[radial-gradient(circle,rgba(232,146,40,0.48)_0%,rgba(232,146,40,0.18)_45%,transparent_72%)]"
+        : "bg-[radial-gradient(circle,rgba(0,0,0,0.22)_0%,rgba(0,0,0,0.08)_50%,transparent_72%)]";
 
     const spinButtonThemeClass = isChristmas
         ? "bg-gradient-to-r from-[#D62828] to-[#C0392B] text-white shadow-xl shadow-red-600/40 focus:ring-red-400/60"
@@ -111,17 +113,23 @@ export const FluyaVitalRoulette: React.FC<IFluyaVitalRouletteProps> = ({
             {/* ---- Left / desktop: unified static roulette SVG ---- */}
             {/* Periodic idle swing: a subtle side-to-side rotation that hints the */}
             {/* wheel is interactive. It repeats every 3s while the wheel is idle. */}
-            <motion.div
-                className="flex w-full max-w-md shrink-0 items-center justify-center lg:max-w-lg"
-                animate={wheelControls}
-            >
-                <RouletteSVG
-                    viewBox="0 -40 512 598"
-                    rotation={rotation}
-                    isChristmas={isChristmas}
-                    className={`h-auto w-full ${svgGlowClass}`}
+            <div className="relative flex w-full max-w-md shrink-0 items-center justify-center lg:max-w-lg">
+                <div
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-[-6%] rounded-full ${wheelGlowClass}`}
                 />
-            </motion.div>
+                <motion.div
+                    className="relative flex w-full items-center justify-center"
+                    animate={wheelControls}
+                >
+                    <RouletteSVG
+                        viewBox="0 -40 512 598"
+                        rotation={rotation}
+                        isChristmas={isChristmas}
+                        className="h-auto w-full"
+                    />
+                </motion.div>
+            </div>
 
             {/* ---- Right / desktop: call-to-action block ---- */}
             <div className="flex w-full max-w-lg flex-col items-center text-center lg:items-start lg:text-left">

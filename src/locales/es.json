@@ -177,19 +177,20 @@
       "scrollPrompt": "Haz scroll para descubrir",
       "words": {
         "modern": "moderno",
-        "aesthetic": "estético",
+        "aesthetic": "rápido",
         "profitable": "rentable",
-        "selling": "vendedor",
+        "selling": "profesional",
         "competitive": "competitivo",
-        "impeccable": "impecable",
-        "attractive": "atractivo",
-        "authentic": "auténtico",
-        "professional": "profesional"
+        "impeccable": "memorable",
+        "attractive": "impecable",
+        "authentic": "atractivo",
+        "professional": "corporativo",
+        "custom": "a medida"
       }
     },
     "ValueProposition": {
-      "title": "Tu competencia no es mejor que tú; solo tiene una vitrina digital que vende mejor.",
-      "subtitle": "Nosotros te ofrecemos la solución para mejorar la presencia de tu marca en internet."
+      "title": "Tú conoces tu negocio; nosotros construimos la tecnología para que opere sin trabas.",
+      "subtitle": "Desde plataformas web profesionales hasta sistemas de gestión a medida, desarrollamos soluciones que ordenan, automatizan y simplifican tu día a día."
     },
     "AboutUs": {
       "title": "¿Quiénes somos?",
@@ -386,15 +387,15 @@
       }
     },
     "SeoMetricsDemo": {
-      "titleLine1": "Una gran web.",
-      "titleLine2": "Que también te encuentren.",
-      "subtitle": "Tus próximos clientes ya están buscando lo que ofrecen tus servicios. Optimizamos la estructura, velocidad y contenido de tu web para que Google entienda tu negocio y atraigas visitas reales.",
+      "titleLine1": "Código limpio.",
+      "titleLine2": "Indexación sin fricción.",
+      "subtitle": "Los motores de búsqueda no adivinan; leen código. Diseñamos la arquitectura semántica, la estructura de metadatos y el rendimiento de tu plataforma para que cualquier motor web indexe tu software con precisión milimétrica.",
       "tags": {
         "technical": "SEO técnico",
-        "content": "Contenido relevante",
+        "content": "Arquitectura limpia",
         "performance": "Rendimiento web"
       },
-      "cta": "Hagamos visible tu negocio",
+      "cta": "Construyamos tu plataforma",
       "card": {
         "brand": "Google",
         "searchQuery": "servicios para mi negocio",
@@ -403,7 +404,7 @@
         "featuredDomain": "tunegocio.com",
         "featuredTitle": "Tu negocio — Justo lo que buscas",
         "featuredSnippet": "Tu propuesta, frente a las personas correctas.",
-        "footnote": "Así se ve ganar visibilidad. El SEO posiciona tu marca frente a quienes ya te están buscando."
+        "footnote": "Así rinde una plataforma optimizada. Rendimiento, velocidad y estructura técnica de nivel superior."
       }
     },
     "ResponsiveDemo": {

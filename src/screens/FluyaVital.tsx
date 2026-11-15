@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // FluyaVital — Standalone screen with layered water background
 // ---------------------------------------------------------------------------
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { IFluyaVitalProps } from "../interfaces/FluyaVitalInterface";
 import Wave1 from "../assets/FluyaVital/SVG/wave-1";
@@ -40,6 +40,21 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
     const { isSpinning, rotation, selectedPrize, hasSpun, spinWheel, resetRoulette } =
         useRoulette();
     const isChristmas = useChristmasMode();
+    const [isDesktopGarland, setIsDesktopGarland] = useState<boolean>(() =>
+        typeof window !== "undefined"
+            ? window.matchMedia("(min-width: 768px)").matches
+            : true,
+    );
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(min-width: 768px)");
+        const handleChange = (event: MediaQueryListEvent) => {
+            setIsDesktopGarland(event.matches);
+        };
+        setIsDesktopGarland(mediaQuery.matches);
+        mediaQuery.addEventListener("change", handleChange);
+        return () => mediaQuery.removeEventListener("change", handleChange);
+    }, []);
     // A result restored from localStorage (single-spin reload) is treated as
     // already dismissed so the result modal does not auto-open over the display.
     const [hasDismissed, setHasDismissed] = useState(selectedPrize !== null);
@@ -87,16 +102,23 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                         exit="exit"
                         className="relative z-10 w-full"
                     >
-                        <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+                        <div
+                            className={`mx-auto w-full max-w-7xl px-4 pb-10 sm:px-6 lg:px-8 ${
+                                isChristmas ? "pt-16 sm:pt-20 lg:pt-24" : "pt-8 sm:pt-10"
+                            }`}
+                        >
                             <Header />
-                            <Hero className="mt-8 sm:mt12 lg:mt-12" />
-                            <FluyaVitalRoulette
-                                isSpinning={isSpinning}
-                                rotation={rotation}
-                                selectedPrize={selectedPrize}
-                                hasSpun={hasSpun}
-                                onSpin={handleSpin}
-                            />
+                            <main>
+                                <Hero className="mt-8 sm:mt-12" />
+                                <FluyaVitalRoulette
+                                    className="mt-10 sm:mt-14 lg:mt-16"
+                                    isSpinning={isSpinning}
+                                    rotation={rotation}
+                                    selectedPrize={selectedPrize}
+                                    hasSpun={hasSpun}
+                                    onSpin={handleSpin}
+                                />
+                            </main>
                             <Footer className="mt-16 sm:mt-20" />
                         </div>
                     </motion.div>
@@ -122,13 +144,14 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
             <div
                 aria-hidden="true"
                 className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+                style={{ contain: "layout style paint" }}
             >
                 <Wave1
-                    className="pointer-events-none absolute bottom-0 left-[-10%] block h-auto w-[120%] will-change-transform animate-wave-drift-left"
+                    className="pointer-events-none absolute bottom-0 left-[-10%] block h-auto w-[120%] transform-gpu will-change-transform animate-wave-drift-left"
                     style={{ animationDuration: "3.5s" }}
                 />
                 <Wave2
-                    className="pointer-events-none absolute bottom-0 left-[-10%] block h-auto w-[120%] will-change-transform animate-wave-drift-right"
+                    className="pointer-events-none absolute bottom-0 left-[-10%] block h-auto w-[120%] transform-gpu will-change-transform animate-wave-drift-right"
                     style={{ animationDuration: "2s" }}
                 />
             </div>
@@ -143,17 +166,21 @@ export const FluyaVital: React.FC<IFluyaVitalProps> = () => {
                 <div
                     aria-hidden="true"
                     className="pointer-events-none fixed top-0 left-0 z-0 w-full overflow-hidden"
+                    style={{ contain: "layout style paint" }}
                 >
-                    <GarlandMobile
-                        className="pointer-events-none block h-auto w-full md:hidden"
-                        viewBox="0 0 586 133"
-                        preserveAspectRatio="xMidYMin slice"
-                    />
-                    <Garland
-                        className="pointer-events-none hidden h-auto w-full md:block"
-                        viewBox="0 0 1112 155"
-                        preserveAspectRatio="xMidYMin slice"
-                    />
+                    {isDesktopGarland ? (
+                        <Garland
+                            className="pointer-events-none block h-auto w-full"
+                            viewBox="0 0 1112 155"
+                            preserveAspectRatio="xMidYMin slice"
+                        />
+                    ) : (
+                        <GarlandMobile
+                            className="pointer-events-none block h-auto w-full"
+                            viewBox="0 0 586 133"
+                            preserveAspectRatio="xMidYMin slice"
+                        />
+                    )}
                 </div>
             )}
 

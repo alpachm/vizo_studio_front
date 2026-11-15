@@ -164,10 +164,12 @@
       "creditsLead": "Website created by"
     },
     "postSpin": {
-      "ariaLabel": "Fluya Vital post-spin view",
-      "brandingLead": "Developed by",
-      "headline": "Custom software and web experiences built for your business.",
-      "description": "We design modern, fast digital platforms ready to grow with you.",
+      "ariaLabel": "Invitation to leave a 5-star Google Maps review",
+      "eyebrow": "YOUR FEEDBACK MATTERS",
+      "starsAriaLabel": "5 stars",
+      "headline": "Leave us 5 stars on Google Maps!",
+      "description": "If you enjoyed your experience at Fluya Vital, please support us with a 5-star rating and a positive comment. It helps us keep growing!",
+      "reviewCta": "Go to Google Maps",
       "backCta": "Back to the wheel"
     }
   },

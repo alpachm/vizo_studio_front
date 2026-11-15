@@ -164,10 +164,12 @@
       "creditsLead": "Sitio web creado por"
     },
     "postSpin": {
-      "ariaLabel": "Vista posterior al giro de la ruleta de Fluya Vital",
-      "brandingLead": "Desarrollado por",
-      "headline": "Software y experiencias web a la medida de tu negocio.",
-      "description": "Diseñamos plataformas digitales modernas, rápidas y listas para crecer contigo.",
+      "ariaLabel": "Invitación para dejar reseña de 5 estrellas en Google Maps",
+      "eyebrow": "TU OPINIÓN NOS IMPULSA",
+      "starsAriaLabel": "5 estrellas",
+      "headline": "¡Déjanos 5 estrellas en Google Maps!",
+      "description": "Si disfrutaste tu experiencia en Fluya Vital, apóyanos con una calificación de 5 estrellas y un comentario positivo. ¡Nos ayuda muchísimo a seguir creciendo!",
+      "reviewCta": "Ir a Google Maps",
       "backCta": "Volver a la ruleta"
     }
   },

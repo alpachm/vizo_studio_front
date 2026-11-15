@@ -13,7 +13,6 @@ import { useTranslation } from "react-i18next";
 import { useHeroVisibility } from "../../context/HeroVisibilityContext";
 import type {
     IValuePropositionProps,
-    IValuePropositionWordGroup,
     IValuePropositionWordProps,
 } from "../../interfaces/HomeScreenInterface";
 
@@ -27,50 +26,11 @@ const COLOR_OFF = "#404040";
 /** Fully illuminated ("on") state — pure white (`text-white`). */
 const COLOR_ON = "#ffffff";
 
-/** Brand accent the branded subtitle group illuminates to (mirrors `primary`). */
-const COLOR_PRIMARY = "#f3661d";
-
 /**
  * Splits a plain headline string into its word tokens, dropping empty entries.
  */
 function splitWords(text: string): string[] {
     return text.split(/\s+/).filter(Boolean);
-}
-
-/**
- * Splits the subtitle into word groups, flagging any text wrapped in the i18n
- * `<brand>…</brand>` interpolation tags so it can illuminate to `primary`.
- */
-function splitSubtitle(text: string): IValuePropositionWordGroup[] {
-    const groups: IValuePropositionWordGroup[] = [];
-    const brandPattern = /<brand>(.*?)<\/brand>/g;
-
-    let match: RegExpExecArray | null;
-    let cursor = 0;
-
-    while ((match = brandPattern.exec(text)) !== null) {
-        const preceding = text.slice(cursor, match.index).trim();
-        preceding
-            .split(/\s+/)
-            .filter(Boolean)
-            .forEach((word) => groups.push({ text: word, isBrand: false }));
-
-        match[1]
-            .split(/\s+/)
-            .filter(Boolean)
-            .forEach((word) => groups.push({ text: word, isBrand: true }));
-
-        cursor = match.index + match[0].length;
-    }
-
-    text
-        .slice(cursor)
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean)
-        .forEach((word) => groups.push({ text: word, isBrand: false }));
-
-    return groups;
 }
 
 /**
@@ -116,11 +76,9 @@ function ValueProposition({ className = "" }: IValuePropositionProps) {
     });
 
     const title = t("HomeScreen.ValueProposition.title");
-    const subtitle = t("HomeScreen.ValueProposition.subtitle");
 
     const headlineWords = useMemo(() => splitWords(title), [title]);
-    const subtitleGroups = useMemo(() => splitSubtitle(subtitle), [subtitle]);
-    const unitCount = headlineWords.length + subtitleGroups.length;
+    const unitCount = headlineWords.length;
 
     // Report visibility upward so the global Header & FloatingButtons can step
     // aside while the Value Proposition occupies the viewport. A synchronous
@@ -172,26 +130,6 @@ function ValueProposition({ className = "" }: IValuePropositionProps) {
                         </Fragment>
                     ))}
                 </h2>
-
-                {/* Supporting subtitle — non-brand words brighten to white while
-                    the branded group brightens to the brand accent. */}
-                <p className="mt-6 max-w-2xl font-body text-base font-medium leading-relaxed sm:text-lg md:mt-8 md:text-xl">
-                    {subtitleGroups.map((group, index) => (
-                        <Fragment key={`subtitle-${index}`}>
-                            <IlluminatedWord
-                                progress={scrollYProgress}
-                                range={revealRange(headlineWords.length + index, unitCount)}
-                                from={COLOR_OFF}
-                                to={group.isBrand ? COLOR_PRIMARY : COLOR_ON}
-                                reduceMotion={shouldReduceMotion}
-                                className={group.isBrand ? "font-mono font-semibold" : ""}
-                            >
-                                {group.text}
-                            </IlluminatedWord>
-                            {index < subtitleGroups.length - 1 ? " " : null}
-                        </Fragment>
-                    ))}
-                </p>
             </div>
         </section>
     );

@@ -3,6 +3,8 @@
     "appName": "Vizo Studio",
     "logoVizo": "Vizo",
     "logoStudio": "Studio",
+    "brandName": "vizostudio",
+    "brandDomain": ".dev",
     "loading": "Loading..."
   },
   "Theme": {
@@ -14,16 +16,18 @@
   },
   "Header": {
     "nav": {
+      "home": "Home",
       "blog": "Blog",
       "services": "Services",
       "aboutUs": "About us",
+      "projects": "Projects",
       "openMenu": "Open navigation menu",
       "closeMenu": "Close navigation menu",
       "desktopAriaLabel": "Main navigation",
       "mobileAriaLabel": "Mobile navigation"
     },
     "buttons": {
-      "contact": "Let's talk"
+      "contact": "Let's talk about your idea"
     }
   },
   "Footer": {
@@ -45,8 +49,9 @@
     "copyright": "© 2026 Vizo Studio. All rights reserved.",
     "location": "Venezuela",
     "legal": {
-      "privacy": "Privacy",
-      "terms": "Terms of Service"
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
     }
   },
   "FloatingButtons": {
@@ -54,7 +59,50 @@
     "contactWhatsApp": "Contact us on WhatsApp"
   },
   "Portfolio": {
-    "title": "A bit of our work"
+    "title": "Less words. More «I want that».",
+    "subtitle": "Design concepts to imagine how far your brand can go.",
+    "projects": {
+      "1": {
+        "category": "FOUNDATION",
+        "title": "Website for a foundation",
+        "imageAlt": "Foundation website preview"
+      },
+      "2": {
+        "category": "PROFESSIONALS",
+        "title": "Website for a lawyer",
+        "imageAlt": "Lawyer website preview"
+      },
+      "3": {
+        "category": "PROFESSIONALS",
+        "title": "Website for a psychologist",
+        "imageAlt": "Psychologist website preview"
+      },
+      "4": {
+        "category": "PROFESSIONALS",
+        "title": "Website for a developer",
+        "imageAlt": "Developer website preview"
+      },
+      "5": {
+        "category": "CUSTOM SOFTWARE",
+        "title": "Custom software for a motorcycle lineup",
+        "imageAlt": "Motorcycle lineup software preview"
+      },
+      "6": {
+        "category": "CUSTOM SOFTWARE",
+        "title": "Personal finance website",
+        "imageAlt": "Personal finance website preview"
+      },
+      "7": {
+        "category": "E-COMMERCE",
+        "title": "Online store specialized in clothing",
+        "imageAlt": "Online clothing store preview"
+      },
+      "8": {
+        "category": "CORPORATE",
+        "title": "Website for a construction company",
+        "imageAlt": "Construction company website preview"
+      }
+    }
   },
   "FluyaVital": {
     "title": "Fluya Vital",
@@ -124,10 +172,24 @@
   },
   "HomeScreen": {
     "Hero": {
-      "title": "We build custom software and web applications that accelerate your business",
-      "description": "At Vizo Studio, we create modern, fast, and scalable websites and web applications. We work closely with you every step of the way to bring your digital project to life without any complications",
-      "cta": "Get a quote",
-      "secondaryCta": "View our services"
+      "headlinePrefix": "Need a website that's",
+      "headlineSuffix": "?",
+      "scrollPrompt": "Scroll to discover",
+      "words": {
+        "modern": "modern",
+        "aesthetic": "aesthetic",
+        "profitable": "profitable",
+        "selling": "persuasive",
+        "competitive": "competitive",
+        "impeccable": "impeccable",
+        "attractive": "attractive",
+        "authentic": "authentic",
+        "professional": "professional"
+      }
+    },
+    "ValueProposition": {
+      "title": "Your competition isn't better than you; they just have a digital storefront that sells better.",
+      "subtitle": "We offer you the solution to improve your brand's presence on the internet."
     },
     "AboutUs": {
       "title": "Who we are?",
@@ -158,7 +220,7 @@
       }
     },
     "Methodology": {
-      "eyebrow": "Our Methodology",
+      "eyebrow": "Our Methodology.",
       "title": "A clear process to turn your idea into a real product.",
       "intro": "Our methodology blends analysis, iteration and continuous deployment so every deliverable adds real value to your business, with total visibility and no surprises.",
       "steps": {
@@ -181,6 +243,10 @@
       }
     },
     "Contact": {
+      "titleLine1": "Your business is already incredible.",
+      "titleLine2": "Let your website be incredible too.",
+      "subtitle": "Tell us what you have in mind. We start with a conversation, with no commitment and no complicated jargon.",
+      "tagline": "You bring the idea. We take care of the next step.",
       "step1": {
         "title": "Do you have an idea?",
         "button": "Tell us"
@@ -268,17 +334,411 @@
       }
     },
     "Services": {
-      "title": "What we do?",
-      "apps": {
-        "title": "Creation of <highlight>mobile apps</highlight>",
-        "imageAlt": "Mobile app development service",
-        "description": "We turn your ideas into fast, user-friendly mobile applications ready to scale. We build custom software with modern design and guaranteed performance on any device, both iPhone and Android"
+      "title": "At <brand>vizo studio</brand> we build what your business needs.",
+      "subtitle": "Websites, mobile apps, and custom software. Three ways to turn your ideas into solutions that drive your business forward.",
+      "cards": {
+        "web": {
+          "title": "Websites",
+          "description": "We create fast, secure websites tailored to your business. We develop modern platforms that look perfect on any device and are ready to grow your brand."
+        },
+        "apps": {
+          "title": "Mobile apps",
+          "description": "We turn your ideas into fast, user-friendly mobile applications ready to scale. We build custom software with modern design and guaranteed performance on any device, both iPhone and Android."
+        },
+        "custom": {
+          "title": "Custom software",
+          "description": "We develop exclusive software systems and tools tailored to your company's workflows. We automate complex processes, integrate data, and grow at the pace of your operation."
+        }
+      }
+    },
+    "ThemeToggleDemo": {
+      "titleLine1": "Your web adapts.",
+      "titleLine2": "Not the other way around.",
+      "subtitle": "Did you notice the theme change? We build intuitive, accessible interfaces that adapt naturally to every user, making their experience smoother and more comfortable.",
+      "cta": "Let's design your custom experience",
+      "card": {
+        "badge": "One web, more possibilities",
+        "toggleAriaLabel": "Toggle between light and dark mode",
+        "titleLine1": "Same identity.",
+        "titleLine2": "An experience designed for you.",
+        "footnote": "The theme changes as you scroll through this section."
+      }
+    },
+    "LanguageSwitcherDemo": {
+      "titleLine1": "Your business.",
+      "titleLine2": "Without language barriers.",
+      "subtitle": "Speaking your users' language builds trust and opens the door to new markets. We develop multilingual websites and applications with experiences tailored to every audience.",
+      "cta": "Let's talk about your multilingual project",
+      "card": {
+        "switchToEn": "Try in English",
+        "switchToEs": "Back to Spanish",
+        "footnote": "Test the language switch: press the button to explore the website in English. You can switch back to Spanish anytime.",
+        "rotatingTitles": {
+          "en": "Your next opportunity might speak another language.",
+          "zh": "您的下一个机会可能说着另一种语言。",
+          "ar": "فرصتك القادمة قد تتحدث لغة أخرى.",
+          "fr": "Votre prochaine opportunité parle peut-être une autre langue.",
+          "pt": "Sua próxima oportunidade pode falar outro idioma.",
+          "de": "Ihre nächste Chance spricht vielleicht eine andere Sprache.",
+          "it": "La tua prossima opportunità può parlare un'altra lingua.",
+          "es": "Tu próxima oportunidad puede hablar otro idioma."
+        }
+      }
+    },
+    "SeoMetricsDemo": {
+      "titleLine1": "A great website.",
+      "titleLine2": "Where people also find you.",
+      "subtitle": "Your next clients are already searching for what you offer. We optimize your website's structure, speed, and content so Google understands your business and you attract high-intent visitors.",
+      "tags": {
+        "technical": "Technical SEO",
+        "content": "Relevant content",
+        "performance": "Web performance"
       },
-      "web": {
-        "title": "Creation of <highlight>websites</highlight>",
-        "imageAlt": "Web development service",
-        "description": "We create fast, secure websites tailored to your business. We develop modern platforms that look perfect on any device and are ready to grow your brand"
+      "cta": "Let's make your business visible",
+      "card": {
+        "brand": "Google",
+        "searchQuery": "services for my business",
+        "resultsLabel": "Search results",
+        "visibilityBadge": "More visibility",
+        "featuredDomain": "yourbusiness.com",
+        "featuredTitle": "Your business — Just what you need",
+        "featuredSnippet": "Your value proposition, in front of the right people.",
+        "footnote": "This is what gaining visibility looks like. SEO positions your brand in front of people already searching for you."
+      }
+    },
+    "ResponsiveDemo": {
+      "titleLine1": "Flawless design.",
+      "titleLine2": "On every screen.",
+      "subtitle": "Your clients visit you from their phone, tablet, or computer. We build 100% responsive websites that fluidly reorganize every element to look and feel effortless on any device.",
+      "tags": {
+        "mobileFirst": "Mobile-First",
+        "fluidLayout": "Fluid layout",
+        "allDevices": "All devices"
+      },
+      "cta": "Let's build your responsive web",
+      "card": {
+        "devices": {
+          "desktop": "Desktop",
+          "tablet": "Tablet",
+          "mobile": "Mobile"
+        },
+        "preview": {
+          "domain": "yourbusiness.com",
+          "badge": "100% Adaptive",
+          "headline": "Your brand, ready for every screen",
+          "ctaPill": "Explore",
+          "card1": "Speed",
+          "card2": "Clarity",
+          "card3": "Conversion"
+        },
+        "footnote": "The interface automatically adapts in real time. Tap any device to test the viewport."
       }
     }
+  },
+  "AboutUsScreen": {
+    "backToHome": "Back to home",
+    "hero": {
+      "eyebrow": "About Vizo Studio",
+      "titleLine1": "More than developers.",
+      "titleLine2": "Your technology partner.",
+      "lead": "We turn ambitious ideas and operational challenges into modern, fast digital platforms designed to deliver real business results."
+    },
+    "story": {
+      "title": "Who we are?",
+      "paragraph1": "At Vizostudio we have a passionate team with over 3 years of experience developing custom software. We have supported brands and entrepreneurs in <country>Venezuela</country>, <country>Colombia</country> and <country>Argentina</country>, transforming complex challenges into agile, secure and efficient digital platforms.",
+      "paragraph2": "Working with us means rigorous planning, transparent communication and constant feedback at every stage. We focus on delivering stable and scalable products, becoming the technical partner your project needs to grow.",
+      "paragraph3": "We combine modern software engineering, user-centered interface design, and performance optimization so every website, mobile app, or custom system reflects the true value of your business.",
+      "imageAlt": "Vizostudio development team view",
+      "regionBadge": "Venezuela • Colombia • Argentina"
+    },
+    "stats": {
+      "experience": {
+        "value": "+3 years",
+        "label": "Proven experience",
+        "description": "Designing and deploying high-impact digital solutions."
+      },
+      "countries": {
+        "value": "3 countries",
+        "label": "Regional presence",
+        "description": "Powering projects across Venezuela, Colombia, and Argentina with a global mindset."
+      },
+      "custom": {
+        "value": "100%",
+        "label": "Custom built",
+        "description": "Clean code, scalable architecture, and zero generic templates."
+      }
+    },
+    "philosophy": {
+      "titleLine1": "Our vision.",
+      "titleLine2": "Building with purpose.",
+      "mission": {
+        "badge": "Our Mission",
+        "title": "Empowering businesses through clear, effective technology",
+        "description": "We build digital tools that solve real problems, automate workflows, and elevate how every brand is perceived by its customers."
+      },
+      "vision": {
+        "badge": "Our Vision",
+        "title": "To be the go-to technology studio for ambitious brands",
+        "description": "We strive to lead the digital evolution of companies across Latin America and beyond, uniting technical excellence, memorable design, and close collaboration."
+      }
+    },
+    "pillars": {
+      "titleLine1": "Why choose us?",
+      "titleLine2": "We make your project stand out.",
+      "subtitle": "Every line of code and every design decision is crafted for stability, speed, and long-term product growth.",
+      "cards": {
+        "proactive": {
+          "title": "Proactive Work",
+          "description": "We don't just follow instructions. We analyze your project, propose advanced solutions, and anticipate technical challenges before they affect your development."
+        },
+        "organized": {
+          "title": "Organized Management",
+          "description": "We plan each project phase with clear methodologies, ensuring timely deliveries, well-defined milestones, and full visibility of progress."
+        },
+        "quality": {
+          "title": "High Quality Standards",
+          "description": "We build with clean code, scalable architecture, high loading speed, and integrated security, applying the best modern web environment practices."
+        },
+        "communication": {
+          "title": "Communication & Feedback",
+          "description": "We maintain a constant and transparent flow at all times. We listen to your requirements, iterate with your ideas, and keep you informed without complex technical jargon."
+        },
+        "scalability": {
+          "title": "Scalable Architecture",
+          "description": "We engineer every system with your company's future in mind, making it seamless to add new features, users, and markets without rebuilding from scratch."
+        },
+        "partnership": {
+          "title": "Ongoing Partnership",
+          "description": "We don't disappear after launch. We back you up with technical support, monitoring, and continuous improvements so your digital product performs at its peak."
+        }
+      }
+    },
+    "cta": {
+      "titleLine1": "Have a project in mind?",
+      "titleLine2": "Let's build it together.",
+      "subtitle": "Tell us about your idea and let's discover how to take your digital presence and business operations to the next level.",
+      "button": "Let's talk about your idea"
+    }
+  },
+  "CookieConsentBanner": {
+    "ariaLabel": "Cookie consent notice",
+    "description": "We use cookies to improve your experience on our site. Learn more in our",
+    "acceptAll": "Accept",
+    "essentialOnly": "Essential only",
+    "cookiePolicyLink": "Cookie Policy"
+  },
+  "LegalCommon": {
+    "backToHome": "Back to home",
+    "lastUpdated": "Last updated: March 2026",
+    "navAriaLabel": "Vizo Studio legal documents",
+    "tabs": {
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
+    },
+    "contactBox": {
+      "titleLine1": "Have any legal or data privacy questions?",
+      "titleLine2": "We are here to answer with full transparency.",
+      "description": "You can reach out directly if you need clarification regarding our commercial terms, how we handle your information, or our use of analytics cookies.",
+      "emailLabel": "Email us at",
+      "contactButton": "Go to contact"
+    }
+  },
+  "TermsAndConditionsScreen": {
+    "hero": {
+      "eyebrow": "Legal & Commercial Framework",
+      "titleLine1": "Terms & Conditions.",
+      "titleLine2": "Clear rules, lasting partnerships.",
+      "lead": "These Terms and Conditions govern access to and use of the Vizo Studio website (vizostudio.dev), as well as the general guidelines applicable to our custom software development proposals and services."
+    },
+    "sections": {
+      "s1": {
+        "title": "Identification and Website Purpose",
+        "p1": "Vizo Studio is a studio specialized in web design, software architecture, and custom software development serving clients across Venezuela, Colombia, Argentina, and worldwide.",
+        "p2": "This website is designed to showcase our portfolio, work methodology, and interactive demonstrations, and to provide the initial contact channel for evaluating and quoting digital projects."
+      },
+      "s2": {
+        "title": "Acceptance and Proper Use of the Site",
+        "p1": "By browsing and interacting with this website, the user freely and knowingly accepts these Terms and Conditions. Users agree to use the platform lawfully and respectfully.",
+        "b1": "Do not engage in activities that compromise the security, availability, or performance of the website infrastructure.",
+        "b2": "Do not use automated scripts, bulk scraping, or fraudulent submissions in the interactive contact wizard.",
+        "b3": "Provide accurate and up-to-date information when requesting a consultation or project quote."
+      },
+      "s3": {
+        "title": "Services, Quotes, and Commercial Scope",
+        "p1": "Information submitted through our interactive contact wizard constitutes a preliminary diagnostic request and does not by itself represent a binding contract.",
+        "p2": "Every software or web development project will be formalized through a specific technical and commercial proposal detailing scope, deliverables, sprint schedule, costs, and payment terms agreed between Vizo Studio and the client."
+      },
+      "s4": {
+        "title": "Intellectual Property and Copyright",
+        "p1": "All visual content, copy, logos, animations, interactive demos, source code, and editorial design on this website are the exclusive property of Vizo Studio or their respective authorized owners and partners.",
+        "p2": "For client projects, ownership of source code or usage licenses for final deliverables are governed by the specific commercial agreement of each project once corresponding payments are completed."
+      },
+      "s5": {
+        "title": "Technical Warranty and Limitation of Liability",
+        "p1": "Vizo Studio applies high standards of engineering, performance, and security across its website. However, it cannot guarantee the complete absence of interruptions caused by external internet providers, hosting services, or scheduled maintenance.",
+        "p2": "The metrics and interactive interfaces displayed on the home page (such as the SEO metrics simulator, multi-device responsiveness preview, dark/light theme switcher, and language switcher) are illustrative demonstrations of our technical capabilities."
+      },
+      "s6": {
+        "title": "Updates and Legal Contact",
+        "p1": "Vizo Studio reserves the right to update these Terms and Conditions to reflect regulatory changes or improvements to our services. The date of the latest revision will always be displayed at the top of this page.",
+        "p2": "For any inquiries regarding these terms, you can reach our team directly at {{email}}."
+      }
+    }
+  },
+  "PrivacyPolicyScreen": {
+    "hero": {
+      "eyebrow": "Data Protection & Transparency",
+      "titleLine1": "Privacy Policy.",
+      "titleLine2": "Your information safe and under your control.",
+      "lead": "At Vizo Studio we respect your privacy. Here we clearly explain what data we collect when you complete our contact form or browse our website, including our use of Google Analytics."
+    },
+    "highlights": {
+      "noSale": {
+        "title": "Zero data selling",
+        "description": "We never sell, rent, or trade your personal or business information with third parties."
+      },
+      "analytics": {
+        "title": "Transparent analytics (GA4)",
+        "description": "We use Google Analytics solely to understand which sections bring the most value and optimize the web experience."
+      },
+      "control": {
+        "title": "Full user control",
+        "description": "You can request deletion of your data or disable analytics cookies at any time."
+      }
+    },
+    "sections": {
+      "s1": {
+        "title": "Data Controller",
+        "p1": "The party responsible for processing data collected through the vizostudio.dev website is Vizo Studio, reachable at our official email address {{email}}.",
+        "p2": "We process personal information from our visitors and prospective clients under strict principles of confidentiality, data minimization, and technical security."
+      },
+      "s2": {
+        "title": "Data We Collect",
+        "p1": "We collect only the necessary information through two clearly separated channels:",
+        "b1": "Data voluntarily provided in the Contact Wizard: full name, company or brand name, email address, phone / WhatsApp number, and your answers regarding your project's goals, design, and features.",
+        "b2": "Browsing and web analytics data (Google Analytics 4): when you accept analytics cookies, we collect aggregated, anonymous statistical data such as visited pages, time on site, device/browser type, approximate country or city, and Google Analytics session identifiers.",
+        "b3": "Technical performance metrics (Vercel Speed Insights): anonymous technical metrics on loading speed (Core Web Vitals) to ensure the website runs fast across all devices."
+      },
+      "s3": {
+        "title": "Use of Google Analytics and Statistical Tracking",
+        "p1": "This website implements Google Analytics 4 (via the official react-ga4 library) provided by Google LLC. Google Analytics uses first-party cookies (_ga and _ga_*) to analyze how visitors interact with the different sections and routes of the site.",
+        "p2": "The information generated by Google Analytics is used exclusively for internal statistical purposes to improve usability, content, and platform performance. We do not merge analytics data with personally identifiable information without your express consent, and you can disable this tracking at any time by selecting «Essential only» in our cookie manager."
+      },
+      "s4": {
+        "title": "Purpose and Legal Basis of Processing",
+        "p1": "We use your data exclusively for the following legitimate purposes:",
+        "b1": "Evaluating your project inquiry, answering your questions, and preparing a tailored technical or commercial proposal.",
+        "b2": "Maintaining direct communication via email or WhatsApp when requested by you through our contact channels.",
+        "b3": "Analyzing aggregated web traffic and performance metrics via Google Analytics (based on your cookie consent)."
+      },
+      "s5": {
+        "title": "Data Retention, Security, and Technology Providers",
+        "p1": "Your contact details are retained only for the time needed to address your commercial inquiry or while an active professional relationship exists.",
+        "p2": "We use encrypted HTTPS/TLS connections and top-tier cloud infrastructure (such as Vercel and Google). We do not share your data with third parties except when required by law."
+      },
+      "s6": {
+        "title": "User Rights (Access, Rectification, and Deletion)",
+        "p1": "As the owner of your data, you have the right at any time to know what information we hold about you, request its correction, update, or permanent deletion, and withdraw your consent for web analytics.",
+        "p2": "To exercise any of these rights immediately and without complex procedures, email us at {{email}} stating your request."
+      }
+    }
+  },
+  "CookiePolicyScreen": {
+    "hero": {
+      "eyebrow": "Technical Transparency",
+      "titleLine1": "Cookie Policy.",
+      "titleLine2": "How they work and how you control them.",
+      "lead": "On this page we detail the exact cookies and local storage technologies used by the Vizo Studio website, including Google Analytics measurement cookies and how you can manage your preferences in real time."
+    },
+    "preferencesCard": {
+      "badge": "Active Preferences Panel",
+      "title": "Your current cookie settings",
+      "statusAll": "You currently have all cookies enabled (Essential + Google Analytics).",
+      "statusEssential": "You currently have essential cookies and storage enabled only (Google Analytics disabled).",
+      "statusUnset": "You have not selected a custom cookie preference yet.",
+      "allowAllBtn": "Accept all (Enable analytics)",
+      "essentialOnlyBtn": "Essential only (Disable analytics)"
+    },
+    "table": {
+      "titleLine1": "Technical inventory.",
+      "titleLine2": "Cookie and storage breakdown.",
+      "subtitle": "Below we transparently list every item stored in your browser when visiting vizostudio.dev:",
+      "headers": {
+        "name": "Name / Key",
+        "provider": "Provider",
+        "purpose": "Purpose",
+        "duration": "Duration",
+        "type": "Category"
+      },
+      "types": {
+        "essential": "Essential",
+        "analytics": "Analytics (GA4)"
+      },
+      "rows": {
+        "theme": {
+          "name": "theme",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Remembers your visual preference between Dark Mode and Light Mode.",
+          "duration": "Persistent"
+        },
+        "lang": {
+          "name": "i18nextLng",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Stores your selected language (Spanish or English) to display the localized interface.",
+          "duration": "Persistent"
+        },
+        "consent": {
+          "name": "vizo_cookie_consent",
+          "provider": "Vizo Studio (LocalStorage)",
+          "purpose": "Stores your decision regarding acceptance or rejection of analytics cookies.",
+          "duration": "Persistent"
+        },
+        "ga": {
+          "name": "_ga",
+          "provider": "Google Analytics (Google LLC)",
+          "purpose": "Registers a unique anonymous identifier to distinguish visitors and generate website usage statistics.",
+          "duration": "2 years"
+        },
+        "gaSession": {
+          "name": "_ga_<ID>",
+          "provider": "Google Analytics 4 (Google LLC)",
+          "purpose": "Used by Google Analytics 4 to maintain and count session state and pageviews.",
+          "duration": "2 years"
+        }
+      }
+    },
+    "sections": {
+      "s1": {
+        "title": "What Are Cookies and Local Storage?",
+        "p1": "Cookies and local storage (localStorage) are small text files or records saved by your browser on your device (computer, tablet, or mobile phone) when you visit a website.",
+        "p2": "Their purpose is to allow the website to remember your interface preferences (such as language or dark/light theme) and, if you authorize it, collect anonymous metrics on how you interact with pages to help us improve them."
+      },
+      "s2": {
+        "title": "Google Analytics Cookies on Our Website",
+        "p1": "At Vizo Studio we use Google Analytics 4 to understand the performance of our pages: which sections are most helpful, what devices visitors use, and how navigation flows across screens.",
+        "b1": "The _ga and _ga_<ID> cookies collect information statistically and in aggregate without personally identifying visitors.",
+        "b2": "We do not use behavioral advertising cookies or invasive third-party remarketing networks.",
+        "b3": "If you select «Essential only» in the bottom banner or in the panel at the top of this page, we disable Google Analytics tracking and remove _ga cookies from your browser."
+      },
+      "s3": {
+        "title": "How to Manage or Delete Cookies from Your Browser?",
+        "p1": "In addition to using our interactive selector at any time, you can block or delete cookies directly from your web browser's privacy settings (Google Chrome, Safari, Mozilla Firefox, Microsoft Edge, or Brave).",
+        "p2": "Please note that if you clear essential local storage, preferences such as your selected language or color theme will revert to their default values on your next visit."
+      }
+    }
+  },
+  "NotFoundScreen": {
+    "code": "404",
+    "oops": "Oops!",
+    "subtitle": "Looks like this page is broken.",
+    "descriptionLine1": "The link you are trying to reach does not exist or has been moved.",
+    "descriptionLine2": "Head back home to keep exploring vizostudio.dev.",
+    "backButton": "BACK",
+    "homeButton": "HOME",
+    "contactButton": "CONTACT",
+    "illustrationAria": "Disconnected browser window illustration",
+    "browserUrl": "vizostudio.dev/404",
+    "errorTag": "ERR_PAGE_NOT_FOUND"
   }
 }

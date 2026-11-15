@@ -1,29 +1,40 @@
 // ---------------------------------------------------------------------------
 // Header — Global fixed header with navigation and CTA
 // ---------------------------------------------------------------------------
-import { useState, useCallback, useEffect, useRef } from "react";
-import { Link } from "@tanstack/react-router";
+import { useState, useCallback, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import BrandLogo from "./BrandLogo";
 import { useScrollToSection } from "../../hooks/useScrollToSection";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
+import { useHeroVisibility } from "../../context/HeroVisibilityContext";
+import { useTheme } from "../../context/ThemeContext";
+import {
+    saveHomeScrollY,
+    skipNextHomeScrollRestore,
+} from "../../utils/homeScrollPosition";
 import type { NavItem } from "../../interfaces/HeaderInterface";
 
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
 
+/** Editorial ease-out curve used across header reveals. */
+const EASE_OUT_EXPO: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 /** Maps route paths to their corresponding home‑page section IDs. */
 const ROUTE_TO_SECTION_ID: Record<string, string> = {
     "/services": "services",
-    "/about": "about-us",
+    "/portfolio": "portfolio",
     "/contact": "contacto",
 };
 
 const DEFAULT_NAV_ITEMS: NavItem[] = [
-    // { labelKey: "Header.nav.blog", to: "/blog" },
     { labelKey: "Header.nav.services", to: "/services" },
     { labelKey: "Header.nav.aboutUs", to: "/about" },
+    { labelKey: "Header.nav.projects", to: "/portfolio" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -32,10 +43,14 @@ const DEFAULT_NAV_ITEMS: NavItem[] = [
 
 function Header() {
     const { t } = useTranslation();
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isOverlapping, setIsOverlapping] = useState(false);
-    const headerRef = useRef<HTMLElement>(null);
+    const shouldReduceMotion = useReducedMotion();
+    const { isHeroInView, isValuePropositionInView } = useHeroVisibility();
+    const { theme } = useTheme();
+    const isLight = theme === "light";
 
     useEffect(() => {
         let rafId: number | null = null;
@@ -46,18 +61,6 @@ function Header() {
 
             rafId = requestAnimationFrame(() => {
                 setIsScrolled(window.scrollY > 20);
-
-                // Pixel-perfect overlap detection with #contacto via getBoundingClientRect
-                const contactSection = document.getElementById("contacto");
-                if (contactSection) {
-                    const headerHeight = headerRef.current?.offsetHeight ?? 80;
-                    const contactRect = contactSection.getBoundingClientRect();
-                    // Header overlaps Contact ONLY when Contact's top edge is
-                    // at or above the Header's bottom edge AND Contact's bottom
-                    // edge is still below the viewport's top.
-                    setIsOverlapping(contactRect.top <= headerHeight && contactRect.bottom >= 0);
-                }
-
                 rafId = null;
             });
         };
@@ -79,138 +82,248 @@ function Header() {
 
     const handleNavClick = useCallback(
         (to: string, e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
-            const sectionId = ROUTE_TO_SECTION_ID[to];
-            if (!sectionId) return; // fallback to default link behavior
-
             e.preventDefault();
-            scrollToSection(sectionId, closeMobile);
+            closeMobile();
+
+            const sectionId = ROUTE_TO_SECTION_ID[to];
+            if (sectionId) {
+                if (pathname === "/") {
+                    scrollToSection(sectionId);
+                } else {
+                    skipNextHomeScrollRestore();
+                    void navigate({ to: "/" }).then(() => {
+                        window.setTimeout(() => {
+                            scrollToSection(sectionId);
+                        }, 120);
+                    });
+                }
+                return;
+            }
+
+            if (to === "/") {
+                if (pathname === "/") {
+                    scrollToTop();
+                } else {
+                    // Navigate back to "/" and let HomeScreen restore the exact scroll position
+                    void navigate({ to: "/", resetScroll: false });
+                }
+                return;
+            }
+
+            if (pathname === "/") {
+                saveHomeScrollY(window.scrollY);
+            }
+            void navigate({ to });
         },
-        [scrollToSection, closeMobile],
+        [pathname, navigate, scrollToSection, scrollToTop, closeMobile],
     );
 
-    // Header background is active when scrolled OR mobile menu is open
-    const isHeaderActive = isScrolled || mobileOpen;
-    const navItems = DEFAULT_NAV_ITEMS;
+    const navItems: NavItem[] =
+        pathname === "/"
+            ? DEFAULT_NAV_ITEMS
+            : [{ labelKey: "Header.nav.home", to: "/" }, ...DEFAULT_NAV_ITEMS];
 
     return (
         <header
-            ref={headerRef}
-            className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
-                isOverlapping
+            className={`fixed top-0 left-0 right-0 z-50 w-full ease-[cubic-bezier(0.22,1,0.36,1)] transition-[opacity,transform] duration-300 ${
+                isHeroInView || isValuePropositionInView
                     ? "-translate-y-full opacity-0 pointer-events-none"
                     : "translate-y-0 opacity-100"
-            } ${isHeaderActive ? "bg-bg shadow-sm py-3" : "bg-transparent py-5"}`}
+            }`}
         >
-            {/* Container 1: Centering and Max-Width */}
-            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Container 2: Flex distribution */}
-                <div className="flex items-center justify-between">
-                    {/* ---- Logo / Brand ---- */}
-                    <Link
-                        to="/"
-                        className="flex items-center shrink-0 gap-2 group cursor-pointer"
-                        aria-label={t("Common.appName")}
-                        onClick={() => scrollToTop(closeMobile)}
-                    >
-                        <span
-                            className={`font-title text-2xl sm:text-3xl font-black tracking-tight transition-colors duration-300 ${
-                                isScrolled ? "text-white" : "text-text-muted"
-                            }`}
+            {/* ---- Glass bar — bottom hairline separates it from the page ---- */}
+            <div
+                className={`border-b backdrop-blur-md transition-colors duration-500 ease-out ${
+                    isLight
+                        ? isScrolled
+                            ? "border-black/10 bg-white/90"
+                            : "border-black/10 bg-white/80"
+                        : isScrolled
+                          ? "border-white/10 bg-black/90"
+                          : "border-white/10 bg-black/80"
+                }`}
+            >
+                <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-[1fr_auto_1fr] items-center py-5">
+                        {/* ---- Logo / Brand ---- */}
+                        <Link
+                            to="/"
+                            resetScroll={false}
+                            className="col-start-1 flex shrink-0 items-center justify-self-start"
+                            aria-label={t("Common.appName")}
+                            onClick={() => {
+                                closeMobile();
+                                if (pathname === "/") {
+                                    scrollToTop();
+                                }
+                            }}
                         >
-                            {t("Common.logoVizo")}
-                        </span>
-                        <span
-                            className={`font-title text-2xl sm:text-3xl font-black tracking-tight transition-colors duration-300 ${
-                                isScrolled ? "text-primary" : "text-text-muted"
-                            }`}
-                        >
-                            {t("Common.logoStudio")}
-                        </span>
-                    </Link>
+                            <BrandLogo className="text-lg sm:text-xl" />
+                        </Link>
 
-                    {/* ---- Desktop Navigation ---- */}
-                    <nav
-                        className="hidden md:flex items-center gap-6 sm:gap-8"
-                        aria-label={t("Header.nav.desktopAriaLabel")}
-                    >
-                        {navItems.map((item) => (
+                        {/* ---- Desktop Navigation (centered) ---- */}
+                        <nav
+                            className="col-start-2 hidden items-center justify-self-center gap-8 md:flex lg:gap-10"
+                            aria-label={t("Header.nav.desktopAriaLabel")}
+                        >
+                            {navItems.map((item) => (
+                                <button
+                                    key={item.to}
+                                    type="button"
+                                    onClick={(e) => handleNavClick(item.to, e)}
+                                    className="font-body text-sm font-medium text-text-muted transition-colors duration-300 hover:text-text focus-visible:text-text focus-visible:outline-none"
+                                >
+                                    {t(item.labelKey)}
+                                </button>
+                            ))}
+                        </nav>
+
+                        {/* ---- Right: Desktop CTA + Mobile toggle ---- */}
+                        <div className="col-start-3 flex items-center justify-self-end gap-3">
                             <button
-                                key={item.to}
                                 type="button"
-                                onClick={(e) => handleNavClick(item.to, e)}
-                                className="font-body text-lg text-text-muted hover:text-primary transition-colors duration-150 bg-transparent border-none cursor-pointer"
+                                onClick={(e) => handleNavClick("/contact", e)}
+                                className="group hidden items-center gap-2 rounded-full border border-neutral-500/35 px-5 py-2.5 font-body text-sm font-medium text-text transition-[border-color,box-shadow,color] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)] md:inline-flex"
                             >
-                                {t(item.labelKey)}
+                                {t("Header.buttons.contact")}
+                                <FiArrowUpRight
+                                    className="h-4 w-4 shrink-0 text-primary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                    aria-hidden="true"
+                                />
                             </button>
-                        ))}
 
-                        <button
-                            type="button"
-                            onClick={(e) => handleNavClick("/contact", e)}
-                            className={`inline-flex items-center justify-center px-4 py-2 font-body font-medium text-lg transition-all duration-300 border ${
-                                isScrolled
-                                    ? "bg-primary border-primary text-white hover:opacity-90"
-                                    : "bg-transparent border-text-muted text-text-muted hover:border-text hover:text-text"
-                            }`}
-                        >
-                            {t("Header.buttons.contact")}
-                        </button>
-                    </nav>
-
-                    {/* ---- Mobile Menu Toggle ---- */}
-                    <div className="flex md:hidden items-center">
-                        <button
-                            type="button"
-                            className="md:hidden inline-flex items-center justify-center p-2 text-text-muted hover:text-primary hover:bg-bg transition-colors"
-                            onClick={() => setMobileOpen((prev) => !prev)}
-                            aria-expanded={mobileOpen}
-                            aria-label={
-                                mobileOpen ? t("Header.nav.closeMenu") : t("Header.nav.openMenu")
-                            }
-                        >
-                            {mobileOpen ? (
-                                <FiX className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
-                            ) : (
-                                <FiMenu className="w-7 h-7 stroke-[2.5]" aria-hidden="true" />
-                            )}
-                        </button>
+                            {/* ---- Mobile Menu Toggle ---- */}
+                            <button
+                                type="button"
+                                onClick={() => setMobileOpen((prev) => !prev)}
+                                aria-expanded={mobileOpen}
+                                aria-controls="mobile-menu"
+                                aria-label={
+                                    mobileOpen
+                                        ? t("Header.nav.closeMenu")
+                                        : t("Header.nav.openMenu")
+                                }
+                                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-500/20 bg-neutral-500/10 text-text transition-colors duration-300 hover:border-neutral-500/40 hover:bg-neutral-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500/30 md:hidden"
+                            >
+                                <AnimatePresence mode="wait" initial={false}>
+                                    <motion.span
+                                        key={mobileOpen ? "close" : "open"}
+                                        initial={
+                                            shouldReduceMotion
+                                                ? { opacity: 0 }
+                                                : { opacity: 0, rotate: -90, scale: 0.8 }
+                                        }
+                                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                        exit={
+                                            shouldReduceMotion
+                                                ? { opacity: 0 }
+                                                : { opacity: 0, rotate: 90, scale: 0.8 }
+                                        }
+                                        transition={{
+                                            duration: shouldReduceMotion ? 0 : 0.2,
+                                            ease: "easeOut",
+                                        }}
+                                        className="flex"
+                                    >
+                                        {mobileOpen ? (
+                                            <FiX className="h-5 w-5" aria-hidden="true" />
+                                        ) : (
+                                            <FiMenu className="h-5 w-5" aria-hidden="true" />
+                                        )}
+                                    </motion.span>
+                                </AnimatePresence>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* ---- Mobile Dropdown (CSS Grid Accordion) ---- */}
-            <div
-                className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out grid ${
-                    mobileOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                }`}
-            >
-                <div className="min-h-0 bg-bg">
-                    <nav
-                        className="flex flex-col px-4 py-4 gap-3 max-w-7xl mx-auto"
-                        aria-label={t("Header.nav.mobileAriaLabel")}
+            {/* ---- Mobile Drawer — clip-path reveal with staggered links ---- */}
+            <AnimatePresence initial={false}>
+                {mobileOpen && (
+                    <motion.div
+                        key="mobile-menu"
+                        id="mobile-menu"
+                        initial={
+                            shouldReduceMotion
+                                ? { opacity: 0 }
+                                : { opacity: 0, clipPath: "inset(0 0 100% 0)" }
+                        }
+                        animate={
+                            shouldReduceMotion
+                                ? { opacity: 1 }
+                                : { opacity: 1, clipPath: "inset(0 0 0% 0)" }
+                        }
+                        exit={
+                            shouldReduceMotion
+                                ? { opacity: 0 }
+                                : { opacity: 0, clipPath: "inset(0 0 100% 0)" }
+                        }
+                        transition={{
+                            duration: shouldReduceMotion ? 0 : 0.45,
+                            ease: EASE_OUT_EXPO,
+                        }}
+                        className={`md:hidden backdrop-blur-lg transition-colors duration-500 ${
+                            isLight ? "bg-white/95" : "bg-black/95"
+                        }`}
                     >
-                        {navItems.map((item) => (
-                            <button
-                                key={item.to}
-                                type="button"
-                                onClick={(e) => handleNavClick(item.to, e)}
-                                className="font-body text-lg text-text-muted hover:text-primary transition-colors duration-150 py-1 bg-transparent border-none cursor-pointer text-left"
-                            >
-                                {t(item.labelKey)}
-                            </button>
-                        ))}
-
-                        {/* Mobile Dropdown CTA — Always Primary Filled */}
-                        <button
-                            type="button"
-                            onClick={(e) => handleNavClick("/contact", e)}
-                            className="inline-flex items-center justify-center px-4 py-2 font-body font-medium text-lg transition-all duration-300 border mt-2 bg-primary border-primary text-white hover:opacity-90"
+                        <nav
+                            className="mx-auto w-full max-w-7xl px-4 pb-8 sm:px-6 lg:px-8"
+                            aria-label={t("Header.nav.mobileAriaLabel")}
                         >
-                            {t("Header.buttons.contact")}
-                        </button>
-                    </nav>
-                </div>
-            </div>
+                            <div className="flex flex-col">
+                                {navItems.map((item, index) => (
+                                    <motion.button
+                                        key={item.to}
+                                        type="button"
+                                        onClick={(e) => handleNavClick(item.to, e)}
+                                        initial={
+                                            shouldReduceMotion
+                                                ? { opacity: 0 }
+                                                : { opacity: 0, y: 16 }
+                                        }
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            duration: shouldReduceMotion ? 0 : 0.5,
+                                            ease: EASE_OUT_EXPO,
+                                            delay: shouldReduceMotion ? 0 : index * 0.07,
+                                        }}
+                                        className="border-b border-neutral-500/20 py-4 text-left font-body text-lg font-medium text-text transition-colors duration-200 hover:text-primary focus-visible:text-primary focus-visible:outline-none"
+                                    >
+                                        {t(item.labelKey)}
+                                    </motion.button>
+                                ))}
+
+                                {/* Mobile CTA — clean outline pill */}
+                                <motion.div
+                                    initial={
+                                        shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }
+                                    }
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{
+                                        duration: shouldReduceMotion ? 0 : 0.5,
+                                        ease: EASE_OUT_EXPO,
+                                        delay: shouldReduceMotion ? 0 : navItems.length * 0.07,
+                                    }}
+                                    className="pt-6"
+                                >
+                                    <button
+                                        type="button"
+                                        onClick={(e) => handleNavClick("/contact", e)}
+                                        className="group inline-flex w-full items-center justify-between rounded-full border border-neutral-500/35 px-6 py-4 font-body text-base font-medium text-text transition-[border-color,box-shadow,color] duration-300 hover:border-[color-mix(in_srgb,var(--color-primary)_70%,transparent)] hover:shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary)_35%,transparent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--color-primary)_50%,transparent)]"
+                                    >
+                                        {t("Header.buttons.contact")}
+                                        <FiArrowUpRight
+                                            className="h-5 w-5 shrink-0 text-primary transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                            aria-hidden="true"
+                                        />
+                                    </button>
+                                </motion.div>
+                            </div>
+                        </nav>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header>
     );
 }

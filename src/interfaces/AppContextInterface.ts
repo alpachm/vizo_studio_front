@@ -28,3 +28,20 @@ export interface ILanguageContextValue {
 export interface IAppProviderProps {
   children: React.ReactNode;
 }
+
+/** Shape of the Hero visibility context value (drives Header/FloatingButtons hide state) */
+export interface IHeroVisibilityContextValue {
+  /** Whether the Home hero section is currently intersecting the viewport */
+  isHeroInView: boolean;
+  /** Whether the Value Proposition section is currently intersecting the viewport */
+  isValuePropositionInView: boolean;
+  /** Update the hero visibility flag from the Hero section */
+  setIsHeroInView: (isInView: boolean) => void;
+  /** Update the Value Proposition visibility flag from the ValueProposition section */
+  setIsValuePropositionInView: (isInView: boolean) => void;
+}
+
+/** Props accepted by the HeroVisibilityProvider */
+export interface IHeroVisibilityProviderProps {
+  children: React.ReactNode;
+}

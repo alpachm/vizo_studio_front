@@ -5,42 +5,32 @@ import { useTranslation } from "react-i18next";
 import { FiCheckCircle } from "react-icons/fi";
 import type { IContactStep4Props } from "../../../interfaces/HomeScreenInterface";
 
-function Step4({ onWriteAgain, onExit }: IContactStep4Props) {
+function Step4({ onWriteAgain }: IContactStep4Props) {
     const { t } = useTranslation();
 
     return (
-        <div className="w-full h-dvh min-h-dvh flex flex-col justify-center items-center bg-bg px-4 sm:px-8 text-center">
+        <div className="w-full py-8 sm:py-10 flex flex-col justify-center items-center text-center">
             {/* Success Icon */}
-            <FiCheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-primary mb-6" />
+            <FiCheckCircle className="w-14 h-14 sm:w-16 sm:h-16 text-primary mb-5" />
 
             {/* Confirmation Title */}
-            <h2 className="font-title text-2xl sm:text-4xl lg:text-5xl font-bold text-text mb-4">
+            <h3 className="font-title text-2xl sm:text-3xl font-bold text-text mb-3">
                 {t("HomeScreen.Contact.step4.title")}
-            </h2>
+            </h3>
 
             {/* Message Body */}
-            <p className="font-body text-base sm:text-lg text-text/70 max-w-xl mb-8">
+            <p className="font-body text-sm sm:text-base text-text-muted max-w-md mb-8 leading-relaxed">
                 {t("HomeScreen.Contact.step4.message")}
             </p>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <button
-                    type="button"
-                    onClick={onWriteAgain}
-                    className="bg-transparent border border-text/20 text-text font-body text-lg font-semibold px-8 py-3 rounded-none hover:border-text/50 active:scale-95 transition-all duration-200 cursor-pointer"
-                >
-                    {t("HomeScreen.Contact.step4.buttons.writeAgain")}
-                </button>
-
-                <button
-                    type="button"
-                    onClick={onExit}
-                    className="bg-primary text-white font-body text-lg font-semibold px-8 py-3 rounded-none shadow-lg hover:brightness-110 active:scale-95 transition-all duration-200 cursor-pointer"
-                >
-                    {t("HomeScreen.Contact.step4.buttons.exit")}
-                </button>
-            </div>
+            {/* Action Button */}
+            <button
+                type="button"
+                onClick={onWriteAgain}
+                className="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 font-body text-sm sm:text-base font-semibold text-white shadow-md hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer"
+            >
+                {t("HomeScreen.Contact.step4.buttons.writeAgain")}
+            </button>
         </div>
     );
 }

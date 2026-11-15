@@ -15,8 +15,20 @@ export default {
                 },
             },
             fontFamily: {
-                title: ["var(--font-title-val)", "sans-serif"],
-                body: ["var(--font-body-val)", "sans-serif"],
+                sans: ["Inter", "sans-serif"],
+                mono: ["JetBrains Mono", "monospace"],
+                // Backward-compatible aliases for the existing `font-title`
+                // (headings / logo) and `font-body` (copy) utility classes.
+                title: ["JetBrains Mono", "monospace"],
+                body: ["Inter", "sans-serif"],
+                // Expressive editorial / display families powering the Hero
+                // rolling counter. Each is loaded via <link> in `index.html`.
+                "instrument-serif": ['"Instrument Serif"', "serif"],
+                "playfair-display": ['"Playfair Display"', "serif"],
+                "space-grotesk": ['"Space Grotesk"', "sans-serif"],
+                syne: ['"Syne"', "sans-serif"],
+                "plus-jakarta-sans": ['"Plus Jakarta Sans"', "sans-serif"],
+                "great-vibes": ['"Great Vibes"', "cursive"],
             },
             animation: {
                 "marquee-scroll": "marquee 40s linear infinite",

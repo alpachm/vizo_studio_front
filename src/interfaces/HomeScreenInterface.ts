@@ -3,6 +3,7 @@
 // ---------------------------------------------------------------------------
 
 import type { IconType } from "react-icons";
+import type { MotionValue } from "framer-motion";
 
 /** Props for the HomeScreen component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -11,6 +12,37 @@ export interface IHomeScreenProps {}
 /** Props for the Hero section component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IHeroProps {}
+
+/** Props for the ValueProposition section component */
+export interface IValuePropositionProps {
+  className?: string;
+}
+
+/** Data shape for a single subtitle word group in the ValueProposition reveal */
+export interface IValuePropositionWordGroup {
+  /** The rendered word or small group of words */
+  text: string;
+  /** Whether this group is the branded "Vizo Studio" accent (text-primary) */
+  isBrand: boolean;
+}
+
+/** Props for a single scroll-illuminated word rendered by ValueProposition */
+export interface IValuePropositionWordProps {
+  /** Shared scroll-progress MotionValue (0 → 1) driving the reveal */
+  progress: MotionValue<number>;
+  /** Scroll-progress window [start, end] over which this word brightens */
+  range: [number, number];
+  /** Color of the word in its dimmed/off state */
+  from: string;
+  /** Color of the word once fully illuminated */
+  to: string;
+  /** Skips the scrub and renders the final color for reduced-motion users */
+  reduceMotion: boolean;
+  /** Optional additional Tailwind classes applied to the word span */
+  className?: string;
+  /** The word text to render */
+  children: string;
+}
 
 /** Props for the AboutUs section component */
 export interface IAboutUsProps {
@@ -33,6 +65,24 @@ export interface IWhyUsCardItem {
 /** Props for the Services section component (currently no external props required) */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IServicesProps {}
+
+/** Data shape for a single Services card */
+export interface IServiceCardItem {
+  id: string;
+  icon: IconType;
+  titleKey: string;
+  descriptionKey: string;
+}
+
+/** Props for a single Services card rendered by the Services section */
+export interface IServiceCardProps {
+  /** Static content descriptor (icon + i18n keys) for this card */
+  card: IServiceCardItem;
+  /** Zero-based position of the card in the deck (drives the stacking stagger) */
+  index: number;
+  /** Whether the parent section has entered the viewport (drives the entrance reveal) */
+  isSectionVisible: boolean;
+}
 
 /** Union of available contact form steps */
 export const ContactStep = {
@@ -126,6 +176,20 @@ export interface BudgetOption {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IPortfolioProps {}
 
+/** Data shape for a single Portfolio project card */
+export interface IPortfolioProjectItem {
+    /** Stable identifier for the project card */
+    id: string;
+    /** Imported local WebP asset used as the card thumbnail */
+    image: string;
+    /** i18n key for the category overline (e.g. "FUNDACION") */
+    categoryKey: string;
+    /** i18n key for the project title */
+    titleKey: string;
+    /** i18n key for the image alt text */
+    imageAltKey: string;
+}
+
 /** Props for the Methodology section component */
 export interface IMethodologyProps {
   className?: string;
@@ -135,6 +199,53 @@ export interface IMethodologyProps {
 export interface IMethodologyStep {
   id: string;
   number: string;
+  icon: IconType;
   titleKey: string;
   descriptionKey: string;
+}
+
+/** Props for the ThemeToggleDemo section component */
+export interface IThemeToggleDemoProps {
+  className?: string;
+}
+
+/** Props for the LanguageSwitcherDemo section component */
+export interface ILanguageSwitcherDemoProps {
+  className?: string;
+}
+
+/** Props for the SeoMetricsDemo section component */
+export interface ISeoMetricsDemoProps {
+  className?: string;
+}
+
+/** Device viewport identifiers for the ResponsiveDemo showcase */
+export type TResponsiveDevice = "desktop" | "tablet" | "mobile";
+
+/** Descriptor for a single device preset in the ResponsiveDemo showcase */
+export interface IResponsiveDevicePreset {
+  id: TResponsiveDevice;
+  icon: IconType;
+  labelKey: string;
+  viewportLabel: string;
+}
+
+/** Props for the ResponsiveDemo section component */
+export interface IResponsiveDemoProps {
+  className?: string;
+}
+
+/** Direction of the brief typography swap during the glitch animation */
+export type TGlitchFontSwapMode = "mono-to-playfair" | "playfair-to-mono";
+
+/** Configuration options for the reusable glitch animation generator */
+export interface IGlitchAnimationOptions {
+  /** Scoped CSS class name attached to the glitching text element */
+  className: string;
+  /** Direction of the momentary typography glitch swap */
+  fontSwapMode?: TGlitchFontSwapMode;
+  /** Total loop duration in seconds (defaults to 4.2s) */
+  durationSeconds?: number;
+  /** Optional fixed/minimum width (in em) so font swaps never reflow surrounding text */
+  minWidth?: string;
 }

@@ -3,7 +3,9 @@
 // ---------------------------------------------------------------------------
 import { createRootRoute } from "@tanstack/react-router";
 import PrincipalLayout from "../layouts/PrincipalLayout";
+import NotFound from "../screens/NotFound";
 
 export const Route = createRootRoute({
     component: PrincipalLayout,
+    notFoundComponent: NotFound,
 });
